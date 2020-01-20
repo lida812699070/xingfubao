@@ -79,7 +79,7 @@ class HomeFragment : BaseFragment() {
         productAdapter.setOnItemClickListener { adapter, view, position ->
             startActivity(
                 Intent(activity, ProductDetailActivity::class.java)
-                    .putExtra("productId", productList[position].productId)
+                    .putExtra("productId", "${productList[position].productId}")
             )
         }
     }
@@ -97,6 +97,13 @@ class HomeFragment : BaseFragment() {
 
         }
         recyclerViewHomeModel.adapter = moduleAdapter
+
+        moduleAdapter.setOnItemClickListener { adapter, view, position ->
+            startActivity(
+                Intent(activity, ProductDetailActivity::class.java)
+                    .putExtra("productId", moduleList[position].productId)
+            )
+        }
     }
 
     private fun bindData(data: HomeModel?) {

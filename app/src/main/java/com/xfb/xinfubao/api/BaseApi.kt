@@ -46,5 +46,11 @@ interface BaseApi {
     @GET("newsxfb")
     fun newsxfb(@QueryMap map: Map<String, String>): Observable<Result<List<FindNewsTab>>>
 
+    /**
+     * 商品信息
+     */
+    @POST("/api/getProductInfo")
+    fun getProductInfo(@Body map: Map<String, String>): Observable<Result<ProductDetail>>
+
 
 }

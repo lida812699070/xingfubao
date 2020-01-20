@@ -10,4 +10,9 @@
         <attr name="edit_input_hint" format="string" />
     </declare-styleable>
 
+    <declare-styleable name="MyToolbarBar">
+        <attr name="str_title_toolbar" format="string" />
+        <attr name="right_image_toolbar" format="reference" />
+    </declare-styleable>
+
 </resources>

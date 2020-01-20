@@ -16,7 +16,7 @@ class WebviewFragment : BaseFragment() {
     private var html: String? = null
 
     companion object {
-        fun newInstanceUrl(url: String): WebviewFragment {
+        fun newInstanceUrl(url: String?): WebviewFragment {
             val webviewFragment = WebviewFragment()
             val bundle = Bundle()
             bundle.putString("url", url)
@@ -24,7 +24,7 @@ class WebviewFragment : BaseFragment() {
             return webviewFragment
         }
 
-        fun newInstanceHtml(html: String): WebviewFragment {
+        fun newInstanceHtml(html: String?): WebviewFragment {
             val webviewFragment = WebviewFragment()
             val bundle = Bundle()
             bundle.putString("html", html)
