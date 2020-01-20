@@ -1,0 +1,112 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        def BOOLEAN = "boolean"
+        def TRUE = "true"
+        def FALSE = "false"
+        def IS_SHOW_LOG = "IS_SHOW_LOG"
+
+        debug {
+            minifyEnabled false
+            buildConfigField BOOLEAN, IS_SHOW_LOG, TRUE
+        }
+
+        atest {
+            minifyEnabled false
+            buildConfigField BOOLEAN, IS_SHOW_LOG, FALSE
+        }
+
+        release {
+            minifyEnabled false
+            buildConfigField BOOLEAN, IS_SHOW_LOG, FALSE
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        dev {
+            minifyEnabled false
+            buildConfigField BOOLEAN, IS_SHOW_LOG, FALSE
+        }
+
+        product {
+            minifyEnabled false
+            buildConfigField BOOLEAN, IS_SHOW_LOG, FALSE
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+//        buildConfigField "boolean", "LOG_DEBUG", "true"//是否输出LOG信息
+//        buildConfigField "String", "API_HOST", "\"http://api.test.com\""//API Host
+
+
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    compile "com.android.support.constraint:constraint-layout:$rootProject.constraintVersion"
+    compile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+    compile "com.android.support:cardview-v7:$rootProject.supportLibraryVersion"
+    compile "com.android.support:design:$rootProject.supportLibraryVersion"
+    compile "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
+
+    // Retrofit
+    compile "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+    compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
+    compile "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofitVersion"
+    compile "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttploggingVersion"
+    compile "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
+
+    // RxJava
+    compile "io.reactivex.rxjava2:rxjava:$rootProject.rxjavaVersion"
+    compile "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
+    compile "com.jakewharton.rxbinding2:rxbinding:$rootProject.rxbindingVersion"
+
+    // Glide
+    compile "com.github.bumptech.glide:glide:$rootProject.glideVersion"
+    compile "com.github.bumptech.glide:okhttp-integration:$rootProject.glideokhttpVersion"
+    compile "jp.wasabeef:glide-transformations:$rootProject.glideTransformationVersion"
+
+    //Butterknife
+    compile "com.jakewharton:butterknife:$rootProject.butterknifeVersion"
+
+    //permissions
+    compile "com.tbruyelle.rxpermissions2:rxpermissions:$rootProject.rxPerssionsVersion"
+
+    //Bugly
+    compile "com.tencent.bugly:crashreport:$rootProject.buglyVersion"
+    //EventBus
+    compile "org.greenrobot:eventbus:$rootProject.eventBusVersion"
+    //crop Bitmap
+//    compile 'com.soundcloud.android:android-crop:1.0.1@aar'
+    //BRVAH  RecyclerView
+    compile "com.github.CymChad:BaseRecyclerViewAdapterHelper:$rootProject.BaseRecyclerViewAdapterHelperVersion"
+    compile "com.trello.rxlifecycle2:rxlifecycle:$rootProject.rxlifecycleVersion"
+    compile "com.trello.rxlifecycle2:rxlifecycle-android:$rootProject.rxlifecycleVersion"
+    compile "com.trello.rxlifecycle2:rxlifecycle-components:$rootProject.rxlifecycleVersion"
+    compile 'com.soundcloud.android:android-crop:1.0.1@aar'
+//    compile 'com.github.mcxtzhang:SuspensionIndexBar:V1.0.0'
+    // Anko Commons
+    compile "org.jetbrains.anko:anko-commons:$rootProject.anko_version"
+    compile "org.jetbrains.anko:anko-design:$anko_version"
+    //65535问题
+    compile 'com.android.support:multidex:1.0.3'
+    testCompile 'junit:junit:4.12'
+    implementation "me.jessyan:autosize:$rootProject.autoSizeVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    //banner
+    compile "com.youth.banner:banner:$rootProject.banner_version"
+
+}

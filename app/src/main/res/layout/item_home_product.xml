@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="4dp"
+    android:layout_marginRight="4dp">
+
+    <ImageView
+        android:id="@+id/ivProduct"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvProductName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="11dp"
+        android:layout_marginTop="9dp"
+        android:ellipsize="end"
+        android:gravity="left|top"
+        android:maxLines="2"
+        android:text="凤彩沉香礼盒四件套"
+        android:textColor="@color/color_text_111"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toLeftOf="@+id/ivProduct"
+        app:layout_constraintRight_toRightOf="@+id/ivProduct"
+        app:layout_constraintTop_toBottomOf="@+id/ivProduct" />
+
+    <TextView
+        android:id="@+id/tvProductPrice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="￥1.00"
+        android:textColor="@color/color_light_org"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="@+id/tvProductName"
+        app:layout_constraintRight_toRightOf="@+id/tvProductName"
+        app:layout_constraintTop_toBottomOf="@+id/tvProductName" />
+</android.support.constraint.ConstraintLayout>

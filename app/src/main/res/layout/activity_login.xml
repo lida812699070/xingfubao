@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".activity.LoginActivity">
+
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:src="@mipmap/logo"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvLoginMobile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10"
+        android:text="手机登录"
+        android:textColor="@color/color_selector_theme_888"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/lineCenter"
+        app:layout_constraintRight_toLeftOf="@+id/lineCenter"
+        app:layout_constraintTop_toTopOf="@+id/lineCenter" />
+
+    <View
+        android:id="@+id/lineCenter"
+        android:layout_width="1dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="43dp"
+        android:background="@color/color_text_888"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
+
+    <TextView
+        android:id="@+id/tvLoginEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10"
+        android:text="邮箱登录"
+        android:textColor="@color/color_selector_theme_888"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/lineCenter"
+        app:layout_constraintLeft_toRightOf="@+id/lineCenter"
+        app:layout_constraintTop_toTopOf="@+id/lineCenter" />
+
+    <EditText
+        android:id="@+id/edLoginMobile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="90dp"
+        android:layout_marginRight="20dp"
+        android:background="@null"
+        android:hint="请输入手机号码"
+        android:paddingLeft="@dimen/dp_10"
+        android:textColor="@color/color_text_111"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@+id/tvLoginEmail" />
+
+    <EditText
+        android:id="@+id/edLoginEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="90dp"
+        android:layout_marginRight="20dp"
+        android:background="@null"
+        android:hint="请输入邮箱号码"
+        android:paddingLeft="@dimen/dp_10"
+        android:textColor="@color/color_text_111"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@+id/tvLoginEmail" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginRight="20dp"
+        android:background="@color/color_line_e0e"
+        app:layout_constraintTop_toBottomOf="@+id/edLoginMobile" />
+
+
+    <EditText
+        android:id="@+id/edLoginPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="20dp"
+        android:background="@null"
+        android:hint="请输入登录密码"
+        android:inputType="textPassword"
+        android:paddingLeft="@dimen/dp_10"
+        android:textColor="@color/color_text_111"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@+id/edLoginMobile" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginRight="20dp"
+        android:background="@color/color_line_e0e"
+        app:layout_constraintTop_toBottomOf="@+id/edLoginPassword" />
+
+    <TextView
+        android:id="@+id/tvLogin"
+        style="@style/MainBtn"
+        android:layout_marginTop="65dp"
+        android:text="登录"
+        app:layout_constraintTop_toBottomOf="@+id/edLoginPassword"
+        tools:ignore="MissingConstraints" />
+
+    <View
+        android:id="@+id/tvLoginLine"
+        android:layout_width="1dp"
+        android:layout_height="17dp"
+        android:layout_marginTop="@dimen/dp_30"
+        android:background="@color/color_text_888"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvLogin" />
+
+    <TextView
+        android:id="@+id/tvRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="13dp"
+        android:padding="5dp"
+        android:text="注册账号"
+        android:textColor="@color/color_text_888"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tvLoginLine"
+        app:layout_constraintRight_toLeftOf="@+id/tvLoginLine"
+        app:layout_constraintTop_toTopOf="@+id/tvLoginLine" />
+
+    <TextView
+        android:id="@+id/tvForgetPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="13dp"
+        android:padding="5dp"
+        android:text="忘记密码?"
+        android:textColor="@color/color_text_888"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tvLoginLine"
+        app:layout_constraintLeft_toRightOf="@+id/tvLoginLine"
+        app:layout_constraintTop_toTopOf="@+id/tvLoginLine" />
+
+</android.support.constraint.ConstraintLayout>

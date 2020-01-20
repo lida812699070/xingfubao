@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/etMobileInputMobile"
+        style="@style/LoginInput"
+        android:layout_marginTop="21dp"
+        android:hint="请输入手机号"
+        android:inputType="number"
+        android:paddingLeft="70dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/ivMobileInputMobile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:src="@mipmap/mobile_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/etMobileInputMobile"
+        app:layout_constraintLeft_toLeftOf="@+id/etMobileInputMobile"
+        app:layout_constraintTop_toTopOf="@+id/etMobileInputMobile" />
+
+    <TextView
+        android:id="@+id/gpMobileRegisterMobileText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="37dp"
+        android:text="+86"
+        android:textColor="@color/color_theme"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/etMobileInputMobile"
+        app:layout_constraintLeft_toLeftOf="@+id/etMobileInputMobile"
+        app:layout_constraintTop_toTopOf="@+id/etMobileInputMobile" />
+
+    <android.support.constraint.Group
+        android:id="@+id/gpMobileRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="etMobileInputMobile,ivMobileInputMobile,gpMobileRegisterMobileText" />
+
+    <EditText
+        android:id="@+id/etEmailInputEmail"
+        style="@style/LoginInput"
+        android:layout_marginTop="21dp"
+        android:hint="请输入邮箱号码"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="39dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/ivEmailInputEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/yaoqingma_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/etEmailInputEmail"
+        app:layout_constraintLeft_toLeftOf="@+id/ivMobileInputMobile"
+        app:layout_constraintTop_toTopOf="@+id/etEmailInputEmail" />
+
+    <android.support.constraint.Group
+        android:id="@+id/gpEmailRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:constraint_referenced_ids="etEmailInputEmail,ivEmailInputEmail" />
+
+    <EditText
+        android:id="@+id/etMobileInputPsd"
+        style="@style/LoginInput"
+        android:layout_marginTop="21dp"
+        android:hint="请输入8-20位字符密码"
+        android:inputType="textPassword"
+        android:maxLines="20"
+        android:paddingLeft="40dp"
+        app:layout_constraintTop_toBottomOf="@+id/etMobileInputMobile"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/ivMobileInputPsd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/mima_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/etMobileInputPsd"
+        app:layout_constraintLeft_toLeftOf="@+id/ivMobileInputMobile"
+        app:layout_constraintTop_toTopOf="@+id/etMobileInputPsd" />
+
+    <ImageView
+        android:id="@+id/ivMobileInputPsdEye"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="11dp"
+        android:padding="5dp"
+        android:src="@drawable/selector_eye"
+        app:layout_constraintBottom_toBottomOf="@+id/etMobileInputPsd"
+        app:layout_constraintRight_toRightOf="@+id/etMobileInputPsd"
+        app:layout_constraintTop_toTopOf="@+id/etMobileInputPsd" />
+
+    <EditText
+        android:id="@+id/etMobileInputPsdAgain"
+        style="@style/LoginInput"
+        android:layout_marginTop="21dp"
+        android:hint="请输入8-20位字符密码"
+        android:inputType="textPassword"
+        android:maxLength="20"
+        android:paddingLeft="40dp"
+        app:layout_constraintTop_toBottomOf="@+id/etMobileInputPsd"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/mima_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/etMobileInputPsdAgain"
+        app:layout_constraintLeft_toLeftOf="@+id/ivMobileInputMobile"
+        app:layout_constraintTop_toTopOf="@+id/etMobileInputPsdAgain" />
+
+    <ImageView
+        android:id="@+id/ivMobileInputPsdEyeAgain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="11dp"
+        android:padding="5dp"
+        android:src="@drawable/selector_eye"
+        app:layout_constraintBottom_toBottomOf="@+id/etMobileInputPsdAgain"
+        app:layout_constraintRight_toRightOf="@+id/etMobileInputPsdAgain"
+        app:layout_constraintTop_toTopOf="@+id/etMobileInputPsdAgain" />
+
+    <EditText
+        android:id="@+id/etMobileInputCheckCode"
+        style="@style/LoginInput"
+        android:layout_marginTop="21dp"
+        android:hint="输入手机验证码"
+        android:inputType="text"
+        android:maxLength="6"
+        android:paddingLeft="40dp"
+        app:layout_constraintTop_toBottomOf="@+id/etMobileInputPsdAgain"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/yanzhengma_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/etMobileInputCheckCode"
+        app:layout_constraintLeft_toLeftOf="@+id/ivMobileInputMobile"
+        app:layout_constraintTop_toTopOf="@+id/etMobileInputCheckCode" />
+
+    <TextView
+        android:id="@+id/tvMobileGetCheckCode"
+        android:layout_width="104dp"
+        android:layout_height="51dp"
+        android:background="@drawable/shape_theme_btn_bg_right_radius"
+        android:gravity="center"
+        android:text="获取"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/etMobileInputCheckCode"
+        app:layout_constraintRight_toRightOf="@+id/etMobileInputCheckCode"
+        app:layout_constraintTop_toTopOf="@+id/etMobileInputCheckCode" />
+
+    <EditText
+        android:id="@+id/etMobileInputInviteCode"
+        style="@style/LoginInput"
+        android:layout_marginTop="21dp"
+        android:hint="请输入邀请码"
+        android:inputType="text"
+        android:maxLines="20"
+        android:paddingLeft="40dp"
+        app:layout_constraintTop_toBottomOf="@+id/etMobileInputCheckCode"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/yaoqingma_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/etMobileInputInviteCode"
+        app:layout_constraintLeft_toLeftOf="@+id/ivMobileInputMobile"
+        app:layout_constraintTop_toTopOf="@+id/etMobileInputInviteCode" />
+
+    <ImageView
+        android:id="@+id/ivMobileLoginCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="5dp"
+        android:src="@drawable/selector_login_check_box"
+        app:layout_constraintLeft_toLeftOf="@+id/etMobileInputInviteCode"
+        app:layout_constraintTop_toBottomOf="@+id/etMobileInputInviteCode" />
+
+    <TextView
+        android:id="@+id/tvMobileRegisterText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:text="我已阅读并同意"
+        android:textColor="@color/color_text_111"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivMobileLoginCheckBox"
+        app:layout_constraintLeft_toRightOf="@+id/ivMobileLoginCheckBox"
+        app:layout_constraintTop_toTopOf="@+id/ivMobileLoginCheckBox" />
+
+    <TextView
+        android:id="@+id/tvMobileRegisterProtocols"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="用户协议及隐私条款"
+        android:textColor="@color/color_theme"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvMobileRegisterText"
+        app:layout_constraintLeft_toRightOf="@+id/tvMobileRegisterText" />
+
+    <TextView
+        android:id="@+id/tvMobileRegister"
+        style="@style/MainBtn"
+        android:layout_marginTop="30dp"
+        android:text="注册"
+        app:layout_constraintTop_toBottomOf="@+id/tvMobileRegisterProtocols"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tvRegisteredText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        android:text="已经注册？"
+        android:textColor="@color/color_text_888"
+        android:textSize="16sp"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/tvToLogin"
+        app:layout_constraintTop_toBottomOf="@+id/tvMobileRegister" />
+
+    <TextView
+        android:id="@+id/tvToLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="去登录"
+        android:textColor="@color/color_theme"
+        android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvRegisteredText"
+        app:layout_constraintLeft_toRightOf="@+id/tvRegisteredText"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
