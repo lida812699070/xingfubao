@@ -90,7 +90,6 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
         ButterKnife.bind(this);
         initView(savedInstanceState);
         AppManager.getAppManager().addActivity(this);
-        initData();
     }
 
     /**
@@ -125,9 +124,6 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     }
 
     public abstract void initView(Bundle savedInstanceState);
-
-    protected void initData() {
-    }
 
     @Override
     public Resources getResources() {//还原字体大小

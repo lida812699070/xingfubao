@@ -39,4 +39,27 @@ abstract class DefaultActivity : BaseActivity() {
         }
         e.printStackTrace()
     }
+
+
+    open fun <T> requestWithError(
+        observable: Observable<com.xfb.xinfubao.model.Result<T>>,
+        callBack: (com.xfb.xinfubao.model.Result<T>) -> Unit,
+        onerror: () -> Unit
+    ) {
+        observable.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doFinally { hideProgress() }
+            .subscribe({
+                if (it.code == 0) {
+                    callBack(it)
+                } else {
+                    onerror()
+                }
+            }, {
+                onError(it)
+                onerror()
+            }, {
+            })
+    }
+
 }

@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
@@ -24,9 +25,6 @@ import com.careagle.sdk.callback.MyDialogCallback;
 import com.careagle.sdk.utils.MyToast;
 import com.careagle.sdk.weight.CustomProgress;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-
 /**
  * Created by Horrarndoo on 2017/9/26.
  * <p>
@@ -37,10 +35,12 @@ public abstract class BaseCompatFragment extends Fragment implements IBaseView {
     protected String TAG;
     protected Context mContext;
     protected Activity mActivity;
-    private Unbinder binder;
     private AlertDialog okDialog;
     private CustomProgress progressDialog;
     protected Dialog customDialog;
+    protected boolean isPrepared;
+    protected boolean isLazyLoaded;
+    public View rootView = null;
 
     @Override
     public void onAttach(Context context) {
@@ -50,13 +50,38 @@ public abstract class BaseCompatFragment extends Fragment implements IBaseView {
     }
 
     @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        isPrepared = true;
+        lazyLoad();
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        lazyLoad();
+    }
+
+    private void lazyLoad() {
+        if (getUserVisibleHint() && isPrepared && !isLazyLoaded) {
+            onLazyLoad();
+            isLazyLoaded = true;
+        }
+    }
+
+    public void onLazyLoad() {
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable
             Bundle savedInstanceState) {
         if (getLayoutView() != null) {
             return getLayoutView();
         } else {
-            //            return inflater.inflate(getLayoutId(), null);
-            return inflater.inflate(getLayoutId(), container, false);
+            if (rootView == null)
+                rootView = getActivity().getLayoutInflater().inflate(getLayoutId(), container, false);
+            return rootView;
         }
     }
 
@@ -64,7 +89,6 @@ public abstract class BaseCompatFragment extends Fragment implements IBaseView {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         TAG = getClass().getSimpleName();
-        binder = ButterKnife.bind(this, view);
         getBundle(getArguments());
         initUI(view, savedInstanceState);
     }
@@ -72,8 +96,6 @@ public abstract class BaseCompatFragment extends Fragment implements IBaseView {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (binder != null)
-            binder.unbind();
         if (okDialog != null && okDialog.isShowing()) {
             okDialog.dismiss();
         }
@@ -154,7 +176,6 @@ public abstract class BaseCompatFragment extends Fragment implements IBaseView {
         }
     }
 
-
     protected void showProgress(int messageResId) {
         showProgress(getString(messageResId));
     }
@@ -228,6 +249,14 @@ public abstract class BaseCompatFragment extends Fragment implements IBaseView {
     }
 
     public void refresh() {
+    }
+
+    public boolean isLazy() {
+        return false;
+    }
+
+    public View findViewById(int resId) {
+        return rootView.findViewById(resId);
     }
 
 }

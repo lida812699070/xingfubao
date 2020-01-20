@@ -39,4 +39,25 @@ abstract class BaseFragment : BaseCompatFragment() {
             })
     }
 
+    open fun <T> requestWithError(
+        observable: Observable<com.xfb.xinfubao.model.Result<T>>,
+        onerror: () -> Unit,
+        callBack: (com.xfb.xinfubao.model.Result<T>) -> Unit
+    ) {
+        observable.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doFinally { hideProgress() }
+            .subscribe({
+                if (it.code == 0) {
+                    callBack(it)
+                } else {
+                    onerror()
+                }
+            }, {
+                onError(it)
+                onerror()
+            }, {
+            })
+    }
+
 }

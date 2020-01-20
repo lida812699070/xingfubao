@@ -1,6 +1,7 @@
 package com.xfb.xinfubao.fragment
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.xfb.xinfubao.MyApplication
 import com.xfb.xinfubao.R
+import com.xfb.xinfubao.activity.ProductDetailActivity
 import com.xfb.xinfubao.api.BaseApi
 import com.xfb.xinfubao.constant.Constant.MONEY_RMB
 import com.xfb.xinfubao.model.HomeModel
@@ -74,6 +76,12 @@ class HomeFragment : BaseFragment() {
                 null
             )
         )
+        productAdapter.setOnItemClickListener { adapter, view, position ->
+            startActivity(
+                Intent(activity, ProductDetailActivity::class.java)
+                    .putExtra("productId", productList[position].productId)
+            )
+        }
     }
 
     private fun initModuleRecyclerView() {

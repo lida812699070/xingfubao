@@ -1,10 +1,9 @@
 package com.xfb.xinfubao.api
 
-import com.xfb.xinfubao.model.HomeModel
-import com.xfb.xinfubao.model.Result
-import com.xfb.xinfubao.model.UserInfo
+import com.xfb.xinfubao.model.*
 import io.reactivex.Observable
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.QueryMap
 
@@ -33,6 +32,19 @@ interface BaseApi {
      */
     @POST("api/login")
     fun toLogin(@Body map: Map<String, String>): Observable<Result<UserInfo>>
+
+
+    /**
+     * 新闻
+     */
+    @GET("newslist")
+    fun newslist(@QueryMap map: Map<String, String>): Observable<Result<List<NewsModel>>>
+
+    /**
+     * 杏福宝新闻首页列表数据
+     */
+    @GET("newsxfb")
+    fun newsxfb(@QueryMap map: Map<String, String>): Observable<Result<List<FindNewsTab>>>
 
 
 }
