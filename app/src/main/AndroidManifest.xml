@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.ConfirmOrderActivity"></activity>
+        <activity android:name=".activity.CashInActivity"></activity>
+        <activity android:name=".activity.ConfirmOrderActivity" />
         <activity android:name=".activity.WebviewActivity" />
         <activity android:name=".activity.ProductDetailActivity" />
         <activity android:name=".activity.ResetPasswordActivity" />

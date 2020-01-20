@@ -1,5 +1,6 @@
 package com.xfb.xinfubao.activity
 
+import android.content.Intent
 import android.os.Bundle
 import com.xfb.xinfubao.R
 import kotlinx.android.synthetic.main.activity_confirm_order.*
@@ -13,6 +14,8 @@ class ConfirmOrderActivity : DefaultActivity() {
 
     override fun initView(savedInstanceState: Bundle?) {
         myToolbar.setClick({ finish() })
+        tvOrderBalance.setOnClickListener {
+            startActivity(Intent(this, CashInActivity::class.java))
+        }
     }
-
 }
