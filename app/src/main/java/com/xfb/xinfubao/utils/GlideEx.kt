@@ -1,5 +1,6 @@
 package com.xfb.xinfubao.utils
 
+import android.net.Uri
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.careagle.sdk.utils.DisplayUtil
@@ -21,6 +22,13 @@ fun ImageView.loadUri(uri: String?, width: Int, height: Int) {
 }
 
 fun ImageView.loadUriCircle(uri: String?) {
+    Glide.with(context)
+        .load(uri)
+        .bitmapTransform(CropCircleTransformation(context))
+        .into(this)
+}
+
+fun ImageView.loadLocalUriCircle(uri: Uri?) {
     Glide.with(context)
         .load(uri)
         .bitmapTransform(CropCircleTransformation(context))

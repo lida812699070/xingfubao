@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_default_bg"
+    tools:context="com.xfb.xinfubao.activity.UserInfoActivity">
+
+    <com.xfb.xinfubao.view.MyToolbarBar
+        android:id="@+id/myToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:str_title_toolbar="我的资料" />
+
+    <TextView
+        android:id="@+id/tvHeader"
+        style="@style/MyInfoText"
+        android:layout_marginTop="10dp"
+        android:text="头像"
+        app:layout_constraintTop_toBottomOf="@+id/myToolbar"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/ivHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="37dp"
+        android:src="@mipmap/touxiang_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/tvHeader"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvHeader" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:src="@mipmap/chevron"
+        app:layout_constraintBottom_toBottomOf="@+id/tvHeader"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvHeader" />
+
+    <TextView
+        android:id="@+id/tvNikeNameText"
+        style="@style/MyInfoText"
+        android:layout_marginTop="1dp"
+        android:text="昵称"
+        app:layout_constraintTop_toBottomOf="@+id/tvHeader"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tvNikeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="37dp"
+        android:text="未设置"
+        android:textColor="@color/color_text_888"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvNikeNameText"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvNikeNameText" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:src="@mipmap/chevron"
+        app:layout_constraintBottom_toBottomOf="@+id/tvNikeNameText"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvNikeNameText" />
+
+    <TextView
+        android:id="@+id/tvUserIdText"
+        style="@style/MyInfoText"
+        android:layout_marginTop="1dp"
+        android:text="用户Id（邀请码)"
+        app:layout_constraintTop_toBottomOf="@+id/tvNikeNameText"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tvUserId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:text="10001"
+        android:textColor="@color/color_text_888"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvUserIdText"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvUserIdText" />
+
+    <TextView
+        android:id="@+id/tvVIPLevel"
+        style="@style/MyInfoText"
+        android:layout_marginTop="10dp"
+        android:text="等级"
+        app:layout_constraintTop_toBottomOf="@+id/tvUserIdText"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/ivVIPLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:src="@mipmap/vip1_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/tvVIPLevel"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvVIPLevel" />
+
+    <TextView
+        android:id="@+id/tvAddressText"
+        style="@style/MyInfoText"
+        android:layout_marginTop="10dp"
+        android:text="收货地址"
+        app:layout_constraintTop_toBottomOf="@+id/tvUserIdText"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:src="@mipmap/chevron"
+        app:layout_constraintBottom_toBottomOf="@+id/tvAddressText"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvAddressText" />
+
+
+</android.support.constraint.ConstraintLayout>

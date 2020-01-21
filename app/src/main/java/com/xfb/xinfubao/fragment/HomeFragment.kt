@@ -15,6 +15,7 @@ import com.chad.library.adapter.base.BaseViewHolder
 import com.xfb.xinfubao.MyApplication
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.activity.ProductDetailActivity
+import com.xfb.xinfubao.activity.UserInfoActivity
 import com.xfb.xinfubao.api.BaseApi
 import com.xfb.xinfubao.constant.Constant.MONEY_RMB
 import com.xfb.xinfubao.model.HomeModel
@@ -65,6 +66,11 @@ class HomeFragment : BaseFragment() {
 
         initModuleRecyclerView()
         initHomeProductRecyclerView()
+        tvHomeUserCenter.setOnClickListener {
+            activity?.let {
+                startActivity(Intent(it, UserInfoActivity::class.java))
+            }
+        }
     }
 
     private fun initHomeProductRecyclerView() {
