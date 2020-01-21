@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_default_bg"
+    tools:context="com.xfb.xinfubao.activity.MoneyExchangeActivity">
+
+    <com.xfb.xinfubao.view.MyToolbarBar
+        android:id="@+id/myToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:str_title_toolbar="资产互兑"
+        tools:ignore="MissingConstraints" />
+
+    <View
+        android:id="@+id/bgExChange"
+        android:layout_width="match_parent"
+        android:layout_height="228dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="20dp"
+        android:background="@mipmap/zc_bg"
+        app:layout_constraintTop_toBottomOf="@+id/myToolbar" />
+
+    <TextView
+        android:id="@+id/tvYXG"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="30dp"
+        android:drawableLeft="@mipmap/yinxingguo_icon_1_s"
+        android:drawablePadding="10dp"
+        android:gravity="center"
+        android:text="银杏果"
+        android:textColor="@color/color_text_111"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="@+id/bgExChange"
+        app:layout_constraintTop_toTopOf="@+id/bgExChange" />
+
+    <ImageView
+        android:id="@+id/ivYXGDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="6dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvYXG"
+        app:layout_constraintLeft_toRightOf="@+id/tvYXG"
+        app:layout_constraintTop_toTopOf="@+id/tvYXG" />
+
+    <TextView
+        android:id="@+id/tvYXY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="54dp"
+        android:drawableLeft="@mipmap/yinxingye_icon_1_s"
+        android:drawablePadding="10dp"
+        android:gravity="center"
+        android:text="银杏叶"
+        android:textColor="@color/color_text_111"
+        android:textSize="16sp"
+        app:layout_constraintRight_toRightOf="@+id/bgExChange"
+        app:layout_constraintTop_toTopOf="@+id/bgExChange" />
+
+    <ImageView
+        android:id="@+id/ivYYGDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="6dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvYXY"
+        app:layout_constraintLeft_toRightOf="@+id/tvYXY"
+        app:layout_constraintTop_toTopOf="@+id/tvYXY" />
+
+    <ImageView
+        android:id="@+id/ivExchange"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/icon_exchange"
+        app:layout_constraintLeft_toLeftOf="@+id/bgExChange"
+        app:layout_constraintRight_toRightOf="@+id/bgExChange"
+        app:layout_constraintTop_toBottomOf="@+id/tvYXY" />
+
+    <TextView
+        android:id="@+id/tvExchangeOutCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="48dp"
+        android:layout_marginTop="123dp"
+        android:text="转出数量"
+        android:textColor="@color/color_text_888"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toLeftOf="@+id/bgExChange"
+        app:layout_constraintTop_toTopOf="@+id/bgExChange" />
+
+    <TextView
+        android:id="@+id/tvExchangeInCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="123dp"
+        android:layout_marginRight="48dp"
+        android:text="收到数量"
+        android:textColor="@color/color_text_888"
+        android:textSize="14sp"
+        app:layout_constraintRight_toRightOf="@+id/bgExChange"
+        app:layout_constraintTop_toTopOf="@+id/bgExChange" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginRight="32dp"
+        android:background="@color/color_line_e0e"
+        app:layout_constraintTop_toBottomOf="@+id/tvExchangeInCount" />
+
+    <TextView
+        android:id="@+id/tvExchangeRatioText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginBottom="20dp"
+        android:drawableLeft="@mipmap/tishi_icon"
+        android:drawablePadding="6dp"
+        android:text="银杏果兑换银杏叶的比例为"
+        android:textColor="@color/color_text_888"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/bgExChange"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <TextView
+        android:id="@+id/tvExchangeRatio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1:50"
+        android:textColor="@color/color_light_org"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvExchangeRatioText"
+        app:layout_constraintLeft_toRightOf="@+id/tvExchangeRatioText" />
+
+    <TextView
+        android:id="@+id/tvToExchange"
+        style="@style/MainBtn"
+        android:layout_marginTop="30dp"
+        android:text="闪电兑换"
+        app:layout_constraintTop_toBottomOf="@+id/bgExChange"
+        tools:ignore="MissingConstraints" />
+</android.support.constraint.ConstraintLayout>

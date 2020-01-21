@@ -1,13 +1,236 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_default_bg"
+    android:fillViewport="true"
     tools:context=".fragment.FindFragment">
 
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragment.FindFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="我的" />
-</android.support.constraint.ConstraintLayout>
+        <ImageView
+            android:id="@+id/ivBgMine"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:background="#5555"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivHeader"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="97dp"
+            android:src="@mipmap/touxiang"
+            android:text="我的"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="13dp"
+            android:text="名字"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toRightOf="@+id/ivHeader"
+            app:layout_constraintTop_toTopOf="@+id/ivHeader" />
+
+        <TextView
+            android:id="@+id/tvNikeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="昵称"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="@+id/tvName"
+            app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+        <TextView
+            android:id="@+id/tvUserId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NO.111"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivHeader"
+            app:layout_constraintLeft_toLeftOf="@+id/tvName" />
+
+        <ImageView
+            android:id="@+id/ivVip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:src="@mipmap/vip1_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/tvUserId"
+            app:layout_constraintLeft_toRightOf="@+id/tvUserId" />
+
+        <ImageView
+            android:id="@+id/ivSetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="58dp"
+            android:layout_marginRight="15dp"
+            android:padding="5dp"
+            android:src="@mipmap/setting_icon"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="118dp"
+            android:layout_marginRight="20dp"
+            android:src="@mipmap/xiaoxi_icon"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivPoint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="115dp"
+            android:layout_marginRight="16dp"
+            android:src="@mipmap/new_icon"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/clMineTabs"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="195dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/shape_mine_tabs_bg"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tvMineyxg"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/yinxingguo_icon"
+                android:drawablePadding="2dp"
+                android:gravity="center"
+                android:text="银杏果"
+                android:textColor="@color/color_text_111"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tvMineyxy"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/yinxingye_icon"
+                android:drawablePadding="2dp"
+                android:gravity="center"
+                android:text="银杏叶"
+                android:textColor="@color/color_text_111"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tvMinejfsc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/jifen_icon"
+                android:drawablePadding="2dp"
+                android:gravity="center"
+                android:text="积分商城"
+                android:textColor="@color/color_text_111"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tvMineNAT"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/yuanli_icon"
+                android:drawablePadding="2dp"
+                android:gravity="center"
+                android:text="NAT"
+                android:textColor="@color/color_text_111"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <com.xfb.xinfubao.view.ItemMineView
+            android:id="@+id/itemYxb"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:layout_marginTop="11dp"
+            app:item_mine_left_img="@mipmap/yuanli_icon1"
+            app:item_mine_title="银杏宝"
+            app:layout_constraintTop_toBottomOf="@+id/clMineTabs" />
+
+        <com.xfb.xinfubao.view.ItemMineView
+            android:id="@+id/itemYlz"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            app:item_mine_left_img="@mipmap/yuanli_icon1"
+            app:item_mine_title="愿立值"
+            app:layout_constraintTop_toBottomOf="@+id/itemYxb" />
+
+        <com.xfb.xinfubao.view.ItemMineView
+            android:id="@+id/itemNATJj"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            app:item_mine_left_img="@mipmap/yuanli_icon1"
+            app:item_mine_title="NAT基金会"
+            app:layout_constraintTop_toBottomOf="@+id/itemYlz" />
+
+        <com.xfb.xinfubao.view.ItemMineView
+            android:id="@+id/itemMarketOrder"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:layout_marginTop="10dp"
+            app:item_mine_left_img="@mipmap/order_icon_circle"
+            app:item_mine_title="商城订单"
+            app:layout_constraintTop_toBottomOf="@+id/itemNATJj" />
+
+        <com.xfb.xinfubao.view.ItemMineView
+            android:id="@+id/itemMoneyChange"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            app:item_mine_left_img="@mipmap/exchange_icon"
+            app:item_mine_title="资产互兑"
+            app:layout_constraintTop_toBottomOf="@+id/itemMarketOrder" />
+
+        <com.xfb.xinfubao.view.ItemMineView
+            android:id="@+id/itemMyTeam"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:layout_marginTop="10dp"
+            app:item_mine_left_img="@mipmap/order_icon_circle"
+            app:item_mine_title="我的团队"
+            app:layout_constraintTop_toBottomOf="@+id/itemMoneyChange" />
+
+        <com.xfb.xinfubao.view.ItemMineView
+            android:id="@+id/itemInvite"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            app:item_mine_left_img="@mipmap/exchange_icon"
+            app:item_mine_title="邀请好友"
+            app:layout_constraintTop_toBottomOf="@+id/itemMyTeam" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:layout_constraintTop_toBottomOf="@+id/itemInvite" />
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v4.widget.NestedScrollView>

@@ -15,7 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.CashInActivity"></activity>
+        <activity android:name=".activity.BalanceActivity"></activity>
+        <activity android:name=".activity.MoneyExchangeActivity" />
+        <activity android:name=".activity.CashInActivity" />
         <activity android:name=".activity.ConfirmOrderActivity" />
         <activity android:name=".activity.WebviewActivity" />
         <activity android:name=".activity.ProductDetailActivity" />
