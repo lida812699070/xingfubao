@@ -8,7 +8,7 @@
     <!--透明文本为dialog挤出空间-->
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="409dp"
+        android:layout_height="270dp"
         android:background="@color/color_default_bg"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="17dp"
-        android:text="申请提币到NatToken"
+        android:text="抵押"
         android:textColor="@color/color_text_111"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -44,11 +44,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/etTokenAddress"
+        android:id="@+id/etPayPassword"
         style="@style/LoginGeryInput"
-        android:layout_marginTop="85dp"
-        android:hint="请输入或者粘贴您的NAToken钱包地址"
-        android:inputType="text"
+        android:layout_marginTop="88dp"
+        android:hint="请输入支付密码"
+        android:inputType="textPassword"
         android:maxLines="1"
         android:paddingLeft="12dp"
         android:textSize="16sp"
@@ -56,46 +56,9 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
-        android:padding="5dp"
-        android:text="粘贴"
-        android:textColor="@color/theme_color"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/etTokenAddress"
-        app:layout_constraintRight_toRightOf="@+id/etTokenAddress"
-        app:layout_constraintTop_toTopOf="@+id/etTokenAddress" />
-
-    <EditText
-        android:id="@+id/etNATCount"
-        style="@style/LoginGeryInput"
-        android:layout_marginTop="16dp"
-        android:hint="请输入要提取的NAT数量"
-        android:inputType="number"
-        android:maxLines="1"
-        android:paddingLeft="12dp"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/etTokenAddress"
-        tools:ignore="MissingConstraints" />
-
-
-    <EditText
-        android:id="@+id/etPayPassword"
-        style="@style/LoginGeryInput"
-        android:layout_marginTop="16dp"
-        android:hint="请输入支付密码"
-        android:inputType="textPassword"
-        android:maxLines="1"
-        android:paddingLeft="12dp"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/etNATCount"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
         android:id="@+id/tvOkCashOut"
         style="@style/MainBtn"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="32dp"
         android:text="确认提取"
         app:layout_constraintTop_toBottomOf="@+id/etPayPassword"
         tools:ignore="MissingConstraints" />

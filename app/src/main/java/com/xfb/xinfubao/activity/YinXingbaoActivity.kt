@@ -30,6 +30,8 @@ class YinXingbaoActivity : DefaultActivity() {
         tvToCashOut.setOnClickListener {
             startActivity(Intent(this, ApplyCashOutActivity::class.java))
         }
+
+        ivFinish.setOnClickListener { finish() }
     }
 
 }
