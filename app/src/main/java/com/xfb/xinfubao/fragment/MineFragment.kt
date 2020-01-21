@@ -6,6 +6,7 @@ import android.view.View
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.activity.BalanceActivity
 import com.xfb.xinfubao.activity.MoneyExchangeActivity
+import com.xfb.xinfubao.activity.YinXingbaoActivity
 import kotlinx.android.synthetic.main.fragment_mine.*
 
 class MineFragment : BaseFragment() {
@@ -41,7 +42,11 @@ class MineFragment : BaseFragment() {
                 startActivity(Intent(it, BalanceActivity::class.java))
             }
         }
-
+        itemYxb.setOnClickListener {
+            activity?.let {
+                startActivity(Intent(it, YinXingbaoActivity::class.java))
+            }
+        }
 
     }
 

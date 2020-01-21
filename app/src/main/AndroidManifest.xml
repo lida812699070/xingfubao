@@ -15,7 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.TransferActivity"></activity>
+        <activity android:name=".activity.CashOutRecordActivity"></activity>
+        <activity android:name=".activity.ApplyCashOutResultActivity" />
+        <activity android:name=".activity.ApplyCashOutActivity" />
+        <activity android:name=".activity.YinXingbaoActivity" />
+        <activity android:name=".activity.TransferActivity" />
         <activity android:name=".activity.BalanceActivity" />
         <activity android:name=".activity.MoneyExchangeActivity" />
         <activity android:name=".activity.CashInActivity" />

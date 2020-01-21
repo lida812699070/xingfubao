@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_default_bg"
+    tools:context="com.xfb.xinfubao.activity.ApplyCashOutResultActivity">
+
+    <com.xfb.xinfubao.view.MyToolbarBar
+        android:id="@+id/myToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:str_title_toolbar="申请转出" />
+
+    <ImageView
+        android:id="@+id/ivState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="185dp"
+        android:src="@drawable/selector_wait_right"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:gravity="center"
+        android:text="@string/apply_cash_out_hint"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivState" />
+
+    <TextView
+        android:id="@+id/tvConnectServerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="如有疑问请"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/tvConnectServer"
+        app:layout_constraintTop_toBottomOf="@+id/tvHint" />
+
+    <TextView
+        android:id="@+id/tvConnectServer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="联系客服"
+        android:textColor="@color/theme_color"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvConnectServerText"
+        app:layout_constraintLeft_toRightOf="@+id/tvConnectServerText"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/tvCashOutDetailText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="438dp"
+        android:text="转出详情"
+        android:textColor="@color/color_text_111"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvApplyTimeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:text="申请时间"
+        android:textColor="@color/color_text_111"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCashOutDetailText" />
+
+    <TextView
+        android:id="@+id/tvApplyTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:text="2019-01-01"
+        android:textColor="@color/color_org"
+        android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvApplyTimeText"
+        app:layout_constraintLeft_toRightOf="@+id/tvApplyTimeText" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/color_line_e0e"
+        app:layout_constraintTop_toBottomOf="@+id/tvApplyTime" />
+
+    <TextView
+        android:id="@+id/tvCashOutMoneyText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="22dp"
+        android:text="转出金额"
+        android:textColor="@color/color_text_111"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvApplyTimeText" />
+
+    <TextView
+        android:id="@+id/tvCashOutMoney"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:text="2019-01-01"
+        android:textColor="@color/color_org"
+        android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvCashOutMoneyText"
+        app:layout_constraintLeft_toRightOf="@+id/tvCashOutMoneyText" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/color_line_e0e"
+        app:layout_constraintTop_toBottomOf="@+id/tvCashOutMoney" />
+
+    <TextView
+        android:id="@+id/tvOk"
+        style="@style/MainBtn"
+        android:layout_marginTop="41dp"
+        android:background="@drawable/shape_org_radius_8"
+        android:text="已成功"
+        app:layout_constraintTop_toBottomOf="@+id/tvCashOutMoneyText"
+        tools:ignore="MissingConstraints" />
+</android.support.constraint.ConstraintLayout>

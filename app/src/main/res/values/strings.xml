@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">杏福宝</string>
+    <string name="apply_cash_out_hint">尊敬的用户\n您的转出申请已成功\n预计到帐</string>
+    <string name="apply_cash_out_success_hint">尊敬的用户\n您的提现已汇出\n请留意您的收款银行卡账号</string>
 </resources>

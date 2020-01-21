@@ -14,4 +14,7 @@
     <color name="color_text_595">#595C61</color>
     <color name="color_line_e0e">#E0E2E4</color>
     <color name="color_light_org">#CFAA8E</color>
+    <color name="color_org">#FF5501</color>
+    <color name="color_gery_f5f">#F5F5F5</color>
+    <color name="color_pink">#FFE7E1</color>
 </resources>

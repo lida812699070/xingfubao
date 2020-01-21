@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_default_bg"
+    android:fillViewport="true"
+    tools:context="com.xfb.xinfubao.activity.ApplyCashOutActivity">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_default_bg">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="459dp"
+            android:background="@drawable/shape_org_white_ga"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivFinish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="55dp"
+            android:padding="5dp"
+            android:src="@mipmap/icon_white_back"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="申请转出"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/ivFinish"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ivFinish" />
+
+        <TextView
+            android:id="@+id/tvApplyRecord"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:padding="5dp"
+            android:text="申请记录"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTitle"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvTitle" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="138dp"
+            android:text="金额(元)"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvTotalMoney"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="166dp"
+            android:includeFontPadding="false"
+            android:text="123000.00"
+            android:textColor="@color/white"
+            android:textSize="38sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvTimeLessOutText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:layout_marginTop="239dp"
+            android:text="距离解冻还有："
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTimeLessOutText"
+            app:layout_constraintLeft_toRightOf="@+id/tvTimeLessOutText"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvTimeLessOutText">
+
+            <TextView
+                android:id="@+id/tvDateYear"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/shape_white_radius_3"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@color/color_text_111"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvDateYearText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:text="年"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tvDateMonth"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/shape_white_radius_3"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@color/color_text_111"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvDateMonthText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:text="月"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tvDateDay"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/shape_white_radius_3"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@color/color_text_111"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvDateDayText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:text="日"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tvDateHour"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/shape_white_radius_3"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@color/color_text_111"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvDateHourText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:text="时"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tvDateMin"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/shape_white_radius_3"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@color/color_text_111"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvDateMinText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:text="分"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="300dp"
+            android:text="申请转出"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/etBankCardNo"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="344dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/shape_white_radius_26"
+            android:hint="请填写银行卡号"
+            android:maxLines="1"
+            android:paddingLeft="18dp"
+            android:paddingRight="18dp"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/etBankName"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/shape_white_radius_26"
+            android:hint="请填写开户银行"
+            android:maxLines="1"
+            android:paddingLeft="18dp"
+            android:paddingRight="18dp"
+            app:layout_constraintTop_toBottomOf="@+id/etBankCardNo" />
+
+        <EditText
+            android:id="@+id/etBankCardUserName"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/shape_white_radius_26"
+            android:hint="请填写开户姓名"
+            android:maxLines="1"
+            android:paddingLeft="18dp"
+            android:paddingRight="18dp"
+            app:layout_constraintTop_toBottomOf="@+id/etBankName" />
+
+        <EditText
+            android:id="@+id/etApplyCashOutMoney"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/shape_white_radius_26"
+            android:hint="申请转出金额"
+            android:inputType="numberDecimal"
+            android:maxLines="1"
+            android:paddingLeft="18dp"
+            android:paddingRight="18dp"
+            app:layout_constraintTop_toBottomOf="@+id/etBankCardUserName" />
+
+        <TextView
+            android:id="@+id/tvAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:padding="5dp"
+            android:text="全部"
+            android:textColor="@color/color_org"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/etApplyCashOutMoney"
+            app:layout_constraintRight_toRightOf="@+id/etApplyCashOutMoney"
+            app:layout_constraintTop_toTopOf="@+id/etApplyCashOutMoney" />
+
+        <EditText
+            android:id="@+id/etPayPassword"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/shape_white_radius_26"
+            android:hint="请输入支付密码"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:paddingLeft="18dp"
+            android:paddingRight="18dp"
+            app:layout_constraintTop_toBottomOf="@+id/etApplyCashOutMoney" />
+
+        <TextView
+            android:id="@+id/tvOK"
+            style="@style/MainBtn"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/shape_pink_radius_8"
+            android:text="确认申请"
+            app:layout_constraintTop_toBottomOf="@+id/etPayPassword"
+            tools:ignore="MissingConstraints" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            app:layout_constraintTop_toBottomOf="@+id/tvOK" />
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v4.widget.NestedScrollView>
+
