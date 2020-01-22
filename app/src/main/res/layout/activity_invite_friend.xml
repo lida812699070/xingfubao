@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_org"
     tools:context="com.xfb.xinfubao.activity.InviteFriendActivity">
 
     <com.xfb.xinfubao.view.MyToolbarBar
@@ -13,4 +14,121 @@
         app:layout_constraintTop_toTopOf="parent"
         app:str_title_toolbar="邀请好友" />
 
+    <ImageView
+        android:id="@+id/ivImg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:src="@mipmap/icon_invite_img"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivBg"
+        android:layout_width="326dp"
+        android:layout_height="505dp"
+        android:layout_marginTop="60dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/icon_invite_bg"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myToolbar" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="38dp"
+        android:text="您的邀请码"
+        android:textColor="@color/color_org"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivBg" />
+
+    <TextView
+        android:id="@+id/tvInviteCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="69dp"
+        android:text="r64n8g"
+        android:textColor="@color/color_text_111"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivBg" />
+
+    <TextView
+        android:id="@+id/tvInviteInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="好友可在注册时直接填写邀请码"
+        android:textColor="@color/color_text_888"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvInviteCode" />
+
+    <View
+        android:id="@+id/viewBgQrPic"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="33dp"
+        android:background="@drawable/shape_white_radius_13"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvInviteInfo" />
+
+    <ImageView
+        android:id="@+id/ivQrCode"
+        android:layout_width="175dp"
+        android:layout_height="175dp"
+        android:src="@mipmap/icon_qr_img"
+        app:layout_constraintBottom_toBottomOf="@+id/viewBgQrPic"
+        app:layout_constraintLeft_toLeftOf="@+id/viewBgQrPic"
+        app:layout_constraintRight_toRightOf="@+id/viewBgQrPic"
+        app:layout_constraintTop_toTopOf="@+id/viewBgQrPic" />
+
+    <TextView
+        android:id="@+id/tvDownloadApp"
+        android:layout_width="160dp"
+        android:layout_height="45dp"
+        android:background="@drawable/shape_org_radius_23"
+        android:gravity="center"
+        android:text="扫码下载杏福宝"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivBg"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewBgQrPic" />
+
+    <TextView
+        android:id="@+id/tvDownLoadSave"
+        android:layout_width="122dp"
+        android:layout_height="52dp"
+        android:layout_marginLeft="64dp"
+        android:background="@drawable/shape_white_radius_8"
+        android:gravity="center"
+        android:text="下载保存"
+        android:textColor="@color/color_text_111"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/ivImg"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <TextView
+        android:id="@+id/tvCopyUrl"
+        android:layout_width="122dp"
+        android:layout_height="52dp"
+        android:layout_marginRight="64dp"
+        android:background="@drawable/shape_white_radius_8"
+        android:gravity="center"
+        android:text="复制链接"
+        android:textColor="@color/color_org"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/ivImg"
+        app:layout_constraintRight_toRightOf="parent" />
 </android.support.constraint.ConstraintLayout>
