@@ -60,6 +60,11 @@ class MineFragment : BaseFragment() {
                 startActivity(Intent(it, MyMessageActivity::class.java))
             }
         }
+        itemHelp.setOnClickListener {
+            activity?.let {
+                startActivity(Intent(it, HelpActivity::class.java))
+            }
+        }
 
     }
 
