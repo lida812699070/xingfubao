@@ -12,5 +12,6 @@ class AuthResultActivity : DefaultActivity() {
 
     override fun initView(savedInstanceState: Bundle?) {
         ivFinish.setOnClickListener { finish() }
+        tvOK.setOnClickListener { finish() }
     }
 }

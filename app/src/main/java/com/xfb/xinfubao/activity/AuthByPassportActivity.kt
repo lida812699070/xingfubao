@@ -13,7 +13,7 @@ class AuthByPassportActivity : DefaultActivity() {
 
     override fun initView(savedInstanceState: Bundle?) {
         ivFinish.setOnClickListener { finish() }
-        tvOK.setOnClickListener { Intent(this, AuthResultActivity::class.java) }
+        tvOK.setOnClickListener { startActivity(Intent(this, AuthResultActivity::class.java)) }
     }
 
 }
