@@ -215,7 +215,7 @@
             android:layout_width="match_parent"
             android:layout_height="68dp"
             android:layout_marginTop="10dp"
-            app:item_mine_left_img="@mipmap/order_icon_circle"
+            app:item_mine_left_img="@mipmap/icon_my_team"
             app:item_mine_title="我的团队"
             app:layout_constraintTop_toBottomOf="@+id/itemMoneyChange" />
 
@@ -223,14 +223,40 @@
             android:id="@+id/itemInvite"
             android:layout_width="match_parent"
             android:layout_height="68dp"
-            app:item_mine_left_img="@mipmap/exchange_icon"
+            app:item_mine_left_img="@mipmap/invite_icon"
             app:item_mine_title="邀请好友"
             app:layout_constraintTop_toBottomOf="@+id/itemMyTeam" />
 
+        <com.xfb.xinfubao.view.ItemMineView
+            android:id="@+id/itemSafeCenter"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:layout_marginTop="10dp"
+            app:item_mine_left_img="@mipmap/icon_safe"
+            app:item_mine_title="安全中心"
+            app:layout_constraintTop_toBottomOf="@+id/itemInvite" />
+
+        <com.xfb.xinfubao.view.ItemMineView
+            android:id="@+id/itemHelp"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            app:item_mine_left_img="@mipmap/icon_help"
+            app:item_mine_title="帮助及反馈"
+            app:layout_constraintTop_toBottomOf="@+id/itemSafeCenter" />
+
+        <com.xfb.xinfubao.view.ItemMineView
+            android:id="@+id/itemAbout"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:layout_marginTop="10dp"
+            app:item_mine_left_img="@mipmap/icon_about"
+            app:item_mine_title="关于我们"
+            app:layout_constraintTop_toBottomOf="@+id/itemHelp" />
+
         <View
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            app:layout_constraintTop_toBottomOf="@+id/itemInvite" />
+            android:layout_height="150dp"
+            app:layout_constraintTop_toBottomOf="@+id/itemAbout" />
     </android.support.constraint.ConstraintLayout>
 
 </android.support.v4.widget.NestedScrollView>
