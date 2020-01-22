@@ -65,4 +65,8 @@
         <item name="android:textColor">@color/color_text_111</item>
     </style>
 
+    <style name="MyInfoTextWithArrow" parent="MyInfoText">
+        <item name="android:drawableRight">@mipmap/chevron</item>
+        <item name="android:paddingRight">20dp</item>
+    </style>
 </resources>

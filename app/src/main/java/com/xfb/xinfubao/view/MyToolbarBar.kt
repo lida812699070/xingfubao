@@ -51,4 +51,8 @@ class MyToolbarBar @JvmOverloads constructor(
         this.rightClick = rightClick
     }
 
+    fun setTitle(title: String) {
+        tvTitle.text = title
+    }
+
 }

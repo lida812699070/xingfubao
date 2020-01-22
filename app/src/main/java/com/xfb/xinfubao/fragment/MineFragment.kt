@@ -65,7 +65,21 @@ class MineFragment : BaseFragment() {
                 startActivity(Intent(it, HelpActivity::class.java))
             }
         }
-
+        itemSafeCenter.setOnClickListener {
+            activity?.let {
+                startActivity(Intent(it, SafeCenterActivity::class.java))
+            }
+        }
+        itemAbout.setOnClickListener {
+            activity?.let {
+                startActivity(Intent(it, AboutActivity::class.java))
+            }
+        }
+        itemInvite.setOnClickListener {
+            activity?.let {
+                startActivity(Intent(it, InviteFriendActivity::class.java))
+            }
+        }
     }
 
 }

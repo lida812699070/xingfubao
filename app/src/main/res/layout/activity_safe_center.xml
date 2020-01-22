@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_default_color"
+    tools:context="com.xfb.xinfubao.activity.SafeCenterActivity">
+
+    <com.xfb.xinfubao.view.MyToolbarBar
+        android:id="@+id/myToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:str_title_toolbar="安全中心" />
+
+    <TextView
+        android:id="@+id/tvResetLoginPassword"
+        style="@style/MyInfoTextWithArrow"
+        android:layout_marginTop="10dp"
+        android:text="修改登录密码"
+        app:layout_constraintTop_toBottomOf="@+id/myToolbar"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tvResetPayPassword"
+        style="@style/MyInfoTextWithArrow"
+        android:layout_marginTop="1dp"
+        android:text="修改支付密码"
+        app:layout_constraintTop_toBottomOf="@+id/tvResetLoginPassword"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tvResetMobile"
+        style="@style/MyInfoTextWithArrow"
+        android:layout_marginTop="10dp"
+        android:text="修改绑定手机"
+        app:layout_constraintTop_toBottomOf="@+id/tvResetPayPassword"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tvMobile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="38dp"
+        android:text="1506070000"
+        android:textColor="@color/color_text_888"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvResetMobile"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvResetMobile" />
+
+    <TextView
+        android:id="@+id/tvAuthentication"
+        style="@style/MyInfoTextWithArrow"
+        android:layout_marginTop="1dp"
+        android:text="实名认证"
+        app:layout_constraintTop_toBottomOf="@+id/tvResetMobile"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tvAuthenticationState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="38dp"
+        android:text="未实名"
+        app:layout_constraintBottom_toBottomOf="@+id/tvAuthentication"
+        app:layout_constraintRight_toRightOf="@+id/tvAuthentication"
+        app:layout_constraintTop_toTopOf="@+id/tvAuthentication" />
+
+</android.support.constraint.ConstraintLayout>
