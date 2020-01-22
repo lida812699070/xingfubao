@@ -2,4 +2,5 @@
     <string name="app_name">杏福宝</string>
     <string name="apply_cash_out_hint">尊敬的用户\n您的转出申请已成功\n预计到帐</string>
     <string name="apply_cash_out_success_hint">尊敬的用户\n您的提现已汇出\n请留意您的收款银行卡账号</string>
+    <string name="str_auth_wait">尊敬的%s用户\n您提交的认证信息正在审中...\n(预计审核时间：5-30分钟)</string>
 </resources>

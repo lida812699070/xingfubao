@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="com.xfb.xinfubao.activity.AuthenticationActivity">
+
+    <com.xfb.xinfubao.view.MyToolbarBar
+        android:id="@+id/myToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:str_title_toolbar="实名认证" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="114dp"
+        android:text="实名认证"
+        android:textColor="@color/color_text_111"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="181dp"
+        android:text="实名认证分为两种不同的认证方式"
+        android:textColor="@color/theme_color"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="222dp"
+        android:layout_marginRight="20dp"
+        android:text="大陆的用户可以使用身份证的方式进行实名认，海外以及港澳台未持有大陆身份证的用户，可以用护照的方式进行实名认证"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvAuthByIdCard"
+        style="@style/MainBtn"
+        android:layout_marginTop="387dp"
+        android:text="通过身份证实名认证"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tvAuthByPassport"
+        style="@style/MainBtn"
+        android:layout_marginTop="19dp"
+        android:background="@drawable/shape_theme_storke_btn_bg"
+        android:text="通过护照实名认证"
+        android:textColor="@color/theme_color"
+        app:layout_constraintTop_toBottomOf="@+id/tvAuthByIdCard"
+        tools:ignore="MissingConstraints" />
+
+</android.support.constraint.ConstraintLayout>

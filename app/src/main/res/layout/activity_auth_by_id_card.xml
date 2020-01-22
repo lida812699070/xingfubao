@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="com.xfb.xinfubao.activity.AuthByIdCardActivity">
+
+    <View
+        android:id="@+id/viewTop"
+        android:layout_width="match_parent"
+        android:layout_height="98dp"
+        android:background="@color/theme_color"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivFinish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:padding="5dp"
+        android:src="@mipmap/icon_white_back"
+        app:layout_constraintBottom_toBottomOf="@+id/tvTitle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvTitle" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="14dp"
+        android:text="身份证认证"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/viewTop"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/tvNameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:text="姓名"
+        android:textColor="@color/color_text_111"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewTop" />
+
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginRight="20dp"
+        android:background="@null"
+        android:hint="请输入您的姓名"
+        android:maxLines="1"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/tvNameText" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="43dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/color_line_e0e"
+        app:layout_constraintTop_toBottomOf="@+id/tvNameText" />
+
+    <TextView
+        android:id="@+id/tvIDCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="96dp"
+        android:text="身份证"
+        android:textColor="@color/color_text_111"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewTop" />
+
+    <EditText
+        android:id="@+id/etIDCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginRight="20dp"
+        android:background="@null"
+        android:hint="请输入身份证号"
+        android:maxLines="1"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/tvIDCard" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="43dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/color_line_e0e"
+        app:layout_constraintTop_toBottomOf="@+id/tvIDCard" />
+
+    <TextView
+        android:id="@+id/tvUploadIDPic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="182dp"
+        android:text="请上传您的身份证照片"
+        android:textColor="@color/color_text_111"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewTop" />
+
+    <ImageView
+        android:id="@+id/ivFacePic"
+        android:layout_width="181dp"
+        android:layout_height="117dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="9dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/icon_id_card_face"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvUploadIDPic" />
+
+    <ImageView
+        android:id="@+id/ivReTakePicFace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:src="@mipmap/icon_light_org_reset"
+        android:visibility="gone"
+        app:layout_constraintRight_toRightOf="@+id/ivFacePic"
+        app:layout_constraintTop_toTopOf="@+id/ivFacePic" />
+
+    <TextView
+        android:id="@+id/tvFacePic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@mipmap/icon_org_photo"
+        android:drawablePadding="2dp"
+        android:text="身份证正面"
+        android:textColor="@color/color_light_org"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivFacePic"
+        app:layout_constraintLeft_toLeftOf="@+id/ivFacePic"
+        app:layout_constraintRight_toRightOf="@+id/ivFacePic"
+        app:layout_constraintTop_toTopOf="@+id/ivFacePic" />
+
+    <ImageView
+        android:id="@+id/ivBackPic"
+        android:layout_width="181dp"
+        android:layout_height="117dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginRight="20dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/icon_id_card_back"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvUploadIDPic" />
+
+    <ImageView
+        android:id="@+id/ivReTakePicBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:src="@mipmap/icon_light_org_reset"
+        android:visibility="gone"
+        app:layout_constraintRight_toRightOf="@+id/ivBackPic"
+        app:layout_constraintTop_toTopOf="@+id/ivBackPic" />
+
+
+    <TextView
+        android:id="@+id/tvBackPic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@mipmap/icon_org_photo"
+        android:drawablePadding="2dp"
+        android:text="身份证背面"
+        android:textColor="@color/color_light_org"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivBackPic"
+        app:layout_constraintLeft_toLeftOf="@+id/ivBackPic"
+        app:layout_constraintRight_toRightOf="@+id/ivBackPic"
+        app:layout_constraintTop_toTopOf="@+id/ivBackPic" />
+
+    <TextView
+        android:id="@+id/tvOK"
+        style="@style/MainBtn"
+        android:layout_marginTop="49dp"
+        android:background="@drawable/selector_light_theme_theme"
+        android:text="确定"
+        app:layout_constraintTop_toBottomOf="@+id/ivBackPic"
+        tools:ignore="MissingConstraints" />
+</android.support.constraint.ConstraintLayout>

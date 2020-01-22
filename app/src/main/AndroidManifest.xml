@@ -17,7 +17,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.ChangePasswordActivity"></activity>
+        <activity android:name=".activity.AuthResultActivity"></activity>
+        <activity android:name=".activity.AuthByPassportActivity" />
+        <activity android:name=".activity.AuthByIdCardActivity" />
+        <activity android:name=".activity.AuthenticationActivity" />
+        <activity android:name=".activity.ChangePasswordActivity" />
         <activity android:name=".activity.InviteFriendActivity" />
         <activity android:name=".activity.AboutActivity" />
         <activity android:name=".activity.SafeCenterActivity" />

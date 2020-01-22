@@ -1,5 +1,6 @@
 package com.xfb.xinfubao.activity
 
+import android.content.Intent
 import android.os.Bundle
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.myenum.ChangePasswordEnum
@@ -22,6 +23,9 @@ class SafeCenterActivity : DefaultActivity() {
         }
         tvResetMobile.setOnClickListener {
             ChangePasswordActivity.toActivity(ChangePasswordEnum.CHANGE_MOBILE, this)
+        }
+        tvAuthentication.setOnClickListener {
+            startActivity(Intent(this, AuthenticationActivity::class.java))
         }
     }
 
