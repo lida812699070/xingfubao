@@ -55,6 +55,11 @@ class MineFragment : BaseFragment() {
                 startActivity(Intent(it, MyTeamActivity::class.java))
             }
         }
+        ivMessage.setOnClickListener {
+            activity?.let {
+                startActivity(Intent(it, MyMessageActivity::class.java))
+            }
+        }
 
     }
 
