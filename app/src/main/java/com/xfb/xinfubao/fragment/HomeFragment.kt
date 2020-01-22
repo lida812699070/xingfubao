@@ -14,6 +14,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.xfb.xinfubao.MyApplication
 import com.xfb.xinfubao.R
+import com.xfb.xinfubao.activity.MyOrderActivity
 import com.xfb.xinfubao.activity.ProductDetailActivity
 import com.xfb.xinfubao.activity.UserInfoActivity
 import com.xfb.xinfubao.api.BaseApi
@@ -69,6 +70,11 @@ class HomeFragment : BaseFragment() {
         tvHomeUserCenter.setOnClickListener {
             activity?.let {
                 startActivity(Intent(it, UserInfoActivity::class.java))
+            }
+        }
+        tvHomeOrder.setOnClickListener {
+            activity?.let {
+                startActivity(Intent(it, MyOrderActivity::class.java))
             }
         }
     }
