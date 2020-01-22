@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.xfb.xinfubao.activity.AddAddressActivity">
+
+    <com.xfb.xinfubao.view.MyToolbarBar
+        android:id="@+id/myToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:str_title_toolbar="收货地址" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/color_default_color" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="18dp"
+        android:text="收货地址"
+        android:textColor="@color/color_text_111"
+        android:textSize="16sp" />
+
+    <com.xfb.xinfubao.view.DefaultEditText
+        android:id="@+id/etInputAddress"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginRight="20dp"
+        app:edit_input_hint="请输入的收货地址，省/市/区/小区名"
+        app:edit_input_max_length="50"
+        app:edit_input_type="edit_input_type_text"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="18dp"
+        android:text="门牌号"
+        android:textColor="@color/color_text_111"
+        android:textSize="16sp" />
+
+    <com.xfb.xinfubao.view.DefaultEditText
+        android:id="@+id/etDoorNo"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginRight="20dp"
+        app:edit_input_hint="详细地址，例如1层101室"
+        app:edit_input_max_length="50"
+        app:edit_input_type="edit_input_type_text"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="18dp"
+        android:text="联系人"
+        android:textColor="@color/color_text_111"
+        android:textSize="16sp" />
+
+    <com.xfb.xinfubao.view.DefaultEditText
+        android:id="@+id/etConnectPeople"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginRight="20dp"
+        app:edit_input_hint="请填写收货人的姓名"
+        app:edit_input_max_length="20"
+        app:edit_input_type="edit_input_type_text"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="18dp"
+        android:text="手机号"
+        android:textColor="@color/color_text_111"
+        android:textSize="16sp" />
+
+    <com.xfb.xinfubao.view.DefaultEditText
+        android:id="@+id/etMobile"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginRight="20dp"
+        app:edit_input_hint="请填写收货手机号码"
+        app:edit_input_max_length="11"
+        app:edit_input_type="edit_input_type_number"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="18dp"
+            android:text="设为默认"
+            android:textColor="@color/color_text_111"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/ivDefaultSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:padding="5dp"
+            android:src="@mipmap/icon_switch_select" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvSaveAddress"
+        style="@style/MainBtn"
+        android:layout_marginTop="26dp"
+        android:text="保存地址" />
+</LinearLayout>

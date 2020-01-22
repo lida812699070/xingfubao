@@ -4,9 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import com.careagle.sdk.callback.PermissionCallBack
-import com.careagle.sdk.utils.Permission
-import com.careagle.sdk.utils.RxPermissionsUtil
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.dialog.DialogUtils
 import com.xfb.xinfubao.utils.loadLocalUriCircle
@@ -28,10 +25,19 @@ class UserInfoActivity : DefaultActivity() {
 
     override fun initView(savedInstanceState: Bundle?) {
         myToolbar.setClick { finish() }
+        //头像
         tvHeader.setOnClickListener {
             DialogUtils.showTakePicDialog(this@UserInfoActivity) {
                 mUri = it
             }
+        }
+        //昵称
+        tvNikeNameText.setOnClickListener {
+            startActivity(Intent(this, InputNikeActivity::class.java))
+        }
+        //收货地址
+        tvAddressText.setOnClickListener {
+            startActivity(Intent(this, AddressManagerActivity::class.java))
         }
     }
 

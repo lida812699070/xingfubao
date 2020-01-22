@@ -30,6 +30,9 @@ class MyToolbarBar @JvmOverloads constructor(
         ivRight.setOnClickListener {
             rightClick()
         }
+        tvSubTitle.setOnClickListener {
+            rightClick()
+        }
     }
 
     fun setClick(leftClick: () -> Unit) {

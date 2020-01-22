@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_default_bg"
+    tools:context="com.xfb.xinfubao.activity.InputNikeActivity">
+
+    <com.xfb.xinfubao.view.MyToolbarBar
+        android:id="@+id/myToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:str_title_toolbar="昵称" />
+
+    <EditText
+        android:id="@+id/etInputNikeName"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:hint="请输入昵称"
+        android:maxLength="16"
+        android:maxLines="1"
+        android:paddingLeft="20dp"
+        android:textColor="@color/color_text_111"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/myToolbar" />
+
+    <ImageView
+        android:id="@+id/ivClear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:paddingLeft="5dp"
+        android:src="@mipmap/icon_yellow_close"
+        app:layout_constraintBottom_toBottomOf="@+id/etInputNikeName"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/etInputNikeName" />
+
+</android.support.constraint.ConstraintLayout>
