@@ -17,7 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.OrderDetailActivity"></activity>
+        <activity android:name=".activity.CartActivity"></activity>
+        <activity android:name=".activity.CategoryActivity" />
+        <activity android:name=".activity.OrderDetailActivity" />
         <activity android:name=".activity.MyOrderActivity" />
         <activity android:name=".activity.PayResultActivity" />
         <activity android:name=".activity.AuthResultActivity" />

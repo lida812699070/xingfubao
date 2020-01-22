@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.xfb.xinfubao.activity.CategoryActivity">
+
+    <TextView
+        android:id="@+id/tvSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="55dp"
+        android:layout_marginRight="15dp"
+        android:padding="5dp"
+        android:text="搜索"
+        android:textColor="@color/color_text_111"
+        android:textSize="16sp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etSearch"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/shape_f5_radius_8"
+        android:drawableLeft="@mipmap/icon_search"
+        android:drawablePadding="10dp"
+        android:hint="搜索商品"
+        android:maxLines="1"
+        android:paddingLeft="16dp"
+        android:textColor="@color/color_text_111"
+        android:textColorHint="@color/color_text_888"
+        android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvSearch"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/tvSearch" />
+
+    <ImageView
+        android:id="@+id/ivSearchClear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:padding="5dp"
+        android:src="@mipmap/icon_search_clear"
+        app:layout_constraintBottom_toBottomOf="@+id/etSearch"
+        app:layout_constraintRight_toRightOf="@+id/etSearch"
+        app:layout_constraintTop_toTopOf="@+id/etSearch" />
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/etSearch"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/color_text_111"
+        app:tabIndicatorFullWidth="false"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="@color/color_text_111"
+        app:tabTextColor="@color/color_text_888" />
+
+    <FrameLayout
+        android:id="@+id/flContent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+
+
+</android.support.constraint.ConstraintLayout>

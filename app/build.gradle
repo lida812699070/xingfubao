@@ -33,4 +33,5 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation project(path: ':sdk')
     implementation project(path: ':matisse')
+    compile 'com.github.mcxtzhang:SwipeDelMenuLayout:V1.3.0'
 }

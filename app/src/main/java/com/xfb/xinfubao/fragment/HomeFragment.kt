@@ -14,9 +14,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.xfb.xinfubao.MyApplication
 import com.xfb.xinfubao.R
-import com.xfb.xinfubao.activity.MyOrderActivity
-import com.xfb.xinfubao.activity.ProductDetailActivity
-import com.xfb.xinfubao.activity.UserInfoActivity
+import com.xfb.xinfubao.activity.*
 import com.xfb.xinfubao.api.BaseApi
 import com.xfb.xinfubao.constant.Constant.MONEY_RMB
 import com.xfb.xinfubao.model.HomeModel
@@ -75,6 +73,16 @@ class HomeFragment : BaseFragment() {
         tvHomeOrder.setOnClickListener {
             activity?.let {
                 startActivity(Intent(it, MyOrderActivity::class.java))
+            }
+        }
+        tvHomeCategory.setOnClickListener {
+            activity?.let {
+                startActivity(Intent(it, CategoryActivity::class.java))
+            }
+        }
+        tvHomeCat.setOnClickListener {
+            activity?.let {
+                startActivity(Intent(it, CartActivity::class.java))
             }
         }
     }
