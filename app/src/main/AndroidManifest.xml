@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.AddAddressActivity"></activity>
+        <activity android:name=".activity.MyTeamActivity"></activity>
+        <activity android:name=".activity.AddAddressActivity" />
         <activity android:name=".activity.AddressManagerActivity" />
         <activity android:name=".activity.InputNikeActivity" />
         <activity android:name=".activity.UserInfoActivity" />

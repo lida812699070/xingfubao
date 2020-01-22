@@ -4,10 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.xfb.xinfubao.R
-import com.xfb.xinfubao.activity.BalanceActivity
-import com.xfb.xinfubao.activity.MoneyExchangeActivity
-import com.xfb.xinfubao.activity.NATClubActivity
-import com.xfb.xinfubao.activity.YinXingbaoActivity
+import com.xfb.xinfubao.activity.*
 import kotlinx.android.synthetic.main.fragment_mine.*
 
 class MineFragment : BaseFragment() {
@@ -51,6 +48,11 @@ class MineFragment : BaseFragment() {
         itemNATJj.setOnClickListener {
             activity?.let {
                 startActivity(Intent(it, NATClubActivity::class.java))
+            }
+        }
+        itemMyTeam.setOnClickListener {
+            activity?.let {
+                startActivity(Intent(it, MyTeamActivity::class.java))
             }
         }
 
