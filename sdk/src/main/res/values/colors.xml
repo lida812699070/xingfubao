@@ -11,4 +11,5 @@
     <color name="color_bg_normal">#F7F7F7</color>
     <color name="color_toast_bg">#b000</color>
     <color name="color_default_bg">#F5F5F5</color>
+    <color name="color_red">#FF0000</color>
 </resources>
