@@ -1,5 +1,6 @@
 package com.xfb.xinfubao.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -23,8 +24,10 @@ class CashInActivity : DefaultActivity() {
     }
 
     override fun initView(savedInstanceState: Bundle?) {
-        myToolbar.setClick({ finish() })
-        
+        myToolbar.setClick { finish() }
+        tvToPay.setOnClickListener {
+            startActivity(Intent(this, PayResultActivity::class.java))
+        }
         initRecyclerView()
         list.add("")
         list.add("")

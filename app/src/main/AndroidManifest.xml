@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.AuthResultActivity"></activity>
+        <activity android:name=".activity.PayResultActivity"></activity>
+        <activity android:name=".activity.AuthResultActivity" />
         <activity android:name=".activity.AuthByPassportActivity" />
         <activity android:name=".activity.AuthByIdCardActivity" />
         <activity android:name=".activity.AuthenticationActivity" />
