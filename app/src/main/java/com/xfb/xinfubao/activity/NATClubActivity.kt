@@ -2,34 +2,47 @@ package com.xfb.xinfubao.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import android.os.Handler
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AlertDialog
+import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
+import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.BaseViewHolder
 import com.xfb.xinfubao.R
-import com.xfb.xinfubao.adapter.MyFragmentPagerAdapter
+import com.xfb.xinfubao.adapter.BalanceAdapter
 import com.xfb.xinfubao.dialog.DialogUtils
-import com.xfb.xinfubao.fragment.BalanceFragment
+import com.xfb.xinfubao.model.ItemBalanceModel
 import kotlinx.android.synthetic.main.activity_natclub.*
 
 /** NAT基金会 */
-class NATClubActivity : DefaultActivity() {
+class NATClubActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
+
+    val adapter = BalanceAdapter(list)
+
     var showDiYaDialog: AlertDialog? = null
+
     override fun getLayoutId(): Int {
         return R.layout.activity_natclub
     }
 
-    override fun initView(savedInstanceState: Bundle?) {
-        val titles = arrayListOf<String>()
-        val fragments = arrayListOf<Fragment>()
-        titles.add("请选择产品")
-        fragments.add(BalanceFragment())
-        vpContent.adapter = MyFragmentPagerAdapter(supportFragmentManager, fragments, titles, this)
-        tabLayout.setupWithViewPager(vpContent)
+    override fun pageRecyclerView(): RecyclerView {
+        return recyclerView
+    }
 
-        ivFinish.setOnClickListener { finish() }
-        //抵押记录
-        tvDiYaRecord.setOnClickListener {
-            startActivity(Intent(this, CashOutRecordActivity::class.java))
-        }
+    override fun pageAdapter(): BaseQuickAdapter<ItemBalanceModel, BaseViewHolder> {
+        return adapter
+    }
+
+    override fun pageSwipeRefreshLayout(): SwipeRefreshLayout? {
+        return swipeRefreshLayout
+    }
+
+    override fun initView(savedInstanceState: Bundle?) {
+
+    }
+
+    override fun initLogic() {
         //去抵押
         tvToDiYa.setOnClickListener {
             showDiYaDialog = DialogUtils.showDiYaDialog(this) {
@@ -37,6 +50,23 @@ class NATClubActivity : DefaultActivity() {
                 showDiYaDialog?.dismiss()
             }
         }
+
+        adapter.addHeaderView(LayoutInflater.from(this).inflate(R.layout.header_nat, null))
+        initData()
+    }
+
+    override fun initData() {
+        Handler().postDelayed({
+            val datas = arrayListOf<ItemBalanceModel>()
+            datas.add(ItemBalanceModel())
+            datas.add(ItemBalanceModel())
+            datas.add(ItemBalanceModel())
+            datas.add(ItemBalanceModel())
+            datas.add(ItemBalanceModel())
+            datas.add(ItemBalanceModel())
+            datas.add(ItemBalanceModel())
+            loadData(datas)
+        }, 1000)
     }
 
 }

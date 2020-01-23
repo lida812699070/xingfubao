@@ -54,6 +54,7 @@
                 android:id="@+id/ivImages"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
+                android:src="@mipmap/icon_loading"
                 android:layout_marginLeft="20dp"
                 app:layout_constraintBottom_toBottomOf="@+id/bgGoodsInfo"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -62,6 +63,7 @@
             <TextView
                 android:id="@+id/tvGoodsName"
                 android:layout_width="0dp"
+                android:layout_marginLeft="10dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
                 android:ellipsize="end"

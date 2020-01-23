@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.xfb.xinfubao.R
+import com.xfb.xinfubao.constant.Constant
 import com.xfb.xinfubao.model.HelpBottomModel
 import kotlinx.android.synthetic.main.activity_help.*
 
@@ -18,7 +19,7 @@ class HelpActivity : DefaultActivity() {
     override fun initView(savedInstanceState: Bundle?) {
         myToolbar.setClick { finish() }
         myToolbar.setRightClickStr("反馈") {
-            startActivity(Intent(this, FeedbackActivity::class.java))
+            WebviewActivity.newInstanceUrl(this, Constant.FEEDBACK, "意见反馈")
         }
         initTopRecyclerView()
         initBottomRecyclerView()

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.activity.*
+import com.xfb.xinfubao.constant.Constant
 import kotlinx.android.synthetic.main.fragment_mine.*
 
 class MineFragment : BaseFragment() {
@@ -62,7 +63,7 @@ class MineFragment : BaseFragment() {
         }
         itemHelp.setOnClickListener {
             activity?.let {
-                startActivity(Intent(it, HelpActivity::class.java))
+                WebviewActivity.newInstanceUrl(it, Constant.HELP_CENTER, "帮助中心")
             }
         }
         itemSafeCenter.setOnClickListener {

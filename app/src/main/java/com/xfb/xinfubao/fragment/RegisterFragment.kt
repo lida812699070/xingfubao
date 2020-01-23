@@ -9,7 +9,9 @@ import com.careagle.sdk.helper.RxHelper
 import com.careagle.sdk.utils.CommentUtils
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.activity.LoginActivity
+import com.xfb.xinfubao.activity.WebviewActivity
 import com.xfb.xinfubao.api.BaseApi
+import com.xfb.xinfubao.constant.Constant
 import com.xfb.xinfubao.utils.changePasswordState
 import com.xfb.xinfubao.utils.downLine
 import com.xfb.xinfubao.utils.setInVisible
@@ -45,6 +47,9 @@ class RegisterFragment : BaseFragment() {
         tvMobileRegisterProtocols.downLine()
         tvToLogin.downLine()
         initListener()
+        tvMobileRegisterProtocols.setOnClickListener {
+            WebviewActivity.newInstanceUrl(activity!!, Constant.PRIVITE_SERVER, "用户协议")
+        }
     }
 
     private fun initListener() {

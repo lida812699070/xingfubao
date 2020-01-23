@@ -7,12 +7,10 @@ import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
-import com.bumptech.glide.Glide
 import com.careagle.sdk.helper.RetrofitCreateHelper
 import com.careagle.sdk.utils.PriceChangeUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
-import com.xfb.xinfubao.MyApplication
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.activity.*
 import com.xfb.xinfubao.api.BaseApi
@@ -160,8 +158,7 @@ class HomeFragment : BaseFragment() {
 
     private val imageLoader = object : ImageLoader() {
         override fun displayImage(context: Context?, path: Any, imageView: ImageView) {
-            Glide.with(MyApplication.getInstance()).load(path.toString())
-                .into(imageView)
+            imageView.loadUri(path.toString())
         }
     }
 }
