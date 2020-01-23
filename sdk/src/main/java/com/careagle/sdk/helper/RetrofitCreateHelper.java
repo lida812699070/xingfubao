@@ -8,7 +8,6 @@ import com.careagle.sdk.helper.okhttp.CacheInterceptor;
 import com.careagle.sdk.helper.okhttp.HttpCache;
 import com.careagle.sdk.helper.okhttp.TrustManager;
 import com.careagle.sdk.utils.JLog;
-import com.careagle.sdk.utils.LogToFile;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -74,7 +73,6 @@ public class RetrofitCreateHelper {
             @Override
             public void log(String message) {
                 JLog.e(message);
-                LogToFile.d("i", message);
             }
         });
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY); // 测试

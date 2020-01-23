@@ -39,10 +39,10 @@ class MyToolbarBar @JvmOverloads constructor(
         this.leftClick = leftClick
     }
 
-    fun setRightClickStr(subTitle: String, rightClick: () -> Unit) {
+    fun setRightClickStr(subTitle: String?, rightClick: () -> Unit) {
         this.rightClick = rightClick
         tvSubTitle.setVisible(true)
-        tvSubTitle.text = subTitle
+        tvSubTitle.text = "$subTitle"
     }
 
     fun setRightClickRes(res: Int, rightClick: () -> Unit) {
@@ -51,8 +51,8 @@ class MyToolbarBar @JvmOverloads constructor(
         this.rightClick = rightClick
     }
 
-    fun setTitle(title: String) {
-        tvTitle.text = title
+    fun setTitle(title: String?) {
+        tvTitle.text = "$title"
     }
 
 }

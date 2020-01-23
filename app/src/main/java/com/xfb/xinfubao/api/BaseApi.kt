@@ -33,7 +33,6 @@ interface BaseApi {
     @POST("api/login")
     fun toLogin(@Body map: Map<String, String>): Observable<Result<UserInfo>>
 
-
     /**
      * 新闻
      */
@@ -49,8 +48,12 @@ interface BaseApi {
     /**
      * 商品信息
      */
-    @POST("/api/getProductInfo")
+    @POST("api/getProductInfo")
     fun getProductInfo(@Body map: Map<String, String>): Observable<Result<ProductDetail>>
 
-
+    /**
+     * 添加购物车
+     */
+    @POST("api/addCart")
+    fun addCart(@Body map: Map<String, String>): Observable<Result<Any?>>
 }

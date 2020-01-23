@@ -1,6 +1,5 @@
 package com.xfb.xinfubao.callback;
 
-import com.careagle.sdk.utils.LogToFile;
 import com.careagle.sdk.utils.MyToast;
 import com.careagle.sdk.utils.NetworkConnectionUtils;
 import com.xfb.xinfubao.MyApplication;
@@ -22,7 +21,6 @@ public abstract class RequestCallBack<T> implements Observer<T> {
         } else {
             MyToast.toast("请求失败,请检查网络");
         }
-        LogToFile.e("error", e.getMessage());
         e.printStackTrace();
     }
 

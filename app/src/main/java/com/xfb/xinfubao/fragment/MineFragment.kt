@@ -46,6 +46,11 @@ class MineFragment : BaseFragment() {
                 startActivity(Intent(it, YinXingbaoActivity::class.java))
             }
         }
+        itemYlz.setOnClickListener {
+            activity?.let {
+                startActivity(Intent(it, YinXingbaoActivity::class.java))
+            }
+        }
         itemNATJj.setOnClickListener {
             activity?.let {
                 startActivity(Intent(it, NATClubActivity::class.java))
@@ -63,7 +68,7 @@ class MineFragment : BaseFragment() {
         }
         itemHelp.setOnClickListener {
             activity?.let {
-                WebviewActivity.newInstanceUrl(it, Constant.HELP_CENTER, "帮助中心")
+                WebviewActivity.newInstanceUrl(it, Constant.HELP_CENTER, "帮助中心","反馈")
             }
         }
         itemSafeCenter.setOnClickListener {
@@ -79,6 +84,11 @@ class MineFragment : BaseFragment() {
         itemInvite.setOnClickListener {
             activity?.let {
                 startActivity(Intent(it, InviteFriendActivity::class.java))
+            }
+        }
+        itemMarketOrder.setOnClickListener {
+            activity?.let {
+                startActivity(Intent(it, MyOrderActivity::class.java))
             }
         }
     }

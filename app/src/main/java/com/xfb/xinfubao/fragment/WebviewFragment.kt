@@ -7,8 +7,10 @@ import android.view.View
 import android.webkit.WebChromeClient
 import android.webkit.WebSettings
 import android.webkit.WebView
+import android.webkit.WebViewClient
 import com.xfb.xinfubao.R
 import kotlinx.android.synthetic.main.fragment_webview.*
+
 
 class WebviewFragment : BaseFragment() {
 
@@ -82,6 +84,26 @@ class WebviewFragment : BaseFragment() {
                 super.onProgressChanged(view, newProgress)
             }
         }
+
+        webView.setWebViewClient(object : WebViewClient() {
+            override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
+                // do your handling codes here, which url is the requested url
+                // probably you need to open that url rather than redirect:
+                view.loadUrl(url)
+                return false // then it is not handled by default action
+            }
+        })
     }
 
+    /**
+     * 用于返回是否需要实现监听
+     */
+    fun webViewCanGoBack(): Boolean {
+        if (webView.canGoBack()) {
+            webView.goBack()
+            return true
+        } else {
+            return false
+        }
+    }
 }

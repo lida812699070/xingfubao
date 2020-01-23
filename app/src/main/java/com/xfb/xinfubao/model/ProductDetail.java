@@ -24,7 +24,7 @@ public class ProductDetail {
     private int inventory;
     private String productMainImg;
     private String productDetails;
-    private int productPrice;
+    private double productPrice;
     private boolean productState;
     private boolean isReal;
     private String productStateDesc;
@@ -71,11 +71,11 @@ public class ProductDetail {
         this.productDetails = productDetails;
     }
 
-    public int getProductPrice() {
+    public double getProductPrice() {
         return productPrice;
     }
 
-    public void setProductPrice(int productPrice) {
+    public void setProductPrice(double productPrice) {
         this.productPrice = productPrice;
     }
 

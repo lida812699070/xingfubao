@@ -1,6 +1,5 @@
 package com.xfb.xinfubao.fragment
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
@@ -11,6 +10,7 @@ import com.careagle.sdk.helper.RetrofitCreateHelper
 import com.careagle.sdk.utils.PriceChangeUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
+import com.xfb.xinfubao.MyImageLoader
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.activity.*
 import com.xfb.xinfubao.api.BaseApi
@@ -20,7 +20,6 @@ import com.xfb.xinfubao.model.HomeModule
 import com.xfb.xinfubao.model.Product
 import com.xfb.xinfubao.utils.loadRound
 import com.xfb.xinfubao.utils.loadUri
-import com.youth.banner.loader.ImageLoader
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : BaseFragment() {
@@ -150,15 +149,10 @@ class HomeFragment : BaseFragment() {
         if (banner == null) return
         if (!isInitBanner) {
             isInitBanner = true
-            banner.setImages(banners).setDelayTime(4000).setImageLoader(imageLoader).start()
+            banner.setImages(banners).setDelayTime(4000).setImageLoader(MyImageLoader()).start()
         } else {
             banner.update(banners)
         }
     }
 
-    private val imageLoader = object : ImageLoader() {
-        override fun displayImage(context: Context?, path: Any, imageView: ImageView) {
-            imageView.loadUri(path.toString())
-        }
-    }
 }

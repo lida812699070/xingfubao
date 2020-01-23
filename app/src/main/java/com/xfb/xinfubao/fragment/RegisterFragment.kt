@@ -48,7 +48,7 @@ class RegisterFragment : BaseFragment() {
         tvToLogin.downLine()
         initListener()
         tvMobileRegisterProtocols.setOnClickListener {
-            WebviewActivity.newInstanceUrl(activity!!, Constant.PRIVITE_SERVER, "用户协议")
+            WebviewActivity.newInstanceUrl(activity!!, Constant.USER_PROTCT, "用户协议")
         }
     }
 

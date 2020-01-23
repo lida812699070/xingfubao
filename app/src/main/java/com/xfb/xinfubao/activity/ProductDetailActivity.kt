@@ -6,6 +6,7 @@ import com.careagle.sdk.helper.RetrofitCreateHelper
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.adapter.MyFragmentPagerAdapter
 import com.xfb.xinfubao.api.BaseApi
+import com.xfb.xinfubao.callback.MyClickCallBack
 import com.xfb.xinfubao.fragment.ProductDetailFragment
 import com.xfb.xinfubao.fragment.WebviewFragment
 import com.xfb.xinfubao.model.ProductDetail
@@ -31,12 +32,19 @@ class ProductDetailActivity : DefaultActivity() {
         val title = arrayListOf<String>()
         val fragments = arrayListOf<Fragment>()
         title.add("商品")
-        fragments.add(ProductDetailFragment.newInstance(data))
+        val productDetailFragment = ProductDetailFragment.newInstance(data)
+        fragments.add(productDetailFragment)
         title.add("详情")
         fragments.add(WebviewFragment.newInstanceHtml(data.productDetails))
         val pagerAdapter =
             MyFragmentPagerAdapter(supportFragmentManager, fragments, title, this)
         vpContent.adapter = pagerAdapter
         tabLayout.setupWithViewPager(vpContent)
+
+        productDetailFragment.myClickCallBack = object : MyClickCallBack {
+            override fun myClick() {
+                vpContent.setCurrentItem(1, true)
+            }
+        }
     }
 }
