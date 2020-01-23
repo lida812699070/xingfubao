@@ -11,6 +11,7 @@ import com.xfb.xinfubao.R
 import com.xfb.xinfubao.activity.ConfirmOrderActivity
 import com.xfb.xinfubao.api.BaseApi
 import com.xfb.xinfubao.callback.MyClickCallBack
+import com.xfb.xinfubao.model.Product
 import com.xfb.xinfubao.model.ProductDetail
 import com.xfb.xinfubao.model.ProductImg
 import com.xfb.xinfubao.utils.ConfigUtils
@@ -109,6 +110,19 @@ class ProductDetailFragment : BaseFragment() {
         //商品详情
         tvProductDetail.setOnClickListener {
             myClickCallBack?.myClick()
+        }
+
+        //立即购买
+        tvToBuy.setOnClickListener {
+            if (count <= 0) {
+                showMessage("请选择购买数量")
+                return@setOnClickListener
+            }
+            val products = arrayListOf<Product>()
+            val productInfo = productDetail!!.toProduct()
+            productInfo.num = count
+            products.add(productInfo)
+            ConfirmOrderActivity.toActivity(activity!!, products)
         }
     }
 

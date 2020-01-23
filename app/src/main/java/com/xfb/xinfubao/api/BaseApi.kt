@@ -18,7 +18,7 @@ interface BaseApi {
     /**
      * 获取验证码
      */
-    @POST("api/getCode")
+    @POST("api/sendicode")
     fun getCheckCode(@Body map: Map<String, String>): Observable<Result<Any?>>
 
     /**
@@ -56,4 +56,12 @@ interface BaseApi {
      */
     @POST("api/addCart")
     fun addCart(@Body map: Map<String, String>): Observable<Result<Any?>>
+
+    /**
+     * 确认订单
+     */
+    @POST("api/confirmOrder")
+    fun confirmOrder(@Body map: RequestOrderModel): Observable<Result<OrderInfo>>
+
+
 }

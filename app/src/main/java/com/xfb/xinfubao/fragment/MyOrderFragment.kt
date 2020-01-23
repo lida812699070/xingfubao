@@ -20,7 +20,7 @@ class MyOrderFragment : BaseRecyclerViewFragment<String>() {
             data.add("")
             data.add("")
             data.add("")
-            productListView.bindData(data)
+//            productListView.bindData(data)
         }
     }
 

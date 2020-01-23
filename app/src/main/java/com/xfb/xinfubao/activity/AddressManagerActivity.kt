@@ -2,7 +2,6 @@ package com.xfb.xinfubao.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.RecyclerView
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -48,21 +47,7 @@ class AddressManagerActivity : BaseRecyclerViewActivity<String>() {
     }
 
     override fun initData() {
-        Handler().postDelayed({
-            val list = arrayListOf<String>()
-            list.add("")
-            list.add("")
-            list.add("")
-            list.add("")
-            list.add("")
-            list.add("")
-            list.add("")
-            list.add("")
-            list.add("")
-            list.add("")
-            list.add("")
-            loadData(list)
-        }, 1000)
+
     }
 
 

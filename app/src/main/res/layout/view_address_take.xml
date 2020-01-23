@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvSelectAddress"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:drawableRight="@mipmap/chevron"
+        android:drawableBottom="@mipmap/icon_line_address"
+        android:gravity="center_vertical"
+        android:paddingLeft="36dp"
+        android:paddingRight="20dp"
+        android:text="请选择收货地址"
+        android:textColor="@color/color_light_org"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clAddressValue"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/white"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvAddressName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="12dp"
+            android:text="小白白"
+            android:textColor="@color/color_text_111"
+            android:textSize="18sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvAddressValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:text="浙江省杭州市大华江虹国际1606"
+            android:textColor="@color/color_text_111"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="@+id/tvAddressName"
+            app:layout_constraintTop_toBottomOf="@+id/tvAddressName" />
+
+        <TextView
+            android:id="@+id/tvAddressMobile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:text="1500000000"
+            android:textColor="@color/color_text_111"
+            android:textSize="18sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tvAddressName"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <ImageView
+            android:id="@+id/ivAddressBottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/icon_line_address"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

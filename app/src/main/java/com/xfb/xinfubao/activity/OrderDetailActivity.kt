@@ -12,6 +12,6 @@ class OrderDetailActivity : DefaultActivity() {
 
     override fun initView(savedInstanceState: Bundle?) {
         myToolbar.setClick { finish() }
-        productList.bindData(arrayListOf("1"))
+//        productList.bindData(arrayListOf("1"))
     }
 }

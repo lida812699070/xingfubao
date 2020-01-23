@@ -1,8 +1,10 @@
 package com.xfb.xinfubao.model;
 
-import java.math.BigDecimal;
+import android.text.TextUtils;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
 
     /**
      * productId : 0
@@ -15,6 +17,56 @@ public class Product {
     private String imgUrl;
     private String productName;
     private double productPrice;
+    private int productNum;
+    private String productMainImg;
+    private String cartId;
+    private int num;
+    private double freight;
+
+    public int getNum() {
+        if (num == 0) return productNum;
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+
+    public int getProductNum() {
+        if (productNum == 0) return num;
+        return productNum;
+    }
+
+    public void setProductNum(int productNum) {
+        this.productNum = productNum;
+    }
+
+    public String getProductMainImg() {
+        if (TextUtils.isEmpty(productMainImg)) {
+            return imgUrl;
+        }
+        return productMainImg;
+    }
+
+    public void setProductMainImg(String productMainImg) {
+        this.productMainImg = productMainImg;
+    }
+
+    public String getCartId() {
+        return cartId;
+    }
+
+    public void setCartId(String cartId) {
+        this.cartId = cartId;
+    }
+
+    public double getFreight() {
+        return freight;
+    }
+
+    public void setFreight(double freight) {
+        this.freight = freight;
+    }
 
     public long getProductId() {
         return productId;
@@ -25,6 +77,9 @@ public class Product {
     }
 
     public String getImgUrl() {
+        if (TextUtils.isEmpty(imgUrl)) {
+            return productMainImg;
+        }
         return imgUrl;
     }
 

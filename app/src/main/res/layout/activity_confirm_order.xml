@@ -25,75 +25,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
+            <com.xfb.xinfubao.view.AddressTakeView
                 android:id="@+id/tvAddress"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="@color/white"
-                android:drawableRight="@mipmap/chevron"
-                android:drawableBottom="@mipmap/icon_line_address"
-                android:gravity="center_vertical"
-                android:paddingLeft="36dp"
-                android:paddingRight="20dp"
-                android:text="请选择收货地址"
-                android:textColor="@color/color_light_org"
-                android:textSize="16sp"
-                android:textStyle="bold"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <View
-                android:id="@+id/bgGoodsInfo"
+            <com.xfb.xinfubao.view.ProductListView
+                android:id="@+id/productList"
                 android:layout_width="match_parent"
-                android:layout_height="115dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@color/white"
                 app:layout_constraintTop_toBottomOf="@+id/tvAddress" />
-
-            <ImageView
-                android:id="@+id/ivImages"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@mipmap/icon_loading"
-                android:layout_marginLeft="20dp"
-                app:layout_constraintBottom_toBottomOf="@+id/bgGoodsInfo"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/bgGoodsInfo" />
-
-            <TextView
-                android:id="@+id/tvGoodsName"
-                android:layout_width="0dp"
-                android:layout_marginLeft="10dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:textColor="@color/color_text_111"
-                android:textSize="16sp"
-                app:layout_constraintLeft_toRightOf="@+id/ivImages"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/ivImages"
-                tools:text="浅绿翡翠貔貅吊坠男款玉佩挂件节日礼物 貔" />
-
-            <TextView
-                android:id="@+id/tvProductSigPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/theme_color"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="@+id/ivImages"
-                app:layout_constraintLeft_toLeftOf="@+id/tvGoodsName"
-                tools:text="$100.00" />
-
-            <TextView
-                android:id="@+id/tvCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="x1"
-                android:textColor="@color/color_text_111"
-                android:textSize="14sp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/tvProductSigPrice"
-                app:layout_constraintRight_toRightOf="@+id/tvGoodsName" />
 
             <TextView
                 android:id="@+id/tvTotalPrice"
@@ -106,7 +51,7 @@
                 android:text="共 1 件商品 合计：¥69"
                 android:textColor="@color/color_text_111"
                 android:textSize="16sp"
-                app:layout_constraintTop_toBottomOf="@+id/bgGoodsInfo" />
+                app:layout_constraintTop_toBottomOf="@+id/productList" />
 
             <TextView
                 android:id="@+id/tvSendWay"
@@ -121,26 +66,25 @@
                 android:textSize="16sp"
                 app:layout_constraintTop_toBottomOf="@+id/tvTotalPrice" />
 
-            <TextView
-                android:id="@+id/tvVirtualGoods"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:drawableLeft="@drawable/selector_order_point"
-                android:drawablePadding="3dp"
-                android:padding="5dp"
-                android:text="虚拟商品"
-                android:textColor="@color/color_selector_111_888"
-                android:textSize="14sp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/tvSendWay"
-                app:layout_constraintRight_toLeftOf="@+id/tvRealGoods" />
+            <!--<TextView-->
+            <!--android:id="@+id/tvVirtualGoods"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginRight="20dp"-->
+            <!--android:drawableLeft="@drawable/selector_order_point"-->
+            <!--android:drawablePadding="3dp"-->
+            <!--android:padding="5dp"-->
+            <!--android:text="虚拟商品"-->
+            <!--android:textColor="@color/color_selector_111_888"-->
+            <!--android:textSize="14sp"-->
+            <!--app:layout_constraintBaseline_toBaselineOf="@+id/tvSendWay"-->
+            <!--app:layout_constraintRight_toLeftOf="@+id/tvRealGoods" />-->
 
             <TextView
                 android:id="@+id/tvRealGoods"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="15dp"
-                android:drawableLeft="@drawable/selector_order_point"
                 android:drawablePadding="3dp"
                 android:padding="5dp"
                 android:text="快递配送"

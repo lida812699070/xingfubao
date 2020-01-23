@@ -39,4 +39,14 @@ public class ConfigUtils {
         }
         return null;
     }
+
+    @Nullable
+    public static String userId() {
+        UserInfo userInfo = getUserInfo();
+        if (userInfo != null) {
+            return userInfo.getUserId() + "";
+        } else {
+            return null;
+        }
+    }
 }

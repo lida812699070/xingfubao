@@ -17,6 +17,12 @@ fun ImageView.loadUri(uri: String?) {
         .into(this)
 }
 
+fun ImageView.loadBanner(uri: String?) {
+    Glide.with(context)
+        .load(uri)
+        .into(this)
+}
+
 fun ImageView.loadUri(uri: String?, width: Int, height: Int) {
     Glide.with(context)
         .load(uri)

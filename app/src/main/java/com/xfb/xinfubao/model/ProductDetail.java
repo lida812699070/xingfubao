@@ -19,23 +19,24 @@ public class ProductDetail {
      * isRealDesc :
      */
 
-    private int productId;
+    private long productId;
     private String productName;
     private int inventory;
     private String productMainImg;
     private String productDetails;
     private double productPrice;
     private boolean productState;
+    //是否实物商品
     private boolean isReal;
     private String productStateDesc;
     private String isRealDesc;
     private List<ProductImg> productImg;
 
-    public int getProductId() {
+    public long getProductId() {
         return productId;
     }
 
-    public void setProductId(int productId) {
+    public void setProductId(long productId) {
         this.productId = productId;
     }
 
@@ -119,4 +120,12 @@ public class ProductDetail {
         this.productImg = productImg;
     }
 
+    public Product toProduct() {
+        Product product = new Product();
+        product.setProductId(productId);
+        product.setImgUrl(productMainImg);
+        product.setProductPrice(productPrice);
+        product.setProductName(productName);
+        return product;
+    }
 }

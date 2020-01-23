@@ -74,7 +74,7 @@ class WebviewFragment : BaseFragment() {
         if (!TextUtils.isEmpty(url)) {
             webView.loadUrl(url)
         } else if (!TextUtils.isEmpty(html)) {
-            webView.loadData(html, "text/html", "UTF-8")
+            webView.loadDataWithBaseURL(null, html, "text/html", "utf-8", null);
         }
 
         webView.webChromeClient = object : WebChromeClient() {
@@ -84,7 +84,6 @@ class WebviewFragment : BaseFragment() {
                 super.onProgressChanged(view, newProgress)
             }
         }
-
         webView.setWebViewClient(object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
                 // do your handling codes here, which url is the requested url
