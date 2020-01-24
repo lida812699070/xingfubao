@@ -7,19 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import com.careagle.sdk.helper.RetrofitCreateHelper
-import com.careagle.sdk.utils.PriceChangeUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.xfb.xinfubao.MyImageLoader
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.activity.*
+import com.xfb.xinfubao.adapter.ProductAdapter
 import com.xfb.xinfubao.api.BaseApi
-import com.xfb.xinfubao.constant.Constant.MONEY_RMB
 import com.xfb.xinfubao.model.HomeModel
 import com.xfb.xinfubao.model.HomeModule
 import com.xfb.xinfubao.model.Product
 import com.xfb.xinfubao.utils.loadRound
-import com.xfb.xinfubao.utils.loadUri
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : BaseFragment() {
@@ -34,19 +32,7 @@ class HomeFragment : BaseFragment() {
         }
     }
 
-    var productAdapter =
-        object :
-            BaseQuickAdapter<Product, BaseViewHolder>(R.layout.item_home_product, productList) {
-            override fun convert(helper: BaseViewHolder, item: Product) {
-                helper.setText(R.id.tvProductName, item.productName)
-                    .setText(
-                        R.id.tvProductPrice,
-                        "$MONEY_RMB${PriceChangeUtils.getNumKb(item.productPrice)}"
-                    )
-                val ivProduct = helper.getView<ImageView>(R.id.ivProduct)
-                ivProduct.loadUri(item.imgUrl)
-            }
-        }
+    var productAdapter = ProductAdapter(productList)
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_home

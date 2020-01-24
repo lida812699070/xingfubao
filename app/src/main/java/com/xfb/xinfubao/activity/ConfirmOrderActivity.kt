@@ -12,6 +12,7 @@ import com.xfb.xinfubao.R
 import com.xfb.xinfubao.api.BaseApi
 import com.xfb.xinfubao.model.*
 import com.xfb.xinfubao.utils.ConfigUtils
+import com.xfb.xinfubao.utils.setVisible
 import kotlinx.android.synthetic.main.activity_confirm_order.*
 
 //确认订单
@@ -59,6 +60,7 @@ class ConfirmOrderActivity : DefaultActivity() {
             RetrofitCreateHelper.createApi(BaseApi::class.java).confirmOrder(
                 requestOrderModel
             ), {
+                emptyView.setVisible(false)
                 bindData(it.data)
             }) {
             emptyView.setLoadState(EmptyView.LoadState.LOAD_STATE_ERROR)
@@ -68,6 +70,7 @@ class ConfirmOrderActivity : DefaultActivity() {
     @SuppressLint("SetTextI18n")
     private fun bindData(data: OrderInfo) {
         this.data = data
+        receiveVo = data.receiveVo
         tvAddress.bindData(data.receiveVo)
         productList.bindData(list)
         var totalCount = 0

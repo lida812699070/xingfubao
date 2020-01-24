@@ -35,8 +35,8 @@ fun ImageView.loadUri(uri: String?, width: Int, height: Int) {
 fun ImageView.loadUriCircle(uri: String?) {
     Glide.with(context)
         .load(uri)
-        .placeholder(R.mipmap.icon_loading)
-        .error(R.mipmap.icon_loading)
+        .placeholder(R.mipmap.touxiang)
+        .error(R.mipmap.touxiang)
         .bitmapTransform(CropCircleTransformation(context))
         .into(this)
 }

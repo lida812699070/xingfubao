@@ -87,5 +87,14 @@ interface BaseApi {
     @POST("api/pay")
     fun pay(@Body map: RequestPay): Observable<Result<Any?>>
 
+    /** 获取产品类型 */
+    @POST("api/findProductType")
+    fun findProductType(@Body map: Map<String, String>): Observable<Result<List<ProductType>>>
+
+    /** 获取产品 */
+    @POST("api/findProductByCategory")
+    fun findProductByCategory(@Body map: Map<String, String>): Observable<Result<List<Product>>>
+
+
 
 }

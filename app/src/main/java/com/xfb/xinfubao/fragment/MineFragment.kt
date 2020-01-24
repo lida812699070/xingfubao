@@ -1,11 +1,16 @@
 package com.xfb.xinfubao.fragment
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.activity.*
 import com.xfb.xinfubao.constant.Constant
+import com.xfb.xinfubao.utils.ConfigUtils
+import com.xfb.xinfubao.utils.loadUriCircle
+import com.xfb.xinfubao.utils.setVisible
 import kotlinx.android.synthetic.main.fragment_mine.*
 
 class MineFragment : BaseFragment() {
@@ -14,7 +19,15 @@ class MineFragment : BaseFragment() {
         return R.layout.fragment_mine
     }
 
+    @SuppressLint("SetTextI18n")
     override fun initUI(view: View?, savedInstanceState: Bundle?) {
+
+        ivHeader.loadUriCircle(ConfigUtils.mUserInfo?.headIcon)
+        tvName.text = "${ConfigUtils.mUserInfo?.name}"
+        tvNikeName.text = "${ConfigUtils.mUserInfo?.nickName}"
+        tvUserId.text = "NO.${ConfigUtils.mUserInfo?.userId}"
+        ivVip.setVisible(!TextUtils.isEmpty(ConfigUtils.mUserInfo?.grade))
+
         //资产互兑
         itemMoneyChange.setOnClickListener {
             activity?.let {
@@ -68,7 +81,7 @@ class MineFragment : BaseFragment() {
         }
         itemHelp.setOnClickListener {
             activity?.let {
-                WebviewActivity.newInstanceUrl(it, Constant.HELP_CENTER, "帮助中心","反馈")
+                WebviewActivity.newInstanceUrl(it, Constant.HELP_CENTER, "帮助中心", "反馈")
             }
         }
         itemSafeCenter.setOnClickListener {

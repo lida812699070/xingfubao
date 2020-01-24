@@ -45,6 +45,7 @@
         android:layout_marginRight="10dp"
         android:padding="5dp"
         android:src="@mipmap/icon_search_clear"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/etSearch"
         app:layout_constraintRight_toRightOf="@+id/etSearch"
         app:layout_constraintTop_toTopOf="@+id/etSearch" />
@@ -63,13 +64,58 @@
         app:tabSelectedTextColor="@color/color_text_111"
         app:tabTextColor="@color/color_text_888" />
 
-    <FrameLayout
-        android:id="@+id/flContent"
+    <TextView
+        android:id="@+id/tvDefaultFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:drawableRight="@drawable/selector_sanjiao"
+        android:drawablePadding="4dp"
+        android:padding="5dp"
+        android:text="默认"
+        android:textColor="@color/color_selector_light_org_111"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvSellCountFilter"
+        app:layout_constraintRight_toLeftOf="@+id/tvSellCountFilter" />
+
+    <TextView
+        android:id="@+id/tvSellCountFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:drawableRight="@drawable/selector_sanjiao"
+        android:drawablePadding="4dp"
+        android:padding="5dp"
+        android:text="销量"
+        android:textColor="@color/color_selector_light_org_111"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvPriceFilter"
+        app:layout_constraintRight_toLeftOf="@+id/tvPriceFilter" />
+
+    <TextView
+        android:id="@+id/tvPriceFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:drawableRight="@drawable/selector_sanjiao"
+        android:drawablePadding="4dp"
+        android:padding="5dp"
+        android:text="价格"
+        android:textColor="@color/color_selector_light_org_111"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/tvPriceFilter">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 
 </android.support.constraint.ConstraintLayout>
