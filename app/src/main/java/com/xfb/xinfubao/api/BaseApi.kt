@@ -63,5 +63,17 @@ interface BaseApi {
     @POST("api/confirmOrder")
     fun confirmOrder(@Body map: RequestOrderModel): Observable<Result<OrderInfo>>
 
+    /**
+     * 查询收货地址
+     */
+    @POST("api/findReceive")
+    fun findReceive(@Body map: Map<String, String>): Observable<Result<List<ReceiveVo>>>
+
+    /**
+     * 添加收货地址
+     */
+    @POST("api/addReceive")
+    fun addReceive(@Body map: Map<String, String>): Observable<Result<Any?>>
+
 
 }

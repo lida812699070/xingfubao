@@ -92,8 +92,13 @@ fun TextView.setColorText(text: String, color: Int, start: Int, end: Int) {
     )
     this.text = spannableStringCoupon
 }
+
 fun TextView.setColorText(color: Int, start: Int, end: Int) {
-    setColorText(text.toString(),color,start,end)
+    setColorText(text.toString(), color, start, end)
+}
+
+fun EditText.indexEnd() {
+    setSelection(text.toString().length)
 }
 
 /** 切换密码可见 */

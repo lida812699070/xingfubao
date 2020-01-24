@@ -126,7 +126,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
             android:padding="5dp"
-            android:src="@mipmap/icon_switch_select" />
+            android:src="@drawable/selector_icon_switch" />
     </RelativeLayout>
 
     <TextView

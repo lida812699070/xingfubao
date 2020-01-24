@@ -1,9 +1,11 @@
 package com.xfb.xinfubao.model;
 
+import java.io.Serializable;
+
 /**
  * 收货地址
  */
-public class ReceiveVo {
+public class ReceiveVo implements Serializable {
 
     private long receiveId;
     //收货人

@@ -14,7 +14,7 @@ import java.util.*
 /**
  * 默认的RecyclerView
  */
-abstract class BaseRecyclerViewActivity<T> : BaseActivity(), SwipeRefreshLayout.OnRefreshListener,
+abstract class BaseRecyclerViewActivity<T> : DefaultActivity(), SwipeRefreshLayout.OnRefreshListener,
     BaseQuickAdapter.RequestLoadMoreListener, EmptyView.ReloadListener {
 
     //初始页数

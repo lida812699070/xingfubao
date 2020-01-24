@@ -8,6 +8,7 @@ import android.text.method.PasswordTransformationMethod
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import com.xfb.xinfubao.R
+import com.xfb.xinfubao.utils.indexEnd
 import kotlinx.android.synthetic.main.view_default_edittext.view.*
 
 
@@ -40,4 +41,12 @@ class DefaultEditText @JvmOverloads constructor(
         etInput.hint = hint
     }
 
+    fun testValue(): String {
+        return etInput.text.toString()
+    }
+
+    fun setTextValue(value: String?) {
+        etInput.setText(value)
+        etInput.indexEnd()
+    }
 }
