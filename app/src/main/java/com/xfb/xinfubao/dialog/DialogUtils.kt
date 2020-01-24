@@ -53,7 +53,12 @@ class DialogUtils {
         }
 
         /** 抵押 */
-        fun showDiYaDialog(context: Context, method: (payPassword: String) -> Unit): AlertDialog? {
+        //state 0 抵押  1支付
+        fun showDiYaDialog(
+            context: Context,
+            state: Int = 0,
+            method: (payPassword: String) -> Unit
+        ): AlertDialog? {
             val builder = AlertDialog.Builder(context)
             builder.setCancelable(true)
             val view = LayoutInflater.from(context)
@@ -70,6 +75,10 @@ class DialogUtils {
             dialog?.window?.setBackgroundDrawable(dw)
             view.findViewById<ImageView>(R.id.ivClose).setOnClickListener {
                 dialog?.dismiss()
+            }
+            if (state == 1) {
+                view.findViewById<TextView>(R.id.tvTitle).text = "支付"
+                view.findViewById<TextView>(R.id.tvOkCashOut).text = "支付"
             }
             val etPayPassword = view.findViewById<EditText>(R.id.etPayPassword)
             view.findViewById<TextView>(R.id.tvOkCashOut).setOnClickListener {

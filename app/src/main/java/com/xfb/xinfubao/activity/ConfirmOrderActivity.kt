@@ -1,17 +1,16 @@
 package com.xfb.xinfubao.activity
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.careagle.sdk.helper.RetrofitCreateHelper
 import com.careagle.sdk.utils.PriceChangeUtils
+import com.careagle.sdk.weight.EmptyView
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.api.BaseApi
-import com.xfb.xinfubao.model.OrderInfo
-import com.xfb.xinfubao.model.Product
-import com.xfb.xinfubao.model.ReceiveVo
-import com.xfb.xinfubao.model.RequestOrderModel
+import com.xfb.xinfubao.model.*
 import com.xfb.xinfubao.utils.ConfigUtils
 import kotlinx.android.synthetic.main.activity_confirm_order.*
 
@@ -19,9 +18,11 @@ import kotlinx.android.synthetic.main.activity_confirm_order.*
 class ConfirmOrderActivity : DefaultActivity() {
     var catId: String? = null
     var receiveVo: ReceiveVo? = null
+    var data: OrderInfo? = null
     private var list = arrayListOf<Product>()
 
     companion object {
+        const val INTENT_RESULT_ADDRESS = 2
         fun toActivity(
             context: Context,
             productList: ArrayList<Product>,
@@ -45,13 +46,28 @@ class ConfirmOrderActivity : DefaultActivity() {
         val requestOrderModel = RequestOrderModel()
         requestOrderModel.userId = ConfigUtils.userId()
         requestOrderModel.productDtoList = list
-        request(RetrofitCreateHelper.createApi(BaseApi::class.java).confirmOrder(requestOrderModel)) {
-            bindData(it.data)
+        emptyView.setLoadState(EmptyView.LoadState.LOAD_STATE_LOADING)
+        emptyView.setReloadListener {
+            requestComfirmData(requestOrderModel)
+        }
+        requestComfirmData(requestOrderModel)
+    }
+
+    /** 请求确认订单接口 */
+    private fun requestComfirmData(requestOrderModel: RequestOrderModel) {
+        requestWithError(
+            RetrofitCreateHelper.createApi(BaseApi::class.java).confirmOrder(
+                requestOrderModel
+            ), {
+                bindData(it.data)
+            }) {
+            emptyView.setLoadState(EmptyView.LoadState.LOAD_STATE_ERROR)
         }
     }
 
     @SuppressLint("SetTextI18n")
     private fun bindData(data: OrderInfo) {
+        this.data = data
         tvAddress.bindData(data.receiveVo)
         productList.bindData(list)
         var totalCount = 0
@@ -70,21 +86,60 @@ class ConfirmOrderActivity : DefaultActivity() {
             "应付款：${getString(R.string.rmb_tag, PriceChangeUtils.getNumKb(data.payAmount))}"
         tvOrderVipSaveMoney.text =
             "VIP折扣已节省${getString(R.string.rmb_tag, PriceChangeUtils.getNumKb(data.discount))}"
+        bindAddress()
 
     }
 
     private fun initListener() {
         myToolbar.setClick { finish() }
+        //立即结算
         tvOrderBalance.setOnClickListener {
-            if (receiveVo == null) {
-                showMessage("请选择收货地址")
-                return@setOnClickListener
-            }
-            startActivity(Intent(this, CashInActivity::class.java))
+            toCreateOrder()
         }
         //选择地址
         tvAddress.setOnClickListener {
-            startActivity(Intent(this, AddressManagerActivity::class.java))
+            startActivityForResult(
+                Intent(this, AddressManagerActivity::class.java),
+                INTENT_RESULT_ADDRESS
+            )
         }
+    }
+
+    /** 立即结算生成订单 */
+    private fun toCreateOrder() {
+        if (receiveVo == null) {
+            showMessage("请选择收货地址")
+            return
+        }
+        if (data == null) {
+            return
+        }
+        val requestSaveOrderModel = RequestSaveOrderModel()
+        requestSaveOrderModel.userId = "${ConfigUtils.userId()}"
+        requestSaveOrderModel.receiveId = "${receiveVo?.receiveId}"
+        requestSaveOrderModel.remark = "${etRemark.text}"
+        requestSaveOrderModel.freight = "${data?.freight}"
+        requestSaveOrderModel.totalAmount = "${data?.orderTotalAmount}"
+        requestSaveOrderModel.discount = "${data?.discount}"
+        requestSaveOrderModel.payAmount = "${data?.payAmount}"
+        requestSaveOrderModel.productDtoList = list
+        request(RetrofitCreateHelper.createApi(BaseApi::class.java).saveOrder(requestSaveOrderModel)) {
+            startActivity(
+                Intent(this, CashInActivity::class.java)
+                    .putExtra("data", it.data)
+            )
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == INTENT_RESULT_ADDRESS && resultCode == Activity.RESULT_OK && data != null) {
+            receiveVo = data.getSerializableExtra("data") as ReceiveVo?
+            bindAddress()
+        }
+    }
+
+    private fun bindAddress() {
+        tvAddress.bindData(receiveVo)
     }
 }

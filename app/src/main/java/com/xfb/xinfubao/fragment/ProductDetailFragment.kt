@@ -8,13 +8,13 @@ import com.careagle.sdk.utils.PriceChangeUtils
 import com.google.gson.Gson
 import com.xfb.xinfubao.MyImageLoader
 import com.xfb.xinfubao.R
+import com.xfb.xinfubao.activity.CashInActivity
 import com.xfb.xinfubao.activity.ConfirmOrderActivity
 import com.xfb.xinfubao.api.BaseApi
 import com.xfb.xinfubao.callback.MyClickCallBack
-import com.xfb.xinfubao.model.Product
-import com.xfb.xinfubao.model.ProductDetail
-import com.xfb.xinfubao.model.ProductImg
+import com.xfb.xinfubao.model.*
 import com.xfb.xinfubao.utils.ConfigUtils
+import kotlinx.android.synthetic.main.activity_confirm_order.*
 import kotlinx.android.synthetic.main.fragment_product_detail.*
 
 class ProductDetailFragment : BaseFragment() {
@@ -72,10 +72,6 @@ class ProductDetailFragment : BaseFragment() {
     }
 
     private fun initListener() {
-        tvToBuy.setOnClickListener {
-            val intent = Intent(activity!!, ConfirmOrderActivity::class.java)
-            startActivity(intent)
-        }
         //TODO 分享
         ivShare.setOnClickListener {
 
@@ -114,15 +110,56 @@ class ProductDetailFragment : BaseFragment() {
 
         //立即购买
         tvToBuy.setOnClickListener {
-            if (count <= 0) {
-                showMessage("请选择购买数量")
-                return@setOnClickListener
+            productDetail?.let {
+                if (count <= 0) {
+                    showMessage("请选择购买数量")
+                    return@setOnClickListener
+                }
+                val products = arrayListOf<Product>()
+                val productInfo = it.toProduct()
+                productInfo.num = count
+                products.add(productInfo)
+                if (it.isIsReal) {
+                    ConfirmOrderActivity.toActivity(activity!!, products)
+                } else {
+                    requestConfirmOrder(products)
+                }
             }
-            val products = arrayListOf<Product>()
-            val productInfo = productDetail!!.toProduct()
-            productInfo.num = count
-            products.add(productInfo)
-            ConfirmOrderActivity.toActivity(activity!!, products)
+        }
+    }
+
+    /** 确认订单 */
+    private fun requestConfirmOrder(products: ArrayList<Product>) {
+        val requestOrderModel = RequestOrderModel()
+        requestOrderModel.userId = ConfigUtils.userId()
+        requestOrderModel.productDtoList = products
+        request(
+            RetrofitCreateHelper.createApi(BaseApi::class.java).confirmOrder(
+                requestOrderModel
+            )
+        ) {
+            toCreateOrder(it.data, products)
+        }
+    }
+
+    /** 创建订单 */
+    private fun toCreateOrder(
+        data: OrderInfo,
+        products: ArrayList<Product>
+    ) {
+        val requestSaveOrderModel = RequestSaveOrderModel()
+        requestSaveOrderModel.userId = "${ConfigUtils.userId()}"
+        requestSaveOrderModel.remark = "${etRemark.text}"
+        requestSaveOrderModel.freight = "${data.freight}"
+        requestSaveOrderModel.totalAmount = "${data.orderTotalAmount}"
+        requestSaveOrderModel.discount = "${data.discount}"
+        requestSaveOrderModel.payAmount = "${data.payAmount}"
+        requestSaveOrderModel.productDtoList = products
+        request(RetrofitCreateHelper.createApi(BaseApi::class.java).saveOrder(requestSaveOrderModel)) {
+            startActivity(
+                Intent(activity!!, CashInActivity::class.java)
+                    .putExtra("data", it.data)
+            )
         }
     }
 

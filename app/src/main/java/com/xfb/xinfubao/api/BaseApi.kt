@@ -75,5 +75,17 @@ interface BaseApi {
     @POST("api/addReceive")
     fun addReceive(@Body map: Map<String, String>): Observable<Result<Any?>>
 
+    /** 保存订单 */
+    @POST("api/saveOrder")
+    fun saveOrder(@Body map: RequestSaveOrderModel): Observable<Result<ArrayList<String>>>
+
+    /** 收银台 */
+    @POST("api/cashRegister")
+    fun cashRegister(@Body map: RequestCashRegisterDto): Observable<Result<CashRegisterModel>>
+
+    /** 立即支付 */
+    @POST("api/pay")
+    fun pay(@Body map: RequestPay): Observable<Result<Any?>>
+
 
 }

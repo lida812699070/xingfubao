@@ -13,7 +13,7 @@ abstract class DefaultActivity : BaseActivity() {
 
     open fun <T> request(
         observable: Observable<Result<T>>,
-        callBack: (com.xfb.xinfubao.model.Result<T>) -> Unit
+        callBack: (Result<T>) -> Unit
     ) {
         observable.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -42,9 +42,9 @@ abstract class DefaultActivity : BaseActivity() {
 
 
     open fun <T> requestWithError(
-        observable: Observable<com.xfb.xinfubao.model.Result<T>>,
-        callBack: (com.xfb.xinfubao.model.Result<T>) -> Unit,
-        onerror: () -> Unit
+        observable: Observable<Result<T>>,
+        callBack: (Result<T>) -> Unit,
+        onerror: (msg: String?) -> Unit
     ) {
         observable.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -53,11 +53,11 @@ abstract class DefaultActivity : BaseActivity() {
                 if (it.code == 0) {
                     callBack(it)
                 } else {
-                    onerror()
+                    onerror(it.msg)
                 }
             }, {
                 onError(it)
-                onerror()
+                onerror("")
             }, {
             })
     }

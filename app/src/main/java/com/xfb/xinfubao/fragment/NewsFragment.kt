@@ -80,7 +80,12 @@ class NewsFragment : BaseRecyclerViewFragment<NewsModel>() {
         initData()
         adapter.setOnItemClickListener { adapter, view, position ->
             activity?.let {
-                WebviewActivity.newInstanceHtml(it, list[position].content, list[position].title)
+                WebviewActivity.newInstanceHtml(
+                    it,
+                    list[position].content,
+                    list[position].title,
+                    rightImage = R.mipmap.fenxiang_icon
+                )
             }
         }
     }

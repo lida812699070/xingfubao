@@ -1,21 +1,36 @@
 package com.xfb.xinfubao.activity
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import com.careagle.sdk.helper.RetrofitCreateHelper
+import com.careagle.sdk.utils.PriceChangeUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.xfb.xinfubao.R
+import com.xfb.xinfubao.api.BaseApi
+import com.xfb.xinfubao.dialog.DialogUtils
+import com.xfb.xinfubao.model.*
+import com.xfb.xinfubao.utils.ConfigUtils
 import kotlinx.android.synthetic.main.activity_cash_in.*
 
 /** 收银台 */
 class CashInActivity : DefaultActivity() {
 
-    var list = arrayListOf<String>()
+    var list = arrayListOf<RegisterOrderVo>()
+    var data: CashRegisterModel? = null
+    var payMethod: PayMethod? = null
     var adapter =
-        object : BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_cash_in_order_price, list) {
-            override fun convert(helper: BaseViewHolder?, item: String?) {
-
+        object : BaseQuickAdapter<RegisterOrderVo, BaseViewHolder>(
+            R.layout.item_cash_in_order_price,
+            list
+        ) {
+            override fun convert(helper: BaseViewHolder, item: RegisterOrderVo) {
+                helper.setText(R.id.tvTitle, "订单${item.orderId}")
+                    .setText(R.id.tvOrderNO, item.orderNumber)
+                    .setText(
+                        R.id.tvPrice,
+                        getString(R.string.rmb_tag, PriceChangeUtils.getDoubleKb(item.payAmount))
+                    )
             }
         }
 
@@ -24,15 +39,54 @@ class CashInActivity : DefaultActivity() {
     }
 
     override fun initView(savedInstanceState: Bundle?) {
+        val orderIds = intent.getSerializableExtra("data") as ArrayList<String>
         myToolbar.setClick { finish() }
-        tvToPay.setOnClickListener {
-            startActivity(Intent(this, PayResultActivity::class.java))
-        }
         initRecyclerView()
-        list.add("")
-        list.add("")
-        list.add("")
-        adapter.notifyDataSetChanged()
+
+        val map = RequestCashRegisterDto()
+        map.userId = "${ConfigUtils.userId()}"
+        map.orderNumber = orderIds
+        showProgress("请稍候")
+        request(RetrofitCreateHelper.createApi(BaseApi::class.java).cashRegister(map)) {
+            bindData(it.data)
+        }
+
+        //立即支付
+        tvToPay.setOnClickListener {
+            DialogUtils.showDiYaDialog(this, 1) {
+                toPay(it)
+            }
+        }
+    }
+
+    private fun toPay(payPwd: String) {
+        if (data == null) {
+            return
+        }
+        showProgress("请稍候")
+        val requestPay = RequestPay()
+        requestPay.userId = "${ConfigUtils.userId()}"
+        requestPay.payWay = "${payMethod?.payMethodId}"
+        requestPay.payAmount = "${data?.totalAmount}"
+        requestPay.payPwd = payPwd
+        request(RetrofitCreateHelper.createApi(BaseApi::class.java).pay(requestPay)) {
+            val payResultModel = PayResultModel()
+            payResultModel.payAmout = data!!.totalAmount
+            payResultModel.payMethod = payMethod
+            PayResultActivity.toActivity(this, payResultModel)
+        }
+    }
+
+    private fun bindData(data: CashRegisterModel?) {
+        this.data = data
+        data?.let {
+            list.clear()
+            list.addAll(it.registerOrderVos)
+            adapter.notifyDataSetChanged()
+            tvTotalPrice.text =
+                "总金额：${getString(R.string.rmb_tag, PriceChangeUtils.getDoubleKb(it.totalAmount))}"
+            payMethod = data.payMethod?.get(0)
+        }
     }
 
     private fun initRecyclerView() {
