@@ -82,5 +82,9 @@ class AddressManagerActivity : BaseRecyclerViewActivity<ReceiveVo>() {
         }
     }
 
+    override fun onRestart() {
+        super.onRestart()
+        onRefresh()
+    }
 
 }

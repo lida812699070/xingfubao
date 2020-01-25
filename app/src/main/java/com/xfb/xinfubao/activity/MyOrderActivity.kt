@@ -22,11 +22,11 @@ class MyOrderActivity : DefaultActivity() {
         titles.add("待发货")
         titles.add("待收货")
         titles.add("已完成")
-        fragments.add(MyOrderFragment())
-        fragments.add(MyOrderFragment())
-        fragments.add(MyOrderFragment())
-        fragments.add(MyOrderFragment())
-        fragments.add(MyOrderFragment())
+        fragments.add(MyOrderFragment.newInstance())
+        fragments.add(MyOrderFragment.newInstance(100))
+        fragments.add(MyOrderFragment.newInstance(102))
+        fragments.add(MyOrderFragment.newInstance(112))
+        fragments.add(MyOrderFragment.newInstance(106))
         val pagerAdapter =
             MyFragmentPagerAdapter(supportFragmentManager, fragments, titles, this)
         vpContent.adapter = pagerAdapter

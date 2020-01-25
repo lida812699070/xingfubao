@@ -95,6 +95,25 @@ interface BaseApi {
     @POST("api/findProductByCategory")
     fun findProductByCategory(@Body map: Map<String, String>): Observable<Result<List<Product>>>
 
+    /** 获取产品 */
+    @POST("api/updpaypsw")
+    fun updpaypsw(@Body map: Map<String, String>): Observable<Result<Any?>>
+
+    /** 实物订单列表 */
+    @POST("api/listRealOrder")
+    fun listRealOrder(@Body map: Map<String, String>): Observable<Result<List<MyOrderModel>>>
+
+    /** 取消订单 */
+    @POST("api/cancelOrder")
+    fun cancelOrder(@Body map: Map<String, String>): Observable<Result<Any?>>
+
+    /** 实物订单详情 */
+    @POST("api/getRealOrder")
+    fun getRealOrder(@Body map: Map<String, String>): Observable<Result<OrderDetailModel>>
+
+    /** 实物订单确认发货 */
+    @POST("api/confirmReceipt")
+    fun confirmReceipt(@Body map: Map<String, String>): Observable<Result<Any?>>
 
 
 }

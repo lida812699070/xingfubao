@@ -19,7 +19,7 @@ class SafeCenterActivity : DefaultActivity() {
             ChangePasswordActivity.toActivity(ChangePasswordEnum.CHANGE_LOGIN_PASSWORD, this)
         }
         tvResetPayPassword.setOnClickListener {
-            ChangePasswordActivity.toActivity(ChangePasswordEnum.CHANGE_PAY_PASSWORD, this)
+            ChangePasswordActivity.toActivity(ChangePasswordEnum.SET_PAY_PASSWORD, this)
         }
         tvResetMobile.setOnClickListener {
             ChangePasswordActivity.toActivity(ChangePasswordEnum.CHANGE_MOBILE, this)

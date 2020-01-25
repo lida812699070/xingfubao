@@ -52,6 +52,13 @@ fun TextView.centerLine() {
     paint.isAntiAlias = true
 }
 
+fun TextView.setDrawLeft(resourceId: Int) {
+    val drawable = getResources().getDrawable(resourceId)
+/// 这一步必须要做,否则不会显示.
+    drawable.setBounds(0, 0, drawable.minimumWidth, drawable.minimumHeight)
+    setCompoundDrawables(drawable, null, null, null)
+}
+
 /*
     扩展视图可见性
  */

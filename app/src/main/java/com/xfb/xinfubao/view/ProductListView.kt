@@ -31,7 +31,13 @@ class ProductListView @JvmOverloads constructor(
                 ) {
                 override fun convert(helper: BaseViewHolder, item: Product) {
                     helper.setText(R.id.tvTitle, item.productName)
-                        .setText(R.id.tvPrice, PriceChangeUtils.getNumKb(item.productPrice))
+                        .setText(
+                            R.id.tvPrice,
+                            mContext.getString(
+                                R.string.rmb_tag,
+                                PriceChangeUtils.getNumKb(item.productPrice)
+                            )
+                        )
                         .setText(R.id.tvNumber, "x${item.num}")
                     val ivProductPic = helper.getView<ImageView>(R.id.ivProductPic)
                     ivProductPic.loadUri(item.imgUrl)

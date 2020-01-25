@@ -17,6 +17,7 @@ public class ConfigUtils {
 
     //用户登录信息
     public static void saveUserInfo(UserInfo userInfo) {
+        mUserInfo = userInfo;
         String json = new Gson().toJson(userInfo);
         SPUtils.put("userInfo", json);
     }

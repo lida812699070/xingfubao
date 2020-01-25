@@ -143,6 +143,9 @@ class RegisterFragment : BaseFragment() {
 
     //获取验证码
     private fun requestCheckCode() {
+        if (disposable != null) {
+            return
+        }
         val map = hashMapOf<String, String>()
         val account =
             if (isMobileRegister) etMobileInputMobile.text.toString() else etMobileInputMobile.text.toString()

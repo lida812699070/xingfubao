@@ -69,6 +69,11 @@ class CashInActivity : DefaultActivity() {
         requestPay.payWay = "${payMethod?.payMethodId}"
         requestPay.payAmount = "${data?.totalAmount}"
         requestPay.payPwd = payPwd
+        val orderNos = arrayListOf<String>()
+        for (registerOrderVo in list) {
+            orderNos.add(registerOrderVo.orderNumber)
+        }
+        requestPay.orderNO = orderNos
         request(RetrofitCreateHelper.createApi(BaseApi::class.java).pay(requestPay)) {
             val payResultModel = PayResultModel()
             payResultModel.payAmout = data!!.totalAmount

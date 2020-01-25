@@ -126,6 +126,7 @@ class ConfirmOrderActivity : DefaultActivity() {
         requestSaveOrderModel.discount = "${data?.discount}"
         requestSaveOrderModel.payAmount = "${data?.payAmount}"
         requestSaveOrderModel.productDtoList = list
+        showProgress("请稍候")
         request(RetrofitCreateHelper.createApi(BaseApi::class.java).saveOrder(requestSaveOrderModel)) {
             startActivity(
                 Intent(this, CashInActivity::class.java)

@@ -8,6 +8,10 @@ import com.careagle.sdk.helper.okhttp.CacheInterceptor;
 import com.careagle.sdk.helper.okhttp.HttpCache;
 import com.careagle.sdk.helper.okhttp.TrustManager;
 import com.careagle.sdk.utils.JLog;
+import com.franmontiel.persistentcookiejar.ClearableCookieJar;
+import com.franmontiel.persistentcookiejar.PersistentCookieJar;
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -32,6 +36,10 @@ public class RetrofitCreateHelper {
     private static Interceptor interceptor = getInterceptor();
     private static Interceptor headerInterceptor = getHeaderInterceptor();
     private static CacheInterceptor cacheInterceptor = new CacheInterceptor();
+
+    private static ClearableCookieJar cookieJar =
+            new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(Config.getContext()));
+
     private static OkHttpClient.Builder okhttpBuilder = new OkHttpClient.Builder()
             //SSL证书
             .sslSocketFactory(TrustManager.getUnsafeOkHttpClient())
@@ -43,6 +51,7 @@ public class RetrofitCreateHelper {
             .addNetworkInterceptor(cacheInterceptor)
             .addInterceptor(cacheInterceptor)
             .cache(HttpCache.getCache())
+            .cookieJar(cookieJar)
             //time out
             .connectTimeout(TIMEOUT_CONNECTION, TimeUnit.SECONDS)
             .readTimeout(TIMEOUT_READ, TimeUnit.SECONDS)

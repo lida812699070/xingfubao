@@ -41,7 +41,7 @@ abstract class BaseFragment : BaseCompatFragment() {
 
     open fun <T> requestWithError(
         observable: Observable<com.xfb.xinfubao.model.Result<T>>,
-        onerror: () -> Unit,
+        onerror: (msg:String) -> Unit,
         callBack: (com.xfb.xinfubao.model.Result<T>) -> Unit
     ) {
         observable.subscribeOn(Schedulers.io())
@@ -51,11 +51,11 @@ abstract class BaseFragment : BaseCompatFragment() {
                 if (it.code == 0) {
                     callBack(it)
                 } else {
-                    onerror()
+                    onerror(it.msg)
                 }
             }, {
                 onError(it)
-                onerror()
+                onerror("请求失败")
             }, {
             })
     }

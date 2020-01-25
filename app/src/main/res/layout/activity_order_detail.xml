@@ -63,7 +63,7 @@
                     app:layout_constraintLeft_toLeftOf="@+id/tvWaitPay" />
 
                 <android.support.constraint.Group
-                    android:id="@+id/gp"
+                    android:id="@+id/gpWait"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
@@ -85,7 +85,11 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </android.support.constraint.ConstraintLayout>
 
-            <include layout="@layout/layout_address" />
+            <com.xfb.xinfubao.view.AddressTakeView
+                android:id="@+id/addressTakeView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" />
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
@@ -435,4 +439,43 @@
             android:textColor="@color/white"
             android:textSize="18sp" />
     </LinearLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clBottom"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/tvOrderPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="4dp"
+            android:text="应付款：¥700.00"
+            android:textColor="@color/theme_color"
+            android:textSize="18sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvOrderVipSaveMoney"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="VIP折扣已节省￥8.00"
+            android:textColor="@color/color_light_org"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@+id/tvOrderPrice" />
+
+        <TextView
+            android:id="@+id/tvOrderBalance"
+            style="@style/MainBtn"
+            android:layout_width="168dp"
+            android:layout_height="match_parent"
+            android:text="立即结算"
+            app:layout_constraintRight_toRightOf="parent" />
+    </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>
