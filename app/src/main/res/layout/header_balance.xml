@@ -1,0 +1,181 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_default_bg"
+    tools:context="com.xfb.xinfubao.activity.BalanceActivity">
+
+    <View
+        android:id="@+id/viewTop"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:background="@color/theme_color"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivFinish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="55dp"
+        android:padding="5dp"
+        android:src="@mipmap/icon_white_back"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="银杏果"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/ivFinish"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivFinish" />
+
+    <ImageView
+        android:id="@+id/ivBg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="123dp"
+        android:layout_marginRight="20dp"
+        android:src="@mipmap/yxg_bg"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="54dp"
+        android:layout_marginTop="158dp"
+        android:text="银杏果"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvLock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="54dp"
+        android:layout_marginTop="158dp"
+        android:background="@drawable/shape_theme_btn_bg12"
+        android:paddingLeft="9dp"
+        android:paddingTop="2dp"
+        android:paddingRight="9dp"
+        android:paddingBottom="2dp"
+        android:text="锁定中"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tvBalanceText"
+        android:layout_width="wrap_content"
+        android:layout_height="26dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/shape_white_radius_13"
+        android:gravity="center"
+        android:paddingLeft="9dp"
+        android:paddingRight="9dp"
+        android:text="余额"
+        android:textColor="@color/color_text_111"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="@+id/tvSubtitle"
+        app:layout_constraintTop_toBottomOf="@+id/tvSubtitle" />
+
+    <TextView
+        android:id="@+id/tvBalance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:includeFontPadding="false"
+        android:text="0.00"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tvBalanceText"
+        app:layout_constraintLeft_toRightOf="@+id/tvBalanceText"
+        app:layout_constraintTop_toTopOf="@+id/tvBalanceText" />
+
+    <TextView
+        android:id="@+id/tvCash"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/shape_white_radius_13"
+        android:gravity="center"
+        android:text="申请提现"
+        android:textColor="@color/color_text_111"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/tvCashRight"
+        app:layout_constraintTop_toBottomOf="@+id/tvBalance"
+        app:layout_goneMarginRight="40dp" />
+
+    <TextView
+        android:id="@+id/tvCashRight"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/shape_white_radius_13"
+        android:gravity="center"
+        android:text="提币到红包"
+        android:textColor="@color/color_text_111"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintLeft_toRightOf="@+id/tvCash"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvBalance" />
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCash"
+        app:tabGravity="fill"
+        app:tabIndicatorFullWidth="false"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="@color/color_text_111"
+        app:tabTextColor="@color/color_text_888" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_line_e0e"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+
+    <TextView
+        android:id="@+id/tvNATMoney"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:text="0.00"
+        android:textColor="@color/theme_color"
+        android:textSize="24sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/tvLock"
+        app:layout_constraintLeft_toLeftOf="@+id/tvBalance"
+        tools:visibility="visible" />
+</android.support.constraint.ConstraintLayout>

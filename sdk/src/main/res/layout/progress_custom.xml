@@ -11,11 +11,10 @@
     android:paddingRight="30dp"
     android:paddingTop="20dp">
 
-    <ImageView
+    <ProgressBar
         android:id="@+id/spinnerImageView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/spinner" />
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/message"

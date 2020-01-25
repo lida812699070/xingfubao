@@ -58,6 +58,7 @@ abstract class BaseRecyclerViewActivity<T> : DefaultActivity(), SwipeRefreshLayo
         pageRecyclerView().layoutManager = pageLayoutManager()
         pageRecyclerView().adapter = pageAdapter()
         pageAdapter().emptyView = emptyView
+        pageAdapter().setHeaderAndEmpty(true)
         if (isCanLoadMore()) {
             pageAdapter().setOnLoadMoreListener(this, pageRecyclerView())
         }
@@ -68,7 +69,7 @@ abstract class BaseRecyclerViewActivity<T> : DefaultActivity(), SwipeRefreshLayo
     fun loadData(data: List<T>, isEndPage: Boolean? = null) {
         if (page == initialPage) list.clear()
         list.addAll(data)
-        var canLoadMore = isCanLoadMore() && (isEndPage ?: (data.size == pageSize))
+        var canLoadMore = isCanLoadMore() && (isEndPage ?: (data.size >= pageSize))
         if (isEndPage != null) {
             canLoadMore = !isEndPage
         }

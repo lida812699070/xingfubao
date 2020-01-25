@@ -14,85 +14,85 @@ public class UserAssets {
      * powerAvowNum : 0
      */
 
-    private int ginkgoTreasureNum;
-    private int ginkgoFruitNum;
-    private int ginkgoLeafNum;
-    private int integralNum;
-    private int natFlowNum;
-    private int natLockNum;
-    private int natTotalNum;
-    private int natMortgagedNum;
-    private int powerAvowNum;
+    private double ginkgoTreasureNum;
+    private double ginkgoFruitNum;
+    private double ginkgoLeafNum;
+    private double integralNum;
+    private double natFlowNum;
+    private double natLockNum;
+    private double natTotalNum;
+    private double natMortgagedNum;
+    private double powerAvowNum;
 
-    public int getGinkgoTreasureNum() {
+    public double getGinkgoTreasureNum() {
         return ginkgoTreasureNum;
     }
 
-    public void setGinkgoTreasureNum(int ginkgoTreasureNum) {
+    public void setGinkgoTreasureNum(double ginkgoTreasureNum) {
         this.ginkgoTreasureNum = ginkgoTreasureNum;
     }
 
-    public int getGinkgoFruitNum() {
+    public double getGinkgoFruitNum() {
         return ginkgoFruitNum;
     }
 
-    public void setGinkgoFruitNum(int ginkgoFruitNum) {
+    public void setGinkgoFruitNum(double ginkgoFruitNum) {
         this.ginkgoFruitNum = ginkgoFruitNum;
     }
 
-    public int getGinkgoLeafNum() {
+    public double getGinkgoLeafNum() {
         return ginkgoLeafNum;
     }
 
-    public void setGinkgoLeafNum(int ginkgoLeafNum) {
+    public void setGinkgoLeafNum(double ginkgoLeafNum) {
         this.ginkgoLeafNum = ginkgoLeafNum;
     }
 
-    public int getIntegralNum() {
+    public double getIntegralNum() {
         return integralNum;
     }
 
-    public void setIntegralNum(int integralNum) {
+    public void setIntegralNum(double integralNum) {
         this.integralNum = integralNum;
     }
 
-    public int getNatFlowNum() {
+    public double getNatFlowNum() {
         return natFlowNum;
     }
 
-    public void setNatFlowNum(int natFlowNum) {
+    public void setNatFlowNum(double natFlowNum) {
         this.natFlowNum = natFlowNum;
     }
 
-    public int getNatLockNum() {
+    public double getNatLockNum() {
         return natLockNum;
     }
 
-    public void setNatLockNum(int natLockNum) {
+    public void setNatLockNum(double natLockNum) {
         this.natLockNum = natLockNum;
     }
 
-    public int getNatTotalNum() {
+    public double getNatTotalNum() {
         return natTotalNum;
     }
 
-    public void setNatTotalNum(int natTotalNum) {
+    public void setNatTotalNum(double natTotalNum) {
         this.natTotalNum = natTotalNum;
     }
 
-    public int getNatMortgagedNum() {
+    public double getNatMortgagedNum() {
         return natMortgagedNum;
     }
 
-    public void setNatMortgagedNum(int natMortgagedNum) {
+    public void setNatMortgagedNum(double natMortgagedNum) {
         this.natMortgagedNum = natMortgagedNum;
     }
 
-    public int getPowerAvowNum() {
+    public double getPowerAvowNum() {
         return powerAvowNum;
     }
 
-    public void setPowerAvowNum(int powerAvowNum) {
+    public void setPowerAvowNum(double powerAvowNum) {
         this.powerAvowNum = powerAvowNum;
     }
 }

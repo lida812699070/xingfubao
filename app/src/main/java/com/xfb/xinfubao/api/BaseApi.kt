@@ -115,5 +115,29 @@ interface BaseApi {
     @POST("api/confirmReceipt")
     fun confirmReceipt(@Body map: Map<String, String>): Observable<Result<Any?>>
 
+    /** 愿力值 */
+    @POST("api/findPowerAvow")
+    fun findPowerAvow(@Body map: Map<String, String>): Observable<Result<List<ItemBalanceModel>>>
+
+    /** 银杏果 */
+    @POST("api/ginkgoFruitInfo")
+    fun ginkgoFruitInfo(@Body map: Map<String, String>): Observable<Result<List<ItemBalanceModel>>>
+
+    /** 银杏叶 */
+    @POST("api/ginkgoLeafInfo")
+    fun ginkgoLeafInfo(@Body map: Map<String, String>): Observable<Result<List<ItemBalanceModel>>>
+
+    /** 银杏宝 */
+    @POST("api/ginkgoTreasureInfo")
+    fun ginkgoTreasureInfo(@Body map: Map<String, String>): Observable<Result<List<ItemBalanceModel>>>
+
+    /** 积分商城 */
+    @POST("api/integralInfo")
+    fun integralInfo(@Body map: Map<String, String>): Observable<Result<List<ItemBalanceModel>>>
+
+    /** NAT资产 */
+    @POST("api/natAssets")
+    fun natAssets(@Body map: Map<String, String>): Observable<Result<List<ItemBalanceModel>>>
+
 
 }

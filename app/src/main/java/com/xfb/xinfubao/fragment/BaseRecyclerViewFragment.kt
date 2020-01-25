@@ -70,7 +70,7 @@ abstract class BaseRecyclerViewFragment<T> : BaseFragment(),
     open fun loadData(data: List<T>, isEndPage: Boolean? = null) {
         if (page == initialPage) list.clear()
         list.addAll(data)
-        var canLoadMore = isCanLoadMore() && (isEndPage ?: (data.size == pageSize))
+        var canLoadMore = isCanLoadMore() && (isEndPage ?: (data.size >= pageSize))
         if (isEndPage != null) {
             canLoadMore = !isEndPage
         }

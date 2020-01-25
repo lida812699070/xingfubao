@@ -8,6 +8,7 @@ import android.view.View
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.activity.*
 import com.xfb.xinfubao.constant.Constant
+import com.xfb.xinfubao.myenum.BalanceEnum
 import com.xfb.xinfubao.utils.ConfigUtils
 import com.xfb.xinfubao.utils.loadUriCircle
 import com.xfb.xinfubao.utils.setVisible
@@ -36,22 +37,22 @@ class MineFragment : BaseFragment() {
         }
         tvMineyxg.setOnClickListener {
             activity?.let {
-                startActivity(Intent(it, BalanceActivity::class.java))
+                BalanceActivity.toActivity(it, BalanceEnum.YING_XING_GUO)
             }
         }
         tvMineyxy.setOnClickListener {
             activity?.let {
-                startActivity(Intent(it, BalanceActivity::class.java))
+                BalanceActivity.toActivity(it, BalanceEnum.YING_XING_YE)
             }
         }
         tvMinejfsc.setOnClickListener {
             activity?.let {
-                startActivity(Intent(it, BalanceActivity::class.java))
+                BalanceActivity.toActivity(it, BalanceEnum.JI_FEN_SHANG_CHENG)
             }
         }
         tvMineNAT.setOnClickListener {
             activity?.let {
-                startActivity(Intent(it, BalanceActivity::class.java))
+                BalanceActivity.toActivity(it, BalanceEnum.NAT)
             }
         }
         itemYxb.setOnClickListener {
@@ -61,7 +62,7 @@ class MineFragment : BaseFragment() {
         }
         itemYlz.setOnClickListener {
             activity?.let {
-                startActivity(Intent(it, YinXingbaoActivity::class.java))
+                BalanceActivity.toActivity(it, BalanceEnum.YUAN_LI_ZHI)
             }
         }
         itemNATJj.setOnClickListener {
