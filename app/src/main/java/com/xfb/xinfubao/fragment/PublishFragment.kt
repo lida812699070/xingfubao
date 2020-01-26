@@ -1,23 +1,38 @@
 package com.xfb.xinfubao.fragment
 
 import android.os.Bundle
-import android.os.Handler
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import com.careagle.sdk.helper.RetrofitCreateHelper
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.xfb.xinfubao.R
+import com.xfb.xinfubao.activity.WebviewActivity
+import com.xfb.xinfubao.api.BaseApi
+import com.xfb.xinfubao.model.NewsModel
 
 /** 公告 */
-class PublishFragment : BaseRecyclerViewFragment<String>() {
-
+class PublishFragment : BaseRecyclerViewFragment<NewsModel>() {
+    private var typeId: Int = 0
     val adapter =
-        object : BaseQuickAdapter<String, BaseViewHolder>(R.layout.item_publish_message, list) {
-            override fun convert(helper: BaseViewHolder?, item: String?) {
-
+        object : BaseQuickAdapter<NewsModel, BaseViewHolder>(R.layout.item_publish_message, list) {
+            override fun convert(helper: BaseViewHolder, item: NewsModel) {
+                helper.setText(R.id.tvTitle, item.title)
+                    .setText(R.id.tvTime, item.createtime)
+                    .setText(R.id.tvContent, item.content)
             }
         }
+
+    companion object {
+        fun newInstance(typeId: Int): PublishFragment {
+            val fragmentLogin = PublishFragment()
+            val bundle = Bundle()
+            bundle.putInt("typeId", typeId)
+            fragmentLogin.arguments = bundle
+            return fragmentLogin
+        }
+    }
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_publish_message
@@ -27,7 +42,7 @@ class PublishFragment : BaseRecyclerViewFragment<String>() {
         return findViewById(R.id.recyclerView) as RecyclerView?
     }
 
-    override fun pageAdapter(): BaseQuickAdapter<String, BaseViewHolder>? {
+    override fun pageAdapter(): BaseQuickAdapter<NewsModel, BaseViewHolder>? {
         return adapter
     }
 
@@ -35,26 +50,33 @@ class PublishFragment : BaseRecyclerViewFragment<String>() {
         return findViewById(R.id.swipeRefreshLayout) as SwipeRefreshLayout?
     }
 
+    override fun initUI(view: View?, savedInstanceState: Bundle?) {
+
+    }
+
     override fun initData() {
-        Handler().postDelayed({
-            val datas = arrayListOf<String>()
-            datas.add("")
-            datas.add("")
-            datas.add("")
-            datas.add("")
-            datas.add("")
-            datas.add("")
-            datas.add("")
-            datas.add("")
-            loadData(datas)
-        }, 1000)
+        val map = hashMapOf<String, String>()
+        map["pageNum"] = "$page"
+        map["pageSize"] = "$pageSize"
+        map["typeID"] = "$typeId"
+        requestWithError(RetrofitCreateHelper.createApi(BaseApi::class.java).noticelistxfb(map), {
+            showLoadError()
+        }, {
+            loadData(it.data)
+        })
     }
 
     override fun initLogic() {
+        typeId = arguments!!.getInt("typeId", 0)
+        adapter.setOnItemClickListener { adapter, view, position ->
+            activity?.let {
+                WebviewActivity.newInstanceHtml(
+                    it,
+                    list[position].content,
+                    list[position].title
+                )
+            }
+        }
         initData()
-    }
-
-    override fun initUI(view: View?, savedInstanceState: Bundle?) {
-
     }
 }

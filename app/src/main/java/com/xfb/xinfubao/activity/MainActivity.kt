@@ -6,7 +6,10 @@ import com.xfb.xinfubao.R
 import com.xfb.xinfubao.fragment.FindFragment
 import com.xfb.xinfubao.fragment.HomeFragment
 import com.xfb.xinfubao.fragment.MineFragment
+import com.xfb.xinfubao.model.event.EventExitApp
 import kotlinx.android.synthetic.main.activity_main.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 
 class MainActivity : DefaultActivity() {
 
@@ -29,6 +32,7 @@ class MainActivity : DefaultActivity() {
     }
 
     override fun initView(savedInstanceState: Bundle?) {
+        EventBus.getDefault().register(this)
         tvTabFind.setOnClickListener {
             tvTabFind.isSelected = true
             tvTabMine.isSelected = false
@@ -84,4 +88,13 @@ class MainActivity : DefaultActivity() {
         }
     }
 
+    @Subscribe
+    fun exitApp(event: EventExitApp) {
+        finish()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
+    }
 }

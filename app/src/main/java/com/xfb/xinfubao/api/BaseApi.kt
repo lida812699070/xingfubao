@@ -167,5 +167,17 @@ interface BaseApi {
     @POST("api/login")
     fun queryUserInfo(@Body map: Map<String, String>): Observable<Result<UserInfo>>
 
+    /** 杏福宝消息类型列表 */
+    @GET("noticexfb")
+    fun noticexfb(@QueryMap map: Map<String, String>): Observable<Result<List<FindNewsTab>>>
+
+    /** 杏福宝消息列表 */
+    @GET("noticelistxfb")
+    fun noticelistxfb(@QueryMap map: Map<String, String>): Observable<Result<List<NewsModel>>>
+
+    /** 消息详情 */
+    @GET("noticedetails")
+    fun noticedetails(@QueryMap map: Map<String, String>): Observable<Result<Any?>>
+
 
 }

@@ -5,7 +5,9 @@ import android.os.Bundle
 import com.xfb.xinfubao.BuildConfig
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.constant.Constant
+import com.xfb.xinfubao.model.event.EventExitApp
 import kotlinx.android.synthetic.main.activity_about.*
+import org.greenrobot.eventbus.EventBus
 
 class AboutActivity : DefaultActivity() {
     override fun getLayoutId(): Int {
@@ -19,5 +21,9 @@ class AboutActivity : DefaultActivity() {
             WebviewActivity.newInstanceUrl(this, Constant.PRIVITE_SERVER, "服务及隐私条款")
         }
         tvVersion.text = "当前版本号:${BuildConfig.VERSION_NAME}"
+        tvExitApp.setOnClickListener {
+            EventBus.getDefault().post(EventExitApp())
+            finish()
+        }
     }
 }
