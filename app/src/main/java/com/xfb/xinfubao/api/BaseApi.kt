@@ -95,9 +95,17 @@ interface BaseApi {
     @POST("api/findProductByCategory")
     fun findProductByCategory(@Body map: Map<String, String>): Observable<Result<List<Product>>>
 
-    /** 获取产品 */
+    /** 修改支付密码 */
     @POST("api/updpaypsw")
     fun updpaypsw(@Body map: Map<String, String>): Observable<Result<Any?>>
+
+    /** 修改登录密码 */
+    @POST("api/updloginpsw")
+    fun updloginpsw(@Body map: Map<String, String>): Observable<Result<Any?>>
+    
+    /** 修改绑定手机号 */
+    @POST("api/bindnumber")
+    fun bindnumber(@Body map: Map<String, String>): Observable<Result<Any?>>
 
     /** 实物订单列表 */
     @POST("api/listRealOrder")

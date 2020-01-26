@@ -139,16 +139,14 @@ class ChangePasswordActivity : DefaultActivity() {
             }
             //修改登录密码
             ChangePasswordEnum.CHANGE_LOGIN_PASSWORD -> {
-                val map = hashMapOf<String, String>()
-                request(RetrofitCreateHelper.createApi(BaseApi::class.java).updpaypsw(map)) {
+                request(RetrofitCreateHelper.createApi(BaseApi::class.java).updloginpsw(map)) {
                     showMessage("操作成功")
                     finish()
                 }
             }
             //修改手机号
             ChangePasswordEnum.CHANGE_MOBILE -> {
-                val map = hashMapOf<String, String>()
-                request(RetrofitCreateHelper.createApi(BaseApi::class.java).updpaypsw(map)) {
+                request(RetrofitCreateHelper.createApi(BaseApi::class.java).bindnumber(map)) {
                     showMessage("操作成功")
                     finish()
                 }
