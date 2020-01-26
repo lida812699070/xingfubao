@@ -102,7 +102,7 @@ interface BaseApi {
     /** 修改登录密码 */
     @POST("api/updloginpsw")
     fun updloginpsw(@Body map: Map<String, String>): Observable<Result<Any?>>
-    
+
     /** 修改绑定手机号 */
     @POST("api/bindnumber")
     fun bindnumber(@Body map: Map<String, String>): Observable<Result<Any?>>
@@ -150,6 +150,22 @@ interface BaseApi {
     /** 获取用户购物车 */
     @POST("api/listUserCart")
     fun listUserCart(@Body map: Map<String, String>): Observable<Result<List<Product>>>
+
+    /** 身份证认证 */
+    @POST("api/checkidentitycard")
+    fun checkidentitycard(@Body map: Map<String, String>): Observable<Result<Any?>>
+
+    /** 护照认证 */
+    @POST("api/checkpassport")
+    fun checkpassport(@Body map: Map<String, String>): Observable<Result<Any?>>
+
+    /** 获取认证情况 */
+    @POST("api/querycertificationdetails")
+    fun querycertificationdetails(@Body map: Map<String, String>): Observable<Result<AuthResultModel>>
+
+    /** 获取用户信息 */
+    @POST("api/login")
+    fun queryUserInfo(@Body map: Map<String, String>): Observable<Result<UserInfo>>
 
 
 }

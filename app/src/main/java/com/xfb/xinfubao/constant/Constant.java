@@ -13,5 +13,7 @@ public class Constant {
     public static final String FEEDBACK = "http://xfbapi.tynet.vip:8088/help/feedback/2";
     //5，服务隐私页面配置
     public static final String PRIVITE_SERVER = "http://xfbapi.tynet.vip:8088/help/agreement/2/3";
+    //图片头地址
+    public static final String PIC_URL = "http://xfbapi.tynet.vip/";
 
 }
