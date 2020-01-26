@@ -3,10 +3,20 @@ package com.careagle.sdk.utils;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
+import android.media.MediaScannerConnection;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 
 import com.careagle.sdk.Config;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -51,5 +61,62 @@ public class CommentUtils {
         clipboard.setPrimaryClip(clipData);
     }
 
+
+    /**
+     * 复制文件
+     *
+     * @param oldFile
+     * @param newFile
+     * @param isImage
+     */
+    public static void copyFile(String oldFile, String newFile, boolean isImage) {
+        FileInputStream fis = null;
+        FileOutputStream fos = null;
+        try {
+            fis = new FileInputStream(oldFile);
+            fos = new FileOutputStream(newFile);
+            byte[] buf = new byte[1024];
+            int by = 0;
+            while ((by = fis.read(buf)) != -1) {
+                fos.write(buf, 0, by);
+            }
+            if (isImage) {
+                sendImageChangeBroadcast(newFile);
+            }
+            fis.close();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 更新系统图库
+     *
+     * @param imgPath
+     */
+    public static void sendImageChangeBroadcast(String imgPath) {
+        if (TextUtils.isEmpty(imgPath)) return;
+        File file = new File(imgPath);
+        if (file.exists() && file.isFile()) {
+            MediaScannerConnection.scanFile(Config.getContext(), new String[]{file.getAbsolutePath()}, null, null);
+        }
+    }
+
+    /**
+     * 获取手机相册路径
+     *
+     * @return
+     */
+    public static String getCameraPath() {
+        String cameraPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/DCIM/Camera/";
+        File file = new File(cameraPath);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        return cameraPath;
+    }
 
 }
