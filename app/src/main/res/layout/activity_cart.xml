@@ -9,18 +9,26 @@
     <com.xfb.xinfubao.view.MyToolbarBar
         android:id="@+id/myToolbar"
         android:layout_width="match_parent"
-        app:str_title_toolbar="购物车"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:str_title_toolbar="购物车" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/clBottom"
-        app:layout_constraintTop_toBottomOf="@+id/myToolbar"
-        tools:itemCount="5"
-        tools:listitem="@layout/item_cart" />
+        app:layout_constraintTop_toBottomOf="@+id/myToolbar">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/clBottom"
+            app:layout_constraintTop_toBottomOf="@+id/myToolbar"
+            tools:itemCount="5"
+            tools:listitem="@layout/item_cart" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/clBottom"

@@ -3,6 +3,7 @@ package com.xfb.xinfubao.model;
 import android.text.TextUtils;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Product implements Serializable {
 
@@ -22,10 +23,34 @@ public class Product implements Serializable {
     private String cartId;
     private int num;
     private double freight;
+    private int quantity;
+
+    public int getQuantity() {
+        int count = 0;
+        if (num != 0) {
+            count = num;
+        } else if (productNum != 0) {
+            count = productNum;
+        } else {
+            count = quantity;
+        }
+        return count;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
     public int getNum() {
-        if (num == 0) return productNum;
-        return num;
+        int count = 0;
+        if (num != 0) {
+            count = num;
+        } else if (productNum != 0) {
+            count = productNum;
+        } else {
+            count = quantity;
+        }
+        return count;
     }
 
     public void setNum(int num) {
@@ -33,8 +58,15 @@ public class Product implements Serializable {
     }
 
     public int getProductNum() {
-        if (productNum == 0) return num;
-        return productNum;
+        int count = 0;
+        if (num != 0) {
+            count = num;
+        } else if (productNum != 0) {
+            count = productNum;
+        } else {
+            count = quantity;
+        }
+        return count;
     }
 
     public void setProductNum(int productNum) {
@@ -101,5 +133,18 @@ public class Product implements Serializable {
 
     public void setProductPrice(double productPrice) {
         this.productPrice = productPrice;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Product)) return false;
+        Product product = (Product) o;
+        return getProductId() == product.getProductId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getProductId());
     }
 }
