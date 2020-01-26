@@ -104,7 +104,7 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 tabLayout.addTab(tabLayout.newTab().setText("提现"))
                 //TODO 银杏果申请提现
                 tvCash.setOnClickListener {
-
+                    ApplyCashOutActivity.toActivity(this, 0)
                 }
             }
             BalanceEnum.YING_XING_YE -> {
