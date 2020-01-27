@@ -29,9 +29,14 @@ class SafeCenterActivity : DefaultActivity() {
             ChangePasswordActivity.toActivity(ChangePasswordEnum.CHANGE_MOBILE, this)
         }
         tvAuthentication.setOnClickListener {
-            AuthResultActivity.toActivity(this, 2)
+            AuthResultActivity.toActivity(this, ConfigUtils.getUserInfo()!!.authState)
         }
         loadData()
+        if (2 == ConfigUtils.getUserInfo()?.authState) {
+            tvAuthenticationState.setTextColor(resources.getColor(R.color.color_light_org))
+            tvAuthenticationState.text = "已实名"
+        }
+
     }
 
 
@@ -43,7 +48,9 @@ class SafeCenterActivity : DefaultActivity() {
     private fun loadData() {
         val map = hashMapOf<String, String>()
         map["userId"] = "${ConfigUtils.userId()}"
-        //TODO 获取用户信息
+        map["userId"] = "${ConfigUtils.userId()}"
+        map["userId"] = "${ConfigUtils.userId()}"
+//        //TODO 获取用户信息
 //        request(RetrofitCreateHelper.createApi(BaseApi::class.java).queryUserInfo(map)) {
 //
 //        }

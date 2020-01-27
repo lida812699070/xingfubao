@@ -179,5 +179,9 @@ interface BaseApi {
     @GET("noticedetails")
     fun noticedetails(@QueryMap map: Map<String, String>): Observable<Result<Any?>>
 
+    /** 删除购物车 */
+    @POST("api/deleteCart")
+    fun deleteCart(@Body map: Map<String, String>): Observable<Result<Any?>>
+
 
 }

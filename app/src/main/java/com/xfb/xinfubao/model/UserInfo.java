@@ -22,10 +22,22 @@ public class UserInfo {
     private String tel;
     private String email;
     private boolean isAuth;
+    /**
+     * 0 未认证 1 审核中 2 认证成功
+     */
+    private int authState;
     private String grade;
     private int parentId;
     private String inviteCode;
     private UserAssets userAssets;
+
+    public int getAuthState() {
+        return authState;
+    }
+
+    public void setAuthState(int authState) {
+        this.authState = authState;
+    }
 
     public UserAssets getUserAssets() {
         return userAssets;

@@ -67,13 +67,40 @@ class CartActivity : BaseRecyclerViewActivity<Product>() {
         adapter.setOnItemChildClickListener { adapter, view, position ->
             when (view.id) {
                 R.id.btnDelete -> {
-                    deleteItem(position)
+                    val map = hashMapOf<String, String>()
+                    map["userId"] = "${ConfigUtils.userId()}"
+                    map["cartId"] = list[position].cartId
+                    showProgress("请稍候")
+                    request(RetrofitCreateHelper.createApi(BaseApi::class.java).deleteCart(map)) {
+                        deleteItem(position)
+                    }
                 }
                 R.id.ivAdd -> {
-                    //TODO 添加数量
+                    showProgress("请稍候")
+                    val map = hashMapOf<String, String>()
+                    map["userId"] = "${ConfigUtils.getUserInfo()?.userId}"
+                    map["productId"] = "${list[position].productId}"
+                    map["quantity"] = "1"
+                    request(RetrofitCreateHelper.createApi(BaseApi::class.java).addCart(map)) {
+                        list[position].quantity += 1
+                        adapter.notifyDataSetChanged()
+                        countTotalPrice()
+                    }
                 }
                 R.id.ivJian -> {
-                    //TODO 减少数量
+                    if (list[position].quantity <= 0) {
+                        return@setOnItemChildClickListener
+                    }
+                    showProgress("请稍候")
+                    val map = hashMapOf<String, String>()
+                    map["userId"] = "${ConfigUtils.getUserInfo()?.userId}"
+                    map["productId"] = "${list[position].productId}"
+                    map["quantity"] = "-1"
+                    request(RetrofitCreateHelper.createApi(BaseApi::class.java).addCart(map)) {
+                        list[position].quantity -= 1
+                        adapter.notifyDataSetChanged()
+                        countTotalPrice()
+                    }
                 }
                 R.id.ivCheckBox -> {
                     if (view.isSelected) {
