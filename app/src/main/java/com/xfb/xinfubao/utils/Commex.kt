@@ -1,5 +1,6 @@
 package com.xfb.xinfubao.utils
 
+import android.content.Context
 import android.graphics.Paint
 import android.text.Selection
 import android.text.Spannable
@@ -12,6 +13,8 @@ import android.view.View
 import android.view.animation.TranslateAnimation
 import android.widget.EditText
 import android.widget.TextView
+import com.careagle.sdk.Config
+import java.io.File
 
 
 /**
@@ -124,4 +127,13 @@ fun EditText.changePasswordState(isHidden: Boolean) {
         val spanText = charSequence as Spannable
         Selection.setSelection(spanText, charSequence.length)
     }
+}
+
+fun Context.getFile(): File {
+    val path =
+        "${Config.getFileCacheDirPath()}${File.separator}images"
+    val file = File(path, "${System.currentTimeMillis()}.jpg")
+    if (!file.getParentFile().exists())
+        file.getParentFile().mkdirs()
+    return file
 }

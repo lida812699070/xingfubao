@@ -29,10 +29,19 @@ public class UserInfo {
     private String grade;
     private int parentId;
     private String inviteCode;
+    private boolean isPayPwd;
     private UserAssets userAssets;
 
     public int getAuthState() {
         return authState;
+    }
+
+    public boolean isPayPwd() {
+        return isPayPwd;
+    }
+
+    public void setPayPwd(boolean payPwd) {
+        isPayPwd = payPwd;
     }
 
     public void setAuthState(int authState) {

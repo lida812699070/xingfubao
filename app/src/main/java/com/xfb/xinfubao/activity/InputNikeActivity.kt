@@ -18,8 +18,9 @@ class InputNikeActivity : DefaultActivity() {
         myToolbar.setRightClickStr("保存") {
             setResult(
                 Activity.RESULT_OK,
-                Intent().putExtra("data", etInputNikeName.text.toString())
+                Intent().putExtra("name", etInputNikeName.text.toString())
             )
+            finish()
         }
 
         ivClear.setOnClickListener {

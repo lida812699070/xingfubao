@@ -5,8 +5,10 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
+import com.careagle.sdk.Config
 import com.careagle.sdk.helper.RetrofitCreateHelper
 import com.careagle.sdk.utils.FileUtils
+import com.careagle.sdk.utils.MyBitmapUtils
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.activity.UserInfoActivity.Companion.REQUEST_TAKE_PHOTO_CODE
 import com.xfb.xinfubao.activity.UserInfoActivity.Companion.REQ_CHOICE_FROM_ALBUM
@@ -16,6 +18,7 @@ import com.xfb.xinfubao.constant.Constant
 import com.xfb.xinfubao.dialog.DialogUtils
 import com.xfb.xinfubao.model.event.EventAuth
 import com.xfb.xinfubao.utils.ConfigUtils
+import com.xfb.xinfubao.utils.getFile
 import com.xfb.xinfubao.utils.loadUri
 import com.xfb.xinfubao.utils.setVisible
 import com.zhihu.matisse.Matisse
@@ -112,7 +115,9 @@ class AuthByIdCardActivity : DefaultActivity() {
     }
 
     private fun loadUrl(uri: Uri?) {
-        val file = File(FileUtils.getRealFilePath(this, uri))
+        var file = File(FileUtils.getRealFilePath(this, uri))
+        val tagFile = getFile()
+        file = MyBitmapUtils().bitmapCompress(file, tagFile, 500, 500)
         val requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file)
         val body = MultipartBody.Part.createFormData("file", file.name, requestFile)
         showProgress("请稍候")

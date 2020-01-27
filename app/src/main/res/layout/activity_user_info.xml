@@ -24,8 +24,8 @@
 
     <ImageView
         android:id="@+id/ivHeader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginRight="37dp"
         android:src="@mipmap/touxiang_icon"
         app:layout_constraintBottom_toBottomOf="@+id/tvHeader"
@@ -93,7 +93,7 @@
     <TextView
         android:id="@+id/tvVIPLevel"
         style="@style/MyInfoText"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="1dp"
         android:text="等级"
         app:layout_constraintTop_toBottomOf="@+id/tvUserIdText"
         tools:ignore="MissingConstraints" />
@@ -113,7 +113,7 @@
         style="@style/MyInfoText"
         android:layout_marginTop="10dp"
         android:text="收货地址"
-        app:layout_constraintTop_toBottomOf="@+id/tvUserIdText"
+        app:layout_constraintTop_toBottomOf="@+id/tvVIPLevel"
         tools:ignore="MissingConstraints" />
 
     <ImageView

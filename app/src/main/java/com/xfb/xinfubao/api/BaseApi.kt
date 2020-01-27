@@ -164,8 +164,8 @@ interface BaseApi {
     fun querycertificationdetails(@Body map: Map<String, String>): Observable<Result<AuthResultModel>>
 
     /** 获取用户信息 */
-    @POST("api/login")
-    fun queryUserInfo(@Body map: Map<String, String>): Observable<Result<UserInfo>>
+    @POST("api/getUserInfo")
+    fun getUserInfo(@Body map: Map<String, String>): Observable<Result<UserInfo>>
 
     /** 杏福宝消息类型列表 */
     @GET("noticexfb")
@@ -182,6 +182,10 @@ interface BaseApi {
     /** 删除购物车 */
     @POST("api/deleteCart")
     fun deleteCart(@Body map: Map<String, String>): Observable<Result<Any?>>
+
+    /** 用户信息编辑 */
+    @POST("api/updateUser")
+    fun updateUser(@Body map: Map<String, String>): Observable<Result<Any?>>
 
 
 }

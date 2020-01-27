@@ -14,6 +14,7 @@
 
         <ImageView
             android:id="@+id/ivBgMine"
+            android:scaleType="fitXY"
             android:layout_width="match_parent"
             android:layout_height="240dp"
             android:background="#5555"
