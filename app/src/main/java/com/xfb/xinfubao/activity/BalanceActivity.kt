@@ -20,6 +20,7 @@ import com.xfb.xinfubao.adapter.BalanceAdapter
 import com.xfb.xinfubao.adapter.BalanceAdapter.Companion.ITEM_TYPE_DATE
 import com.xfb.xinfubao.api.BaseApi
 import com.xfb.xinfubao.model.ItemBalanceModel
+import com.xfb.xinfubao.model.UserInfo
 import com.xfb.xinfubao.myenum.BalanceEnum
 import com.xfb.xinfubao.utils.ConfigUtils
 import com.xfb.xinfubao.utils.setInVisible
@@ -66,9 +67,19 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
     override fun initLogic() {
         balanceEnum = intent.getSerializableExtra("data") as BalanceEnum
         adapter.balanceEnum = balanceEnum
+        adapter.setHeaderAndEmpty(true)
+        val map = hashMapOf<String, String>()
+        map["userId"] = "${ConfigUtils.userId()}"
+        showProgress("请稍候")
+        request(RetrofitCreateHelper.createApi(BaseApi::class.java).getUserInfo(map)) {
+            initHeader(it.data)
+        }
+    }
+
+    private fun initHeader(data: UserInfo) {
         val headerView = LayoutInflater.from(this).inflate(R.layout.header_balance, null)
         adapter.addHeaderView(headerView)
-        val userAssets = ConfigUtils.mUserInfo.userAssets
+        val userAssets = data.userAssets
         val ivFinish = headerView.findViewById<ImageView>(R.id.ivFinish)
         val viewTop = headerView.findViewById<View>(R.id.viewTop)
         //标题

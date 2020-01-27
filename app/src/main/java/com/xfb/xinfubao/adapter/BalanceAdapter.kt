@@ -14,6 +14,7 @@ import com.xfb.xinfubao.utils.setVisible
 class BalanceAdapter(data: List<ItemBalanceModel>) :
     BaseMultiItemQuickAdapter<ItemBalanceModel, BaseViewHolder>(data) {
     var balanceEnum = BalanceEnum.YING_XING_GUO
+    var natSelector = -1
 
     companion object {
         //普通
@@ -31,6 +32,7 @@ class BalanceAdapter(data: List<ItemBalanceModel>) :
         val tvTitle = helper.getView<TextView>(R.id.tvTitle)
         val ivPoint = helper.getView<ImageView>(R.id.ivPoint)
         val tvMoney = helper.getView<TextView>(R.id.tvMoney)
+        val ivNatClubRight = helper.getView<ImageView>(R.id.ivNatClubRight)
 
         when (data.itemType) {
             ITEM_TYPE_MONEY -> {
@@ -66,6 +68,32 @@ class BalanceAdapter(data: List<ItemBalanceModel>) :
                         ivPoint.setVisible(false)
                         tvMoney.isSelected = data.isCashIn
                         tvMoney.text = "${PriceChangeUtils.getNumKbs(data.amount)}分"
+                    }
+                    BalanceEnum.NAT_CLUB -> {
+                        val strTitle = "${data.createDate}   ${data.name}"
+                        tvTitle.setColorText(
+                            strTitle,
+                            mContext.resources.getColor(R.color.color_text_888),
+                            11,
+                            16
+                        )
+                        ivPoint.setVisible(false)
+                        tvMoney.isSelected = data.isCashIn
+                        tvMoney.text = "${PriceChangeUtils.getNumKbs(data.amount)}"
+                        ivNatClubRight.setVisible(helper.adapterPosition == natSelector)
+                    }
+                    BalanceEnum.YIN_XING_BAO -> {
+                        val strTitle = "${data.createDate}   ${data.name}"
+                        tvTitle.setColorText(
+                            strTitle,
+                            mContext.resources.getColor(R.color.color_text_888),
+                            11,
+                            16
+                        )
+                        ivPoint.setVisible(false)
+                        tvMoney.setTextColor(mContext.resources.getColor(R.color.color_org))
+                        tvMoney.text = "${PriceChangeUtils.getNumKbs(data.amount)}"
+
                     }
                 }
             }

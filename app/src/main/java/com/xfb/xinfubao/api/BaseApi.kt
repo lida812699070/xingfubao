@@ -187,5 +187,9 @@ interface BaseApi {
     @POST("api/updateUser")
     fun updateUser(@Body map: Map<String, String>): Observable<Result<Any?>>
 
+    /** NAT基金会 */
+    @POST("api/getNatInfo")
+    fun getNatInfo(@Body map: Map<String, String>): Observable<Result<List<ItemBalanceModel>>>
+
 
 }

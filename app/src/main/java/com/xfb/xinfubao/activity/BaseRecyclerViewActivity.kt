@@ -5,7 +5,6 @@ import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.careagle.sdk.R
-import com.careagle.sdk.base.activity.BaseActivity
 import com.careagle.sdk.weight.EmptyView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
@@ -14,7 +13,8 @@ import java.util.*
 /**
  * 默认的RecyclerView
  */
-abstract class BaseRecyclerViewActivity<T> : DefaultActivity(), SwipeRefreshLayout.OnRefreshListener,
+abstract class BaseRecyclerViewActivity<T> : DefaultActivity(),
+    SwipeRefreshLayout.OnRefreshListener,
     BaseQuickAdapter.RequestLoadMoreListener, EmptyView.ReloadListener {
 
     //初始页数
@@ -83,6 +83,9 @@ abstract class BaseRecyclerViewActivity<T> : DefaultActivity(), SwipeRefreshLayo
             emptyView?.setLoadState(EmptyView.LoadState.LOAD_STATE_EMPTY)
         }
         pageAdapter().notifyDataSetChanged()
+        if (page == 0) {
+            pageRecyclerView().scrollToPosition(0)
+        }
     }
 
     /**

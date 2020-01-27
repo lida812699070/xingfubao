@@ -7,4 +7,5 @@ enum class BalanceEnum(var key: Int, var tag: String) {
     JI_FEN_SHANG_CHENG(3, "积分商城"),
     NAT(4, "NAT资产"),
     YUAN_LI_ZHI(5, "愿力值"),
+    NAT_CLUB(6, "NAT基金会"),
 }
