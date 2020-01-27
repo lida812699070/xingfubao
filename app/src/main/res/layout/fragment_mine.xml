@@ -14,10 +14,10 @@
 
         <ImageView
             android:id="@+id/ivBgMine"
-            android:scaleType="fitXY"
             android:layout_width="match_parent"
             android:layout_height="240dp"
             android:background="#5555"
+            android:scaleType="fitXY"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
@@ -172,7 +172,7 @@
             android:layout_width="match_parent"
             android:layout_height="68dp"
             android:layout_marginTop="11dp"
-            app:item_mine_left_img="@mipmap/yuanli_icon1"
+            app:item_mine_left_img="@mipmap/icon_mine_yxb"
             app:item_mine_title="银杏宝"
             app:layout_constraintTop_toBottomOf="@+id/clMineTabs" />
 
@@ -188,7 +188,7 @@
             android:id="@+id/itemNATJj"
             android:layout_width="match_parent"
             android:layout_height="68dp"
-            app:item_mine_left_img="@mipmap/yuanli_icon1"
+            app:item_mine_left_img="@mipmap/icon_mine_nat"
             app:item_mine_title="NAT基金会"
             app:layout_constraintTop_toBottomOf="@+id/itemYlz" />
 
