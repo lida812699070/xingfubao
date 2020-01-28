@@ -13,9 +13,12 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.api.BaseApi
+import com.xfb.xinfubao.constant.Constant
 import com.xfb.xinfubao.model.ExchangeModel
 import com.xfb.xinfubao.utils.ConfigUtils
+import com.xfb.xinfubao.utils.loadUri
 import com.xfb.xinfubao.utils.setInVisible
+import com.xfb.xinfubao.utils.setVisible
 import kotlinx.android.synthetic.main.activity_money_exchange.*
 
 /** 资产互兑 */
@@ -29,6 +32,7 @@ class MoneyExchangeActivity : DefaultActivity() {
         override fun convert(helper: BaseViewHolder, item: ExchangeModel) {
             helper.setText(R.id.tvYXY, item.assetsName)
             val ivRight = helper.getView<ImageView>(R.id.ivRight)
+            ivRight.loadUri(Constant.PIC_URL + item.assetsIcon)
         }
     }
     val rightAdapter = object :
@@ -36,6 +40,7 @@ class MoneyExchangeActivity : DefaultActivity() {
         override fun convert(helper: BaseViewHolder, item: ExchangeModel) {
             helper.setText(R.id.tvYXY, item.assetsName)
             val ivRight = helper.getView<ImageView>(R.id.ivRight)
+            ivRight.loadUri(Constant.PIC_URL + item.assetsIcon)
         }
     }
 
@@ -51,11 +56,13 @@ class MoneyExchangeActivity : DefaultActivity() {
         }
 
         val map = hashMapOf<String, String>()
+        map["userId"] = "${ConfigUtils.userId()}"
         showProgress("请稍候")
         request(RetrofitCreateHelper.createApi(BaseApi::class.java).findAssetsType(map)) {
             leftSelect = it.data[0]
             leftList.clear()
             leftList.addAll(it.data)
+            bindLeft()
             requestRight()
         }
 
@@ -99,6 +106,7 @@ class MoneyExchangeActivity : DefaultActivity() {
         request(RetrofitCreateHelper.createApi(BaseApi::class.java).findExchangeConfig(params)) {
             if (it.data.isEmpty()) {
                 rightSelect = null
+                ivIRight.setInVisible(false)
                 tvPleaseSelect.setInVisible(true)
                 tvYXY.setInVisible(false)
             } else {
@@ -117,6 +125,7 @@ class MoneyExchangeActivity : DefaultActivity() {
             leftSelect = leftList[position]
             tvYXG.text = leftSelect?.assetsName
             requestRight()
+            bindLeft()
             recyclerViewLeft.setInVisible(false)
         }
         recyclerViewRight.layoutManager = LinearLayoutManager(this)
@@ -151,12 +160,20 @@ class MoneyExchangeActivity : DefaultActivity() {
         if (leftSelect == null || rightSelect == null) {
             return
         }
-        tvYXG.text = leftSelect?.assetsName
+        bindLeft()
         tvYXY.text = rightSelect?.assetsName
+        ivIRight.loadUri(Constant.PIC_URL + rightSelect?.assetsIcon)
+        ivIRight.setVisible(true)
         tvExchangeRatioText.text = "${leftSelect?.assetsName}兑换${rightSelect?.assetsName}的比例为"
         tvExchangeRatio.text = "1:${PriceChangeUtils.getDoubleKb(rightSelect!!.ratio)}"
         countExchange()
 
+    }
+
+    private fun bindLeft() {
+        tvYXG.text = leftSelect?.assetsName
+        ivLeft.loadUri(Constant.PIC_URL + leftSelect?.assetsIcon)
+        ivLeft.setVisible(true)
     }
 
     private fun toExchange() {
@@ -165,6 +182,10 @@ class MoneyExchangeActivity : DefaultActivity() {
         }
         if (TextUtils.isEmpty(etExchangeOutCount.text.toString())) {
             showMessage("请输入转出数量")
+            return
+        }
+        if (leftSelect!!.assetsQuantity < etExchangeOutCount.text.toString().toDouble()) {
+            showMessage("余额不足")
             return
         }
         val map = hashMapOf<String, String>()

@@ -27,12 +27,13 @@
 
     <ImageView
         android:id="@+id/ivLeft"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginRight="4dp"
         android:src="@mipmap/yinxingguo_icon_1_s"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/tvYXG"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintRight_toLeftOf="@+id/tvYXG"
         app:layout_constraintTop_toTopOf="@+id/tvYXG" />
 
@@ -76,15 +77,16 @@
         app:layout_constraintTop_toTopOf="@+id/bgExChange" />
 
     <ImageView
-        android:id="@+id/ivRight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/ivIRight"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginRight="4dp"
         android:src="@mipmap/yinxingguo_icon_1_s"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/tvYXY"
+        app:layout_constraintBottom_toBottomOf="@+id/ivLeft"
+        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintRight_toLeftOf="@+id/tvYXY"
-        app:layout_constraintTop_toTopOf="@+id/tvYXY" />
+        app:layout_constraintTop_toTopOf="@+id/ivLeft" />
 
     <TextView
         android:id="@+id/tvPleaseSelect"

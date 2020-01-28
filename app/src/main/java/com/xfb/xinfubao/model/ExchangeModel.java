@@ -14,6 +14,24 @@ public class ExchangeModel {
     private int assetsId;
     private double ratio;
     private String assetsName;
+    private String assetsIcon;
+    private double assetsQuantity;
+
+    public String getAssetsIcon() {
+        return assetsIcon;
+    }
+
+    public void setAssetsIcon(String assetsIcon) {
+        this.assetsIcon = assetsIcon;
+    }
+
+    public double getAssetsQuantity() {
+        return assetsQuantity;
+    }
+
+    public void setAssetsQuantity(double assetsQuantity) {
+        this.assetsQuantity = assetsQuantity;
+    }
 
     public int getAssetsConfigId() {
         return assetsConfigId;
