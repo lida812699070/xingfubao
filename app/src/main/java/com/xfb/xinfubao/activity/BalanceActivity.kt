@@ -21,6 +21,7 @@ import com.xfb.xinfubao.activity.TransferActivity.Companion.TRANSFER_TYPE_YXY
 import com.xfb.xinfubao.adapter.BalanceAdapter
 import com.xfb.xinfubao.adapter.BalanceAdapter.Companion.ITEM_TYPE_DATE
 import com.xfb.xinfubao.api.BaseApi
+import com.xfb.xinfubao.constant.Constant.YUAN_LI_ZHI_RULE_URL
 import com.xfb.xinfubao.model.ItemBalanceModel
 import com.xfb.xinfubao.model.UserInfo
 import com.xfb.xinfubao.model.event.EventTransfer
@@ -164,9 +165,8 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 tvCash.text = "愿力值规则"
                 tvBalance.text = PriceChangeUtils.getNumKb(userAssets.powerAvowNum)
                 tabLayout.addTab(tabLayout.newTab().setText("明细"))
-                //TODO 愿力值规则
                 tvCash.setOnClickListener {
-
+                    WebviewActivity.newInstanceUrl(this, YUAN_LI_ZHI_RULE_URL, "愿力值规则")
                 }
             }
             BalanceEnum.NAT -> {

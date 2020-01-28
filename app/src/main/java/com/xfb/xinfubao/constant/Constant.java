@@ -15,5 +15,9 @@ public class Constant {
     public static final String PRIVITE_SERVER = "http://xfbapi.tynet.vip:8088/help/agreement/2/3";
     //图片头地址
     public static final String PIC_URL = "http://xfbapi.tynet.vip/";
+    //愿力值规则
+    public static final String YUAN_LI_ZHI_RULE_URL = "http://xfbapi.tynet.vip:8088/help/agreement/2/6";
+    //银杏宝规则
+    public static final String YIN_XING_BAO_RULE_URL = "http://xfbapi.tynet.vip:8088/help/agreement/2/5";
 
 }

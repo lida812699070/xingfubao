@@ -14,6 +14,7 @@ import com.chad.library.adapter.base.BaseViewHolder
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.adapter.BalanceAdapter
 import com.xfb.xinfubao.api.BaseApi
+import com.xfb.xinfubao.constant.Constant
 import com.xfb.xinfubao.model.ItemBalanceModel
 import com.xfb.xinfubao.model.UserInfo
 import com.xfb.xinfubao.myenum.BalanceEnum
@@ -70,7 +71,7 @@ class YinXingbaoActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
             finish()
         }
         tvSubTitle.setOnClickListener {
-            //TODO 银杏宝规则
+            WebviewActivity.newInstanceUrl(this, Constant.YIN_XING_BAO_RULE_URL, "银杏宝规则")
         }
         tvTotalMoney.text = PriceChangeUtils.getNumKb(data.userAssets.ginkgoTreasureNum)
         tvTotalCashIn.text = PriceChangeUtils.getNumKb(data.userAssets.ginkgoTreasureNum)
