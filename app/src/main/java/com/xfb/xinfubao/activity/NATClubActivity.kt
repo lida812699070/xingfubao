@@ -99,6 +99,7 @@ class NATClubActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
 
         adapter.setOnItemClickListener { adapter, view, position ->
             selectPosition = position
+            this.adapter.natSelector = selectPosition
             adapter.notifyDataSetChanged()
         }
     }

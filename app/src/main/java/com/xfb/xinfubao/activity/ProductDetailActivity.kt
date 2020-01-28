@@ -10,7 +10,10 @@ import com.xfb.xinfubao.callback.MyClickCallBack
 import com.xfb.xinfubao.fragment.ProductDetailFragment
 import com.xfb.xinfubao.fragment.WebviewFragment
 import com.xfb.xinfubao.model.ProductDetail
+import com.xfb.xinfubao.model.event.EventPauResult
 import kotlinx.android.synthetic.main.activity_product_detail.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 
 class ProductDetailActivity : DefaultActivity() {
     var productId: String? = null
@@ -26,6 +29,7 @@ class ProductDetailActivity : DefaultActivity() {
         request(RetrofitCreateHelper.createApi(BaseApi::class.java).getProductInfo(map)) {
             initFragments(it.data)
         }
+        EventBus.getDefault().register(this)
     }
 
     private fun initFragments(data: ProductDetail) {
@@ -46,5 +50,15 @@ class ProductDetailActivity : DefaultActivity() {
                 vpContent.setCurrentItem(1, true)
             }
         }
+    }
+
+    @Subscribe
+    fun payResult(event: EventPauResult) {
+        finish()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
     }
 }

@@ -1,6 +1,7 @@
 package com.xfb.xinfubao.activity
 
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import com.careagle.sdk.helper.RetrofitCreateHelper
 import com.careagle.sdk.utils.PriceChangeUtils
@@ -10,8 +11,10 @@ import com.xfb.xinfubao.R
 import com.xfb.xinfubao.api.BaseApi
 import com.xfb.xinfubao.dialog.DialogUtils
 import com.xfb.xinfubao.model.*
+import com.xfb.xinfubao.model.event.EventPauResult
 import com.xfb.xinfubao.utils.ConfigUtils
 import kotlinx.android.synthetic.main.activity_cash_in.*
+import org.greenrobot.eventbus.EventBus
 
 /** 收银台 */
 class CashInActivity : DefaultActivity() {
@@ -19,6 +22,7 @@ class CashInActivity : DefaultActivity() {
     var list = arrayListOf<RegisterOrderVo>()
     var data: CashRegisterModel? = null
     var payMethod: PayMethod? = null
+    var showDiYaDialog: AlertDialog? = null
     var adapter =
         object : BaseQuickAdapter<RegisterOrderVo, BaseViewHolder>(
             R.layout.item_cash_in_order_price,
@@ -53,7 +57,8 @@ class CashInActivity : DefaultActivity() {
 
         //立即支付
         tvToPay.setOnClickListener {
-            DialogUtils.showDiYaDialog(this, 1) {
+            showDiYaDialog = DialogUtils.showDiYaDialog(this, 1) {
+                showDiYaDialog?.hide()
                 toPay(it)
             }
         }
@@ -79,6 +84,8 @@ class CashInActivity : DefaultActivity() {
             payResultModel.payAmout = data!!.totalAmount
             payResultModel.payMethod = payMethod
             PayResultActivity.toActivity(this, payResultModel)
+            finish()
+            EventBus.getDefault().post(EventPauResult())
         }
     }
 
@@ -99,4 +106,8 @@ class CashInActivity : DefaultActivity() {
         recyclerView.adapter = adapter
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        showDiYaDialog?.dismiss()
+    }
 }

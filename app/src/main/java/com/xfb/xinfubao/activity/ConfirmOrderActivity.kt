@@ -11,9 +11,12 @@ import com.careagle.sdk.weight.EmptyView
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.api.BaseApi
 import com.xfb.xinfubao.model.*
+import com.xfb.xinfubao.model.event.EventPauResult
 import com.xfb.xinfubao.utils.ConfigUtils
 import com.xfb.xinfubao.utils.setVisible
 import kotlinx.android.synthetic.main.activity_confirm_order.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 
 //确认订单
 class ConfirmOrderActivity : DefaultActivity() {
@@ -52,6 +55,7 @@ class ConfirmOrderActivity : DefaultActivity() {
             requestComfirmData(requestOrderModel)
         }
         requestComfirmData(requestOrderModel)
+        EventBus.getDefault().register(this)
     }
 
     /** 请求确认订单接口 */
@@ -145,5 +149,15 @@ class ConfirmOrderActivity : DefaultActivity() {
 
     private fun bindAddress() {
         tvAddress.bindData(receiveVo)
+    }
+
+    @Subscribe
+    fun payResult(event: EventPauResult) {
+        finish()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
     }
 }

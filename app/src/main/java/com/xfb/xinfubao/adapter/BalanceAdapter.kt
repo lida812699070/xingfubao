@@ -80,7 +80,7 @@ class BalanceAdapter(data: List<ItemBalanceModel>) :
                         ivPoint.setVisible(false)
                         tvMoney.isSelected = data.isCashIn
                         tvMoney.text = "${PriceChangeUtils.getNumKbs(data.amount)}"
-                        ivNatClubRight.setVisible(helper.adapterPosition == natSelector)
+                        ivNatClubRight.setVisible((helper.adapterPosition-1) == natSelector)
                     }
                     BalanceEnum.YIN_XING_BAO -> {
                         val strTitle = "${data.createDate}   ${data.name}"

@@ -149,7 +149,6 @@ class ProductDetailFragment : BaseFragment() {
     ) {
         val requestSaveOrderModel = RequestSaveOrderModel()
         requestSaveOrderModel.userId = "${ConfigUtils.userId()}"
-        requestSaveOrderModel.remark = "${etRemark.text}"
         requestSaveOrderModel.freight = "${data.freight}"
         requestSaveOrderModel.totalAmount = "${data.orderTotalAmount}"
         requestSaveOrderModel.discount = "${data.discount}"
