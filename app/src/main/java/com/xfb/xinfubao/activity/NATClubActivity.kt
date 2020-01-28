@@ -70,8 +70,8 @@ class NATClubActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
             showDiYaDialog?.dismiss()
             val map = hashMapOf<String, String>()
             val itemBalanceModel = list[selectPosition]
-            map["ordernum"] = itemBalanceModel.id
-            map["orderId"] = itemBalanceModel.orderNum
+            map["ordernum"] = itemBalanceModel.orderNum
+            map["orderId"] = itemBalanceModel.id
             map["userId"] = "${ConfigUtils.userId()}"
             map["payPassword"] = it
             request(RetrofitCreateHelper.createApi(BaseApi::class.java).mortgageNat(map)) {
