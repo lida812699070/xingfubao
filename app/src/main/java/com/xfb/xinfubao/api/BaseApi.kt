@@ -191,5 +191,9 @@ interface BaseApi {
     @POST("api/getNatInfo")
     fun getNatInfo(@Body map: Map<String, String>): Observable<Result<List<ItemBalanceModel>>>
 
+    /** 转账 */
+    @POST("api/transfer")
+    fun transfer(@Body map: Map<String, String>): Observable<Result<Any?>>
+
 
 }

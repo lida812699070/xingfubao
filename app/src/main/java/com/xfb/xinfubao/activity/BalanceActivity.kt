@@ -16,16 +16,21 @@ import com.careagle.sdk.utils.PriceChangeUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.xfb.xinfubao.R
+import com.xfb.xinfubao.activity.TransferActivity.Companion.TRANSFER_TYPE_JF
+import com.xfb.xinfubao.activity.TransferActivity.Companion.TRANSFER_TYPE_YXY
 import com.xfb.xinfubao.adapter.BalanceAdapter
 import com.xfb.xinfubao.adapter.BalanceAdapter.Companion.ITEM_TYPE_DATE
 import com.xfb.xinfubao.api.BaseApi
 import com.xfb.xinfubao.model.ItemBalanceModel
 import com.xfb.xinfubao.model.UserInfo
+import com.xfb.xinfubao.model.event.EventTransfer
 import com.xfb.xinfubao.myenum.BalanceEnum
 import com.xfb.xinfubao.utils.ConfigUtils
 import com.xfb.xinfubao.utils.setInVisible
 import com.xfb.xinfubao.utils.setVisible
 import kotlinx.android.synthetic.main.activity_balancel.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 
 /**
  * 银杏宝  银杏叶  银杏果  积分商城  愿力值
@@ -73,7 +78,14 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         showProgress("请稍候")
         request(RetrofitCreateHelper.createApi(BaseApi::class.java).getUserInfo(map)) {
             initHeader(it.data)
+            ConfigUtils.saveUserInfo(it.data)
         }
+        EventBus.getDefault().register(this)
+    }
+
+    @Subscribe
+    fun transfer(event: EventTransfer) {
+        finish()
     }
 
     private fun initHeader(data: UserInfo) {
@@ -127,9 +139,8 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 tabLayout.addTab(tabLayout.newTab().setText("全部"))
                 tabLayout.addTab(tabLayout.newTab().setText("收入"))
                 tabLayout.addTab(tabLayout.newTab().setText("转出"))
-                //TODO 银杏叶转账
                 tvCash.setOnClickListener {
-
+                    TransferActivity.toActivity(this, TRANSFER_TYPE_YXY)
                 }
             }
             BalanceEnum.JI_FEN_SHANG_CHENG -> {
@@ -141,9 +152,8 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 tabLayout.addTab(tabLayout.newTab().setText("全部"))
                 tabLayout.addTab(tabLayout.newTab().setText("收入"))
                 tabLayout.addTab(tabLayout.newTab().setText("转出"))
-                //TODO 积分商城转账
                 tvCash.setOnClickListener {
-
+                    TransferActivity.toActivity(this, TRANSFER_TYPE_JF)
                 }
             }
             BalanceEnum.YUAN_LI_ZHI -> {
@@ -318,6 +328,7 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
 
     override fun onDestroy() {
         super.onDestroy()
+        EventBus.getDefault().unregister(this)
         showBalanceDialog?.dismiss()
     }
 }
