@@ -76,7 +76,7 @@ class YinXingbaoActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         tvTotalCashIn.text = PriceChangeUtils.getNumKb(data.userAssets.ginkgoTreasureNum)
         tvTotalCashInYXY.text = PriceChangeUtils.getNumKb(data.userAssets.ginkgoLeafNum)
         tvToCashOut.setOnClickListener {
-            //TODO 申请转出
+            ApplyCashOutActivity.toActivity(this, 1)
         }
         tabLayout.addTab(tabLayout.newTab().setText("明细"))
         initData()

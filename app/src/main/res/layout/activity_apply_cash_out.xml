@@ -14,6 +14,7 @@
         android:background="@color/color_default_bg">
 
         <View
+            android:id="@+id/viewTop"
             android:layout_width="match_parent"
             android:layout_height="459dp"
             android:background="@drawable/shape_org_white_ga"
@@ -96,6 +97,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
+            android:id="@+id/clDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
@@ -301,7 +303,7 @@
             android:id="@+id/tvOK"
             style="@style/MainBtn"
             android:layout_marginTop="30dp"
-            android:background="@drawable/shape_pink_radius_8"
+            android:background="@drawable/shape_org_radius_8"
             android:text="确认申请"
             app:layout_constraintTop_toBottomOf="@+id/etPayPassword"
             tools:ignore="MissingConstraints" />

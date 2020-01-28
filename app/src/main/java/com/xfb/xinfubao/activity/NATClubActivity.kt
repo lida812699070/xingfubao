@@ -1,6 +1,5 @@
 package com.xfb.xinfubao.activity
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AlertDialog
@@ -51,18 +50,34 @@ class NATClubActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
 
     override fun initLogic() {
         adapter.balanceEnum = BalanceEnum.NAT_CLUB
-        //TODO 去抵押
         tvToDiYa.setOnClickListener {
-            showDiYaDialog = DialogUtils.showDiYaDialog(this) {
-                startActivity(Intent(this, ApplyCashOutResultActivity::class.java))
-                showDiYaDialog?.dismiss()
-            }
+            toDiya()
         }
         val map = hashMapOf<String, String>()
         map["userId"] = "${ConfigUtils.userId()}"
         showProgress("请稍候")
         request(RetrofitCreateHelper.createApi(BaseApi::class.java).getUserInfo(map)) {
             initHeader(it.data)
+        }
+    }
+
+    private fun toDiya() {
+        if (selectPosition == -1) {
+            showMessage("请选择抵押产品")
+            return
+        }
+        showDiYaDialog = DialogUtils.showDiYaDialog(this) {
+            showDiYaDialog?.dismiss()
+            val map = hashMapOf<String, String>()
+            val itemBalanceModel = list[selectPosition]
+            map["ordernum"] = itemBalanceModel.id
+            map["orderId"] = itemBalanceModel.orderNum
+            map["userId"] = "${ConfigUtils.userId()}"
+            map["payPassword"] = it
+            request(RetrofitCreateHelper.createApi(BaseApi::class.java).mortgageNat(map)) {
+                showMessage("操作成功")
+                finish()
+            }
         }
     }
 
@@ -74,9 +89,8 @@ class NATClubActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         ivFinish.setOnClickListener {
             finish()
         }
-        //TODO 抵押记录
         tvDiYaRecord.setOnClickListener {
-
+            CashOutRecordActivity.toActivity(this, 2)
         }
         tvTotalMoney.text = PriceChangeUtils.getNumKb(userInfo.userAssets.natMortgagedNum)
         adapter.addHeaderView(headerView)

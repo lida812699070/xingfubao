@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">杏福宝</string>
-    <string name="apply_cash_out_hint">尊敬的用户\n您的转出申请已成功\n预计到帐</string>
+    <string name="apply_cash_out_hint">尊敬的用户\n您的转出申请已成功\n预计到帐时间1-7个工作日</string>
+    <string name="apply_cash_out_2_hint">尊敬的用户\n您的提现申请已成功\n预计到帐时间1-7个工作日</string>
     <string name="apply_cash_out_success_hint">尊敬的用户\n您的提现已汇出\n请留意您的收款银行卡账号</string>
+    <string name="apply_cash_out_success2_hint">尊敬的用户\n您的抵押申请已成功\n请留意您的NAT总资产</string>
     <string name="str_auth_wait">尊敬的%s用户\n您提交的认证信息正在审中...\n(预计审核时间：5-30分钟)</string>
     <string name="str_app_introduce">杏福宝是一款及商城购物，数字资产钱包为一体的新型购\n物区块链数字应用，为您提供安全、便捷的一站式的购\n物、数字资产管理方案</string>
     <string name="rmb_tag">¥%s</string>

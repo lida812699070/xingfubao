@@ -195,5 +195,22 @@ interface BaseApi {
     @POST("api/transfer")
     fun transfer(@Body map: Map<String, String>): Observable<Result<Any?>>
 
+    /** 银杏宝转出记录 */
+    @POST("api/ginkgoTreasureTurnOutRecord")
+    fun ginkgoTreasureTurnOutRecord(@Body map: Map<String, String>): Observable<Result<List<ItemBalanceModel>>>
+
+    /** 抵押记录 */
+    @POST("api/findNatMortgageLogs")
+    fun findNatMortgageLogs(@Body map: Map<String, String>): Observable<Result<List<ItemBalanceModel>>>
+
+    //TODO 申请记录接口
+    /** 提现记录 */
+    @POST("api/findNatMortgageLogs")
+    fun cashOutLogs(@Body map: Map<String, String>): Observable<Result<List<ItemBalanceModel>>>
+
+    /** 抵押 */
+    @POST("api/mortgageNat")
+    fun mortgageNat(@Body map: Map<String, String>): Observable<Result<DiyaModel>>
+
 
 }

@@ -1,33 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_default_bg"
+    android:orientation="vertical"
     tools:context="com.xfb.xinfubao.activity.CashOutRecordActivity">
 
     <com.xfb.xinfubao.view.MyToolbarBar
         android:id="@+id/myToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
         app:str_title_toolbar="转出记录" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/myToolbar"
-        tools:itemCount="3"
-        tools:listitem="@layout/item_cash_out_record" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tvBack"
-        style="@style/MainBtn"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/shape_org_radius_8"
-        android:text="返回"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView"
-        tools:ignore="MissingConstraints" />
-</android.support.constraint.ConstraintLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_cash_out_record" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>

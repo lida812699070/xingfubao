@@ -2,16 +2,28 @@ package com.xfb.xinfubao.model;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 
-public class ItemBalanceModel implements MultiItemEntity {
+import java.io.Serializable;
+
+public class ItemBalanceModel implements MultiItemEntity, Serializable {
     private String id;
     private String name;
     private String createDate;
     private double amount;
+    //状态；nat抵押记录1.处理中/2.完成3/释放中4已释放，银杏宝转出记录1待审核，2完成
     private int state;
     private String orderNum;
     private String stateDepict;
     private int itemType = 0;
     private int type = 0;
+    private boolean isSuccess = true;
+
+    public boolean isSuccess() {
+        return state == 2;
+    }
+
+    public void setSuccess(boolean success) {
+        isSuccess = success;
+    }
 
     public boolean isCashIn() {
         return type == 0;

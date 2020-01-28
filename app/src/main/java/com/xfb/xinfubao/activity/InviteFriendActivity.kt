@@ -5,6 +5,7 @@ import com.careagle.sdk.Config
 import com.careagle.sdk.utils.CommentUtils
 import com.careagle.sdk.utils.MyBitmapUtils
 import com.xfb.xinfubao.R
+import com.xfb.xinfubao.utils.ConfigUtils
 import com.xfb.xinfubao.utils.ZXingUtils
 import kotlinx.android.synthetic.main.activity_invite_friend.*
 import java.io.File
@@ -40,6 +41,7 @@ class InviteFriendActivity : DefaultActivity() {
         tvCopyUrl.setOnClickListener {
             CommentUtils.copy(downloadUrl)
         }
+        tvInviteCode.text = ConfigUtils.mUserInfo.inviteCode
         //TODO 邀请好友接口
     }
 }
