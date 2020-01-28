@@ -212,5 +212,17 @@ interface BaseApi {
     @POST("api/mortgageNat")
     fun mortgageNat(@Body map: Map<String, String>): Observable<Result<DiyaModel>>
 
+    /** 资产互兑 */
+    @POST("api/assetsExchange")
+    fun assetsExchange(@Body map: Map<String, String>): Observable<Result<Any?>>
+
+    /** 资产互兑左边列表 */
+    @POST("api/findAssetsType")
+    fun findAssetsType(@Body map: Map<String, String>): Observable<Result<List<ExchangeModel>>>
+
+    /** 资产互兑右边列表 */
+    @POST("api/findExchangeConfig")
+    fun findExchangeConfig(@Body map: Map<String, String>): Observable<Result<List<ExchangeModel>>>
+
 
 }
