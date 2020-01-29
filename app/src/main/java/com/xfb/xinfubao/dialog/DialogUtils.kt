@@ -21,6 +21,7 @@ import com.careagle.sdk.utils.Permission
 import com.careagle.sdk.utils.RxPermissionsUtil
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.activity.UserInfoActivity
+import com.xfb.xinfubao.wxapi.WXUtils
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.engine.impl.GlideEngine
@@ -147,6 +148,50 @@ class DialogUtils {
                         dialog?.dismiss()
                     }
                 }, Permission.WRITE_EXTERNAL_STORAGE, Permission.CAMERA)
+            }
+            dialog?.window?.setBackgroundDrawable(dw)
+        }
+
+        /** 拍照 选择照片 */
+        fun showShareDialog(context: Activity) {
+            val builder = AlertDialog.Builder(context)
+            builder.setCancelable(true)
+            val view = LayoutInflater.from(context)
+                .inflate(R.layout.dialog_share_wx, null)
+            builder.setView(view)
+            val dialog = builder.create()
+            dialog?.show()
+            val layoutParams = dialog?.window?.attributes
+            layoutParams?.width = WindowManager.LayoutParams.MATCH_PARENT
+            layoutParams?.gravity = Gravity.BOTTOM
+            dialog?.window?.attributes = layoutParams
+            dialog?.window?.setDimAmount(0.4f)
+            val dw = ColorDrawable(0x00)
+            view.findViewById<TextView>(R.id.tvCancel).setOnClickListener {
+                dialog?.dismiss()
+            }
+            view.findViewById<TextView>(R.id.tvShareWx).setOnClickListener {
+                //分享到微信
+                WXUtils.getInstance()
+                    .shareWXUrl(
+                        context,
+                        "http://www.baidu.com",
+                        WXUtils.resourceToByte(R.mipmap.logo, context),
+                        "标题",
+                        "详细描述xxx"
+                    )
+            }
+            view.findViewById<TextView>(R.id.tvShareWxCricler).setOnClickListener {
+                //分享到微信朋友圈
+                WXUtils.getInstance()
+                    .shareWXUrl(
+                        context,
+                        "http://www.baidu.com",
+                        WXUtils.resourceToByte(R.mipmap.logo, context),
+                        "标题",
+                        "详细描述xxx"
+                    )
+
             }
             dialog?.window?.setBackgroundDrawable(dw)
         }

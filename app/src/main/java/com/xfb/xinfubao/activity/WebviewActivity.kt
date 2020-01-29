@@ -7,7 +7,9 @@ import android.text.TextUtils
 import android.view.KeyEvent
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.constant.Constant
+import com.xfb.xinfubao.dialog.DialogUtils
 import com.xfb.xinfubao.fragment.WebviewFragment
+import com.xfb.xinfubao.wxapi.WXUtils
 import kotlinx.android.synthetic.main.activity_webview.*
 
 class WebviewActivity : DefaultActivity() {
@@ -91,7 +93,7 @@ class WebviewActivity : DefaultActivity() {
         if (rightImage != 0) {
             myToolbar.setRightClickRes(rightImage) {
                 if (R.mipmap.fenxiang_icon == rightImage) {
-                    //TODO 分享
+                    DialogUtils.showShareDialog(this)
                 }
             }
         }
