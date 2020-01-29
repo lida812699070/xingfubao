@@ -56,8 +56,8 @@ class ProductDetailFragment : BaseFragment() {
             tvPrice.text =
                 getString(R.string.rmb_tag, PriceChangeUtils.getNumKb(it.productPrice))
             tvStock.text = "库存：${it.inventory}"
-            tvCat.setVisible(it.isIsReal && it.isProductState && it.isChain)
-            tvAddToCat.setVisible(it.isIsReal && it.isProductState && it.isChain)
+            tvCat.setVisible(it.isIsReal && it.isProductState && !it.isChain)
+            tvAddToCat.setVisible(it.isIsReal && it.isProductState && !it.isChain)
             if (!it.isProductState) {
                 tvToBuy.text = "已下架"
             }
