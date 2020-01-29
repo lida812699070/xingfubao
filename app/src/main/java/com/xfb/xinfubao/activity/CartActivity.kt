@@ -11,6 +11,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.api.BaseApi
+import com.xfb.xinfubao.constant.Constant
 import com.xfb.xinfubao.model.Product
 import com.xfb.xinfubao.utils.ConfigUtils
 import com.xfb.xinfubao.utils.loadUri
@@ -27,7 +28,7 @@ class CartActivity : BaseRecyclerViewActivity<Product>() {
             val tvCount = helper.getView<TextView>(R.id.tvCount)
             val tvTitle = helper.getView<TextView>(R.id.tvTitle)
             val tvPrice = helper.getView<TextView>(R.id.tvPrice)
-            ivImages.loadUri(item.productMainImg)
+            ivImages.loadUri(Constant.PIC_URL + item.productMainImg)
             tvPrice.text = mContext.getString(
                 R.string.rmb_tag,
                 PriceChangeUtils.getNumKb(item.productPrice)
@@ -128,6 +129,14 @@ class CartActivity : BaseRecyclerViewActivity<Product>() {
             countTotalPrice()
         }
         tvToOrder.setOnClickListener {
+            var size = 0
+            itemSelectList.forEach {
+                size += it.quantity
+            }
+            if (size == 0) {
+                showMessage("请选择要购买的商品")
+                return@setOnClickListener
+            }
             ConfirmOrderActivity.toActivity(this, itemSelectList)
         }
         initData()

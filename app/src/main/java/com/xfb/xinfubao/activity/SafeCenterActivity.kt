@@ -1,64 +1,85 @@
 package com.xfb.xinfubao.activity
 
+import android.content.Intent
 import android.os.Bundle
+import com.careagle.sdk.helper.RetrofitCreateHelper
 import com.xfb.xinfubao.R
-import com.xfb.xinfubao.model.event.EventAuth
+import com.xfb.xinfubao.api.BaseApi
+import com.xfb.xinfubao.model.UserInfo
 import com.xfb.xinfubao.myenum.ChangePasswordEnum
 import com.xfb.xinfubao.utils.ConfigUtils
 import kotlinx.android.synthetic.main.activity_safe_center.*
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
 
 /** 安全中心 */
 class SafeCenterActivity : DefaultActivity() {
 
+    var userInfo: UserInfo? = null
     override fun getLayoutId(): Int {
         return R.layout.activity_safe_center
     }
 
     override fun initView(savedInstanceState: Bundle?) {
-        EventBus.getDefault().register(this)
         myToolbar.setClick { finish() }
         tvResetLoginPassword.setOnClickListener {
-            ChangePasswordActivity.toActivity(ChangePasswordEnum.CHANGE_LOGIN_PASSWORD, this)
+            ChangePasswordActivity.toActivity(
+                ChangePasswordEnum.CHANGE_LOGIN_PASSWORD,
+                this,
+                tvResetLoginPassword.text.toString()
+            )
         }
         tvResetPayPassword.setOnClickListener {
-            ChangePasswordActivity.toActivity(ChangePasswordEnum.SET_PAY_PASSWORD, this)
+            ChangePasswordActivity.toActivity(
+                ChangePasswordEnum.SET_PAY_PASSWORD,
+                this,
+                tvResetPayPassword.text.toString()
+            )
         }
         tvResetMobile.setOnClickListener {
-            ChangePasswordActivity.toActivity(ChangePasswordEnum.CHANGE_MOBILE, this)
+            ChangePasswordActivity.toActivity(
+                ChangePasswordEnum.CHANGE_MOBILE,
+                this,
+                tvResetMobile.text.toString()
+            )
         }
-        tvAuthentication.setOnClickListener {
-            AuthResultActivity.toActivity(this, ConfigUtils.getUserInfo()!!.authState)
-        }
+        showProgress("请稍候")
         loadData()
-        if (2 == ConfigUtils.getUserInfo()?.authState) {
-            tvAuthenticationState.setTextColor(resources.getColor(R.color.color_light_org))
-            tvAuthenticationState.text = "已实名"
-        }
-
     }
 
-
-    @Subscribe
-    fun auth(auth: EventAuth) {
+    override fun onRestart() {
+        super.onRestart()
         loadData()
     }
 
     private fun loadData() {
         val map = hashMapOf<String, String>()
         map["userId"] = "${ConfigUtils.userId()}"
-        map["userId"] = "${ConfigUtils.userId()}"
-        map["userId"] = "${ConfigUtils.userId()}"
-//        //TODO 获取用户信息
-//        request(RetrofitCreateHelper.createApi(BaseApi::class.java).queryUserInfo(map)) {
-//
-//        }
+        request(RetrofitCreateHelper.createApi(BaseApi::class.java).getUserInfo(map)) {
+            bindData(it.data)
+        }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        EventBus.getDefault().unregister(this)
+    private fun bindData(data: UserInfo) {
+        userInfo = data
+        tvResetPayPassword.text = if (data.isPayPwd) "修改支付密码" else "设置支付密码"
+        tvMobile.text = data.tel
+        if (data.authState == 2) {
+            tvAuthenticationState.text = "已实名"
+            tvAuthenticationState.setTextColor(resources.getColor(R.color.color_light_org))
+            tvAuthentication.setOnClickListener {
+                AuthResultActivity.toActivity(this, ConfigUtils.getUserInfo()!!.authState)
+            }
+        } else if (data.authState == 1) {
+            tvAuthenticationState.text = "审核中"
+            tvAuthenticationState.setTextColor(resources.getColor(R.color.color_light_org))
+            tvAuthentication.setOnClickListener {
+                AuthResultActivity.toActivity(this, ConfigUtils.getUserInfo()!!.authState)
+            }
+        } else if (data.authState == 0) {
+            tvAuthenticationState.text = "未实名"
+            tvAuthentication.setOnClickListener {
+                startActivity(Intent(this, AuthenticationActivity::class.java))
+            }
+        }
     }
 
 }

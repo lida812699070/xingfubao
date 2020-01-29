@@ -24,9 +24,10 @@ class ChangePasswordActivity : DefaultActivity() {
     var disposable: Disposable? = null
 
     companion object {
-        fun toActivity(enum: ChangePasswordEnum?, context: Context) {
+        fun toActivity(enum: ChangePasswordEnum?, context: Context, title: String) {
             val intent = Intent(context, ChangePasswordActivity::class.java)
             intent.putExtra("enum", enum)
+            intent.putExtra("title", title)
             context.startActivity(intent)
         }
     }
@@ -36,8 +37,10 @@ class ChangePasswordActivity : DefaultActivity() {
     }
 
     override fun initView(savedInstanceState: Bundle?) {
-        myToolbar.setClick { finish() }
         changePasswordEnum = intent.getSerializableExtra("enum") as ChangePasswordEnum
+        val title = intent.getStringExtra("title")
+        myToolbar.setTitle(title)
+        myToolbar.setClick { finish() }
         when (changePasswordEnum) {
             ChangePasswordEnum.CHANGE_LOGIN_PASSWORD -> {
 
@@ -45,19 +48,16 @@ class ChangePasswordActivity : DefaultActivity() {
             ChangePasswordEnum.SET_PAY_PASSWORD -> {
                 etPasswordTop.hint = "请输入支付密码"
                 etPasswordBottom.hint = "请再次输入密码"
-                myToolbar.setTitle("设置支付密码")
             }
             ChangePasswordEnum.CHANGE_PAY_PASSWORD -> {
                 etPasswordTop.hint = "请输入新的支付密码"
                 etPasswordBottom.hint = "请再次输入密码"
-                myToolbar.setTitle("修改支付密码")
             }
             ChangePasswordEnum.CHANGE_MOBILE -> {
                 etMobile.hint = "请输入新的手机号码"
                 etCheckCode.hint = "请输入验证码"
                 etPasswordTop.hint = "请输入支付密码"
                 etPasswordBottom.setVisible(false)
-                myToolbar.setTitle("修改绑定手机")
             }
         }
 

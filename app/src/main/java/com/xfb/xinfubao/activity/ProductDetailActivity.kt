@@ -29,6 +29,7 @@ class ProductDetailActivity : DefaultActivity() {
         request(RetrofitCreateHelper.createApi(BaseApi::class.java).getProductInfo(map)) {
             initFragments(it.data)
         }
+        ivFinish.setOnClickListener { finish() }
         EventBus.getDefault().register(this)
     }
 

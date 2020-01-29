@@ -14,13 +14,13 @@ import com.xfb.xinfubao.api.BaseApi
 import com.xfb.xinfubao.callback.MyClickCallBack
 import com.xfb.xinfubao.model.*
 import com.xfb.xinfubao.utils.ConfigUtils
-import kotlinx.android.synthetic.main.activity_confirm_order.*
+import com.xfb.xinfubao.utils.setVisible
 import kotlinx.android.synthetic.main.fragment_product_detail.*
 
 class ProductDetailFragment : BaseFragment() {
     var productDetail: ProductDetail? = null
     var myClickCallBack: MyClickCallBack? = null
-    private var count = 0
+    private var count = 1
 
     companion object {
         fun newInstance(productInfo: ProductDetail): ProductDetailFragment {
@@ -56,7 +56,8 @@ class ProductDetailFragment : BaseFragment() {
             tvPrice.text =
                 getString(R.string.rmb_tag, PriceChangeUtils.getNumKb(it.productPrice))
             tvStock.text = "库存：${it.inventory}"
-
+            tvCat.setVisible(it.isIsReal)
+            tvAddToCat.setVisible(it.isIsReal)
         }
     }
 
