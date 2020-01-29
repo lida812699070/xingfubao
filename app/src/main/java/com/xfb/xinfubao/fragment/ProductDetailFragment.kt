@@ -56,8 +56,11 @@ class ProductDetailFragment : BaseFragment() {
             tvPrice.text =
                 getString(R.string.rmb_tag, PriceChangeUtils.getNumKb(it.productPrice))
             tvStock.text = "库存：${it.inventory}"
-            tvCat.setVisible(it.isIsReal)
-            tvAddToCat.setVisible(it.isIsReal)
+            tvCat.setVisible(it.isIsReal && it.isProductState && it.isChain)
+            tvAddToCat.setVisible(it.isIsReal && it.isProductState && it.isChain)
+            if (!it.isProductState) {
+                tvToBuy.text = "已下架"
+            }
         }
     }
 
@@ -79,8 +82,12 @@ class ProductDetailFragment : BaseFragment() {
         }
         //加数量
         ivAdd.setOnClickListener {
-            count++
-            tvCount.text = "$count"
+            productDetail?.let {
+                if (it.inventory > count) {
+                    count++
+                    tvCount.text = "$count"
+                }
+            }
         }
         //减数量
         ivJian.setOnClickListener {
@@ -114,6 +121,9 @@ class ProductDetailFragment : BaseFragment() {
             productDetail?.let {
                 if (count <= 0) {
                     showMessage("请选择购买数量")
+                    return@setOnClickListener
+                }
+                if (!it.isProductState) {
                     return@setOnClickListener
                 }
                 val products = arrayListOf<Product>()

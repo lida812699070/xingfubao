@@ -26,11 +26,20 @@ public class ProductDetail {
     private String productDetails;
     private double productPrice;
     private boolean productState;
+    private boolean isChain;
     //是否实物商品
     private boolean isReal;
     private String productStateDesc;
     private String isRealDesc;
     private List<ProductImg> productImg;
+
+    public boolean isChain() {
+        return isChain;
+    }
+
+    public void setChain(boolean chain) {
+        isChain = chain;
+    }
 
     public long getProductId() {
         return productId;

@@ -28,7 +28,7 @@ class CartActivity : BaseRecyclerViewActivity<Product>() {
             val tvCount = helper.getView<TextView>(R.id.tvCount)
             val tvTitle = helper.getView<TextView>(R.id.tvTitle)
             val tvPrice = helper.getView<TextView>(R.id.tvPrice)
-            ivImages.loadUri(Constant.PIC_URL + item.productMainImg)
+            ivImages.loadUri(item.productMainImg)
             tvPrice.text = mContext.getString(
                 R.string.rmb_tag,
                 PriceChangeUtils.getNumKb(item.productPrice)
