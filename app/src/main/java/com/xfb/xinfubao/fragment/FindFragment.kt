@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.fragment_find.*
 
 class FindFragment : BaseFragment() {
     val fragments = arrayListOf<Fragment>()
-    val titles = arrayListOf("手机注册", "邮箱注册")
+    val titles = arrayListOf<String>()
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_find

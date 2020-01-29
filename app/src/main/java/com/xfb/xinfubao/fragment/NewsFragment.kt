@@ -11,6 +11,7 @@ import com.chad.library.adapter.base.BaseViewHolder
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.activity.WebviewActivity
 import com.xfb.xinfubao.api.BaseApi
+import com.xfb.xinfubao.constant.Constant
 import com.xfb.xinfubao.model.NewsModel
 import com.xfb.xinfubao.utils.DateUtils
 import com.xfb.xinfubao.utils.loadUri
@@ -42,7 +43,7 @@ class NewsFragment : BaseRecyclerViewFragment<NewsModel>() {
                             DateUtils.YYYY_MM
                         )
                     )
-                ivImages.loadUri(item.iocurl)
+                ivImages.loadUri(Constant.PIC_URL+item.iocurl)
             }
         }
 

@@ -1,5 +1,6 @@
 package com.xfb.xinfubao.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.widget.SwipeRefreshLayout
@@ -55,6 +56,11 @@ class CategoryActivity : BaseRecyclerViewActivity<Product>() {
             initTabs(it.data)
         }
         tvDefaultFilter.isSelected = true
+        adapter.setOnItemClickListener { adapter, view, position ->
+            val putExtra = Intent(this, ProductDetailActivity::class.java)
+                .putExtra("productId", "${list[position].productId}")
+            startActivity(putExtra)
+        }
     }
 
 
@@ -144,6 +150,9 @@ class CategoryActivity : BaseRecyclerViewActivity<Product>() {
         etSearch.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 ivSearchClear.setVisible(!TextUtils.isEmpty(getSearchStr()))
+                if (TextUtils.isEmpty(getSearchStr())) {
+                    tvSearch.text = "搜索"
+                }
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -168,11 +177,12 @@ class CategoryActivity : BaseRecyclerViewActivity<Product>() {
                     onRefresh()
                 }
             } else if (tvSearch.text == "取消") {
-                key = null
-                tabLayout.setVisible(true)
-                tvSearch.text = "搜索"
-                etSearch.setText("")
-                onRefresh()
+                finish()
+//                key = null
+//                tabLayout.setVisible(true)
+//                tvSearch.text = "搜索"
+//                etSearch.setText("")
+//                onRefresh()
             }
         }
     }
