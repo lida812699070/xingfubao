@@ -137,3 +137,11 @@ fun Context.getFile(): File {
         file.getParentFile().mkdirs()
     return file
 }
+fun Context.getApkFile(): File {
+    val path =
+        "${Config.getFileCacheDirPath()}${File.separator}apk"
+    val file = File(path, "${System.currentTimeMillis()}.apk")
+    if (!file.getParentFile().exists())
+        file.getParentFile().mkdirs()
+    return file
+}
