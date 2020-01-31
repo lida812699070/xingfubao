@@ -58,7 +58,8 @@ class OrderDetailActivity : DefaultActivity() {
             totalCount += it.num
             totalPrice += (it.productPrice * it.num)
         }
-        tvTotalMoney.text = "共 $totalCount 件商品 合计：${PriceChangeUtils.getDoubleKb(totalPrice)}"
+        tvTotalCount.text = "共 $totalCount 件商品 合计："
+        tvTotalMoney.text = getString(R.string.rmb_tag, PriceChangeUtils.getDoubleKb(totalPrice))
         tvSendPrice.text = getString(R.string.rmb_tag, PriceChangeUtils.getNumKb(data.freight))
         //小计
         tvProductTotalPrice.text =

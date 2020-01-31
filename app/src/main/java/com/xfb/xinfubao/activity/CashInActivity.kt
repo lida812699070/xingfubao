@@ -12,14 +12,19 @@ import com.xfb.xinfubao.api.BaseApi
 import com.xfb.xinfubao.dialog.DialogUtils
 import com.xfb.xinfubao.model.*
 import com.xfb.xinfubao.model.event.EventPauResult
+import com.xfb.xinfubao.myenum.ChangePasswordEnum
 import com.xfb.xinfubao.utils.ConfigUtils
+import com.xfb.xinfubao.utils.setVisible
 import kotlinx.android.synthetic.main.activity_cash_in.*
+import kotlinx.android.synthetic.main.activity_cash_in.myToolbar
+import kotlinx.android.synthetic.main.activity_safe_center.*
 import org.greenrobot.eventbus.EventBus
 
 /** 收银台 */
 class CashInActivity : DefaultActivity() {
 
     var list = arrayListOf<RegisterOrderVo>()
+    var payWayList = arrayListOf<PayMethod>()
     var data: CashRegisterModel? = null
     var payMethod: PayMethod? = null
     var showDiYaDialog: AlertDialog? = null
@@ -29,12 +34,21 @@ class CashInActivity : DefaultActivity() {
             list
         ) {
             override fun convert(helper: BaseViewHolder, item: RegisterOrderVo) {
-                helper.setText(R.id.tvTitle, "订单${item.orderId}")
+                helper.setText(R.id.tvTitle, "订单${helper.adapterPosition + 1}")
                     .setText(R.id.tvOrderNO, item.orderNumber)
                     .setText(
                         R.id.tvPrice,
                         getString(R.string.rmb_tag, PriceChangeUtils.getDoubleKb(item.payAmount))
                     )
+            }
+        }
+    var payWayAdapter =
+        object : BaseQuickAdapter<PayMethod, BaseViewHolder>(
+            R.layout.item_pay_way,
+            payWayList
+        ) {
+            override fun convert(helper: BaseViewHolder, item: PayMethod) {
+                helper.setText(R.id.tvPayWay, "${item.payMethodName}")
             }
         }
 
@@ -57,10 +71,50 @@ class CashInActivity : DefaultActivity() {
 
         //立即支付
         tvToPay.setOnClickListener {
-            showDiYaDialog = DialogUtils.showDiYaDialog(this, 1) {
-                showDiYaDialog?.hide()
-                toPay(it)
+            if (true == ConfigUtils.mUserInfo?.isPayPwd) {
+                showDiYaDialog = DialogUtils.showDiYaDialog(this, 1) {
+                    showDiYaDialog?.hide()
+                    toPay(it)
+                }
+            } else {
+                showProgress("请稍候")
+                val params = hashMapOf<String, String>()
+                params["userId"] = "${ConfigUtils.userId()}"
+                request(RetrofitCreateHelper.createApi(BaseApi::class.java).getUserInfo(params)) {
+                    ConfigUtils.saveUserInfo(it.data)
+                    if (it.data.isPayPwd) {
+                        showDiYaDialog = DialogUtils.showDiYaDialog(this, 1) {
+                            showDiYaDialog?.hide()
+                            toPay(it)
+                        }
+                    } else {
+                        showMessage("请先设置支付密码")
+                        ChangePasswordActivity.toActivity(
+                            ChangePasswordEnum.SET_PAY_PASSWORD,
+                            this,
+                            tvResetPayPassword.text.toString()
+                        )
+                    }
+                }
             }
+
+        }
+
+        //选择支付方式
+        tvPayWayText.setOnClickListener {
+            payWayRecyclerView.setVisible(true)
+        }
+
+        initPayWayRecyclerView()
+    }
+
+    private fun initPayWayRecyclerView() {
+        payWayRecyclerView.layoutManager = LinearLayoutManager(this)
+        payWayRecyclerView.adapter = payWayAdapter
+        payWayAdapter.setOnItemClickListener { adapter, view, position ->
+            payMethod = payWayList[position]
+            tvPayWay.text = payMethod?.payMethodName
+            payWayRecyclerView.setVisible(false)
         }
     }
 
@@ -98,6 +152,9 @@ class CashInActivity : DefaultActivity() {
             tvTotalPrice.text =
                 "总金额：${getString(R.string.rmb_tag, PriceChangeUtils.getDoubleKb(it.totalAmount))}"
             payMethod = data.payMethod?.get(0)
+            tvPayWay.text = payMethod?.payMethodName
+            payWayList.clear()
+            payWayList.addAll(data.payMethod)
         }
     }
 

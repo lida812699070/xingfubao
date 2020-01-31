@@ -1,6 +1,7 @@
 package com.xfb.xinfubao.view
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import com.careagle.sdk.utils.PriceChangeUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.xfb.xinfubao.R
+import com.xfb.xinfubao.activity.ProductDetailActivity
 import com.xfb.xinfubao.model.Product
 import com.xfb.xinfubao.utils.loadUri
 import kotlinx.android.synthetic.main.view_product_list.view.*
@@ -44,6 +46,12 @@ class ProductListView @JvmOverloads constructor(
                 }
             }
         itemRecyclerView.adapter = adapter
+
+        adapter?.setOnItemClickListener { adapter, view, position ->
+            val putExtra = Intent(context, ProductDetailActivity::class.java)
+                .putExtra("productId", "${list[position].productId}")
+            context.startActivity(putExtra)
+        }
     }
 
     fun bindData(datas: List<Product>) {

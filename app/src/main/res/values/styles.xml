@@ -69,4 +69,8 @@
         <item name="android:drawableRight">@mipmap/chevron</item>
         <item name="android:paddingRight">20dp</item>
     </style>
+
+    <style name="TabText">
+        <item name="android:textSize">18sp</item>
+    </style>
 </resources>

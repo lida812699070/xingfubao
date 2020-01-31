@@ -17,7 +17,7 @@ abstract class BaseRecyclerViewFragment<T> : BaseFragment(),
     EmptyView.ReloadListener {
 
     //初始页数
-    protected val initialPage = 0
+    protected val initialPage = 1
     protected var page = initialPage
     protected var pageSize = 10
     protected var emptyView: EmptyView? = null

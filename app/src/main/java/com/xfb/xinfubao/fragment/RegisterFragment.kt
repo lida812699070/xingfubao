@@ -95,7 +95,7 @@ class RegisterFragment : BaseFragment() {
             return
         }
         val account =
-            if (isMobileRegister) etMobileInputMobile.text.toString() else etMobileInputMobile.text.toString()
+            if (isMobileRegister) etMobileInputMobile.text.toString() else etEmailInputEmail.text.toString()
         if (isMobileRegister) {
             if (!CommentUtils.isMobile(account)) {
                 showMessage("请输入正确的手机号")
@@ -148,7 +148,7 @@ class RegisterFragment : BaseFragment() {
         }
         val map = hashMapOf<String, String>()
         val account =
-            if (isMobileRegister) etMobileInputMobile.text.toString() else etMobileInputMobile.text.toString()
+            if (isMobileRegister) etMobileInputMobile.text.toString() else etEmailInputEmail.text.toString()
         if (isMobileRegister) {
             if (!CommentUtils.isMobile(account)) {
                 showMessage("请输入正确的手机号")

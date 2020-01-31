@@ -60,6 +60,7 @@ class ProductDetailFragment : BaseFragment() {
             tvAddToCat.setVisible(it.isIsReal && it.isProductState && !it.isChain)
             if (!it.isProductState) {
                 tvToBuy.text = "已下架"
+                tvToBuy.setBackgroundColor(resources.getColor(R.color.color_text_888))
             }
         }
     }
@@ -98,8 +99,13 @@ class ProductDetailFragment : BaseFragment() {
         }
         //加入购物车
         tvAddToCat.setOnClickListener {
+            if (productDetail == null) return@setOnClickListener
             if (count == 0) {
                 showMessage("请添加购买数量")
+                return@setOnClickListener
+            }
+            if (count > productDetail!!.inventory) {
+                showMessage("商品库存不足")
                 return@setOnClickListener
             }
             showProgress("请稍候")
@@ -121,6 +127,10 @@ class ProductDetailFragment : BaseFragment() {
             productDetail?.let {
                 if (count <= 0) {
                     showMessage("请选择购买数量")
+                    return@setOnClickListener
+                }
+                if (count > it.inventory) {
+                    showMessage("商品库存不足")
                     return@setOnClickListener
                 }
                 if (!it.isProductState) {

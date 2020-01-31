@@ -24,6 +24,7 @@ public class Product implements Serializable {
     private int num;
     private double freight;
     private int quantity;
+    private int productQuantity;
 
     public int getQuantity() {
         int count = 0;
@@ -37,6 +38,14 @@ public class Product implements Serializable {
         return count;
     }
 
+    public int getProductQuantity() {
+        return productQuantity;
+    }
+
+    public void setProductQuantity(int productQuantity) {
+        this.productQuantity = productQuantity;
+    }
+
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
@@ -47,6 +56,8 @@ public class Product implements Serializable {
             count = num;
         } else if (productNum != 0) {
             count = productNum;
+        } else if (productQuantity != 0) {
+            count = productQuantity;
         } else {
             count = quantity;
         }

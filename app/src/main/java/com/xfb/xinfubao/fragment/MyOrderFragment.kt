@@ -60,7 +60,11 @@ class MyOrderFragment : BaseRecyclerViewFragment<MyOrderModel>() {
                     PriceChangeUtils.getNumKb(item.totalAmount)
                 )
                 tvCancelOrder.setVisible(item.orderState == 100)
-//                tvTotalCount.text = "共${item.}件商品  合计："
+                var totalCount = 0
+                item.productBase.forEach {
+                    totalCount += it.num
+                }
+                tvTotalCount.text = "共${totalCount}件商品  合计："
                 var strState = ""
                 when (item.orderState) {
                     100 -> {

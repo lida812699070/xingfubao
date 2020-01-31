@@ -31,7 +31,8 @@ class PayResultActivity : DefaultActivity() {
         tvPayWay.text = payResultModel.payMethod.payMethodName
         myToolbar.setClick { finish() }
         tvOrderDetail.setOnClickListener {
-            startActivity(Intent(this, OrderDetailActivity::class.java))
+            startActivity(Intent(this, MyOrderActivity::class.java))
+            finish()
         }
     }
 
