@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.careagle.sdk.helper.RetrofitCreateHelper
 import com.careagle.sdk.utils.PriceChangeUtils
+import com.careagle.sdk.weight.EmptyView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.xfb.xinfubao.R
@@ -88,7 +89,7 @@ class CartActivity : BaseRecyclerViewActivity<Product>() {
                     }
                 }
                 R.id.ivJian -> {
-                    if (list[position].quantity <= 0) {
+                    if (list[position].quantity <= 1) {
                         return@setOnItemChildClickListener
                     }
                     showProgress("请稍候")
@@ -148,6 +149,9 @@ class CartActivity : BaseRecyclerViewActivity<Product>() {
         list.remove(pos)//集合移除该条
         adapter.notifyItemRemoved(position)//通知移除该条
         adapter.notifyItemRangeChanged(position, list.size - position)//更新适配器这条后面列表的变化
+        if (list.isEmpty()) {
+            emptyView?.setLoadState(EmptyView.LoadState.LOAD_STATE_EMPTY)
+        }
     }
 
     override fun initData() {

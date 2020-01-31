@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_174"
+    android:layout_gravity="center"
+    android:layout_marginLeft="@dimen/dp_47"
+    android:layout_marginRight="@dimen/dp_47"
+    android:background="@drawable/shape_white_radius_8">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_26"
+        android:layout_marginTop="@dimen/dp_28"
+        android:layout_marginRight="@dimen/dp_26"
+        android:gravity="center"
+        android:textColor="@color/color_text_111"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvSubTitle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_goneMarginBottom="@dimen/dp_40"
+        tools:text="不在当前店铺" />
+
+    <TextView
+        android:id="@+id/tvSubTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_12"
+        android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginRight="@dimen/dp_12"
+        android:layout_marginBottom="@dimen/dp_28"
+        android:gravity="center"
+        android:text="删除后商品将不在【我的推荐】中"
+        android:textColor="@color/color_text_888"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/tvOk"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+    <TextView
+        android:id="@+id/tvCancel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_114"
+        android:layout_marginRight="@dimen/dp_5"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:gravity="center"
+        android:padding="@dimen/dp_9"
+        android:text="取消"
+        android:textColor="@color/color_text_111"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/tvOk"
+        app:layout_constraintTop_toTopOf="parent" />
+    <!--按钮样式同意修改-->
+    <TextView
+        android:id="@+id/tvOk"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginTop="@dimen/dp_114"
+        android:layout_marginRight="@dimen/dp_16"
+        android:gravity="center"
+        android:padding="@dimen/dp_9"
+        android:text="确定"
+        android:textColor="@color/color_text_111"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toRightOf="@+id/tvCancel"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_goneMarginLeft="@dimen/dp_16" />
+</android.support.constraint.ConstraintLayout>

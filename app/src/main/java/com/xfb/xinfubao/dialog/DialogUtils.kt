@@ -9,6 +9,7 @@ import android.os.Build
 import android.provider.MediaStore
 import android.support.v4.content.FileProvider
 import android.support.v7.app.AlertDialog
+import android.text.TextUtils
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.WindowManager
@@ -21,6 +22,7 @@ import com.careagle.sdk.utils.Permission
 import com.careagle.sdk.utils.RxPermissionsUtil
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.activity.UserInfoActivity
+import com.xfb.xinfubao.utils.setVisible
 import com.xfb.xinfubao.wxapi.WXUtils
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
@@ -194,6 +196,58 @@ class DialogUtils {
 
             }
             dialog?.window?.setBackgroundDrawable(dw)
+        }
+
+        /**
+         * 显示推荐样式的dialog
+         */
+        fun showSelect(
+            context: Context,
+            titles: String,
+            strCancel: String = "取消",
+            strOk: String = "确定",
+            isCancel: Boolean = true,
+            subTitle: String? = null,
+            cancel: () -> Unit = {},
+            method: () -> Unit
+        ): AlertDialog {
+            val builder = AlertDialog.Builder(context)
+            builder.setCancelable(true)
+            val view = LayoutInflater.from(context)
+                .inflate(R.layout.dialog_my_recommend_select, null)
+            builder.setView(view)
+            val changeShopDialog = builder.create()
+            changeShopDialog?.show()
+            changeShopDialog?.window?.setLayout(
+                context.resources.getDimension(R.dimen.dp_360).toInt(),
+                context.resources.getDimension(R.dimen.dp_174).toInt()
+            )
+            changeShopDialog?.window?.setDimAmount(0.2f)
+            changeShopDialog?.window?.setBackgroundDrawable(context.resources.getDrawable(R.drawable.shape_white_radius_8))
+            val tvTitle = view.findViewById<TextView>(R.id.tvTitle)
+            val tvCancel = view.findViewById<TextView>(R.id.tvCancel)
+            val tvSubTitle = view.findViewById<TextView>(R.id.tvSubTitle)
+            val tvOk = view.findViewById<TextView>(R.id.tvOk)
+            tvTitle.text = titles
+            if (titles.length > 35) {
+                tvTitle.textSize = 14f
+            }
+            tvCancel.text = strCancel
+            tvOk.text = strOk
+            tvCancel.setVisible(isCancel)
+            if (!TextUtils.isEmpty(subTitle)) {
+                tvSubTitle.setVisible(true)
+                tvSubTitle.text = subTitle
+            }
+            tvCancel.setOnClickListener {
+                cancel()
+                changeShopDialog?.dismiss()
+            }
+            tvOk.setOnClickListener {
+                method()
+                changeShopDialog?.dismiss()
+            }
+            return changeShopDialog
         }
     }
 }

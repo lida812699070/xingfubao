@@ -151,9 +151,13 @@ class ProductDetailFragment : BaseFragment() {
 
     /** 确认订单 */
     private fun requestConfirmOrder(products: ArrayList<Product>) {
+        products.forEach {
+            it.num = count
+        }
         val requestOrderModel = RequestOrderModel()
         requestOrderModel.userId = ConfigUtils.userId()
         requestOrderModel.productDtoList = products
+        showProgress("请稍候")
         request(
             RetrofitCreateHelper.createApi(BaseApi::class.java).confirmOrder(
                 requestOrderModel

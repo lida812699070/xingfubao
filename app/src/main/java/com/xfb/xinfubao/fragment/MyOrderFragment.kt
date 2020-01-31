@@ -12,6 +12,7 @@ import com.chad.library.adapter.base.BaseViewHolder
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.activity.OrderDetailActivity
 import com.xfb.xinfubao.api.BaseApi
+import com.xfb.xinfubao.dialog.DialogUtils
 import com.xfb.xinfubao.model.MyOrderModel
 import com.xfb.xinfubao.utils.ConfigUtils
 import com.xfb.xinfubao.utils.setColorText
@@ -130,7 +131,9 @@ class MyOrderFragment : BaseRecyclerViewFragment<MyOrderModel>() {
                     OrderDetailActivity.toActivity(activity!!, list[position].orderNumber)
                 }
                 R.id.tvCancelOrder -> {
-                    cancelOrder(position)
+                    DialogUtils.showSelect(activity!!, "确认取消订单?", method = {
+                        cancelOrder(position)
+                    })
                 }
             }
         }
