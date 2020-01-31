@@ -164,8 +164,10 @@
         android:text="银杏果兑换银杏叶的比例为"
         android:textColor="@color/color_text_888"
         android:textSize="14sp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/bgExChange"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/tvExchangeRatio"
@@ -174,8 +176,10 @@
         android:text="1:50"
         android:textColor="@color/color_light_org"
         android:textSize="14sp"
+        android:visibility="invisible"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvExchangeRatioText"
-        app:layout_constraintLeft_toRightOf="@+id/tvExchangeRatioText" />
+        app:layout_constraintLeft_toRightOf="@+id/tvExchangeRatioText"
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/tvToExchange"

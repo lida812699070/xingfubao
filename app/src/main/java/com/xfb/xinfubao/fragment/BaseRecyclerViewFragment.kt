@@ -84,6 +84,9 @@ abstract class BaseRecyclerViewFragment<T> : BaseFragment(),
             emptyView?.setLoadState(EmptyView.LoadState.LOAD_STATE_EMPTY)
         }
         pageAdapter()?.notifyDataSetChanged()
+        if (page == 0) {
+            pageRecyclerView()?.scrollToPosition(0)
+        }
     }
 
     /**

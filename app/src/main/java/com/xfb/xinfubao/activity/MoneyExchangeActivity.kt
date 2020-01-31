@@ -2,6 +2,7 @@ package com.xfb.xinfubao.activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.text.Editable
 import android.text.TextUtils
@@ -14,6 +15,7 @@ import com.chad.library.adapter.base.BaseViewHolder
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.api.BaseApi
 import com.xfb.xinfubao.constant.Constant
+import com.xfb.xinfubao.dialog.DialogUtils
 import com.xfb.xinfubao.model.ExchangeModel
 import com.xfb.xinfubao.utils.ConfigUtils
 import com.xfb.xinfubao.utils.loadUri
@@ -27,6 +29,7 @@ class MoneyExchangeActivity : DefaultActivity() {
     var rightSelect: ExchangeModel? = null
     val leftList = arrayListOf<ExchangeModel>()
     val rightList = arrayListOf<ExchangeModel>()
+    var showDiYaDialog: AlertDialog? = null
     val leftAdapter = object :
         BaseQuickAdapter<ExchangeModel, BaseViewHolder>(R.layout.item_exchange, leftList) {
         override fun convert(helper: BaseViewHolder, item: ExchangeModel) {
@@ -82,7 +85,12 @@ class MoneyExchangeActivity : DefaultActivity() {
         })
 
         tvToExchange.setOnClickListener {
-            toExchange()
+            checkPayPassword {
+                showDiYaDialog = DialogUtils.showDiYaDialog(this, 1) {
+                    showDiYaDialog?.hide()
+                    toExchange(it)
+                }
+            }
         }
 
         initRecyclerView()
@@ -109,6 +117,8 @@ class MoneyExchangeActivity : DefaultActivity() {
                 ivIRight.setInVisible(false)
                 tvPleaseSelect.setInVisible(true)
                 tvYXY.setInVisible(false)
+                tvExchangeRatio.setInVisible(false)
+                tvExchangeRatioText.setInVisible(false)
             } else {
                 rightSelect = it.data[0]
                 bindData()
@@ -158,8 +168,12 @@ class MoneyExchangeActivity : DefaultActivity() {
     @SuppressLint("SetTextI18n")
     fun bindData() {
         if (leftSelect == null || rightSelect == null) {
+            tvExchangeRatioText.setInVisible(false)
+            tvExchangeRatio.setInVisible(false)
             return
         }
+        tvExchangeRatioText.setVisible(true)
+        tvExchangeRatio.setVisible(true)
         bindLeft()
         tvYXY.text = rightSelect?.assetsName
         ivIRight.loadUri(Constant.PIC_URL + rightSelect?.assetsIcon)
@@ -176,7 +190,7 @@ class MoneyExchangeActivity : DefaultActivity() {
         ivLeft.setVisible(true)
     }
 
-    private fun toExchange() {
+    private fun toExchange(pwd: String) {
         if (leftSelect == null || rightSelect == null) {
             return
         }
@@ -193,6 +207,7 @@ class MoneyExchangeActivity : DefaultActivity() {
         map["assetsConfigId"] = "${rightSelect!!.assetsConfigId}"
         map["turnOutQuantity"] = "${etExchangeOutCount.text}"
         map["intoQuantity"] = "${tvExchangeInCount.text}"
+        map["payPwd"] = pwd
         showProgress("请稍候")
         request(RetrofitCreateHelper.createApi(BaseApi::class.java).assetsExchange(map)) {
             showMessage("兑换成功")
@@ -201,4 +216,8 @@ class MoneyExchangeActivity : DefaultActivity() {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        showDiYaDialog?.dismiss()
+    }
 }

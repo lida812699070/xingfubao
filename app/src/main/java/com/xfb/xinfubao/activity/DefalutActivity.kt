@@ -2,9 +2,13 @@ package com.xfb.xinfubao.activity
 
 import com.careagle.sdk.Config
 import com.careagle.sdk.base.activity.BaseActivity
+import com.careagle.sdk.helper.RetrofitCreateHelper
 import com.careagle.sdk.utils.MyToast
 import com.careagle.sdk.utils.NetworkConnectionUtils
+import com.xfb.xinfubao.api.BaseApi
 import com.xfb.xinfubao.model.Result
+import com.xfb.xinfubao.myenum.ChangePasswordEnum
+import com.xfb.xinfubao.utils.ConfigUtils
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -60,6 +64,29 @@ abstract class DefaultActivity : BaseActivity() {
                 onerror("")
             }, {
             })
+    }
+
+    fun checkPayPassword(method: () -> Unit) {
+        if (true == ConfigUtils.mUserInfo?.isPayPwd) {
+            method()
+        } else {
+            showProgress("请稍候")
+            val params = hashMapOf<String, String>()
+            params["userId"] = "${ConfigUtils.userId()}"
+            request(RetrofitCreateHelper.createApi(BaseApi::class.java).getUserInfo(params)) {
+                ConfigUtils.saveUserInfo(it.data)
+                if (it.data.isPayPwd) {
+                    method()
+                } else {
+                    showMessage("请先设置支付密码")
+                    ChangePasswordActivity.toActivity(
+                        ChangePasswordEnum.SET_PAY_PASSWORD,
+                        this,
+                        "设置支付密码"
+                    )
+                }
+            }
+        }
     }
 
 }

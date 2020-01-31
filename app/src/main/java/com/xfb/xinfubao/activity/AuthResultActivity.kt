@@ -30,18 +30,25 @@ class AuthResultActivity : DefaultActivity() {
 
     override fun initView(savedInstanceState: Bundle?) {
         authState = intent.getIntExtra("authState", 0)
+
+        showProgress("请稍候")
+        val map = hashMapOf<String, String>()
+        map["userId"] = "${ConfigUtils.userId()}"
+        request(RetrofitCreateHelper.createApi(BaseApi::class.java).getUserInfo(map)) {
+            ConfigUtils.saveUserInfo(it.data)
+            authState = it.data.authState
+            if (authState == 1) {
+                tvAuthInfo.text = getString(R.string.str_auth_wait)
+            } else {
+                tvTitle.text = "认证成功"
+                ivAuthState.setImageResource(R.mipmap.icon_auth_success)
+                tvAuthInfo.setInVisible(false)
+                clAuthSuccess.setVisible(true)
+                queryAuthInfo()
+            }
+        }
         ivFinish.setOnClickListener { finish() }
         tvOK.setOnClickListener { finish() }
-        if (authState == 1) {
-            tvAuthInfo.text = getString(R.string.str_auth_wait, ConfigUtils.mUserInfo.name)
-        } else {
-            tvTitle.text = "认证成功"
-            ivAuthState.setImageResource(R.mipmap.icon_auth_success)
-            tvAuthInfo.setInVisible(false)
-            clAuthSuccess.setVisible(true)
-            queryAuthInfo()
-        }
-
 
     }
 

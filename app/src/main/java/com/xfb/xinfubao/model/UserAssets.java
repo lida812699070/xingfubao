@@ -14,14 +14,23 @@ public class UserAssets {
      * powerAvowNum : 0
      */
 
+    //银杏宝数量
     private double ginkgoTreasureNum;
+    //银杏果数量
     private double ginkgoFruitNum;
+    //银杏叶数量
     private double ginkgoLeafNum;
+    //积分数量
     private double integralNum;
+    //NAT流通数量
     private double natFlowNum;
+    //NAT锁定数量
     private double natLockNum;
+    //NAT总数量
     private double natTotalNum;
+    //NAT已抵押数量
     private double natMortgagedNum;
+    //愿力值
     private double powerAvowNum;
 
     public double getGinkgoTreasureNum() {

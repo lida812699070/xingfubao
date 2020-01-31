@@ -107,7 +107,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="45dp"
             android:layout_marginTop="237dp"
-            android:text="累计收益(银杏宝)"
+            android:text="累计收益(银杏果)"
             android:textColor="@color/color_text_888"
             android:textSize="14sp"
             app:layout_constraintLeft_toLeftOf="parent"

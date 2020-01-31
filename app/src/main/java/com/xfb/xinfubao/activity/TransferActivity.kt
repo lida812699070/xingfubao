@@ -36,6 +36,7 @@ class TransferActivity : DefaultActivity() {
     }
 
     override fun initView(savedInstanceState: Bundle?) {
+        myToolbar.setClick { finish()  }
         type = intent.getIntExtra("type", 0)
         tvUserName.text = if (type == TRANSFER_TYPE_YXY) "银杏叶" else "积分"
         showProgress("请稍候")

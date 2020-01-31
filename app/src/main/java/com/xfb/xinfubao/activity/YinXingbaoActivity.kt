@@ -74,7 +74,7 @@ class YinXingbaoActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
             WebviewActivity.newInstanceUrl(this, Constant.YIN_XING_BAO_RULE_URL, "银杏宝规则")
         }
         tvTotalMoney.text = PriceChangeUtils.getNumKb(data.userAssets.ginkgoTreasureNum)
-        tvTotalCashIn.text = PriceChangeUtils.getNumKb(data.userAssets.ginkgoTreasureNum)
+        tvTotalCashIn.text = PriceChangeUtils.getNumKb(data.userAssets.ginkgoFruitNum)
         tvTotalCashInYXY.text = PriceChangeUtils.getNumKb(data.userAssets.ginkgoLeafNum)
         tvToCashOut.setOnClickListener {
             ApplyCashOutActivity.toActivity(this, 1)

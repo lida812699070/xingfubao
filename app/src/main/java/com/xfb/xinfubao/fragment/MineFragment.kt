@@ -15,12 +15,15 @@ import com.xfb.xinfubao.activity.*
 import com.xfb.xinfubao.api.BaseApi
 import com.xfb.xinfubao.constant.Constant
 import com.xfb.xinfubao.model.UserInfo
+import com.xfb.xinfubao.model.event.EventUserInfo
 import com.xfb.xinfubao.myenum.BalanceEnum
 import com.xfb.xinfubao.utils.BlurBitmap
 import com.xfb.xinfubao.utils.ConfigUtils
 import com.xfb.xinfubao.utils.setVisible
 import jp.wasabeef.glide.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.fragment_mine.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 
 
 class MineFragment : BaseFragment() {
@@ -31,6 +34,7 @@ class MineFragment : BaseFragment() {
 
     @SuppressLint("SetTextI18n")
     override fun initUI(view: View?, savedInstanceState: Bundle?) {
+        EventBus.getDefault().register(this)
         getUserInfo()
         //资产互兑
         itemMoneyChange.setOnClickListener {
@@ -153,5 +157,15 @@ class MineFragment : BaseFragment() {
         tvUserId.text = "NO.${data.userId}"
         ivVip.setVisible(!TextUtils.isEmpty(data.grade))
         ConfigUtils.saveUserInfo(data)
+    }
+
+    @Subscribe
+    fun userInfoRequest(evnt: EventUserInfo) {
+        getUserInfo()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
     }
 }

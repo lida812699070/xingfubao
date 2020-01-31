@@ -12,12 +12,9 @@ import com.xfb.xinfubao.api.BaseApi
 import com.xfb.xinfubao.dialog.DialogUtils
 import com.xfb.xinfubao.model.*
 import com.xfb.xinfubao.model.event.EventPauResult
-import com.xfb.xinfubao.myenum.ChangePasswordEnum
 import com.xfb.xinfubao.utils.ConfigUtils
 import com.xfb.xinfubao.utils.setVisible
 import kotlinx.android.synthetic.main.activity_cash_in.*
-import kotlinx.android.synthetic.main.activity_cash_in.myToolbar
-import kotlinx.android.synthetic.main.activity_safe_center.*
 import org.greenrobot.eventbus.EventBus
 
 /** 收银台 */
@@ -71,33 +68,12 @@ class CashInActivity : DefaultActivity() {
 
         //立即支付
         tvToPay.setOnClickListener {
-            if (true == ConfigUtils.mUserInfo?.isPayPwd) {
+            checkPayPassword {
                 showDiYaDialog = DialogUtils.showDiYaDialog(this, 1) {
                     showDiYaDialog?.hide()
                     toPay(it)
                 }
-            } else {
-                showProgress("请稍候")
-                val params = hashMapOf<String, String>()
-                params["userId"] = "${ConfigUtils.userId()}"
-                request(RetrofitCreateHelper.createApi(BaseApi::class.java).getUserInfo(params)) {
-                    ConfigUtils.saveUserInfo(it.data)
-                    if (it.data.isPayPwd) {
-                        showDiYaDialog = DialogUtils.showDiYaDialog(this, 1) {
-                            showDiYaDialog?.hide()
-                            toPay(it)
-                        }
-                    } else {
-                        showMessage("请先设置支付密码")
-                        ChangePasswordActivity.toActivity(
-                            ChangePasswordEnum.SET_PAY_PASSWORD,
-                            this,
-                            tvResetPayPassword.text.toString()
-                        )
-                    }
-                }
             }
-
         }
 
         //选择支付方式

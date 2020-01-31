@@ -73,7 +73,7 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
     override fun initLogic() {
         balanceEnum = intent.getSerializableExtra("data") as BalanceEnum
         adapter.balanceEnum = balanceEnum
-        adapter.setHeaderAndEmpty(true)
+        adapter.setHeaderAndEmpty(false)
         val map = hashMapOf<String, String>()
         map["userId"] = "${ConfigUtils.userId()}"
         showProgress("请稍候")
@@ -136,7 +136,7 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 tvSubtitle.text = BalanceEnum.YING_XING_YE.tag
                 ivBg.setImageResource(R.mipmap.icon_yxy)
                 tvCash.text = "转账"
-                tvBalance.text = PriceChangeUtils.getNumKb(userAssets.ginkgoFruitNum)
+                tvBalance.text = PriceChangeUtils.getNumKb(userAssets.ginkgoLeafNum)
                 tabLayout.addTab(tabLayout.newTab().setText("全部"))
                 tabLayout.addTab(tabLayout.newTab().setText("收入"))
                 tabLayout.addTab(tabLayout.newTab().setText("转出"))
@@ -180,7 +180,7 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 tvCashRight.text = "提币到钱包"
                 tvNATMoney.setVisible(true)
                 tvNATMoney.text = PriceChangeUtils.getNumKb(userAssets.natLockNum)
-                tvBalance.text = PriceChangeUtils.getNumKb(userAssets.natTotalNum)
+                tvBalance.text = PriceChangeUtils.getNumKb(userAssets.natFlowNum)
                 tabLayout.addTab(tabLayout.newTab().setText("解锁明细"))
                 tabLayout.addTab(tabLayout.newTab().setText("兑换明细"))
                 tabLayout.addTab(tabLayout.newTab().setText("提币明细"))
@@ -245,11 +245,11 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                         var dateStr = ""
                         val datas = arrayListOf<ItemBalanceModel>()
                         it.data.forEach {
-                            if (it.createDate != dateStr) {
-                                dateStr = it.createDate
+                            if (it.createDate.substring(0, 10) != dateStr) {
+                                dateStr = it.createDate.substring(0, 10)
                                 val itemBalanceModel = ItemBalanceModel()
                                 itemBalanceModel.itemType = ITEM_TYPE_DATE
-                                itemBalanceModel.createDate = it.createDate
+                                itemBalanceModel.createDate = it.createDate.substring(0, 10)
                                 datas.add(itemBalanceModel)
                             }
                             datas.add(it)
@@ -267,11 +267,11 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                         var dateStr = ""
                         val datas = arrayListOf<ItemBalanceModel>()
                         it.data.forEach {
-                            if (it.createDate != dateStr) {
-                                dateStr = it.createDate
+                            if (it.createDate.substring(0, 10) != dateStr) {
+                                dateStr = it.createDate.substring(0, 10)
                                 val itemBalanceModel = ItemBalanceModel()
                                 itemBalanceModel.itemType = ITEM_TYPE_DATE
-                                itemBalanceModel.createDate = it.createDate
+                                itemBalanceModel.createDate = it.createDate.substring(0, 10)
                                 datas.add(itemBalanceModel)
                             }
                             datas.add(it)
@@ -289,11 +289,11 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                         var dateStr = ""
                         val datas = arrayListOf<ItemBalanceModel>()
                         it.data.forEach {
-                            if (it.createDate != dateStr) {
-                                dateStr = it.createDate
+                            if (it.createDate.substring(0, 10) != dateStr) {
+                                dateStr = it.createDate.substring(0, 10)
                                 val itemBalanceModel = ItemBalanceModel()
                                 itemBalanceModel.itemType = ITEM_TYPE_DATE
-                                itemBalanceModel.createDate = it.createDate
+                                itemBalanceModel.createDate = it.createDate.substring(0, 10)
                                 datas.add(itemBalanceModel)
                             }
                             datas.add(it)

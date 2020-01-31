@@ -14,6 +14,7 @@ import com.xfb.xinfubao.api.UpLoadPicApi
 import com.xfb.xinfubao.constant.Constant
 import com.xfb.xinfubao.dialog.DialogUtils
 import com.xfb.xinfubao.model.UserInfo
+import com.xfb.xinfubao.model.event.EventUserInfo
 import com.xfb.xinfubao.utils.ConfigUtils
 import com.xfb.xinfubao.utils.getFile
 import com.xfb.xinfubao.utils.loadUriCircle
@@ -25,6 +26,7 @@ import kotlinx.android.synthetic.main.activity_user_info.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import org.greenrobot.eventbus.EventBus
 import java.io.File
 
 
@@ -118,6 +120,7 @@ class UserInfoActivity : DefaultActivity() {
             if (!TextUtils.isEmpty(headShotUrl)) {
                 ivHeader.loadUriCircle("${Constant.PIC_URL}$headShotUrl")
             }
+            EventBus.getDefault().post(EventUserInfo())
         }
     }
 

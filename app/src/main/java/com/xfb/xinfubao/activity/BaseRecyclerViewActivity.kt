@@ -84,7 +84,7 @@ abstract class BaseRecyclerViewActivity<T> : DefaultActivity(),
         }
         pageAdapter().notifyDataSetChanged()
         if (page == 0) {
-            pageRecyclerView().scrollToPosition(0)
+            pageRecyclerView().scrollTo(0,0)
         }
     }
 
