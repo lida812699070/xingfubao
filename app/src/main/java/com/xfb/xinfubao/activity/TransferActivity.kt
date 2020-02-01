@@ -86,6 +86,7 @@ class TransferActivity : DefaultActivity() {
             showProgress("请稍候")
             request(RetrofitCreateHelper.createApi(BaseApi::class.java).transfer(map)) {
                 showMessage("转账成功")
+                finish()
                 EventBus.getDefault().post(EventTransfer())
             }
         }
