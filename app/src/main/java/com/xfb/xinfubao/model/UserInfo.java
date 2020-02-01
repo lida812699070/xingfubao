@@ -28,9 +28,18 @@ public class UserInfo {
     private int authState;
     private String grade;
     private int parentId;
+    private double discount;
     private String inviteCode;
     private boolean isPayPwd;
     private UserAssets userAssets;
+
+    public double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(double discount) {
+        this.discount = discount;
+    }
 
     public int getAuthState() {
         return authState;

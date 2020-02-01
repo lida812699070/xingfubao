@@ -12,7 +12,10 @@ import com.xfb.xinfubao.activity.CashInActivity
 import com.xfb.xinfubao.activity.ConfirmOrderActivity
 import com.xfb.xinfubao.api.BaseApi
 import com.xfb.xinfubao.callback.MyClickCallBack
-import com.xfb.xinfubao.model.*
+import com.xfb.xinfubao.model.Product
+import com.xfb.xinfubao.model.ProductDetail
+import com.xfb.xinfubao.model.ProductImg
+import com.xfb.xinfubao.model.RequestSaveOrderModel
 import com.xfb.xinfubao.utils.ConfigUtils
 import com.xfb.xinfubao.utils.setVisible
 import kotlinx.android.synthetic.main.fragment_product_detail.*
@@ -143,41 +146,30 @@ class ProductDetailFragment : BaseFragment() {
                 if (it.isIsReal) {
                     ConfirmOrderActivity.toActivity(activity!!, products)
                 } else {
-                    requestConfirmOrder(products)
+                    toCreateOrder(products)
                 }
             }
         }
     }
 
-    /** 确认订单 */
-    private fun requestConfirmOrder(products: ArrayList<Product>) {
+    /** 创建订单 */
+    private fun toCreateOrder(
+        products: ArrayList<Product>
+    ) {
+        var totalAmount = 0.0
         products.forEach {
             it.num = count
         }
-        val requestOrderModel = RequestOrderModel()
-        requestOrderModel.userId = ConfigUtils.userId()
-        requestOrderModel.productDtoList = products
-        showProgress("请稍候")
-        request(
-            RetrofitCreateHelper.createApi(BaseApi::class.java).confirmOrder(
-                requestOrderModel
-            )
-        ) {
-            toCreateOrder(it.data, products)
+        products.forEach {
+            totalAmount += it.productPrice * count
         }
-    }
-
-    /** 创建订单 */
-    private fun toCreateOrder(
-        data: OrderInfo,
-        products: ArrayList<Product>
-    ) {
         val requestSaveOrderModel = RequestSaveOrderModel()
         requestSaveOrderModel.userId = "${ConfigUtils.userId()}"
-        requestSaveOrderModel.freight = "${data.freight}"
-        requestSaveOrderModel.totalAmount = "${data.orderTotalAmount}"
-        requestSaveOrderModel.discount = "${data.discount}"
-        requestSaveOrderModel.payAmount = "${data.payAmount}"
+        requestSaveOrderModel.freight = "0"
+        requestSaveOrderModel.totalAmount = "$totalAmount"
+        requestSaveOrderModel.discount = "${totalAmount * (1.0 - ConfigUtils.mUserInfo.discount)}"
+        requestSaveOrderModel.payAmount =
+            "${totalAmount * ConfigUtils.mUserInfo.discount}"
         requestSaveOrderModel.productDtoList = products
         request(RetrofitCreateHelper.createApi(BaseApi::class.java).saveOrder(requestSaveOrderModel)) {
             startActivity(
