@@ -2,6 +2,7 @@ package com.xfb.xinfubao.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import com.careagle.sdk.helper.RetrofitCreateHelper
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.api.BaseApi
@@ -61,7 +62,11 @@ class SafeCenterActivity : DefaultActivity() {
     private fun bindData(data: UserInfo) {
         userInfo = data
         tvResetPayPassword.text = if (data.isPayPwd) "修改支付密码" else "设置支付密码"
-        tvMobile.text = data.tel
+        if (TextUtils.isEmpty(data.tel)) {
+            tvResetMobile.text = "绑定手机号"
+        } else {
+            tvMobile.text = data.tel
+        }
         if (data.authState == 2) {
             tvAuthenticationState.text = "已实名"
             tvAuthenticationState.setTextColor(resources.getColor(R.color.color_light_org))

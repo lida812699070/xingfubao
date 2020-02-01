@@ -17,10 +17,12 @@ class ForgetPasswordActivity : DefaultActivity() {
 
         tvRestPasswordMobile.setOnClickListener {
             ResetPasswordActivity.startActivityForWay(this, true)
+            finish()
         }
 
         tvRestPasswordEmail.setOnClickListener {
             ResetPasswordActivity.startActivityForWay(this, false)
+            finish()
         }
     }
 

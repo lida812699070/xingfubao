@@ -117,6 +117,11 @@ class MineFragment : BaseFragment() {
                 startActivity(Intent(it, UserInfoActivity::class.java))
             }
         }
+        ivSetting.setOnClickListener {
+            activity?.let {
+                startActivity(Intent(it, UserInfoActivity::class.java))
+            }
+        }
     }
 
 

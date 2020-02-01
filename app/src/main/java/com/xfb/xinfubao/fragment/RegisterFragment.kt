@@ -114,7 +114,7 @@ class RegisterFragment : BaseFragment() {
 
         if (TextUtils.isEmpty(strPassword) || TextUtils.isEmpty(strPasswordAgain) || TextUtils.isEmpty(
                 strCheckCode
-            ) || TextUtils.isEmpty(strInviteCode)
+            )
         ) {
             showMessage("请填写完整信息")
             return

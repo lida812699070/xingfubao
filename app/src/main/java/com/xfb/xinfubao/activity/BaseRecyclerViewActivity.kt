@@ -66,7 +66,7 @@ abstract class BaseRecyclerViewActivity<T> : DefaultActivity(),
         emptyView?.setReloadListener(this)
     }
 
-    fun loadData(data: List<T>, isEndPage: Boolean? = null) {
+    open fun loadData(data: List<T>, isEndPage: Boolean? = null) {
         if (page == initialPage) list.clear()
         list.addAll(data)
         var canLoadMore = isCanLoadMore() && (isEndPage ?: (data.size >= pageSize))
@@ -83,8 +83,8 @@ abstract class BaseRecyclerViewActivity<T> : DefaultActivity(),
             emptyView?.setLoadState(EmptyView.LoadState.LOAD_STATE_EMPTY)
         }
         pageAdapter().notifyDataSetChanged()
-        if (page == 0) {
-            pageRecyclerView().scrollTo(0,0)
+        if (page == initialPage) {
+            pageRecyclerView().scrollToPosition(0)
         }
     }
 
