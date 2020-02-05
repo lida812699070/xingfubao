@@ -17,10 +17,34 @@ android {
         // 设置支持multidex
         multiDexEnabled true
     }
+
+    signingConfigs {
+        release {
+            keyAlias "lida53"
+            keyPassword "lida53"
+            storeFile file("keystore.jks")
+            storePassword "lida53"
+            v2SigningEnabled true
+        }
+        debug {
+            keyAlias "lida53"
+            keyPassword "lida53"
+            storeFile file("keystore.jks")
+            storePassword "lida53"
+            v2SigningEnabled false
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
     compileOptions {
