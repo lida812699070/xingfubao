@@ -18,7 +18,7 @@ import com.xfb.xinfubao.model.event.EventUserInfo
 import com.xfb.xinfubao.utils.ConfigUtils
 import com.xfb.xinfubao.utils.getFile
 import com.xfb.xinfubao.utils.loadUriCircle
-import com.xfb.xinfubao.utils.setVisible
+import com.xfb.xinfubao.utils.loadUriNoError
 import com.zhihu.matisse.Matisse
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -80,7 +80,7 @@ class UserInfoActivity : DefaultActivity() {
             tvNikeName.text = data.nickName
         }
         tvUserId.text = "${data.userId}"
-        ivVIPLevel.setVisible(!TextUtils.isEmpty(data.grade))
+        ivVIPLevel.loadUriNoError(data.gradeIcon)
 
     }
 

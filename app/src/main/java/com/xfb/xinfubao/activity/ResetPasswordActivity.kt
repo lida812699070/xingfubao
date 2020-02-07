@@ -128,9 +128,10 @@ class ResetPasswordActivity : DefaultActivity() {
             showMessage("两次输入的密码不一致")
             return
         }
-        map["psw"] = strPassword
+        map["pwd"] = strPassword
+        map["restType"] = if (isMobile) "0" else "1"
         showProgress("请稍候")
-        request(RetrofitCreateHelper.createApi(BaseApi::class.java).updloginpsw(map)) {
+        request(RetrofitCreateHelper.createApi(BaseApi::class.java).resetPwd(map)) {
             showMessage("操作成功")
             finish()
         }

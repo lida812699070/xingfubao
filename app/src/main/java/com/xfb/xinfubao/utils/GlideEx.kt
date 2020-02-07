@@ -16,6 +16,11 @@ fun ImageView.loadUri(uri: String?) {
         .error(R.mipmap.icon_loading)
         .into(this)
 }
+fun ImageView.loadUriNoError(uri: String?) {
+    Glide.with(context)
+        .load(uri)
+        .into(this)
+}
 
 fun ImageView.loadBanner(uri: String?) {
     Glide.with(context)

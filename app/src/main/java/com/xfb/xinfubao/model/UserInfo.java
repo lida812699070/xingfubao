@@ -29,9 +29,48 @@ public class UserInfo {
     private String grade;
     private int parentId;
     private double discount;
+    //团队人数
+    private int teamNumber;
+    //直推人数
+    private int pushTheNumber;
+    //团队业绩
+    private double teamPerformance;
     private String inviteCode;
+    private String gradeIcon;
     private boolean isPayPwd;
     private UserAssets userAssets;
+
+    public int getTeamNumber() {
+        return teamNumber;
+    }
+
+    public void setTeamNumber(int teamNumber) {
+        this.teamNumber = teamNumber;
+    }
+
+    public int getPushTheNumber() {
+        return pushTheNumber;
+    }
+
+    public void setPushTheNumber(int pushTheNumber) {
+        this.pushTheNumber = pushTheNumber;
+    }
+
+    public double getTeamPerformance() {
+        return teamPerformance;
+    }
+
+    public void setTeamPerformance(double teamPerformance) {
+        this.teamPerformance = teamPerformance;
+    }
+
+    public String getGradeIcon() {
+        return gradeIcon;
+    }
+
+    public void setGradeIcon(String gradeIcon) {
+        this.gradeIcon = gradeIcon;
+    }
 
     public double getDiscount() {
         return discount;

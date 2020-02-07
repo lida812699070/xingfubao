@@ -103,6 +103,10 @@ interface BaseApi {
     @POST("api/updloginpsw")
     fun updloginpsw(@Body map: Map<String, String>): Observable<Result<Any?>>
 
+    /** 重置密码 */
+    @POST("api/resetPwd")
+    fun resetPwd(@Body map: Map<String, String>): Observable<Result<Any?>>
+
     /** 修改绑定手机号 */
     @POST("api/bindnumber")
     fun bindnumber(@Body map: Map<String, String>): Observable<Result<Any?>>
@@ -223,6 +227,10 @@ interface BaseApi {
     /** 资产互兑右边列表 */
     @POST("api/findExchangeConfig")
     fun findExchangeConfig(@Body map: Map<String, String>): Observable<Result<List<ExchangeModel>>>
+
+    /** 我的团队 */
+    @POST("api/getTeam")
+    fun getTeam(@Body map: Map<String, String>): Observable<Result<List<MyTeamModel>>>
 
 
 }

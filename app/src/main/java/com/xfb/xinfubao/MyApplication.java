@@ -15,7 +15,7 @@ public class MyApplication extends Application {
         super.onCreate();
         context = this;
         Config.setApp(this);
-        Config.setBaseUrl("http://xfbapi.tynet.vip:8088");
+        Config.setBaseUrl("http://xfb.cxtx.info:8082");
         CrashReport.initCrashReport(getApplicationContext(), "e613e24431", false);
     }
 
