@@ -25,6 +25,8 @@ android {
             storeFile file("keystore.jks")
             storePassword "lida53"
             v2SigningEnabled true
+            aaptOptions.cruncherEnabled = false
+            aaptOptions.useNewCruncher = false
         }
         debug {
             keyAlias "lida53"
