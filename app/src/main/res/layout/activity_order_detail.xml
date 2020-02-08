@@ -475,7 +475,7 @@
             style="@style/MainBtn"
             android:layout_width="168dp"
             android:layout_height="match_parent"
-            android:text="立即结算"
+            android:text="立即付款"
             app:layout_constraintRight_toRightOf="parent" />
     </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>

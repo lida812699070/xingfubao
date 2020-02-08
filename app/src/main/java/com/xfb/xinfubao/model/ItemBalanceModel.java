@@ -26,7 +26,7 @@ public class ItemBalanceModel implements MultiItemEntity, Serializable {
     }
 
     public boolean isCashIn() {
-        return type == 0;
+        return type == 1;
     }
 
     public int getType() {

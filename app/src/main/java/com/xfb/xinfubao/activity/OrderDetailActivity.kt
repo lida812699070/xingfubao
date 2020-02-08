@@ -10,7 +10,6 @@ import com.careagle.sdk.utils.PriceChangeUtils
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.api.BaseApi
 import com.xfb.xinfubao.model.OrderDetailModel
-import com.xfb.xinfubao.model.RequestSaveOrderModel
 import com.xfb.xinfubao.utils.ConfigUtils
 import com.xfb.xinfubao.utils.setColorText
 import com.xfb.xinfubao.utils.setDrawLeft
@@ -140,7 +139,7 @@ class OrderDetailActivity : DefaultActivity() {
             tvOrderPrice.text =
                 "应付款：${getString(
                     R.string.rmb_tag,
-                    PriceChangeUtils.getNumKb(data.paymentInfo.paymentAmount)
+                    PriceChangeUtils.getNumKb(data.totalAmount - data.discountAmount)
                 )}"
             tvOrderVipSaveMoney.text =
                 "VIP折扣已节省${getString(
@@ -222,23 +221,14 @@ class OrderDetailActivity : DefaultActivity() {
 
     }
 
-
     /** 立即结算生成订单 */
     private fun toCreateOrder() {
-        val requestSaveOrderModel = RequestSaveOrderModel()
-        requestSaveOrderModel.userId = "${ConfigUtils.userId()}"
-        requestSaveOrderModel.receiveId = "${data?.receive?.receiveId}"
-        requestSaveOrderModel.remark = "${data?.orderDesc}"
-        requestSaveOrderModel.freight = "${data?.freight}"
-        requestSaveOrderModel.totalAmount = "${data?.totalAmount}"
-        requestSaveOrderModel.discount = "${data?.discountAmount}"
-        requestSaveOrderModel.payAmount = "${data?.paymentInfo?.paymentAmount}"
-        requestSaveOrderModel.productDtoList = data?.productBase
-        showProgress("请稍候")
-        request(RetrofitCreateHelper.createApi(BaseApi::class.java).saveOrder(requestSaveOrderModel)) {
+        orderNO?.let {
+            val orderIds = arrayListOf<String>()
+            orderIds.add(it)
             startActivity(
                 Intent(this, CashInActivity::class.java)
-                    .putExtra("data", it.data)
+                    .putExtra("data", orderIds)
             )
         }
     }

@@ -10,6 +10,7 @@ import android.text.TextWatcher
 import android.widget.ImageView
 import com.careagle.sdk.helper.RetrofitCreateHelper
 import com.careagle.sdk.utils.PriceChangeUtils
+import com.careagle.sdk.weight.EmptyView
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.xfb.xinfubao.R
@@ -53,20 +54,24 @@ class MoneyExchangeActivity : DefaultActivity() {
 
     override fun initView(savedInstanceState: Bundle?) {
         myToolbar.setClick { finish() }
-        //TODO 帮助
-        myToolbar.setRightClickStr("帮助") {
-
-        }
 
         val map = hashMapOf<String, String>()
         map["userId"] = "${ConfigUtils.userId()}"
         showProgress("请稍候")
         request(RetrofitCreateHelper.createApi(BaseApi::class.java).findAssetsType(map)) {
-            leftSelect = it.data[0]
-            leftList.clear()
-            leftList.addAll(it.data)
-            bindLeft()
-            requestRight()
+            if (it.data.isEmpty()) {
+                emptyView.setVisible(true)
+                emptyView.setLoadState(EmptyView.LoadState.LOAD_STATE_EMPTY)
+                emptyView.setEmptyStr("没有可兑换的资产")
+            } else {
+                leftSelect = it.data[0]
+                leftList.clear()
+                leftList.addAll(it.data)
+                bindLeft()
+                requestRight()
+                emptyView.setVisible(false)
+            }
+
         }
 
         etExchangeOutCount.addTextChangedListener(object : TextWatcher {

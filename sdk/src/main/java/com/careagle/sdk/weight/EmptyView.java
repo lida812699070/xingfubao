@@ -56,6 +56,10 @@ public class EmptyView extends ConstraintLayout implements View.OnClickListener 
         tvEmpty.setText(text);
     }
 
+    public void setEmptyStr(String emptyStr) {
+        tvEmpty.setText(emptyStr);
+    }
+
     @Override
     public void onClick(View view) {
         if (reloadListener != null) {
