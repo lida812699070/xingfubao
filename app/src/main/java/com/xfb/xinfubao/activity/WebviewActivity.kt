@@ -9,7 +9,6 @@ import com.xfb.xinfubao.R
 import com.xfb.xinfubao.constant.Constant
 import com.xfb.xinfubao.dialog.DialogUtils
 import com.xfb.xinfubao.fragment.WebviewFragment
-import com.xfb.xinfubao.wxapi.WXUtils
 import kotlinx.android.synthetic.main.activity_webview.*
 
 class WebviewActivity : DefaultActivity() {
@@ -20,6 +19,7 @@ class WebviewActivity : DefaultActivity() {
     private var subTitle: String? = null
     private var rightImage = 0
     private var fragment: WebviewFragment? = null
+    private var isNeedPadding: Boolean = false
 
     companion object {
         fun newInstanceUrl(
@@ -27,13 +27,15 @@ class WebviewActivity : DefaultActivity() {
             url: String,
             title: String = "新闻详情",
             subTitle: String = "",
-            rightImage: Int = 0
+            rightImage: Int = 0,
+            isNeedPadding: Boolean = false
         ) {
             val intent = Intent(context, WebviewActivity::class.java)
             intent.putExtra("url", url)
             intent.putExtra("title", title)
             intent.putExtra("subTitle", subTitle)
             intent.putExtra("rightImage", rightImage)
+            intent.putExtra("isNeedPadding", isNeedPadding)
             context.startActivity(intent)
         }
 
@@ -42,13 +44,15 @@ class WebviewActivity : DefaultActivity() {
             html: String,
             title: String = "新闻详情",
             subTitle: String = "",
-            rightImage: Int = 0
+            rightImage: Int = 0,
+            isNeedPadding: Boolean = false
         ) {
             val intent = Intent(context, WebviewActivity::class.java)
             intent.putExtra("html", html)
             intent.putExtra("title", title)
             intent.putExtra("subTitle", subTitle)
             intent.putExtra("rightImage", rightImage)
+            intent.putExtra("isNeedPadding", isNeedPadding)
             context.startActivity(intent)
         }
 
@@ -64,11 +68,12 @@ class WebviewActivity : DefaultActivity() {
         url = intent.getStringExtra("url")
         title = intent.getStringExtra("title")
         subTitle = intent.getStringExtra("subTitle")
+        isNeedPadding = intent.getBooleanExtra("isNeedPadding", false)
         rightImage = intent.getIntExtra("rightImage", 0)
         if (!TextUtils.isEmpty(html)) {
-            fragment = WebviewFragment.newInstanceHtml(html!!)
+            fragment = WebviewFragment.newInstanceHtml(html!!, isNeedPadding)
         } else if (!TextUtils.isEmpty(url)) {
-            fragment = WebviewFragment.newInstanceUrl(url!!)
+            fragment = WebviewFragment.newInstanceUrl(url!!, isNeedPadding)
         } else {
             showMessage("没有数据")
             finish()

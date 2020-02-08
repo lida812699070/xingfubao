@@ -105,6 +105,9 @@ abstract class BaseRecyclerViewActivity<T> : DefaultActivity(),
         if (pageSwipeRefreshLayout() != null) {
             pageSwipeRefreshLayout()?.isRefreshing = false
         }
+        if (page == initialPage) {
+            pageRecyclerView().scrollToPosition(0)
+        }
         if (page > 0) {
             page--
         }

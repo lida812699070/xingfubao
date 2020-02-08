@@ -56,6 +56,7 @@ class ChangePasswordActivity : DefaultActivity() {
             ChangePasswordEnum.CHANGE_MOBILE -> {
                 etMobile.hint = "请输入新的手机号码"
                 etCheckCode.hint = "请输入验证码"
+                etPasswordTop.setVisible(!TextUtils.isEmpty(ConfigUtils.getUserInfo()?.tel))
                 etPasswordTop.hint = "请输入支付密码"
                 etPasswordBottom.setVisible(false)
             }

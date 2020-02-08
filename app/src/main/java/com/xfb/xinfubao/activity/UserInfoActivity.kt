@@ -36,6 +36,7 @@ class UserInfoActivity : DefaultActivity() {
         const val REQ_CHOICE_FROM_ALBUM = 2
         const val REQUEST_TAKE_PHOTO_CODE = 3
         const val REQUEST_NAME = 4
+        const val REQUEST_CORP_CODE = 5
     }
 
     var mUri: Uri? = null
@@ -91,20 +92,42 @@ class UserInfoActivity : DefaultActivity() {
                 REQ_CHOICE_FROM_ALBUM -> {
                     val result = Matisse.obtainResult(data)
                     if (!result.isEmpty()) {
-                        loadUrl(result[0])
+                        mUri = result[0]
+                        corp(result[0])
+
                     }
                 }
                 REQUEST_TAKE_PHOTO_CODE -> {
                     mUri?.let {
-                        loadUrl(it)
+                        corp(it)
                     }
                 }
                 REQUEST_NAME -> {
                     val name = data?.getStringExtra("name")
                     editUserInfo(nickName = name!!)
                 }
+                REQUEST_CORP_CODE -> {
+                    loadUrl(mUri)
+                }
             }
         }
+    }
+
+    private fun corp(uri: Uri) {
+        // 调用系统中自带的图片剪裁
+        val intent = Intent("com.android.camera.action.CROP")
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION.or(Intent.FLAG_GRANT_WRITE_URI_PERMISSION))
+        intent.setDataAndType(uri, "image/*");
+        // 下面这个crop=true是设置在开启的Intent中设置显示的VIEW可裁剪
+        intent.putExtra("crop", "true");
+        // aspectX aspectY 是宽高的比例
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        // outputX outputY 是裁剪图片宽高
+        intent.putExtra("outputX", 150);
+        intent.putExtra("outputY", 150);
+        intent.putExtra("return-data", true);
+        startActivityForResult(intent, REQUEST_CORP_CODE);
     }
 
     fun editUserInfo(headShotUrl: String = "", nickName: String = "") {

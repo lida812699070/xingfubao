@@ -43,7 +43,7 @@ class NewsFragment : BaseRecyclerViewFragment<NewsModel>() {
                             DateUtils.YYYY_MM
                         )
                     )
-                ivImages.loadUri(Constant.PIC_URL+item.iocurl)
+                ivImages.loadUri(Constant.PIC_URL + item.iocurl)
             }
         }
 
@@ -85,7 +85,8 @@ class NewsFragment : BaseRecyclerViewFragment<NewsModel>() {
                     it,
                     list[position].content,
                     list[position].title,
-                    rightImage = R.mipmap.fenxiang_icon
+                    rightImage = R.mipmap.fenxiang_icon,
+                    isNeedPadding = true
                 )
             }
         }

@@ -6,6 +6,7 @@ import android.support.multidex.MultiDex;
 
 import com.careagle.sdk.Config;
 import com.tencent.bugly.crashreport.CrashReport;
+import com.xfb.xinfubao.constant.Constant;
 
 public class MyApplication extends Application {
     private static MyApplication context = null;
@@ -15,7 +16,7 @@ public class MyApplication extends Application {
         super.onCreate();
         context = this;
         Config.setApp(this);
-        Config.setBaseUrl("http://xfb.cxtx.info:8082");
+        Config.setBaseUrl(Constant.SERVER_API);
         CrashReport.initCrashReport(getApplicationContext(), "e613e24431", false);
     }
 

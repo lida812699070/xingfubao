@@ -74,7 +74,7 @@
         android:id="@+id/tvUserIdText"
         style="@style/MyInfoText"
         android:layout_marginTop="1dp"
-        android:text="用户Id（邀请码)"
+        android:text="用户Id"
         app:layout_constraintTop_toBottomOf="@+id/tvNikeNameText"
         tools:ignore="MissingConstraints" />
 
