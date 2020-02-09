@@ -31,7 +31,7 @@ import org.greenrobot.eventbus.EventBus
 import java.io.File
 
 
-/** 我的资料 */
+/** 我的资料1 */
 class UserInfoActivity : DefaultActivity() {
     companion object {
         const val REQ_CHOICE_FROM_ALBUM = 2
