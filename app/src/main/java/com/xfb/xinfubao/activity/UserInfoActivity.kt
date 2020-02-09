@@ -2,6 +2,7 @@ package com.xfb.xinfubao.activity
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
@@ -107,7 +108,13 @@ class UserInfoActivity : DefaultActivity() {
                     editUserInfo(nickName = name!!)
                 }
                 REQUEST_CORP_CODE -> {
-                    loadUrl(mUri)
+                    data?.let {
+                        val bundle = it.extras
+                        val parcelable = bundle.getParcelable<Bitmap>("data")
+                        val file = getFile()
+                        MyBitmapUtils.saveBitmap2file(parcelable, file.absolutePath)
+                        loadFile(file)
+                    }
                 }
             }
         }
@@ -124,8 +131,8 @@ class UserInfoActivity : DefaultActivity() {
         intent.putExtra("aspectX", 1);
         intent.putExtra("aspectY", 1);
         // outputX outputY 是裁剪图片宽高
-        intent.putExtra("outputX", 150);
-        intent.putExtra("outputY", 150);
+        intent.putExtra("outputX", 300);
+        intent.putExtra("outputY", 300);
         intent.putExtra("return-data", true);
         startActivityForResult(intent, REQUEST_CORP_CODE);
     }
@@ -151,6 +158,10 @@ class UserInfoActivity : DefaultActivity() {
         var file = File(FileUtils.getRealFilePath(this, uri))
         val tagFile = getFile()
         file = MyBitmapUtils().bitmapCompress(file, tagFile, 300, 300)
+        loadFile(file)
+    }
+
+    private fun loadFile(file: File) {
         val requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file)
         val body = MultipartBody.Part.createFormData("file", file.name, requestFile)
         showProgress("请稍候")

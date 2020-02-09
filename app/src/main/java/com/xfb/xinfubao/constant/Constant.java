@@ -8,7 +8,7 @@ public class Constant {
     public static final String SERVER_API = SERVER + ":8082";
     //    http://xfbapi.tynet.vip/images/28dc2296e1ed44679c199db18a34a050.png
     //图片头地址
-    public static final String PIC_URL = "http://xfbapi.tynet.vip";
+    public static final String PIC_URL = SERVER + "/";
     //2，用户协议页面配置
     public static final String USER_PROTCT = SERVER_API + "/help/agreement/2/4";
     //3，帮助中心页面配置
