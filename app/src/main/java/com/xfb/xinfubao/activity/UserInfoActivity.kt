@@ -38,7 +38,6 @@ class UserInfoActivity : DefaultActivity() {
         const val REQUEST_TAKE_PHOTO_CODE = 3
         const val REQUEST_NAME = 4
         const val REQUEST_CORP_CODE = 5
-
     }
 
     var mUri: Uri? = null
