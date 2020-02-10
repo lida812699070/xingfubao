@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.View
 import com.careagle.sdk.helper.RetrofitCreateHelper
 import com.careagle.sdk.helper.RxHelper
 import com.careagle.sdk.utils.CommentUtils
@@ -118,7 +119,7 @@ class ChangePasswordActivity : DefaultActivity() {
             return
         }
         map["icode"] = strCheckCode
-        if (TextUtils.isEmpty(strPassword)) {
+        if (TextUtils.isEmpty(strPassword) && etPasswordTop.visibility == View.VISIBLE) {
             showMessage("请输入密码")
             return
         }

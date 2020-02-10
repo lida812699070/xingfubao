@@ -126,6 +126,8 @@ class MoneyExchangeActivity : DefaultActivity() {
                 tvExchangeRatioText.setInVisible(false)
             } else {
                 rightSelect = it.data[0]
+                rightList.clear()
+                rightList.addAll(it.data)
                 bindData()
                 tvPleaseSelect.setInVisible(false)
                 tvYXY.setInVisible(true)

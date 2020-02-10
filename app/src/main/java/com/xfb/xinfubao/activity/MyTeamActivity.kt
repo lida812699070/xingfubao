@@ -24,7 +24,7 @@ class MyTeamActivity : BaseRecyclerViewActivity<MyTeamModel>() {
             override fun convert(helper: BaseViewHolder, item: MyTeamModel) {
                 helper.setText(R.id.tvMobile, item.tel)
                     .setText(R.id.tvLevel, item.grade)
-                    .setText(R.id.tvTeamNumber, item.teamNumber)
+                    .setText(R.id.tvTeamNumber, "${item.teamNumber}")
                     .setText(R.id.tvTeamYeji, PriceChangeUtils.getNumKb(item.teamPerformance))
             }
         }
