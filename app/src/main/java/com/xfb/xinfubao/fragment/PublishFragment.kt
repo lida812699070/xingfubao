@@ -70,11 +70,16 @@ class PublishFragment : BaseRecyclerViewFragment<NewsModel>() {
         typeId = arguments!!.getInt("typeId", 0)
         adapter.setOnItemClickListener { adapter, view, position ->
             activity?.let {
-                WebviewActivity.newInstanceHtml(
-                    it,
-                    list[position].content,
-                    list[position].title
-                )
+                val map = hashMapOf<String, String>()
+                map["id"] = "${list[position].id}"
+                request(RetrofitCreateHelper.createApi(BaseApi::class.java).noticedetails(map)) {
+                    WebviewActivity.newInstanceHtml(
+                        activity!!,
+                        it.data.content,
+                        it.data.title,
+                        isNeedPadding = true
+                    )
+                }
             }
         }
         initData()
