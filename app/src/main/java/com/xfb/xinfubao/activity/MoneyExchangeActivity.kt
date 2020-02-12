@@ -1,6 +1,8 @@
 package com.xfb.xinfubao.activity
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
@@ -18,6 +20,7 @@ import com.xfb.xinfubao.api.BaseApi
 import com.xfb.xinfubao.constant.Constant
 import com.xfb.xinfubao.dialog.DialogUtils
 import com.xfb.xinfubao.model.ExchangeModel
+import com.xfb.xinfubao.myenum.BalanceEnum
 import com.xfb.xinfubao.utils.ConfigUtils
 import com.xfb.xinfubao.utils.loadUri
 import com.xfb.xinfubao.utils.setInVisible
@@ -31,6 +34,7 @@ class MoneyExchangeActivity : DefaultActivity() {
     val leftList = arrayListOf<ExchangeModel>()
     val rightList = arrayListOf<ExchangeModel>()
     var showDiYaDialog: AlertDialog? = null
+    var balanceEnum: BalanceEnum? = null
     val leftAdapter = object :
         BaseQuickAdapter<ExchangeModel, BaseViewHolder>(R.layout.item_exchange, leftList) {
         override fun convert(helper: BaseViewHolder, item: ExchangeModel) {
@@ -48,11 +52,20 @@ class MoneyExchangeActivity : DefaultActivity() {
         }
     }
 
+    companion object {
+        fun toActivity(context: Context, enum: BalanceEnum) {
+            val intent = Intent(context, MoneyExchangeActivity::class.java)
+            intent.putExtra("enum", enum)
+            context.startActivity(intent)
+        }
+    }
+
     override fun getLayoutId(): Int {
         return R.layout.activity_money_exchange
     }
 
     override fun initView(savedInstanceState: Bundle?) {
+        balanceEnum = intent.getSerializableExtra("enum") as BalanceEnum?
         myToolbar.setClick { finish() }
 
         val map = hashMapOf<String, String>()
@@ -65,6 +78,13 @@ class MoneyExchangeActivity : DefaultActivity() {
                 emptyView.setEmptyStr("没有可兑换的资产")
             } else {
                 leftSelect = it.data[0]
+                if (balanceEnum != null) {
+                    it.data.forEach {
+                        if (it.assetsId == 104) {
+                            leftSelect = it
+                        }
+                    }
+                }
                 leftList.clear()
                 leftList.addAll(it.data)
                 bindLeft()

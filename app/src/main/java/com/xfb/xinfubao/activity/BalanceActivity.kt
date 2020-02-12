@@ -187,7 +187,7 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 tabLayout.addTab(tabLayout.newTab().setText("提币明细"))
                 //TODO 兑换商城积分
                 tvCash.setOnClickListener {
-
+                    MoneyExchangeActivity.toActivity(this,BalanceEnum.NAT)
                 }
                 //TODO 提币到钱包
                 tvCashRight.setOnClickListener {
