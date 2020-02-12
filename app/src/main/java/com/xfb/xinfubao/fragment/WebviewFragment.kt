@@ -19,23 +19,34 @@ class WebviewFragment : BaseFragment() {
     private var url: String? = null
     private var html: String? = null
     private var isNeedPadding: Boolean? = false
+    private var isPublish: Boolean? = false
 
     companion object {
-        fun newInstanceUrl(url: String?, isNeedPadding: Boolean = false): WebviewFragment {
+        fun newInstanceUrl(
+            url: String?,
+            isNeedPadding: Boolean = false,
+            isPublish: Boolean = false
+        ): WebviewFragment {
             val webviewFragment = WebviewFragment()
             val bundle = Bundle()
             bundle.putString("url", url)
             bundle.putBoolean("isNeedPadding", isNeedPadding)
+            bundle.putBoolean("isPublish", isPublish)
             webviewFragment.arguments = bundle
             return webviewFragment
         }
 
-        fun newInstanceHtml(html: String?, isNeedPadding: Boolean = false): WebviewFragment {
+        fun newInstanceHtml(
+            html: String?,
+            isNeedPadding: Boolean = false,
+            isPublish: Boolean = false
+        ): WebviewFragment {
             val webviewFragment = WebviewFragment()
             val bundle = Bundle()
             bundle.putString("html", html)
             webviewFragment.arguments = bundle
             bundle.putBoolean("isNeedPadding", isNeedPadding)
+            bundle.putBoolean("isPublish", isPublish)
             return webviewFragment
         }
 
@@ -49,6 +60,7 @@ class WebviewFragment : BaseFragment() {
         url = arguments?.getString("url")
         html = arguments?.getString("html")
         isNeedPadding = arguments?.getBoolean("isNeedPadding")
+        isPublish = arguments?.getBoolean("isPublish")
         val webSettings = webView.settings
         webSettings.setGeolocationEnabled(true)
         //支持媒体资源自动播放
@@ -58,7 +70,6 @@ class WebviewFragment : BaseFragment() {
         webSettings.cacheMode = WebSettings.LOAD_DEFAULT // 根据cache-cont
         webSettings.layoutAlgorithm = WebSettings.LayoutAlgorithm.NORMAL
         // int fontSize = 10;
-        // settings.setTextSize(TextSize.NORMAL);
         webSettings.javaScriptEnabled = true
         webSettings.loadWithOverviewMode = true
         webSettings.setSupportZoom(false)
@@ -73,11 +84,16 @@ class WebviewFragment : BaseFragment() {
         mWebView.removeJavascriptInterface("accessibility");
         mWebView.removeJavascriptInterface("accessibilityTraversal");
         webSettings.loadWithOverviewMode = true
-        if (Build.VERSION.SDK_INT >= 19)
-            webSettings.layoutAlgorithm =
-                android.webkit.WebSettings.LayoutAlgorithm.TEXT_AUTOSIZING;
-        else {
-            webSettings.layoutAlgorithm = android.webkit.WebSettings.LayoutAlgorithm.SINGLE_COLUMN;
+        if (true == isPublish) {
+            webSettings.textZoom = 300
+        } else {
+            if (Build.VERSION.SDK_INT >= 19)
+                webSettings.layoutAlgorithm =
+                    WebSettings.LayoutAlgorithm.TEXT_AUTOSIZING;
+            else {
+                webSettings.layoutAlgorithm =
+                    WebSettings.LayoutAlgorithm.SINGLE_COLUMN;
+            }
         }
         val layoutParams = ConstraintLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,

@@ -20,6 +20,7 @@ class WebviewActivity : DefaultActivity() {
     private var rightImage = 0
     private var fragment: WebviewFragment? = null
     private var isNeedPadding: Boolean = false
+    private var isPublish: Boolean = false
 
     companion object {
         fun newInstanceUrl(
@@ -28,7 +29,8 @@ class WebviewActivity : DefaultActivity() {
             title: String = "新闻详情",
             subTitle: String = "",
             rightImage: Int = 0,
-            isNeedPadding: Boolean = false
+            isNeedPadding: Boolean = false,
+            isPublish: Boolean = false
         ) {
             val intent = Intent(context, WebviewActivity::class.java)
             intent.putExtra("url", url)
@@ -36,6 +38,7 @@ class WebviewActivity : DefaultActivity() {
             intent.putExtra("subTitle", subTitle)
             intent.putExtra("rightImage", rightImage)
             intent.putExtra("isNeedPadding", isNeedPadding)
+            intent.putExtra("isPublish", isPublish)
             context.startActivity(intent)
         }
 
@@ -45,7 +48,8 @@ class WebviewActivity : DefaultActivity() {
             title: String = "新闻详情",
             subTitle: String = "",
             rightImage: Int = 0,
-            isNeedPadding: Boolean = false
+            isNeedPadding: Boolean = false,
+            isPublish: Boolean = false
         ) {
             val intent = Intent(context, WebviewActivity::class.java)
             intent.putExtra("html", html)
@@ -53,6 +57,7 @@ class WebviewActivity : DefaultActivity() {
             intent.putExtra("subTitle", subTitle)
             intent.putExtra("rightImage", rightImage)
             intent.putExtra("isNeedPadding", isNeedPadding)
+            intent.putExtra("isPublish", isPublish)
             context.startActivity(intent)
         }
 
@@ -69,11 +74,12 @@ class WebviewActivity : DefaultActivity() {
         title = intent.getStringExtra("title")
         subTitle = intent.getStringExtra("subTitle")
         isNeedPadding = intent.getBooleanExtra("isNeedPadding", false)
+        isPublish = intent.getBooleanExtra("isPublish", false)
         rightImage = intent.getIntExtra("rightImage", 0)
         if (!TextUtils.isEmpty(html)) {
-            fragment = WebviewFragment.newInstanceHtml(html!!, isNeedPadding)
+            fragment = WebviewFragment.newInstanceHtml(html!!, isNeedPadding, isPublish)
         } else if (!TextUtils.isEmpty(url)) {
-            fragment = WebviewFragment.newInstanceUrl(url!!, isNeedPadding)
+            fragment = WebviewFragment.newInstanceUrl(url!!, isNeedPadding, isPublish)
         } else {
             showMessage("没有数据")
             finish()

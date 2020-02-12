@@ -77,7 +77,8 @@ class PublishFragment : BaseRecyclerViewFragment<NewsModel>() {
                         activity!!,
                         it.data.content,
                         it.data.title,
-                        isNeedPadding = true
+                        isNeedPadding = true,
+                        isPublish = true
                     )
                 }
             }
