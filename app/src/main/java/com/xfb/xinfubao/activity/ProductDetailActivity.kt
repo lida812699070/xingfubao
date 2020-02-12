@@ -40,7 +40,7 @@ class ProductDetailActivity : DefaultActivity() {
         val productDetailFragment = ProductDetailFragment.newInstance(data)
         fragments.add(productDetailFragment)
         title.add("详情")
-        fragments.add(WebviewFragment.newInstanceHtml(data.productDetails))
+        fragments.add(WebviewFragment.newInstanceHtml(data.productDetails, isNeedPadding = true))
         val pagerAdapter =
             MyFragmentPagerAdapter(supportFragmentManager, fragments, title, this)
         vpContent.adapter = pagerAdapter
