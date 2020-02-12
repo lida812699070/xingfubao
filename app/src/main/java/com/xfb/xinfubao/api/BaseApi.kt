@@ -232,5 +232,9 @@ interface BaseApi {
     @POST("api/getTeam")
     fun getTeam(@Body map: Map<String, String>): Observable<Result<List<MyTeamModel>>>
 
+    /** 转账手续费 */
+    @POST("api/findTransferInfo")
+    fun findTransferInfo(@Body map: Map<String, String>): Observable<Result<FindTransferInfoModel>>
+
 
 }

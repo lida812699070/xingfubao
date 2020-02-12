@@ -36,24 +36,29 @@ class TransferActivity : DefaultActivity() {
     }
 
     override fun initView(savedInstanceState: Bundle?) {
-        myToolbar.setClick { finish()  }
+        myToolbar.setClick { finish() }
         type = intent.getIntExtra("type", 0)
         tvUserName.text = if (type == TRANSFER_TYPE_YXY) "银杏叶" else "积分"
         showProgress("请稍候")
         val map = hashMapOf<String, String>()
         map["userId"] = "${ConfigUtils.userId()}"
+        var assetsCode = ""
+        if (type == TRANSFER_TYPE_YXY)
+            assetsCode = "yxy"
+        else
+            assetsCode = "jf"
+        map["assetsCode"] = assetsCode
         showProgress("请稍候")
-        request(RetrofitCreateHelper.createApi(BaseApi::class.java).getUserInfo(map)) {
-            ConfigUtils.saveUserInfo(it.data)
-            if (type == TRANSFER_TYPE_YXY)
-                mAmount = it.data.userAssets.ginkgoLeafNum
-            else
-                mAmount = it.data.userAssets.integralNum
+        //获取手续费
+        request(RetrofitCreateHelper.createApi(BaseApi::class.java).findTransferInfo(map)) {
+            tvShouXvFei.text = "${PriceChangeUtils.getDoubleKb(it.data.transferRatio * 100)}%"
+            mAmount = it.data.balance
             tvLessBalance.text = getString(R.string.rmb_tag, PriceChangeUtils.getNumKb(mAmount))
             tvOk.setOnClickListener {
                 onCashChange()
             }
         }
+
     }
 
     private fun onCashChange() {
