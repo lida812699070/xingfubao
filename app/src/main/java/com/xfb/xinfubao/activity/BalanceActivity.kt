@@ -3,7 +3,6 @@ package com.xfb.xinfubao.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.support.design.widget.TabLayout
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AlertDialog
@@ -41,6 +40,8 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
     val adapter = BalanceAdapter(list)
     var showBalanceDialog: AlertDialog? = null
     lateinit var balanceEnum: BalanceEnum
+    lateinit var tabLayout: TabLayout
+
     var tagType: Int? = null
 
     companion object {
@@ -110,7 +111,7 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         val tvCash = headerView.findViewById<TextView>(R.id.tvCash)
         //另一个主按钮
         val tvCashRight = headerView.findViewById<TextView>(R.id.tvCashRight)
-        val tabLayout = headerView.findViewById<TabLayout>(R.id.tabLayout)
+        tabLayout = headerView.findViewById<TabLayout>(R.id.tabLayout)
         //NAT金额
         val tvNATMoney = headerView.findViewById<TextView>(R.id.tvNATMoney)
         val tvLock = headerView.findViewById<TextView>(R.id.tvLock)
@@ -185,9 +186,8 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 tabLayout.addTab(tabLayout.newTab().setText("解锁明细"))
                 tabLayout.addTab(tabLayout.newTab().setText("兑换明细"))
                 tabLayout.addTab(tabLayout.newTab().setText("提币明细"))
-                //TODO 兑换商城积分
                 tvCash.setOnClickListener {
-                    MoneyExchangeActivity.toActivity(this,BalanceEnum.NAT)
+                    MoneyExchangeActivity.toActivity(this, BalanceEnum.NAT)
                 }
                 //TODO 提币到钱包
                 tvCashRight.setOnClickListener {
@@ -205,21 +205,7 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
             }
 
             override fun onTabSelected(p0: TabLayout.Tab?) {
-                if ("全部" == p0?.text) {
-                    tagType = null
-                } else if ("收入" == p0?.text) {
-                    tagType = 1
-                } else if ("提现" == p0?.text) {
-                    tagType = 2
-                } else if ("转出" == p0?.text) {
-                    tagType = 2
-                } else if ("解锁明细" == p0?.text) {
-                    tagType = 0
-                } else if ("兑换明细" == p0?.text) {
-                    tagType = 1
-                } else if ("提币明细" == p0?.text) {
-                    tagType = 2
-                }
+                resetType(p0)
                 showProgress("请稍候")
                 onRefresh()
             }
@@ -228,10 +214,31 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         initData()
     }
 
+    private fun resetType(p0: TabLayout.Tab?) {
+        if ("全部" == p0?.text) {
+            tagType = null
+        } else if ("收入" == p0?.text) {
+            tagType = 1
+        } else if ("提现" == p0?.text) {
+            tagType = 2
+        } else if ("转出" == p0?.text) {
+            tagType = 2
+        } else if ("解锁明细" == p0?.text) {
+            tagType = 1
+        } else if ("兑换明细" == p0?.text) {
+            tagType = 2
+        } else if ("提币明细" == p0?.text) {
+            tagType = 3
+        }
+    }
+
     override fun initData() {
         val map = hashMapOf<String, String>()
         map["assetsType"] = "${balanceEnum.key}"
         map["pageNum"] = "$page"
+        if (tagType == null) {
+            resetType(tabLayout.getTabAt(0))
+        }
         tagType?.let {
             map["tagType"] = "$it"
         }

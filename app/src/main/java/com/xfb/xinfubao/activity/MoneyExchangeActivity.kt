@@ -87,6 +87,7 @@ class MoneyExchangeActivity : DefaultActivity() {
                 }
                 leftList.clear()
                 leftList.addAll(it.data)
+                leftAdapter.notifyDataSetChanged()
                 bindLeft()
                 requestRight()
                 emptyView.setVisible(false)
@@ -122,10 +123,12 @@ class MoneyExchangeActivity : DefaultActivity() {
 
         tvYXG.setOnClickListener {
             recyclerViewLeft.setInVisible(true)
+            recyclerViewRight.setInVisible(false)
         }
 
         tvYXY.setOnClickListener {
             recyclerViewRight.setInVisible(true)
+            recyclerViewLeft.setInVisible(false)
         }
 
         tvPleaseSelect.setOnClickListener {
@@ -148,6 +151,7 @@ class MoneyExchangeActivity : DefaultActivity() {
                 rightSelect = it.data[0]
                 rightList.clear()
                 rightList.addAll(it.data)
+                rightAdapter.notifyDataSetChanged()
                 bindData()
                 tvPleaseSelect.setInVisible(false)
                 tvYXY.setInVisible(true)
