@@ -5,6 +5,7 @@ import android.support.design.widget.TabLayout
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.careagle.sdk.helper.RetrofitCreateHelper
@@ -29,6 +30,7 @@ class YinXingbaoActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
 
     val adapter = BalanceAdapter(list)
     var selectPosition = -1
+    var headerView: View? = null
 
     override fun getLayoutId(): Int {
         return R.layout.activity_yin_xingbao
@@ -62,25 +64,20 @@ class YinXingbaoActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
     }
 
     private fun initHeader(data: UserInfo) {
-        val headerView = LayoutInflater.from(this).inflate(R.layout.header_yxb, null)
+        headerView = LayoutInflater.from(this).inflate(R.layout.header_yxb, null)
         adapter.addHeaderView(headerView)
         adapter.setHeaderAndEmpty(true)
-        val ivFinish = headerView.findViewById<ImageView>(R.id.ivFinish)
-        val tvSubTitle = headerView.findViewById<TextView>(R.id.tvSubTitle)
-        val tvTotalMoney = headerView.findViewById<TextView>(R.id.tvTotalMoney)
-        val tvTotalCashIn = headerView.findViewById<TextView>(R.id.tvTotalCashIn)
-        val tvTotalCashInYXY = headerView.findViewById<TextView>(R.id.tvTotalCashInYXY)
-        val tvToCashOut = headerView.findViewById<TextView>(R.id.tvToCashOut)
-        val tabLayout = headerView.findViewById<TabLayout>(R.id.tabLayout)
+        val ivFinish = headerView!!.findViewById<ImageView>(R.id.ivFinish)
+        val tvSubTitle = headerView!!.findViewById<TextView>(R.id.tvSubTitle)
+        val tvToCashOut = headerView!!.findViewById<TextView>(R.id.tvToCashOut)
+        val tabLayout = headerView!!.findViewById<TabLayout>(R.id.tabLayout)
         ivFinish.setOnClickListener {
             finish()
         }
         tvSubTitle.setOnClickListener {
             WebviewActivity.newInstanceUrl(this, Constant.YIN_XING_BAO_RULE_URL, "银杏宝规则")
         }
-        tvTotalMoney.text = PriceChangeUtils.getNumKb(data.userAssets.ginkgoTreasureNum)
-        tvTotalCashIn.text = PriceChangeUtils.getNumKb(data.userAssets.ginkgoFruitNum)
-        tvTotalCashInYXY.text = PriceChangeUtils.getNumKb(data.userAssets.ginkgoLeafNum)
+        initHeaderData(data)
         tvToCashOut.setOnClickListener {
             if (selectPosition == -1) {
                 showMessage("请选择转出记录")
@@ -103,6 +100,16 @@ class YinXingbaoActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         }
     }
 
+    private fun initHeaderData(data: UserInfo) {
+        if (headerView == null) return
+        val tvTotalMoney = headerView!!.findViewById<TextView>(R.id.tvTotalMoney)
+        val tvTotalCashIn = headerView!!.findViewById<TextView>(R.id.tvTotalCashIn)
+        val tvTotalCashInYXY = headerView!!.findViewById<TextView>(R.id.tvTotalCashInYXY)
+        tvTotalMoney?.text = PriceChangeUtils.getNumKb(data.userAssets.ginkgoTreasureNum)
+        tvTotalCashIn?.text = PriceChangeUtils.getNumKb(data.userAssets.ginkgoFruitNum)
+        tvTotalCashInYXY?.text = PriceChangeUtils.getNumKb(data.userAssets.ginkgoLeafNum)
+    }
+
     override fun initData() {
         val map = hashMapOf<String, String>()
         map["pageNum"] = "$page"
@@ -122,6 +129,12 @@ class YinXingbaoActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         selectPosition = -1
         this.adapter.natSelector = selectPosition
         onRefresh()
+        val map = hashMapOf<String, String>()
+        map["userId"] = "${ConfigUtils.userId()}"
+        request(RetrofitCreateHelper.createApi(BaseApi::class.java).getUserInfo(map)) {
+            ConfigUtils.saveUserInfo(it.data)
+            initHeaderData(it.data)
+        }
     }
 
     override fun onDestroy() {

@@ -49,7 +49,7 @@ class CashOutRecordActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 )
                 tvMoney.text = "${PriceChangeUtils.getNumKbs(data.amount)}"
                 if (state == 0) {
-                    tvState.text = if (data.isSuccess) "已成功" else "待审核"
+                    tvState.text = data.stateDepict
                     tvState.setBackgroundDrawable(
                         if (data.isSuccess)
                             mContext.resources.getDrawable(R.drawable.shape_light_org_radius_13)
@@ -57,7 +57,7 @@ class CashOutRecordActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                             mContext.resources.getDrawable(R.drawable.shape_888_radius_13)
                     )
                 } else if (state == 1) {
-                    tvState.text = if (data.isSuccess) "已成功" else "待审核"
+                    tvState.text = data.stateDepict
                     tvState.setBackgroundDrawable(
                         if (data.isSuccess)
                             mContext.resources.getDrawable(R.drawable.shape_org_radius_13)
@@ -65,7 +65,7 @@ class CashOutRecordActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                             mContext.resources.getDrawable(R.drawable.shape_888_radius_13)
                     )
                 } else if (state == 2) {
-                    tvState.text = "已抵押"
+                    tvState.text = data.stateDepict
                     tvState.setBackgroundDrawable(
                         mContext.resources.getDrawable(R.drawable.shape_theme_radius_13)
                     )

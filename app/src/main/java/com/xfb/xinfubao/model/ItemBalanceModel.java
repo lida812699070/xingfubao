@@ -18,7 +18,7 @@ public class ItemBalanceModel implements MultiItemEntity, Serializable {
     private boolean isSuccess = true;
 
     public boolean isSuccess() {
-        return state == 2;
+        return state != 1;
     }
 
     public void setSuccess(boolean success) {

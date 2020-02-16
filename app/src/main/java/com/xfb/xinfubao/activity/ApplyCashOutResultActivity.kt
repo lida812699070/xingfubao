@@ -48,20 +48,21 @@ class ApplyCashOutResultActivity : DefaultActivity() {
                 ivState.setImageResource(if (isWait) R.mipmap.dengdai_icon else R.mipmap.dui_icon_3)
                 if (isWait) {
                     tvHint.setColorText(
-                        getString(R.string.apply_cash_out_2_hint),
+                        getString(R.string.apply_cash_out_2_hint, itemBalanceModel?.stateDepict),
                         resources.getColor(R.color.color_light_org),
                         12,
-                        15
+                        12 + itemBalanceModel!!.stateDepict.length
                     )
-                    tvOk.text = "待审核"
                 } else {
                     tvHint.setColorText(
-                        getString(R.string.apply_cash_out_success_hint),
+                        getString(
+                            R.string.apply_cash_out_success_hint,
+                            itemBalanceModel?.stateDepict
+                        ),
                         resources.getColor(R.color.color_light_org),
                         10,
-                        13
+                        10 + itemBalanceModel!!.stateDepict.length
                     )
-                    tvOk.text = "已成功"
                 }
                 tvCashOutDetailText.text = "提现详情"
                 tvApplyTime.text = itemBalanceModel?.createDate
@@ -75,20 +76,21 @@ class ApplyCashOutResultActivity : DefaultActivity() {
                 ivState.setImageResource(if (isWait) R.mipmap.dengdai_icon else R.mipmap.dui_icon_org_3)
                 if (isWait) {
                     tvHint.setColorText(
-                        getString(R.string.apply_cash_out_hint),
+                        getString(R.string.apply_cash_out_hint, itemBalanceModel?.stateDepict),
                         resources.getColor(R.color.color_org),
                         12,
-                        15
+                        12 + itemBalanceModel!!.stateDepict.length
                     )
-                    tvOk.text = "待审核"
                 } else {
                     tvHint.setColorText(
-                        getString(R.string.apply_cash_out_success_hint),
+                        getString(
+                            R.string.apply_cash_out_success_hint,
+                            itemBalanceModel?.stateDepict
+                        ),
                         resources.getColor(R.color.color_org),
                         10,
-                        13
+                        10 + itemBalanceModel!!.stateDepict.length
                     )
-                    tvOk.text = "已成功"
                 }
                 tvCashOutDetailText.text = "转出详情"
                 tvApplyTime.text = itemBalanceModel?.createDate
@@ -101,12 +103,11 @@ class ApplyCashOutResultActivity : DefaultActivity() {
                 myToolbar.setTitle("抵押银杏宝")
                 ivState.setImageResource(if (isWait) R.mipmap.dengdai_icon else R.mipmap.dui_icon_2)
                 tvHint.setColorText(
-                    getString(R.string.apply_cash_out_success2_hint),
+                    getString(R.string.apply_cash_out_success2_hint, itemBalanceModel?.stateDepict),
                     resources.getColor(R.color.color_theme),
                     12,
-                    15
+                    12 + itemBalanceModel!!.stateDepict.length
                 )
-                tvOk.text = "已成功"
                 tvCashOutDetailText.text = "抵押详情"
                 tvApplyTime.text = itemBalanceModel?.createDate
                 tvApplyTime.setTextColor(resources.getColor(R.color.color_theme))
@@ -115,7 +116,7 @@ class ApplyCashOutResultActivity : DefaultActivity() {
                 tvOk.setBackgroundDrawable(resources.getDrawable(R.drawable.shape_theme_radius_13))
             }
         }
-
+        tvOk.text = itemBalanceModel?.stateDepict
     }
 
 }

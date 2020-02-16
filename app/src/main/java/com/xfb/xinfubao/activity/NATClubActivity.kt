@@ -5,6 +5,7 @@ import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.careagle.sdk.helper.RetrofitCreateHelper
@@ -27,6 +28,7 @@ class NATClubActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
     val adapter = BalanceAdapter(list)
     var showDiYaDialog: AlertDialog? = null
     var selectPosition = -1
+    var headerView: View? = null
 
     override fun getLayoutId(): Int {
         return R.layout.activity_natclub
@@ -76,16 +78,27 @@ class NATClubActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
             map["payPassword"] = it
             request(RetrofitCreateHelper.createApi(BaseApi::class.java).mortgageNat(map)) {
                 showMessage("操作成功")
-                finish()
+                val map = hashMapOf<String, String>()
+                map["userId"] = "${ConfigUtils.userId()}"
+                showProgress("请稍候")
+                request(RetrofitCreateHelper.createApi(BaseApi::class.java).getUserInfo(map)) {
+                    ConfigUtils.saveUserInfo(it.data)
+                    val tvTotalMoney = headerView!!.findViewById<TextView>(R.id.tvTotalMoney)
+                    tvTotalMoney.text =
+                        PriceChangeUtils.getNumKb(it.data.userAssets.natMortgagedNum)
+                    var selectPosition = -1
+                    this.adapter.natSelector = selectPosition
+                    onRefresh()
+                }
             }
         }
     }
 
     private fun initHeader(userInfo: UserInfo) {
-        val headerView = LayoutInflater.from(this).inflate(R.layout.header_nat, null)
-        val ivFinish = headerView.findViewById<ImageView>(R.id.ivFinish)
-        val tvDiYaRecord = headerView.findViewById<TextView>(R.id.tvDiYaRecord)
-        val tvTotalMoney = headerView.findViewById<TextView>(R.id.tvTotalMoney)
+        headerView = LayoutInflater.from(this).inflate(R.layout.header_nat, null)
+        val ivFinish = headerView!!.findViewById<ImageView>(R.id.ivFinish)
+        val tvDiYaRecord = headerView!!.findViewById<TextView>(R.id.tvDiYaRecord)
+        val tvTotalMoney = headerView!!.findViewById<TextView>(R.id.tvTotalMoney)
         ivFinish.setOnClickListener {
             finish()
         }

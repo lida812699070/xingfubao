@@ -53,6 +53,7 @@ class BalanceAdapter(data: List<ItemBalanceModel>) :
                             11,
                             16
                         )
+                        ivPoint.isSelected = data.isCashIn
                         tvMoney.isSelected = data.isCashIn
                         tvMoney.text = PriceChangeUtils.getNumKb(data.amount)
                     }
@@ -92,6 +93,7 @@ class BalanceAdapter(data: List<ItemBalanceModel>) :
                         ivPoint.setVisible(false)
                         tvMoney.setTextColor(mContext.resources.getColor(R.color.color_org))
                         tvMoney.text = "${PriceChangeUtils.getNumKbs(data.amount)}"
+                        ivNatClubRight.setImageResource(R.mipmap.dui_icon_3_red)
                         ivNatClubRight.setVisible((helper.adapterPosition - 1) == natSelector)
                     }
                 }

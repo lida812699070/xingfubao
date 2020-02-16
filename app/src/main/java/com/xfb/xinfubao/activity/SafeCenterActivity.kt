@@ -55,6 +55,7 @@ class SafeCenterActivity : DefaultActivity() {
         val map = hashMapOf<String, String>()
         map["userId"] = "${ConfigUtils.userId()}"
         request(RetrofitCreateHelper.createApi(BaseApi::class.java).getUserInfo(map)) {
+            ConfigUtils.saveUserInfo(it.data)
             bindData(it.data)
         }
     }
@@ -65,6 +66,7 @@ class SafeCenterActivity : DefaultActivity() {
         if (TextUtils.isEmpty(data.tel)) {
             tvResetMobile.text = "绑定手机号"
         } else {
+            tvResetMobile.text = "修改绑定手机"
             tvMobile.text = data.tel
         }
         if (data.authState == 2) {
