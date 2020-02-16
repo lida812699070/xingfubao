@@ -53,7 +53,6 @@ class BalanceAdapter(data: List<ItemBalanceModel>) :
                             11,
                             16
                         )
-                        ivPoint.setVisible(false)
                         tvMoney.isSelected = data.isCashIn
                         tvMoney.text = PriceChangeUtils.getNumKb(data.amount)
                     }
@@ -80,7 +79,7 @@ class BalanceAdapter(data: List<ItemBalanceModel>) :
                         ivPoint.setVisible(false)
                         tvMoney.isSelected = data.isCashIn
                         tvMoney.text = "${PriceChangeUtils.getNumKbs(data.amount)}"
-                        ivNatClubRight.setVisible((helper.adapterPosition-1) == natSelector)
+                        ivNatClubRight.setVisible((helper.adapterPosition - 1) == natSelector)
                     }
                     BalanceEnum.YIN_XING_BAO -> {
                         val strTitle = "${data.createDate}   ${data.name}"
@@ -93,7 +92,7 @@ class BalanceAdapter(data: List<ItemBalanceModel>) :
                         ivPoint.setVisible(false)
                         tvMoney.setTextColor(mContext.resources.getColor(R.color.color_org))
                         tvMoney.text = "${PriceChangeUtils.getNumKbs(data.amount)}"
-
+                        ivNatClubRight.setVisible((helper.adapterPosition - 1) == natSelector)
                     }
                 }
             }

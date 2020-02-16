@@ -17,14 +17,18 @@ import com.xfb.xinfubao.api.BaseApi
 import com.xfb.xinfubao.constant.Constant
 import com.xfb.xinfubao.model.ItemBalanceModel
 import com.xfb.xinfubao.model.UserInfo
+import com.xfb.xinfubao.model.event.EventTransfer
 import com.xfb.xinfubao.myenum.BalanceEnum
 import com.xfb.xinfubao.utils.ConfigUtils
 import kotlinx.android.synthetic.main.activity_yin_xingbao.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 
 /** 银杏宝 */
 class YinXingbaoActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
 
     val adapter = BalanceAdapter(list)
+    var selectPosition = -1
 
     override fun getLayoutId(): Int {
         return R.layout.activity_yin_xingbao
@@ -54,6 +58,7 @@ class YinXingbaoActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         request(RetrofitCreateHelper.createApi(BaseApi::class.java).getUserInfo(map)) {
             initHeader(it.data)
         }
+        EventBus.getDefault().register(this)
     }
 
     private fun initHeader(data: UserInfo) {
@@ -77,10 +82,25 @@ class YinXingbaoActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         tvTotalCashIn.text = PriceChangeUtils.getNumKb(data.userAssets.ginkgoFruitNum)
         tvTotalCashInYXY.text = PriceChangeUtils.getNumKb(data.userAssets.ginkgoLeafNum)
         tvToCashOut.setOnClickListener {
-            ApplyCashOutActivity.toActivity(this, 1)
+            if (selectPosition == -1) {
+                showMessage("请选择转出记录")
+                return@setOnClickListener
+            }
+            ApplyCashOutActivity.toActivity(
+                this,
+                1,
+                list[selectPosition].id,
+                list[selectPosition].amount
+            )
         }
         tabLayout.addTab(tabLayout.newTab().setText("明细"))
         initData()
+
+        adapter.setOnItemClickListener { adapter, view, position ->
+            selectPosition = position
+            this.adapter.natSelector = selectPosition
+            adapter.notifyDataSetChanged()
+        }
     }
 
     override fun initData() {
@@ -97,4 +117,15 @@ class YinXingbaoActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         }
     }
 
+    @Subscribe
+    fun transfer(event: EventTransfer) {
+        selectPosition = -1
+        this.adapter.natSelector = selectPosition
+        onRefresh()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
+    }
 }

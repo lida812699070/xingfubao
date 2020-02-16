@@ -22,6 +22,7 @@ import kotlinx.android.synthetic.main.activity_cash_out_record.*
 class CashOutRecordActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
     /** 0 申请提现记录  1 申请转出记录  2 申请抵押记录 */
     var state = 0
+
     companion object {
         fun toActivity(context: Context, state: Int) {
             val intent = Intent(context, CashOutRecordActivity::class.java)
@@ -128,25 +129,27 @@ class CashOutRecordActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         map["pageNum"] = "$page"
         map["pageSize"] = "$pageSize"
         map["userId"] = "${ConfigUtils.userId()}"
-        if (state == 0) {
+        if (state == 0) {//银杏果提现
+            map["assetsCode"] = "yxg"
             requestWithError(
-                RetrofitCreateHelper.createApi(BaseApi::class.java).cashOutLogs(
+                RetrofitCreateHelper.createApi(BaseApi::class.java).getWithdrawalsRecord(
                     map
                 ), {
                     loadData(it.data)
                 }) {
                 showLoadError()
             }
-        } else if (state == 1) {
+        } else if (state == 1) {//银杏宝转出
+            map["assetsCode"] = "yxb"
             requestWithError(
-                RetrofitCreateHelper.createApi(BaseApi::class.java).ginkgoTreasureTurnOutRecord(
+                RetrofitCreateHelper.createApi(BaseApi::class.java).getWithdrawalsRecord(
                     map
                 ), {
                     loadData(it.data)
                 }) {
                 showLoadError()
             }
-        } else if (state == 2) {
+        } else if (state == 2) {//NAT抵押
             requestWithError(
                 RetrofitCreateHelper.createApi(BaseApi::class.java).findNatMortgageLogs(
                     map

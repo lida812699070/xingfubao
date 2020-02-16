@@ -199,15 +199,14 @@ interface BaseApi {
     @POST("api/transfer")
     fun transfer(@Body map: Map<String, String>): Observable<Result<Any?>>
 
-    /** 银杏宝转出记录 */
-    @POST("api/ginkgoTreasureTurnOutRecord")
-    fun ginkgoTreasureTurnOutRecord(@Body map: Map<String, String>): Observable<Result<List<ItemBalanceModel>>>
+    /** 银杏果提现记录 */
+    @POST("api/getWithdrawalsRecord")
+    fun getWithdrawalsRecord(@Body map: Map<String, String>): Observable<Result<List<ItemBalanceModel>>>
 
     /** 抵押记录 */
     @POST("api/findNatMortgageLogs")
     fun findNatMortgageLogs(@Body map: Map<String, String>): Observable<Result<List<ItemBalanceModel>>>
 
-    //TODO 申请记录接口
     /** 提现记录 */
     @POST("api/findNatMortgageLogs")
     fun cashOutLogs(@Body map: Map<String, String>): Observable<Result<List<ItemBalanceModel>>>
@@ -235,6 +234,18 @@ interface BaseApi {
     /** 转账手续费 */
     @POST("api/findTransferInfo")
     fun findTransferInfo(@Body map: Map<String, String>): Observable<Result<FindTransferInfoModel>>
+
+    /** 银杏果提现 */
+    @POST("api/ginkgoFruitTurnOut")
+    fun ginkgoFruitTurnOut(@Body map: Map<String, String>): Observable<Result<Any?>>
+
+    /** 银杏宝转出 */
+    @POST("api/ginkgoTreasureTurnOut")
+    fun ginkgoTreasureTurnOut(@Body map: Map<String, String>): Observable<Result<Any?>>
+
+    /** 获取银杏宝转出详情 */
+    @POST("api/findTurnOutInfo")
+    fun findTurnOutInfo(@Body map: Map<String, String>): Observable<Result<YXBCashOutDetail>>
 
 
 }
