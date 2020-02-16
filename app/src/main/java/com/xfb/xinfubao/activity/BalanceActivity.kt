@@ -42,8 +42,8 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
     lateinit var balanceEnum: BalanceEnum
     lateinit var tabLayout: TabLayout
     var headerView: View? = null
-
     var tagType: Int? = null
+    var initTab = false
 
     companion object {
         fun toActivity(context: Context, enum: BalanceEnum) {
@@ -134,7 +134,7 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 ivBg.setImageResource(R.mipmap.yxg_bg)
                 tvCash.text = "申请提现"
                 tvBalance.text = PriceChangeUtils.getNumKb(userAssets.ginkgoFruitNum)
-                if (tabLayout.childCount == 0) {
+                if (!initTab) {
                     tabLayout.addTab(tabLayout.newTab().setText("全部"))
                     tabLayout.addTab(tabLayout.newTab().setText("收入"))
                     tabLayout.addTab(tabLayout.newTab().setText("提现"))
@@ -149,7 +149,7 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 ivBg.setImageResource(R.mipmap.icon_yxy)
                 tvCash.text = "转账"
                 tvBalance.text = PriceChangeUtils.getNumKb(userAssets.ginkgoLeafNum)
-                if (tabLayout.childCount == 0) {
+                if (!initTab) {
                     tabLayout.addTab(tabLayout.newTab().setText("全部"))
                     tabLayout.addTab(tabLayout.newTab().setText("收入"))
                     tabLayout.addTab(tabLayout.newTab().setText("转出"))
@@ -164,7 +164,7 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 ivBg.setImageResource(R.mipmap.icon_jfsc)
                 tvCash.text = "转账"
                 tvBalance.text = PriceChangeUtils.getNumKb(userAssets.integralNum)
-                if (tabLayout.childCount == 0) {
+                if (!initTab) {
                     tabLayout.addTab(tabLayout.newTab().setText("全部"))
                     tabLayout.addTab(tabLayout.newTab().setText("收入"))
                     tabLayout.addTab(tabLayout.newTab().setText("转出"))
@@ -180,7 +180,7 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 ivBg.setImageResource(R.mipmap.icon_ylz)
                 tvCash.text = "愿力值规则"
                 tvBalance.text = PriceChangeUtils.getNumKb(userAssets.powerAvowNum)
-                if (tabLayout.childCount == 0) {
+                if (!initTab) {
                     tabLayout.addTab(tabLayout.newTab().setText("明细"))
                 }
                 tvCash.setOnClickListener {
@@ -199,7 +199,7 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 tvNATMoney.setVisible(true)
                 tvNATMoney.text = PriceChangeUtils.getNumKb(userAssets.natLockNum)
                 tvBalance.text = PriceChangeUtils.getNumKb(userAssets.natFlowNum)
-                if (tabLayout.childCount == 0) {
+                if (!initTab) {
                     tabLayout.addTab(tabLayout.newTab().setText("解锁明细"))
                     tabLayout.addTab(tabLayout.newTab().setText("兑换明细"))
                     tabLayout.addTab(tabLayout.newTab().setText("提币明细"))
@@ -213,6 +213,7 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 }
             }
         }
+        initTab = true
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(p0: TabLayout.Tab?) {
 
