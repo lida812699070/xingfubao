@@ -43,7 +43,7 @@ class NewsFragment : BaseRecyclerViewFragment<NewsModel>() {
                             DateUtils.YYYY_MM
                         )
                     )
-                ivImages.loadUri(Constant.PIC_URL + item.iocurl)
+                ivImages.loadUri(item.iocurl)
             }
         }
 

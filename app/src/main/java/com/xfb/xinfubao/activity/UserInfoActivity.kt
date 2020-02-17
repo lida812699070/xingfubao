@@ -76,7 +76,7 @@ class UserInfoActivity : DefaultActivity() {
     }
 
     private fun bindData(data: UserInfo) {
-        ivHeader.loadUriCircle(Constant.PIC_URL + data.headIcon)
+        ivHeader.loadUriCircle(data.headIcon)
         if (TextUtils.isEmpty(data.nickName)) {
             tvNikeName.text = "未设置"
         } else {
@@ -149,7 +149,7 @@ class UserInfoActivity : DefaultActivity() {
                 tvNikeName.text = nickName
             }
             if (!TextUtils.isEmpty(headShotUrl)) {
-                ivHeader.loadUriCircle("${Constant.PIC_URL}$headShotUrl")
+                ivHeader.loadUriCircle("$headShotUrl")
             }
             EventBus.getDefault().post(EventUserInfo())
         }

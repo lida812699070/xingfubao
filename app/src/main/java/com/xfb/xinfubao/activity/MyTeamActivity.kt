@@ -66,6 +66,7 @@ class MyTeamActivity : BaseRecyclerViewActivity<MyTeamModel>() {
         map["userId"] = "${ConfigUtils.userId()}"
         requestWithError(RetrofitCreateHelper.createApi(BaseApi::class.java).getTeam(map), {
             loadData(it.data)
+            pageAdapter().loadMoreEnd()
         }) {
             showLoadError()
         }

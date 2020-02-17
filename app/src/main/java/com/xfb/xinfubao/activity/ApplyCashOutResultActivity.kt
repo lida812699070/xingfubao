@@ -102,11 +102,12 @@ class ApplyCashOutResultActivity : DefaultActivity() {
             2 -> {
                 myToolbar.setTitle("抵押银杏宝")
                 ivState.setImageResource(if (isWait) R.mipmap.dengdai_icon else R.mipmap.dui_icon_2)
+                val strState = if (itemBalanceModel!!.isSuccess) "已抵押" else "待审核"
                 tvHint.setColorText(
-                    getString(R.string.apply_cash_out_success2_hint, itemBalanceModel?.stateDepict),
+                    getString(R.string.apply_cash_out_success2_hint, strState),
                     resources.getColor(R.color.color_theme),
                     12,
-                    12 + itemBalanceModel!!.stateDepict.length
+                    15
                 )
                 tvCashOutDetailText.text = "抵押详情"
                 tvApplyTime.text = itemBalanceModel?.createDate

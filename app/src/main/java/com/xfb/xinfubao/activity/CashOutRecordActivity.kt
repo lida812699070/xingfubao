@@ -65,10 +65,14 @@ class CashOutRecordActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                             mContext.resources.getDrawable(R.drawable.shape_888_radius_13)
                     )
                 } else if (state == 2) {
-                    tvState.text = data.stateDepict
+                    tvState.text = if (data.isSuccess) "已抵押" else "待审核"
                     tvState.setBackgroundDrawable(
-                        mContext.resources.getDrawable(R.drawable.shape_theme_radius_13)
+                        if (data.isSuccess)
+                            mContext.resources.getDrawable(R.drawable.shape_theme_radius_13)
+                        else
+                            mContext.resources.getDrawable(R.drawable.shape_888_radius_13)
                     )
+                    tvTitle.text = strTitle
                 }
             }
         }

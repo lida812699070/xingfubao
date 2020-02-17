@@ -40,7 +40,7 @@ class MoneyExchangeActivity : DefaultActivity() {
         override fun convert(helper: BaseViewHolder, item: ExchangeModel) {
             helper.setText(R.id.tvYXY, item.assetsName)
             val ivRight = helper.getView<ImageView>(R.id.ivRight)
-            ivRight.loadUri(Constant.PIC_URL + item.assetsIcon)
+            ivRight.loadUri(item.assetsIcon)
         }
     }
     val rightAdapter = object :
@@ -48,7 +48,7 @@ class MoneyExchangeActivity : DefaultActivity() {
         override fun convert(helper: BaseViewHolder, item: ExchangeModel) {
             helper.setText(R.id.tvYXY, item.assetsName)
             val ivRight = helper.getView<ImageView>(R.id.ivRight)
-            ivRight.loadUri(Constant.PIC_URL + item.assetsIcon)
+            ivRight.loadUri(item.assetsIcon)
         }
     }
 
@@ -207,7 +207,7 @@ class MoneyExchangeActivity : DefaultActivity() {
         tvExchangeRatio.setVisible(true)
         bindLeft()
         tvYXY.text = rightSelect?.assetsName
-        ivIRight.loadUri(Constant.PIC_URL + rightSelect?.assetsIcon)
+        ivIRight.loadUri(rightSelect?.assetsIcon)
         ivIRight.setVisible(true)
         tvExchangeRatioText.text = "${leftSelect?.assetsName}兑换${rightSelect?.assetsName}的比例为"
         tvExchangeRatio.text = "1:${PriceChangeUtils.getDoubleKb(rightSelect!!.ratio)}"
@@ -217,7 +217,7 @@ class MoneyExchangeActivity : DefaultActivity() {
 
     private fun bindLeft() {
         tvYXG.text = leftSelect?.assetsName
-        ivLeft.loadUri(Constant.PIC_URL + leftSelect?.assetsIcon)
+        ivLeft.loadUri(leftSelect?.assetsIcon)
         ivLeft.setVisible(true)
     }
 

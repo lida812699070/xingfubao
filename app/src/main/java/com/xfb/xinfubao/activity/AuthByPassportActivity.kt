@@ -142,12 +142,12 @@ class AuthByPassportActivity : DefaultActivity() {
 
     private fun uploadPicSuccess(data: String?) {
         if (isFront) {
-            ivFacePic.loadUri("${Constant.PIC_URL}$data")
+            ivFacePic.loadUri("$data")
             frontUrlStr = data!!
             ivReTakePicFace.setVisible(true)
             tvFacePic.setVisible(false)
         } else {
-            ivBackPic.loadUri("${Constant.PIC_URL}$data")
+            ivBackPic.loadUri("$data")
             backUrlStr = data!!
             tvBackPic.setVisible(false)
             ivReTakePicBack.setVisible(true)

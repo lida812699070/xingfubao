@@ -147,10 +147,19 @@ class MineFragment : BaseFragment() {
         }
     }
 
+    private fun changeUrl(uri: String?): String? {
+        var url = uri
+        if (uri != null && !uri.startsWith("http")) {
+            url = Constant.PIC_URL + url
+        }
+        return url
+    }
+
     @SuppressLint("SetTextI18n")
     private fun bindData(data: UserInfo) {
+        val changeUrl = changeUrl("${data.headIcon}")
         Glide.with(context)
-            .load("${Constant.PIC_URL}${data.headIcon}")
+            .load(changeUrl)
             .placeholder(R.mipmap.touxiang)
             .error(R.mipmap.touxiang)
             .bitmapTransform(CropCircleTransformation(context))
