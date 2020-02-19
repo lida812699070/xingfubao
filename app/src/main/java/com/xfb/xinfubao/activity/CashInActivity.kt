@@ -3,19 +3,26 @@ package com.xfb.xinfubao.activity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
+import android.view.KeyEvent
+import android.view.View
 import com.careagle.sdk.helper.RetrofitCreateHelper
 import com.careagle.sdk.utils.PriceChangeUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
+import com.tencent.mm.opensdk.openapi.WXAPIFactory
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.api.BaseApi
 import com.xfb.xinfubao.dialog.DialogUtils
 import com.xfb.xinfubao.model.*
 import com.xfb.xinfubao.model.event.EventPauResult
+import com.xfb.xinfubao.model.event.PaySucessEvent
+import com.xfb.xinfubao.payment.PayUtils
 import com.xfb.xinfubao.utils.ConfigUtils
 import com.xfb.xinfubao.utils.setVisible
+import com.xfb.xinfubao.wxapi.WXUtils
 import kotlinx.android.synthetic.main.activity_cash_in.*
 import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 
 /** 收银台 */
 class CashInActivity : DefaultActivity() {
@@ -70,7 +77,7 @@ class CashInActivity : DefaultActivity() {
         tvToPay.setOnClickListener {
             checkPayPassword {
                 showDiYaDialog = DialogUtils.showDiYaDialog(this, 1) {
-                    showDiYaDialog?.hide()
+                    showDiYaDialog?.dismiss()
                     toPay(it)
                 }
             }
@@ -78,10 +85,15 @@ class CashInActivity : DefaultActivity() {
 
         //选择支付方式
         tvPayWayText.setOnClickListener {
-            payWayRecyclerView.setVisible(true)
+            gpSelector.setVisible(true)
+        }
+
+        viewBg.setOnClickListener {
+            gpSelector.setVisible(false)
         }
 
         initPayWayRecyclerView()
+        EventBus.getDefault().register(this)
     }
 
     private fun initPayWayRecyclerView() {
@@ -90,7 +102,7 @@ class CashInActivity : DefaultActivity() {
         payWayAdapter.setOnItemClickListener { adapter, view, position ->
             payMethod = payWayList[position]
             tvPayWay.text = payMethod?.payMethodName
-            payWayRecyclerView.setVisible(false)
+            gpSelector.setVisible(false)
         }
     }
 
@@ -110,13 +122,35 @@ class CashInActivity : DefaultActivity() {
         }
         requestPay.orderNO = orderNos
         request(RetrofitCreateHelper.createApi(BaseApi::class.java).pay(requestPay)) {
-            val payResultModel = PayResultModel()
-            payResultModel.payAmout = data!!.totalAmount
-            payResultModel.payMethod = payMethod
-            PayResultActivity.toActivity(this, payResultModel)
-            finish()
-            EventBus.getDefault().post(EventPauResult())
+            if (105L == payMethod?.payMethodId) {//微信
+//                val wechatPaymentModel = WechatPaymentModel()
+//                wechatPaymentModel.convert()
+//                PayUtils(this).wechatPayment(wechatPaymentModel)
+                val msgApi = WXAPIFactory.createWXAPI(this, WXUtils.WX_APP_ID)
+                msgApi.registerApp(it.data.paySign.app_id)
+                val convert = it.data.paySign.convert()
+                msgApi.sendReq(convert)
+            } else if (106L == payMethod?.payMethodId) {//支付宝
+                val payModel = PayModel(
+                    2,
+                    it.data.id,
+                    it.data.orderStr,
+                    null
+                )
+                toPay(payModel)
+            } else {
+                paySuccess()
+            }
         }
+    }
+
+    private fun paySuccess() {
+        val payResultModel = PayResultModel()
+        payResultModel.payAmout = data!!.totalAmount
+        payResultModel.payMethod = payMethod
+        PayResultActivity.toActivity(this, payResultModel)
+        finish()
+        EventBus.getDefault().post(EventPauResult())
     }
 
     private fun bindData(data: CashRegisterModel?) {
@@ -142,5 +176,30 @@ class CashInActivity : DefaultActivity() {
     override fun onDestroy() {
         super.onDestroy()
         showDiYaDialog?.dismiss()
+        EventBus.getDefault().unregister(this)
     }
+
+    fun toPay(payModel: PayModel) {
+        payModel.payInfo = payModel.orderStr
+        PayUtils(this).toPay(payModel, true)
+    }
+
+    @Subscribe
+    fun payEnd(event: PaySucessEvent) {
+        if (event.code == 1) {
+            paySuccess()
+        } else {
+            showMessage(event.msg)
+        }
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK && gpSelector.visibility == View.VISIBLE) {
+            gpSelector.setVisible(false)
+            return false
+        } else {
+            return super.onKeyDown(keyCode, event)
+        }
+    }
+
 }

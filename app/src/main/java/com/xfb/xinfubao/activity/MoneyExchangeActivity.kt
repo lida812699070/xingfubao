@@ -113,7 +113,7 @@ class MoneyExchangeActivity : DefaultActivity() {
         tvToExchange.setOnClickListener {
             checkPayPassword {
                 showDiYaDialog = DialogUtils.showDiYaDialog(this, 1) {
-                    showDiYaDialog?.hide()
+                    showDiYaDialog?.dismiss()
                     toExchange(it)
                 }
             }

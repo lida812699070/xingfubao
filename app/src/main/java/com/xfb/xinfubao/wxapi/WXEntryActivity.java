@@ -21,7 +21,7 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wx_pay_result);
-        IWXAPI api = WXAPIFactory.createWXAPI(this, WXUtils.getInstance().WX_APP_ID, false);
+        IWXAPI api = WXAPIFactory.createWXAPI(this, WXUtils.WX_APP_ID, false);
         try {
             api.handleIntent(getIntent(), this);
         } catch (Exception e) {
@@ -40,7 +40,7 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
 
     @Override
     public void onResp(BaseResp baseResp) {
-        WXUtils.getInstance().wxAuthListener.result(baseResp,false);
+        WXUtils.getInstance().wxAuthListener.result(baseResp, false);
         finish();
     }
 

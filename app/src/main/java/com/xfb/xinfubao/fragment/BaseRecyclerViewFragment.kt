@@ -34,7 +34,7 @@ abstract class BaseRecyclerViewFragment<T> : BaseFragment(),
     abstract fun initLogic()
 
     open fun pageEmptyView(): EmptyView? {
-        if (emptyView == null) {
+        if (emptyView == null && context != null) {
             emptyView = EmptyView(context!!)
         }
         return emptyView

@@ -1,5 +1,7 @@
 package com.xfb.xinfubao.model;
 
+import org.jetbrains.annotations.Nullable;
+
 public class WechatPaymentModel {
     private String appId;
     private String partnerId;
@@ -63,5 +65,16 @@ public class WechatPaymentModel {
 
     public void setSign(String sign) {
         this.sign = sign;
+    }
+
+    public void convert(@Nullable PaySign paySign) {
+        if (paySign == null) return;
+        appId = paySign.getApp_id();
+        partnerId = paySign.getMch_id();
+        prepayId = paySign.getPrepay_id();
+        packageValue = "Sign=WXPay";
+        nonceStr = paySign.getNonce_str();
+        timeStamp = paySign.getTimeStamp();
+        sign = paySign.getSign();
     }
 }

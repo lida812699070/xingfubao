@@ -28,7 +28,7 @@ public class WXUtils {
     //微信API
     private IWXAPI iwxapi = null;
     //微信APPID
-    public String WX_APP_ID = "wxceec97609d9dca17";
+    public static String WX_APP_ID = "wxa70a398c8a7adbe1";
     //微信secret
 //    private String APP_SECRET = "12ac158e4a327b7186b8690d564a3b76";
     //微信商品分享回调
@@ -49,6 +49,7 @@ public class WXUtils {
 
     public static WXUtils getInstance() {
         if (wxUtils == null) wxUtils = new WXUtils();
+        wxUtils.getIWXAPI();
         return wxUtils;
     }
 
@@ -62,7 +63,7 @@ public class WXUtils {
      *
      * @return iwxapi
      */
-    private IWXAPI getIWXAPI() {
+    public IWXAPI getIWXAPI() {
         return getIWXAPI(false);
     }
 

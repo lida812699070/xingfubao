@@ -171,6 +171,7 @@ class ProductDetailFragment : BaseFragment() {
         requestSaveOrderModel.payAmount =
             "${totalAmount * ConfigUtils.mUserInfo.discount}"
         requestSaveOrderModel.productDtoList = products
+        showProgress("请稍候")
         request(RetrofitCreateHelper.createApi(BaseApi::class.java).saveOrder(requestSaveOrderModel)) {
             startActivity(
                 Intent(activity!!, CashInActivity::class.java)
@@ -178,6 +179,5 @@ class ProductDetailFragment : BaseFragment() {
             )
         }
     }
-
 
 }

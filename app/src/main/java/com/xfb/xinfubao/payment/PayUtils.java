@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 
 import com.alipay.sdk.app.PayTask;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
@@ -94,12 +95,13 @@ public class PayUtils {
     @SuppressLint("HandlerLeak")
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
+            String s = msg.obj.toString();
             PayResult payResult = new PayResult(msg.obj.toString());
             //对于支付结果，请商户依赖服务端的异步通知结果。同步通知结果，仅作为支付结束的通知。
             String resultStatus = payResult.getResultStatus();
             // 判断resultStatus 为9000则代表支付成功
             PaySucessEvent event = new PaySucessEvent();
-            if (resultStatus.contains("9000")) {
+            if (!TextUtils.isEmpty(resultStatus) && resultStatus.contains("9000")) {
                 //支付成功
                 event.code = 1;
                 // msg.what == 1,NativePay  否 H5
@@ -117,8 +119,10 @@ public class PayUtils {
     /**
      * 微信支付
      */
-    private void wechatPayment(WechatPaymentModel model) {
-        WXUtils.getInstance().wechatPayment(context, model, req -> {
+    public void wechatPayment(WechatPaymentModel model) {
+        WXUtils instance = WXUtils.getInstance();
+        instance.getIWXAPI();
+        instance.wechatPayment(context, model, req -> {
             PaySucessEvent event = new PaySucessEvent();
             if (req.errCode == BaseResp.ErrCode.ERR_OK) {
                 event.code = 1;

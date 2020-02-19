@@ -85,7 +85,7 @@ interface BaseApi {
 
     /** 立即支付 */
     @POST("api/pay")
-    fun pay(@Body map: RequestPay): Observable<Result<Any?>>
+    fun pay(@Body map: RequestPay): Observable<Result<PayOrderModel>>
 
     /** 获取产品类型 */
     @POST("api/findProductType")

@@ -120,14 +120,6 @@ class MineFragment : BaseFragment() {
             activity?.let {
                 startActivity(Intent(it, UserInfoActivity::class.java))
             }
-//            val payModel = PayModel(
-//                2,
-//                "20200205191359384775487467328",
-//                "alipay_sdk=alipay-sdk-java-4.7.12.ALL&app_id=2019020163174914&biz_content=%7B%22body%22%3A%22%25E7%25B2%2589%25E8%25B1%25A1%25E7%25BA%25A2%25E5%258C%25850.5%25E5%2585%2583%22%2C%22out_trade_no%22%3A%2220200205191359384775487467328%22%2C%22product_code%22%3A%22QUICK_MSECURITY_PAY%22%2C%22subject%22%3A%22%25E7%25B2%2589%25E8%25B1%25A1%25E7%25BA%25A2%25E5%258C%25850.5%25E5%2585%2583%22%2C%22timeout_express%22%3A%2210m%22%2C%22total_amount%22%3A%220.50%22%7D&charset=UTF-8&format=json&method=alipay.trade.app.pay&notify_url=https%3A%2F%2Fapi.fenxianglife.com%2Fnjia%2Falipay%2Fnotify%2Fpayment%2FredEnvelope&sign=Gqk1UfJc09%2FZYXh1dLnTXVEGkpwOuxVNHbFu4uDNzkaes%2B3gxic35L2Pagb%2FI7CCu0MFVAhKKVa7WcxI3iInHr8BGQ14Z1MfRIxNt74s27aKxgyfTpSbEID8pXKDXiCLoGm6sZVBqiowB6%2FJTvmfGsHbTPYvF8KLO10o6sDFyUCp6C04LgdHdzetPzrm9A8%2F3UE02TylDpAAxBDxf7h2HUkr3CLSp92r166YBUSz%2FW2Kb%2FV0ShpK3uk4BkDEbznj4cU%2FHg2nO00GrFknMbc9gu8erVRo7%2BPdAJ9CDVPqTWG7qHwOzQ5WNXzyl5YcgXW9f5j0tEKj9wHeN29YpN3K6g%3D%3D&sign_type=RSA2&timestamp=2020-02-05+19%3A13%3A59&version=1.0",
-//                null
-//            )
-//            payModel.payInfo = payModel.orderStr
-//            PayUtils(activity).toPay(payModel, true)
         }
     }
 

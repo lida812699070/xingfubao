@@ -8,9 +8,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
     <application
         android:name=".MyApplication"
@@ -85,11 +86,23 @@
 
         <activity
             android:name=".wxapi.WXEntryActivity"
-            android:label="@string/app_name"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:exported="true"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
             android:taskAffinity="net.sourceforge.simcpux"
-            android:launchMode="singleTask">
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <!--这里填写你申请的app id-->
+                <data android:scheme="wxa70a398c8a7adbe1" />
+            </intent-filter>
         </activity>
     </application>
 
