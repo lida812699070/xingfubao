@@ -139,6 +139,9 @@ class HomeFragment : BaseFragment() {
         } else {
             banner.update(banners)
         }
+        banner.setOnBannerListener {
+            banners[it]
+        }
     }
 
 }

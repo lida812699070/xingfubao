@@ -33,7 +33,7 @@ import java.io.File
 class DialogUtils {
 
     companion object {
-        /** 银杏宝 */
+        /** NAT提币到钱包 */
         fun showBalanceDialog(context: Context): AlertDialog {
             val builder = AlertDialog.Builder(context)
             builder.setCancelable(true)

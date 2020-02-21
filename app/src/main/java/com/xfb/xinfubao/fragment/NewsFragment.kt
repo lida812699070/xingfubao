@@ -11,7 +11,7 @@ import com.chad.library.adapter.base.BaseViewHolder
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.activity.WebviewActivity
 import com.xfb.xinfubao.api.BaseApi
-import com.xfb.xinfubao.constant.Constant
+import com.xfb.xinfubao.constant.Constant.NEWS_H5
 import com.xfb.xinfubao.model.NewsModel
 import com.xfb.xinfubao.utils.DateUtils
 import com.xfb.xinfubao.utils.loadUri
@@ -81,12 +81,18 @@ class NewsFragment : BaseRecyclerViewFragment<NewsModel>() {
         initData()
         adapter.setOnItemClickListener { adapter, view, position ->
             activity?.let {
-                WebviewActivity.newInstanceHtml(
+                //                WebviewActivity.newInstanceHtml(
+//                    it,
+//                    list[position].content,
+//                    list[position].title,
+//                    rightImage = R.mipmap.fenxiang_icon,
+//                    isNeedPadding = true
+//                )
+                WebviewActivity.newInstanceUrl(
                     it,
-                    list[position].content,
+                    NEWS_H5 + list[position].id,
                     list[position].title,
-                    rightImage = R.mipmap.fenxiang_icon,
-                    isNeedPadding = true
+                    rightImage = R.mipmap.fenxiang_icon
                 )
             }
         }

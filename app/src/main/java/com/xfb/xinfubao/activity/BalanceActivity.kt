@@ -22,6 +22,7 @@ import com.xfb.xinfubao.adapter.BalanceAdapter
 import com.xfb.xinfubao.adapter.BalanceAdapter.Companion.ITEM_TYPE_DATE
 import com.xfb.xinfubao.api.BaseApi
 import com.xfb.xinfubao.constant.Constant.YUAN_LI_ZHI_RULE_URL
+import com.xfb.xinfubao.dialog.DialogUtils
 import com.xfb.xinfubao.model.ItemBalanceModel
 import com.xfb.xinfubao.model.UserInfo
 import com.xfb.xinfubao.model.event.EventTransfer
@@ -209,7 +210,7 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 }
                 //TODO 提币到钱包
                 tvCashRight.setOnClickListener {
-
+                    val showBalanceDialog1 = DialogUtils.showBalanceDialog(this)
                 }
             }
         }
