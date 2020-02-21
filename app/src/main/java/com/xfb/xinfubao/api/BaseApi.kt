@@ -247,5 +247,13 @@ interface BaseApi {
     @POST("api/findTurnOutInfo")
     fun findTurnOutInfo(@Body map: Map<String, String>): Observable<Result<YXBCashOutDetail>>
 
+    /** nat提币 */
+    @POST("api/natTurnOut")
+    fun natTurnOut(@Body map: Map<String, String>): Observable<Result<Any?>>
+
+    /** nat提币 */
+    @POST("api/getNatUnlockPackage")
+    fun getNatUnlockPackage(@Body map: Map<String, String>): Observable<Result<List<NatUnlockPakeageModel>>>
+
 
 }

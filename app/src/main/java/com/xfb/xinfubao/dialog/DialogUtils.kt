@@ -9,6 +9,8 @@ import android.os.Build
 import android.provider.MediaStore
 import android.support.v4.content.FileProvider
 import android.support.v7.app.AlertDialog
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -19,9 +21,14 @@ import android.widget.TextView
 import com.careagle.sdk.Config
 import com.careagle.sdk.callback.PermissionCallBack
 import com.careagle.sdk.utils.Permission
+import com.careagle.sdk.utils.PriceChangeUtils
 import com.careagle.sdk.utils.RxPermissionsUtil
+import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.BaseViewHolder
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.activity.UserInfoActivity
+import com.xfb.xinfubao.model.NatUnlockPakeageModel
+import com.xfb.xinfubao.utils.ConfigUtils
 import com.xfb.xinfubao.utils.setVisible
 import com.xfb.xinfubao.wxapi.WXUtils
 import com.zhihu.matisse.Matisse
@@ -34,7 +41,10 @@ class DialogUtils {
 
     companion object {
         /** NAT提币到钱包 */
-        fun showBalanceDialog(context: Context): AlertDialog {
+        fun showBalanceDialog(
+            context: Context,
+            method: (strTokenAddress: String, strNATCount: String, strPayPassword: String) -> Unit
+        ): AlertDialog {
             val builder = AlertDialog.Builder(context)
             builder.setCancelable(true)
             val view = LayoutInflater.from(context)
@@ -49,8 +59,23 @@ class DialogUtils {
             changeShopDialog?.window?.setDimAmount(0.4f)
             val dw = ColorDrawable(0x00)
             changeShopDialog?.window?.setBackgroundDrawable(dw)
+            val etTokenAddress = view.findViewById<EditText>(R.id.etTokenAddress)
+            val tvCopy = view.findViewById<TextView>(R.id.tvCopy)
+            val tvOkCashOut = view.findViewById<TextView>(R.id.tvOkCashOut)
+            val etNATCount = view.findViewById<EditText>(R.id.etNATCount)
+            val etPayPassword = view.findViewById<EditText>(R.id.etPayPassword)
             view.findViewById<ImageView>(R.id.ivClose).setOnClickListener {
                 changeShopDialog.dismiss()
+            }
+            tvCopy.setOnClickListener {
+                val primaryClip = ConfigUtils.getPrimaryClip(context)
+                etTokenAddress.setText(primaryClip)
+            }
+            tvOkCashOut.setOnClickListener {
+                val strTokenAddress = etTokenAddress.text.toString()
+                val strNATCount = etNATCount.text.toString()
+                val strPayPassword = etPayPassword.text.toString()
+                method(strTokenAddress, strNATCount, strPayPassword)
             }
             return changeShopDialog
         }
@@ -246,6 +271,47 @@ class DialogUtils {
             tvOk.setOnClickListener {
                 method()
                 changeShopDialog?.dismiss()
+            }
+            return changeShopDialog
+        }
+
+        fun showNatUnlockSelectDialog(
+            context: Context,
+            data: List<NatUnlockPakeageModel>,
+            method: (item: NatUnlockPakeageModel) -> Unit
+        ): AlertDialog? {
+            val builder = AlertDialog.Builder(context)
+            builder.setCancelable(true)
+            val view = LayoutInflater.from(context)
+                .inflate(R.layout.dialog_nat_unlock, null)
+            builder.setView(view)
+            val changeShopDialog = builder.create()
+            changeShopDialog?.show()
+            val layoutParams = changeShopDialog?.window?.attributes
+            layoutParams?.width = WindowManager.LayoutParams.MATCH_PARENT
+            layoutParams?.gravity = Gravity.BOTTOM
+            changeShopDialog?.window?.attributes = layoutParams
+            changeShopDialog?.window?.setDimAmount(0.4f)
+            val dw = ColorDrawable(0x00)
+            changeShopDialog?.window?.setBackgroundDrawable(dw)
+            val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerViewUnlock)
+            recyclerView.layoutManager = LinearLayoutManager(context)
+            val adapter = object : BaseQuickAdapter<NatUnlockPakeageModel, BaseViewHolder>(
+                R.layout.item_nat_unlock,
+                data
+            ) {
+                override fun convert(helper: BaseViewHolder, item: NatUnlockPakeageModel) {
+                    helper.setText(R.id.tvNATtUnLockTitle, item.name)
+                        .setText(
+                            R.id.tvNATtUnLockInfo,
+                            "期数：${item.lockTime}个月  兑换比例：${PriceChangeUtils.getDoubleKb(item.unlockRatio)}"
+                        )
+                        .setVisible(R.id.ivNatClubRight, false)
+                }
+            }
+            recyclerView.adapter = adapter
+            adapter.setOnItemClickListener { adapter, view, position ->
+                method(data[position])
             }
             return changeShopDialog
         }

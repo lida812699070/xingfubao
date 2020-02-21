@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_default_bg">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewUnlock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        android:paddingBottom="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:itemCount="4"
+        tools:listitem="@layout/item_nat_unlock" />
+
+</RelativeLayout>

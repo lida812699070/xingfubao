@@ -3,7 +3,7 @@ package com.xfb.xinfubao.model;
 import java.util.List;
 
 public class HomeModel {
-    private List<String> banner;
+    private List<BannerModel> banner;
     private String moduleName;
     private List<Product> product;
     private List<HomeModule> module;
@@ -16,11 +16,11 @@ public class HomeModel {
         this.module = module;
     }
 
-    public List<String> getBanner() {
+    public List<BannerModel> getBanner() {
         return banner;
     }
 
-    public void setBanner(List<String> banner) {
+    public void setBanner(List<BannerModel> banner) {
         this.banner = banner;
     }
 

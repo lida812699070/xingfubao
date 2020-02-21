@@ -1,5 +1,8 @@
 package com.xfb.xinfubao.utils;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
@@ -7,6 +10,8 @@ import com.careagle.sdk.utils.SPUtils;
 import com.google.gson.Gson;
 import com.xfb.xinfubao.MyApplication;
 import com.xfb.xinfubao.model.UserInfo;
+
+import static android.content.Context.CLIPBOARD_SERVICE;
 
 /**
  * 配置
@@ -50,4 +55,22 @@ public class ConfigUtils {
             return null;
         }
     }
+
+
+    /**
+     * 获取剪切板的内容。
+     */
+    public static String getPrimaryClip(Context context) {
+        ClipboardManager manager = (ClipboardManager) context.getSystemService(CLIPBOARD_SERVICE);
+        if (manager == null) {
+            return "";
+        }
+        ClipData data = manager.getPrimaryClip();
+        if (data == null || data.getItemCount() <= 0) {
+            return "";
+        }
+        ClipData.Item item = data.getItemAt(0);
+        return item != null && item.getText() != null ? item.getText().toString() : "";
+    }
+
 }

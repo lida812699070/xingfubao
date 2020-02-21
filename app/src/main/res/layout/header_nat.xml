@@ -129,16 +129,65 @@
     </android.support.constraint.ConstraintLayout>
 
     <TextView
-        android:id="@+id/tvSelectProduct"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/tvSelectUnLock"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:text="请选择产品"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/shape_white_radius_8"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="请选择NAT解锁包"
         android:textColor="@color/color_text_111"
         android:textSize="14sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/clContent" />
+
+    <TextView
+        android:id="@+id/tvNATtUnLockTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:text="NAT解锁包1"
+        android:textColor="@color/color_text_111"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSelectUnLock"
+        app:layout_constraintLeft_toLeftOf="@+id/tvSelectUnLock"
+        app:layout_constraintTop_toTopOf="@+id/tvSelectUnLock" />
+
+    <TextView
+        android:id="@+id/tvNATtUnLockInfo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="10dp"
+        android:text="期数:12个月 兑换比率：1.2"
+        android:textColor="@color/color_text_111"
+        android:textSize="14sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvNATtUnLockTitle"
+        app:layout_constraintLeft_toRightOf="@+id/tvNATtUnLockTitle"
+        app:layout_constraintRight_toRightOf="@+id/tvSelectUnLock" />
+
+    <android.support.constraint.Group
+        android:id="@+id/gpUnlockInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:constraint_referenced_ids="tvNATtUnLockTitle,tvNATtUnLockInfo" />
+
+    <TextView
+        android:id="@+id/tvSelectProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:text="请选择产品"
+        android:textColor="@color/color_text_111"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSelectUnLock" />
 
     <View
         android:layout_width="70dp"

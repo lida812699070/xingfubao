@@ -17,16 +17,21 @@ import com.xfb.xinfubao.adapter.BalanceAdapter
 import com.xfb.xinfubao.api.BaseApi
 import com.xfb.xinfubao.dialog.DialogUtils
 import com.xfb.xinfubao.model.ItemBalanceModel
+import com.xfb.xinfubao.model.NatUnlockPakeageModel
 import com.xfb.xinfubao.model.UserInfo
 import com.xfb.xinfubao.myenum.BalanceEnum
 import com.xfb.xinfubao.utils.ConfigUtils
+import com.xfb.xinfubao.utils.setVisible
 import kotlinx.android.synthetic.main.activity_natclub.*
+import kotlinx.android.synthetic.main.header_nat.*
 
 /** NAT基金会 */
 class NATClubActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
 
     val adapter = BalanceAdapter(list)
     var showDiYaDialog: AlertDialog? = null
+    var selectUnlockModel: NatUnlockPakeageModel? = null
+    var showNatUnlockSelectDialog: AlertDialog? = null
     var selectPosition = -1
     var headerView: View? = null
 
@@ -68,6 +73,10 @@ class NATClubActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
             showMessage("请选择抵押产品")
             return
         }
+        if (selectUnlockModel == null) {
+            showMessage("请选择解锁包")
+            return
+        }
         showDiYaDialog = DialogUtils.showDiYaDialog(this) {
             showDiYaDialog?.dismiss()
             val map = hashMapOf<String, String>()
@@ -76,6 +85,7 @@ class NATClubActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
             map["orderId"] = itemBalanceModel.id
             map["userId"] = "${ConfigUtils.userId()}"
             map["payPassword"] = it
+            map["unlockPackageId"] = "${selectUnlockModel?.id}"
             request(RetrofitCreateHelper.createApi(BaseApi::class.java).mortgageNat(map)) {
                 showMessage("操作成功")
                 val map = hashMapOf<String, String>()
@@ -99,6 +109,22 @@ class NATClubActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         val ivFinish = headerView!!.findViewById<ImageView>(R.id.ivFinish)
         val tvDiYaRecord = headerView!!.findViewById<TextView>(R.id.tvDiYaRecord)
         val tvTotalMoney = headerView!!.findViewById<TextView>(R.id.tvTotalMoney)
+        val tvSelectUnLock = headerView!!.findViewById<TextView>(R.id.tvSelectUnLock)
+        tvSelectUnLock.setOnClickListener {
+            showProgress("请稍候")
+            request(RetrofitCreateHelper.createApi(BaseApi::class.java).getNatUnlockPackage(mapOf())) {
+                showNatUnlockSelectDialog =
+                    DialogUtils.showNatUnlockSelectDialog(this, it.data) {
+                        selectUnlockModel = it
+                        tvSelectUnLock.text = ""
+                        gpUnlockInfo.setVisible(true)
+                        tvNATtUnLockTitle.text = it.name
+                        tvNATtUnLockInfo.text =
+                            "期数：${it.lockTime}个月  兑换比例：${PriceChangeUtils.getDoubleKb(it.unlockRatio)}"
+                        showNatUnlockSelectDialog?.dismiss()
+                    }
+            }
+        }
         ivFinish.setOnClickListener {
             finish()
         }

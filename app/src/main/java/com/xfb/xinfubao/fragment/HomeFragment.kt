@@ -14,6 +14,7 @@ import com.xfb.xinfubao.R
 import com.xfb.xinfubao.activity.*
 import com.xfb.xinfubao.adapter.ProductAdapter
 import com.xfb.xinfubao.api.BaseApi
+import com.xfb.xinfubao.model.BannerModel
 import com.xfb.xinfubao.model.HomeModel
 import com.xfb.xinfubao.model.HomeModule
 import com.xfb.xinfubao.model.Product
@@ -130,18 +131,9 @@ class HomeFragment : BaseFragment() {
         moduleAdapter.notifyDataSetChanged()
     }
 
-    private var isInitBanner = false
-    private fun initBanner(banners: List<String>) {
+    private fun initBanner(banners: List<BannerModel>) {
         if (banner == null) return
-        if (!isInitBanner) {
-            isInitBanner = true
-            banner.setImages(banners).setDelayTime(4000).setImageLoader(MyImageLoader()).start()
-        } else {
-            banner.update(banners)
-        }
-        banner.setOnBannerListener {
-            banners[it]
-        }
+        banner.setImages(banners).setDelayTime(4000).setImageLoader(MyImageLoader()).start()
     }
 
 }

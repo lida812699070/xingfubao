@@ -7,6 +7,7 @@ import android.support.design.widget.TabLayout
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.RecyclerView
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -40,6 +41,7 @@ import org.greenrobot.eventbus.Subscribe
 class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
     val adapter = BalanceAdapter(list)
     var showBalanceDialog: AlertDialog? = null
+    var showCashOutDialog: AlertDialog? = null
     lateinit var balanceEnum: BalanceEnum
     lateinit var tabLayout: TabLayout
     var headerView: View? = null
@@ -208,9 +210,37 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 tvCash.setOnClickListener {
                     MoneyExchangeActivity.toActivity(this, BalanceEnum.NAT)
                 }
-                //TODO 提币到钱包
+
                 tvCashRight.setOnClickListener {
-                    val showBalanceDialog1 = DialogUtils.showBalanceDialog(this)
+                    showCashOutDialog =
+                        DialogUtils.showBalanceDialog(this) { strTokenAddress, strNATCount, strPayPassword ->
+                            if (TextUtils.isEmpty(strTokenAddress)) {
+                                showMessage("请输入NAToken钱包地址")
+                                return@showBalanceDialog
+                            }
+                            if (TextUtils.isEmpty(strNATCount)) {
+                                showMessage("请输入要提取的NAT数量")
+                                return@showBalanceDialog
+                            }
+                            if (TextUtils.isEmpty(strPayPassword)) {
+                                showMessage("请输入支付密码")
+                                return@showBalanceDialog
+                            }
+                            showProgress("请稍候")
+                            val map = hashMapOf<String, String>()
+                            map["userId"] = "${ConfigUtils.userId()}"
+                            map["amount"] = strNATCount
+                            map["bankCards"] = strTokenAddress
+                            map["payPwd"] = strPayPassword
+                            request(
+                                RetrofitCreateHelper.createApi(BaseApi::class.java).natTurnOut(
+                                    map
+                                )
+                            ) {
+                                showMessage("提币成功")
+                                showCashOutDialog?.dismiss()
+                            }
+                        }
                 }
             }
         }
@@ -233,6 +263,7 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
 
         initData()
     }
+
 
     private fun resetType(p0: TabLayout.Tab?) {
         if ("全部" == p0?.text) {
