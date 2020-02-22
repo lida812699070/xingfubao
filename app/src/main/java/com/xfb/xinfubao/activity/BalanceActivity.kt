@@ -238,6 +238,7 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                                 )
                             ) {
                                 showMessage("提币成功")
+                                EventBus.getDefault().post(EventTransfer())
                                 showCashOutDialog?.dismiss()
                             }
                         }
