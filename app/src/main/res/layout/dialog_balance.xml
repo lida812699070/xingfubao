@@ -74,7 +74,7 @@
         style="@style/LoginGeryInput"
         android:layout_marginTop="16dp"
         android:hint="请输入要提取的NAT数量"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:maxLines="1"
         android:paddingLeft="12dp"
         android:textSize="16sp"
