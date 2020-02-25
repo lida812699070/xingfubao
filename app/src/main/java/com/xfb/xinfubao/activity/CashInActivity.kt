@@ -75,10 +75,14 @@ class CashInActivity : DefaultActivity() {
 
         //立即支付
         tvToPay.setOnClickListener {
-            checkPayPassword {
-                showDiYaDialog = DialogUtils.showDiYaDialog(this, 1) {
-                    showDiYaDialog?.dismiss()
-                    toPay(it)
+            if (105L == payMethod?.payMethodId || 106L == payMethod?.payMethodId) {
+                toPay("")
+            } else {
+                checkPayPassword {
+                    showDiYaDialog = DialogUtils.showDiYaDialog(this, 1) {
+                        showDiYaDialog?.dismiss()
+                        toPay(it)
+                    }
                 }
             }
         }

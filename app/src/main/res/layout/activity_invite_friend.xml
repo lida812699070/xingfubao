@@ -132,4 +132,101 @@
         android:textSize="16sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvDownLoadSave"
         app:layout_constraintRight_toRightOf="parent" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clPic"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myToolbar">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_org" />
+
+        <ImageView
+            android:id="@+id/ivBgP"
+            android:layout_width="326dp"
+            android:layout_height="455dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/icon_invite_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:text="您的邀请码"
+            android:textColor="@color/color_org"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ivBgP" />
+
+        <TextView
+            android:id="@+id/tvInviteCodeP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="59dp"
+            android:text="r64n8g"
+            android:textColor="@color/color_text_111"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ivBgP" />
+
+        <TextView
+            android:id="@+id/tvInviteInfoP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="好友可在注册时直接填写邀请码"
+            android:textColor="@color/color_text_888"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvInviteCodeP" />
+
+        <View
+            android:id="@+id/viewBgQrPicP"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_marginTop="33dp"
+            android:background="@drawable/shape_white_radius_13"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvInviteInfoP" />
+
+        <ImageView
+            android:id="@+id/ivQrCodeP"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:src="@mipmap/icon_qr_img"
+            app:layout_constraintBottom_toBottomOf="@+id/viewBgQrPicP"
+            app:layout_constraintLeft_toLeftOf="@+id/viewBgQrPicP"
+            app:layout_constraintRight_toRightOf="@+id/viewBgQrPicP"
+            app:layout_constraintTop_toTopOf="@+id/viewBgQrPicP" />
+
+        <TextView
+            android:id="@+id/tvDownloadAppP"
+            android:layout_width="160dp"
+            android:layout_height="45dp"
+            android:background="@drawable/shape_org_radius_23"
+            android:gravity="center"
+            android:text="扫码下载杏福宝"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivBgP"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewBgQrPicP" />
+
+    </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>

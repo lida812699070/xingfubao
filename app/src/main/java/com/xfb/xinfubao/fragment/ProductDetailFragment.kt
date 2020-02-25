@@ -80,10 +80,6 @@ class ProductDetailFragment : BaseFragment() {
     }
 
     private fun initListener() {
-        //TODO 分享
-        ivShare.setOnClickListener {
-
-        }
         //加数量
         ivAdd.setOnClickListener {
             productDetail?.let {

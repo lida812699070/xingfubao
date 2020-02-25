@@ -53,6 +53,7 @@
                 android:layout_marginRight="15dp"
                 android:padding="5dp"
                 android:src="@mipmap/fenxiang_icon_product"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@+id/tvTitle"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/tvTitle" />

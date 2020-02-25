@@ -11,12 +11,19 @@
         android:layout_height="match_parent"
         android:background="@color/color_default_bg">
 
+        <View
+            android:id="@+id/viewTop"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:background="@color/theme_color"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <com.youth.banner.Banner
             android:id="@+id/banner"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintDimensionRatio="414:170"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/viewTop" />
 
         <View
             android:id="@+id/viewBgHomeMenu"
@@ -98,6 +105,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
+            android:padding="5dp"
             android:text="热烈祝贺杏福宝上线！"
             android:textColor="@color/color_text_111"
             android:textSize="16sp"

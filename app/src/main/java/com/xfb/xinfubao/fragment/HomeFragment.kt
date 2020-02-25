@@ -69,6 +69,18 @@ class HomeFragment : BaseFragment() {
                 startActivity(Intent(it, CartActivity::class.java))
             }
         }
+
+        tvHomeMessage.setOnClickListener {
+            activity?.let {
+                startActivity(Intent(it, MyMessageActivity::class.java))
+            }
+        }
+
+        tvHomeMore.setOnClickListener {
+            activity?.let {
+                startActivity(Intent(it, MyMessageActivity::class.java))
+            }
+        }
     }
 
     private fun initHomeProductRecyclerView() {
