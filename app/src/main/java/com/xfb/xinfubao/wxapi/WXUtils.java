@@ -99,6 +99,15 @@ public class WXUtils {
         getIWXAPI().sendReq(request);
     }
 
+    public void wechatPayment(Context context, PayReq request, WxPayListener wxPayListener) {
+        if (request == null) {
+            MyToast.toast("微信支付失败，支付请求体参数丢失！");
+            return;
+        }
+        this.wxPayListener = wxPayListener;
+        getIWXAPI().sendReq(request);
+    }
+
 
     private String buildTransaction() {
         return "miniProgram" + System.currentTimeMillis();
@@ -266,6 +275,7 @@ public class WXUtils {
         public void result(BaseResp baseResp, boolean isPay) {
             if (isPay) {
                 wxPayListener.result(baseResp);
+
             } else {
                 //判断是否是分享回调
                 if (baseResp instanceof SendMessageToWX.Resp && baseResp.errCode == BaseResp.ErrCode.ERR_OK) {

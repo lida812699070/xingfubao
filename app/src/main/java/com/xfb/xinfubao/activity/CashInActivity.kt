@@ -129,11 +129,11 @@ class CashInActivity : DefaultActivity() {
             if (105L == payMethod?.payMethodId) {//微信
 //                val wechatPaymentModel = WechatPaymentModel()
 //                wechatPaymentModel.convert()
-//                PayUtils(this).wechatPayment(wechatPaymentModel)
+
                 val msgApi = WXAPIFactory.createWXAPI(this, WXUtils.WX_APP_ID)
                 msgApi.registerApp(it.data.paySign.app_id)
                 val convert = it.data.paySign.convert()
-                msgApi.sendReq(convert)
+                PayUtils(this).wechatPayment(convert)
             } else if (106L == payMethod?.payMethodId) {//支付宝
                 val payModel = PayModel(
                     2,

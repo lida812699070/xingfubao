@@ -10,10 +10,9 @@ import android.text.TextUtils;
 
 import com.alipay.sdk.app.PayTask;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
+import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.xfb.xinfubao.model.PayModel;
-import com.xfb.xinfubao.model.WechatPaymentModel;
 import com.xfb.xinfubao.model.event.PaySucessEvent;
-import com.xfb.xinfubao.utils.ConvertUtil;
 import com.xfb.xinfubao.wxapi.WXUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -40,29 +39,15 @@ public class PayUtils {
         this.context = context;
     }
 
-
     /**
-     * 去支付
-     * 暂不可用
+     * 支付宝支付
      *
-     * @param payModel 支付信息
+     * @param payModel
+     * @param isNativePay
      */
-    public void toPay(PayModel payModel) {
-        toPay(payModel, false);
-    }
-
     public void toPay(PayModel payModel, boolean isNativePay) {
         this.payModel = payModel;
-        switch (payModel.getPayType()) {
-            case WECHAT:
-                //调起微信支付
-                wechatPayment(ConvertUtil.fromJson(payModel.getOrderStr(), WechatPaymentModel.class));
-                break;
-            case ALIPAY:
-                //调起支付宝支付
-                aliPay(payModel.getOrderStr(), isNativePay);
-                break;
-        }
+        aliPay(payModel.getOrderStr(), isNativePay);
     }
 
     /**
@@ -119,10 +104,10 @@ public class PayUtils {
     /**
      * 微信支付
      */
-    public void wechatPayment(WechatPaymentModel model) {
+    public void wechatPayment(PayReq payReq) {
         WXUtils instance = WXUtils.getInstance();
         instance.getIWXAPI();
-        instance.wechatPayment(context, model, req -> {
+        instance.wechatPayment(context, payReq, req -> {
             PaySucessEvent event = new PaySucessEvent();
             if (req.errCode == BaseResp.ErrCode.ERR_OK) {
                 event.code = 1;
