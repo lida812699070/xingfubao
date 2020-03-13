@@ -1,5 +1,6 @@
 package com.xfb.xinfubao.wxapi;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,7 +17,7 @@ import com.xfb.xinfubao.R;
  * Created by kaiwang on 2018/4/27.
  */
 
-public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHandler {
+public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

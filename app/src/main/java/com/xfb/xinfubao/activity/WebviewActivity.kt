@@ -21,6 +21,7 @@ class WebviewActivity : DefaultActivity() {
     private var fragment: WebviewFragment? = null
     private var isNeedPadding: Boolean = false
     private var isPublish: Boolean = false
+    private var newsId: Int? = 0
 
     companion object {
         fun newInstanceUrl(
@@ -30,7 +31,8 @@ class WebviewActivity : DefaultActivity() {
             subTitle: String = "",
             rightImage: Int = 0,
             isNeedPadding: Boolean = false,
-            isPublish: Boolean = false
+            isPublish: Boolean = false,
+            newsId: Int? = 0
         ) {
             val intent = Intent(context, WebviewActivity::class.java)
             intent.putExtra("url", url)
@@ -39,6 +41,7 @@ class WebviewActivity : DefaultActivity() {
             intent.putExtra("rightImage", rightImage)
             intent.putExtra("isNeedPadding", isNeedPadding)
             intent.putExtra("isPublish", isPublish)
+            intent.putExtra("newsId", newsId)
             context.startActivity(intent)
         }
 
@@ -76,6 +79,7 @@ class WebviewActivity : DefaultActivity() {
         isNeedPadding = intent.getBooleanExtra("isNeedPadding", false)
         isPublish = intent.getBooleanExtra("isPublish", false)
         rightImage = intent.getIntExtra("rightImage", 0)
+        newsId = intent.getIntExtra("newsId", 0)
         if (!TextUtils.isEmpty(html)) {
             fragment = WebviewFragment.newInstanceHtml(html!!, isNeedPadding, isPublish)
         } else if (!TextUtils.isEmpty(url)) {
@@ -102,6 +106,7 @@ class WebviewActivity : DefaultActivity() {
         }
 
         if (rightImage != 0) {
+            //TODO 请求分享信息  分享成功后请求
             myToolbar.setRightClickRes(rightImage) {
                 if (R.mipmap.fenxiang_icon == rightImage) {
                     DialogUtils.showShareDialog(this)

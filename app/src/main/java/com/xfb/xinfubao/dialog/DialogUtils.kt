@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
+import android.os.Handler
 import android.provider.MediaStore
 import android.support.v4.content.FileProvider
 import android.support.v7.app.AlertDialog
@@ -29,12 +30,14 @@ import com.xfb.xinfubao.R
 import com.xfb.xinfubao.activity.UserInfoActivity
 import com.xfb.xinfubao.model.NatUnlockPakeageModel
 import com.xfb.xinfubao.utils.ConfigUtils
+import com.xfb.xinfubao.utils.HttpUtils
 import com.xfb.xinfubao.utils.setVisible
 import com.xfb.xinfubao.wxapi.WXUtils
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.engine.impl.GlideEngine
 import java.io.File
+import kotlin.concurrent.thread
 
 
 class DialogUtils {
@@ -197,28 +200,42 @@ class DialogUtils {
             view.findViewById<TextView>(R.id.tvCancel).setOnClickListener {
                 dialog?.dismiss()
             }
+            val handler = Handler()
             view.findViewById<TextView>(R.id.tvShareWx).setOnClickListener {
-                //分享到微信
-                WXUtils.getInstance()
-                    .shareWXUrl(
-                        context,
-                        "http://www.baidu.com",
-                        WXUtils.resourceToByte(R.mipmap.logo, context),
-                        "标题",
-                        "详细描述xxx"
-                    )
+                thread {
+                    val netWorkBitmap =
+                        HttpUtils.getNetWorkBitmap("https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3173584241,3533290860&fm=26&gp=0.jpg")
+                    handler.post {
+                        //分享到微信
+                        WXUtils.getInstance()
+                            .shareWXUrl(
+                                context,
+                                "http://www.baidu.com",
+                                netWorkBitmap,
+                                "标题",
+                                "详细描述xxx"
+                            )
+                        dialog?.dismiss()
+                    }
+                }
             }
             view.findViewById<TextView>(R.id.tvShareWxCricler).setOnClickListener {
-                //分享到微信朋友圈
-                WXUtils.getInstance()
-                    .shareWXUrl(
-                        context,
-                        "http://www.baidu.com",
-                        WXUtils.resourceToByte(R.mipmap.logo, context),
-                        "标题",
-                        "详细描述xxx"
-                    )
-
+                thread {
+                    val netWorkBitmap =
+                        HttpUtils.getNetWorkBitmap("https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3173584241,3533290860&fm=26&gp=0.jpg")
+                    handler.post {
+                        //分享到微信
+                        WXUtils.getInstance()
+                            .shareWXUrlCircle(
+                                context,
+                                "http://www.baidu.com",
+                                netWorkBitmap,
+                                "标题",
+                                "详细描述xxx"
+                            )
+                        dialog?.dismiss()
+                    }
+                }
             }
             dialog?.window?.setBackgroundDrawable(dw)
         }

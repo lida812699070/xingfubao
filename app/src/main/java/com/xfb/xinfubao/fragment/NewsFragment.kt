@@ -92,7 +92,8 @@ class NewsFragment : BaseRecyclerViewFragment<NewsModel>() {
                     it,
                     NEWS_H5 + list[position].id,
                     list[position].title,
-                    rightImage = R.mipmap.fenxiang_icon
+                    rightImage = R.mipmap.fenxiang_icon,
+                    newsId = list[position].id
                 )
             }
         }

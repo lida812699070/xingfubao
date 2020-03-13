@@ -171,9 +171,7 @@ class OrderDetailActivity : DefaultActivity() {
                 tvOrderStateBig.text = "等待卖家发货"
                 tvBottomYellow.text = "返回"
                 tvBottomYellow.setOnClickListener { finish() }
-                tvBottomTheme.text = "催促发货"
-                //TODO 催促发货
-                tvBottomTheme.setOnClickListener { finish() }
+                tvBottomTheme.setVisible(false)
             }
             112L -> {
                 tvOrderFinishTime.setVisible(false)
@@ -197,13 +195,9 @@ class OrderDetailActivity : DefaultActivity() {
             106L -> {
                 tvBottomYellow.text = "返回"
                 tvBottomYellow.setOnClickListener { finish() }
-                tvBottomTheme.text = "联系客服"
                 tvOrderStateBig.text = "订单已完成"
                 tvOrderStateBig.setDrawLeft(R.mipmap.icon_order_finish)
-                //TODO 联系客服
-                tvBottomTheme.setOnClickListener {
-
-                }
+                tvBottomTheme.setVisible(false)
             }
             107L -> {
                 tvOrderPayTime.setVisible(false)

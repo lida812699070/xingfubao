@@ -28,7 +28,7 @@ public class WXUtils {
     //微信API
     private IWXAPI iwxapi = null;
     //微信APPID
-    public static String WX_APP_ID = "wxa70a398c8a7adbe1";
+    public static String WX_APP_ID = "wx690e0544bdec7cdb";
     //微信secret
 //    private String APP_SECRET = "12ac158e4a327b7186b8690d564a3b76";
     //微信商品分享回调
@@ -125,6 +125,14 @@ public class WXUtils {
         shareUrl(context, SendMessageToWX.Req.WXSceneSession, url, imageUrl, title, description);
     }
 
+    public void shareWXUrl(Context context, String url, Bitmap imageUrl, String title, String description) {
+        shareUrl(context, SendMessageToWX.Req.WXSceneSession, url, imageUrl, title, description);
+    }
+
+    public void shareWXUrlCircle(Context context, String url, Bitmap imageUrl, String title, String description) {
+        shareUrl(context, SendMessageToWX.Req.WXSceneTimeline, url, imageUrl, title, description);
+    }
+
     /**
      * 微信朋友圈分享图片
      *
@@ -195,6 +203,16 @@ public class WXUtils {
         msg.title = title;
         msg.description = description;
         msg.thumbData = image;
+        shareUrl(msg, scene);
+    }
+
+    private void shareUrl(Context context, final int scene, String url, Bitmap image, String title, String description) {
+        WXWebpageObject webpage = new WXWebpageObject();
+        webpage.webpageUrl = url;
+        final WXMediaMessage msg = new WXMediaMessage(webpage);
+        msg.title = title;
+        msg.description = description;
+        msg.setThumbImage(image);
         shareUrl(msg, scene);
     }
 

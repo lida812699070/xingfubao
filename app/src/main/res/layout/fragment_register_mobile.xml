@@ -166,7 +166,7 @@
         android:id="@+id/etMobileInputInviteCode"
         style="@style/LoginInput"
         android:layout_marginTop="21dp"
-        android:hint="请输入邀请码"
+        android:hint="请输入邀请码（选填）"
         android:inputType="text"
         android:maxLines="20"
         android:paddingLeft="40dp"

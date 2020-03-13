@@ -4,7 +4,8 @@ public class Constant {
 
     public static final String MONEY_RMB = "¥";
     public static final String REQUEST_ID = "2";
-    public static final String SERVER = "http://xfb.cxtx.info";
+    //    public static final String SERVER = "http://xfb.cxtx.info";
+    public static final String SERVER = "http://test.xfb.cxtx.info";
     public static final String SERVER_API = SERVER + ":8082";
     //    http://xfbapi.tynet.vip/images/28dc2296e1ed44679c199db18a34a050.png
     //图片头地址
