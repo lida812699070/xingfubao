@@ -16,6 +16,7 @@ import com.xfb.xinfubao.R
 import com.xfb.xinfubao.adapter.BalanceAdapter
 import com.xfb.xinfubao.api.BaseApi
 import com.xfb.xinfubao.constant.Constant
+import com.xfb.xinfubao.dialog.DialogUtils
 import com.xfb.xinfubao.model.ItemBalanceModel
 import com.xfb.xinfubao.model.UserInfo
 import com.xfb.xinfubao.model.event.EventTransfer
@@ -70,6 +71,7 @@ class YinXingbaoActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         val ivFinish = headerView!!.findViewById<ImageView>(R.id.ivFinish)
         val tvSubTitle = headerView!!.findViewById<TextView>(R.id.tvSubTitle)
         val tvToCashOut = headerView!!.findViewById<TextView>(R.id.tvToCashOut)
+        val tvToCashOutBalance = headerView!!.findViewById<TextView>(R.id.tvToCashOutBalance)
         val tabLayout = headerView!!.findViewById<TabLayout>(R.id.tabLayout)
         ivFinish.setOnClickListener {
             finish()
@@ -78,6 +80,7 @@ class YinXingbaoActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
             WebviewActivity.newInstanceUrl(this, Constant.YIN_XING_BAO_RULE_URL, "银杏宝规则")
         }
         initHeaderData(data)
+        //转出本金
         tvToCashOut.setOnClickListener {
             if (selectPosition == -1) {
                 showMessage("请选择转出记录")
@@ -89,6 +92,25 @@ class YinXingbaoActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 list[selectPosition].id,
                 list[selectPosition].amount
             )
+        }
+        //转出余额
+        tvToCashOutBalance.setOnClickListener {
+            if (selectPosition == -1) {
+                showMessage("请选择转出记录")
+                return@setOnClickListener
+            }
+            DialogUtils.showDiYaDialog(this, 2) {
+                val map = hashMapOf<String, String>()
+                map["userId"] = "${ConfigUtils.userId()}"
+                map["payPwd"] = it
+                map["orderNo"] = list[selectPosition].orderNum
+                showProgress("请稍候")
+                request(RetrofitCreateHelper.createApi(BaseApi::class.java).exchangeBalance(map)) {
+                    showMessage("转出成功")
+                    transfer(EventTransfer())
+                    ApplyCashOutResultActivity.toActivity(this, 3, it.data)
+                }
+            }
         }
         tabLayout.addTab(tabLayout.newTab().setText("明细"))
         initData()

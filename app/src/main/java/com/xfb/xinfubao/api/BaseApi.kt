@@ -46,6 +46,12 @@ interface BaseApi {
     fun newsxfb(@QueryMap map: Map<String, String>): Observable<Result<List<FindNewsTab>>>
 
     /**
+     * 杏福宝新闻首页列表数据
+     */
+    @GET("newsdetails")
+    fun newsdetails(@QueryMap map: Map<String, String>): Observable<Result<NewsDetail>>
+
+    /**
      * 商品信息
      */
     @POST("api/getProductInfo")
@@ -254,6 +260,10 @@ interface BaseApi {
     /** nat提币 */
     @POST("api/getNatUnlockPackage")
     fun getNatUnlockPackage(@Body map: Map<String, String>): Observable<Result<List<NatUnlockPakeageModel>>>
+
+    /** 转换余额 */
+    @POST("api/exchangeBalance")
+    fun exchangeBalance(@Body map: Map<String, String>): Observable<Result<ItemBalanceModel>>
 
 
 }

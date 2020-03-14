@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_apply_cash_out_result.*
 
 /** 申请转出结果 */
 class ApplyCashOutResultActivity : DefaultActivity() {
-    /** 0 申请提现记录  1 申请转出记录  2 申请抵押记录 */
+    /** 0 申请提现记录  1 申请转出记录  2 申请抵押记录 3银杏宝转出余额*/
     var state = 0
     var itemBalanceModel: ItemBalanceModel? = null
     private var isWait = false
@@ -115,6 +115,24 @@ class ApplyCashOutResultActivity : DefaultActivity() {
                 tvCashOutMoney.setTextColor(resources.getColor(R.color.color_theme))
                 tvCashOutMoney.text = PriceChangeUtils.getNumKb(itemBalanceModel!!.amount)
                 tvOk.setBackgroundDrawable(resources.getDrawable(R.drawable.shape_theme_radius_13))
+            }
+            3 -> {
+                myToolbar.setTitle("转换详情")
+                ivState.setImageResource(R.mipmap.icon_org_dui_3)
+                val strState = "已成功"
+                tvHint.setColorText(
+                    getString(R.string.apply_cash_out_success3_hint, strState),
+                    resources.getColor(R.color.color_org),
+                    12,
+                    15
+                )
+                tvConnectServer.setTextColor(resources.getColor(R.color.color_org))
+                tvCashOutDetailText.text = "转换详情"
+                tvApplyTime.text = itemBalanceModel?.createDate
+                tvApplyTime.setTextColor(resources.getColor(R.color.color_org))
+                tvCashOutMoney.setTextColor(resources.getColor(R.color.color_org))
+                tvCashOutMoney.text = PriceChangeUtils.getNumKb(itemBalanceModel!!.amount)
+                tvOk.setBackgroundDrawable(resources.getDrawable(R.drawable.shape_org_radius_13))
             }
         }
         tvOk.text = itemBalanceModel?.stateDepict

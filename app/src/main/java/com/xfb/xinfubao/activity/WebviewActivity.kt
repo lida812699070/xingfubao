@@ -5,7 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.KeyEvent
+import com.careagle.sdk.helper.RetrofitCreateHelper
 import com.xfb.xinfubao.R
+import com.xfb.xinfubao.api.BaseApi
 import com.xfb.xinfubao.constant.Constant
 import com.xfb.xinfubao.dialog.DialogUtils
 import com.xfb.xinfubao.fragment.WebviewFragment
@@ -106,10 +108,14 @@ class WebviewActivity : DefaultActivity() {
         }
 
         if (rightImage != 0) {
-            //TODO 请求分享信息  分享成功后请求
             myToolbar.setRightClickRes(rightImage) {
                 if (R.mipmap.fenxiang_icon == rightImage) {
-                    DialogUtils.showShareDialog(this)
+                    val map = hashMapOf<String, String>()
+                    map["nid"] = "$newsId"
+                    request(RetrofitCreateHelper.createApi(BaseApi::class.java).newsdetails(map)) {
+                        it.data.url = Constant.NEWS_H5 + it.data.id
+                        DialogUtils.showShareDialog(this, it.data)
+                    }
                 }
             }
         }

@@ -19,6 +19,7 @@ import android.view.WindowManager
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.careagle.sdk.Config
 import com.careagle.sdk.callback.PermissionCallBack
 import com.careagle.sdk.utils.Permission
@@ -29,6 +30,7 @@ import com.chad.library.adapter.base.BaseViewHolder
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.activity.UserInfoActivity
 import com.xfb.xinfubao.model.NatUnlockPakeageModel
+import com.xfb.xinfubao.model.NewsDetail
 import com.xfb.xinfubao.utils.ConfigUtils
 import com.xfb.xinfubao.utils.HttpUtils
 import com.xfb.xinfubao.utils.setVisible
@@ -110,6 +112,11 @@ class DialogUtils {
             if (state == 1) {
                 view.findViewById<TextView>(R.id.tvTitle).text = "支付"
                 view.findViewById<TextView>(R.id.tvOkCashOut).text = "支付"
+            } else if (state == 2) {
+                view.findViewById<TextView>(R.id.tvTitle).text = "转出余额"
+                view.findViewById<TextView>(R.id.tvOkCashOut).text = "确认转出"
+                view.findViewById<TextView>(R.id.tvOkCashOut).background =
+                    context.getDrawable(R.drawable.shape_org_radius_8)
             }
             val etPayPassword = view.findViewById<EditText>(R.id.etPayPassword)
             view.findViewById<TextView>(R.id.tvOkCashOut).setOnClickListener {
@@ -183,7 +190,14 @@ class DialogUtils {
         }
 
         /** 拍照 选择照片 */
-        fun showShareDialog(context: Activity) {
+        fun showShareDialog(
+            context: Activity,
+            data: NewsDetail
+        ) {
+            if (TextUtils.isEmpty(data.iocurl)) {
+                Toast.makeText(context, "没有图片数据", Toast.LENGTH_SHORT).show()
+                return
+            }
             val builder = AlertDialog.Builder(context)
             builder.setCancelable(true)
             val view = LayoutInflater.from(context)
@@ -204,16 +218,16 @@ class DialogUtils {
             view.findViewById<TextView>(R.id.tvShareWx).setOnClickListener {
                 thread {
                     val netWorkBitmap =
-                        HttpUtils.getNetWorkBitmap("https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3173584241,3533290860&fm=26&gp=0.jpg")
+                        HttpUtils.getNetWorkBitmap(data.iocurl)
                     handler.post {
                         //分享到微信
                         WXUtils.getInstance()
                             .shareWXUrl(
                                 context,
-                                "http://www.baidu.com",
+                                data.url,
                                 netWorkBitmap,
-                                "标题",
-                                "详细描述xxx"
+                                data.title,
+                                data.content
                             )
                         dialog?.dismiss()
                     }
@@ -222,16 +236,16 @@ class DialogUtils {
             view.findViewById<TextView>(R.id.tvShareWxCricler).setOnClickListener {
                 thread {
                     val netWorkBitmap =
-                        HttpUtils.getNetWorkBitmap("https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3173584241,3533290860&fm=26&gp=0.jpg")
+                        HttpUtils.getNetWorkBitmap(data.iocurl)
                     handler.post {
                         //分享到微信
                         WXUtils.getInstance()
                             .shareWXUrlCircle(
                                 context,
-                                "http://www.baidu.com",
+                                data.url,
                                 netWorkBitmap,
-                                "标题",
-                                "详细描述xxx"
+                                data.title,
+                                data.content
                             )
                         dialog?.dismiss()
                     }
