@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.ApplyZhiYaActivity">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="459dp"
+        android:background="@drawable/shape_theme_white_ga"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivFinish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="55dp"
+        android:padding="5dp"
+        android:src="@mipmap/icon_white_back"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="申请质押"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/ivFinish"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivFinish" />
+
+    <TextView
+        android:id="@+id/tvHint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="20dp"
+        android:drawableLeft="@mipmap/icon_tishi_white"
+        android:drawablePadding="15dp"
+        android:text="提示：尊敬的杏福宝用户，因您的产品已经使用，如需申请质押，需要先行将产品寄回，然后填入物流信息，在本页面申请质押。"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clAddress"
+        android:layout_width="match_parent"
+        android:layout_height="101dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/shape_coff_radius_8"
+        app:layout_constraintTop_toBottomOf="@+id/tvHint">
+
+        <TextView
+            android:id="@+id/tvAddressInfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="退货地址：江苏省常州市xx区xx市xx路3232号\n收货人：常孝集团\n电话号码：xxxx-xxxxxxxx"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/tvCopyAddress"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvCopyAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="13dp"
+            android:padding="5dp"
+            android:text="复制"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvAddressInfo"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvAddressInfo" />
+    </android.support.constraint.ConstraintLayout>
+
+    <EditText
+        android:id="@+id/etCompany"
+        style="@style/LoginGeryInput"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/shape_white_radius_8"
+        android:hint="请输入物流公司"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingLeft="12dp"
+        android:paddingRight="60dp"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/clAddress"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tvCompanyCopy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:padding="5dp"
+        android:text="粘贴"
+        android:textColor="@color/theme_color"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/etCompany"
+        app:layout_constraintRight_toRightOf="@+id/etCompany"
+        app:layout_constraintTop_toTopOf="@+id/etCompany" />
+
+    <EditText
+        android:id="@+id/etOrderNo"
+        style="@style/LoginGeryInput"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_white_radius_8"
+        android:hint="请输入运单号码"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingLeft="12dp"
+        android:paddingRight="60dp"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/etCompany"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tvOrderNoCopy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:padding="5dp"
+        android:text="粘贴"
+        android:textColor="@color/theme_color"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/etOrderNo"
+        app:layout_constraintRight_toRightOf="@+id/etOrderNo"
+        app:layout_constraintTop_toTopOf="@+id/etOrderNo" />
+
+    <TextView
+        android:id="@+id/tvOk"
+        style="@style/MainBtn"
+        android:layout_marginTop="32dp"
+        android:text="申请质押"
+        app:layout_constraintTop_toBottomOf="@+id/tvOrderNoCopy"
+        tools:ignore="MissingConstraints" />
+</android.support.constraint.ConstraintLayout>

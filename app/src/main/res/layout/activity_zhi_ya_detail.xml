@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_default_bg"
-    tools:context="com.xfb.xinfubao.activity.NATClubActivity">
+    tools:context="com.xfb.xinfubao.activity.ZhiYaDetailActivity">
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
@@ -31,37 +31,28 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
-            android:id="@+id/tvToUse"
+            android:id="@+id/tvBottom1"
             style="@style/MainBtn"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
-            android:background="@drawable/selector_theme_gery_btn"
-            android:text="去使用"
+            android:background="@drawable/shape_theme_storke_btn_bg"
+            android:text="质押赎回"
+            android:textColor="@color/theme_color"
             tools:ignore="MissingConstraints" />
 
         <TextView
-            android:id="@+id/tvToDiYa"
+            android:id="@+id/tvBottom2"
             style="@style/MainBtn"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
-            android:background="@drawable/selector_theme_gery_btn"
-            android:text="去置换"
+            android:background="@drawable/shape_theme_btn_bg"
+            android:text="转出"
             tools:ignore="MissingConstraints" />
 
-        <TextView
-            android:id="@+id/tvToZhiYa"
-            style="@style/MainBtn"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/selector_theme_gery_btn"
-            android:text="去质押"
-            tools:ignore="MissingConstraints" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

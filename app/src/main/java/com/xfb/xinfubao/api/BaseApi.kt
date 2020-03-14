@@ -217,9 +217,17 @@ interface BaseApi {
     @POST("api/findNatMortgageLogs")
     fun cashOutLogs(@Body map: Map<String, String>): Observable<Result<List<ItemBalanceModel>>>
 
-    /** 抵押 */
+    /** NAT置换 */
     @POST("api/mortgageNat")
     fun mortgageNat(@Body map: Map<String, String>): Observable<Result<DiyaModel>>
+
+    /** NAT去质押 */
+    @POST("api/natPledgeApply")
+    fun natPledgeApply(@Body map: Map<String, String>): Observable<Result<NATResultModel>>
+
+    /** NAT去使用 */
+    @POST("api/natMakeUseOf")
+    fun natMakeUseOf(@Body map: Map<String, String>): Observable<Result<NATResultModel>>
 
     /** 资产互兑 */
     @POST("api/assetsExchange")

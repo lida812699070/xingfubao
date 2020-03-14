@@ -86,7 +86,7 @@ class DialogUtils {
         }
 
         /** 抵押 */
-        //state 0 抵押  1支付
+        //state 0 抵押  1支付  2银杏宝余额转出 3质押 4使用
         fun showDiYaDialog(
             context: Context,
             state: Int = 0,
@@ -117,6 +117,12 @@ class DialogUtils {
                 view.findViewById<TextView>(R.id.tvOkCashOut).text = "确认转出"
                 view.findViewById<TextView>(R.id.tvOkCashOut).background =
                     context.getDrawable(R.drawable.shape_org_radius_8)
+            } else if (state == 3) {
+                view.findViewById<TextView>(R.id.tvTitle).text = "质押"
+                view.findViewById<TextView>(R.id.tvOkCashOut).text = "确认质押"
+            } else if (state == 4) {
+                view.findViewById<TextView>(R.id.tvTitle).text = "使用"
+                view.findViewById<TextView>(R.id.tvOkCashOut).text = "确认使用"
             }
             val etPayPassword = view.findViewById<EditText>(R.id.etPayPassword)
             view.findViewById<TextView>(R.id.tvOkCashOut).setOnClickListener {

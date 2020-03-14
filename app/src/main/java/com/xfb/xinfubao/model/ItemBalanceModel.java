@@ -16,6 +16,33 @@ public class ItemBalanceModel implements MultiItemEntity, Serializable {
     private int itemType = 0;
     private int type = 0;
     private boolean isSuccess = true;
+    private boolean use;
+    private boolean exchange;
+    private boolean pledge;
+
+    public boolean isUse() {
+        return use;
+    }
+
+    public void setUse(boolean use) {
+        this.use = use;
+    }
+
+    public boolean isExchange() {
+        return exchange;
+    }
+
+    public void setExchange(boolean exchange) {
+        this.exchange = exchange;
+    }
+
+    public boolean isPledge() {
+        return pledge;
+    }
+
+    public void setPledge(boolean pledge) {
+        this.pledge = pledge;
+    }
 
     public boolean isSuccess() {
         return state != 1;

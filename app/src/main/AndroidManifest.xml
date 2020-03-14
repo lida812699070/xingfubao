@@ -22,7 +22,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.CartActivity"></activity>
+        <activity android:name=".activity.CashInNatActivity"></activity>
+        <activity android:name=".activity.ShuHuiZhiYaActivity" />
+        <activity android:name=".activity.ApplyZhiYaActivity" />
+        <activity android:name=".activity.ZhiYaDetailActivity" />
+        <activity android:name=".activity.CartActivity" />
         <activity android:name=".activity.CategoryActivity" />
         <activity android:name=".activity.OrderDetailActivity" />
         <activity android:name=".activity.MyOrderActivity" />
@@ -90,7 +94,7 @@
             android:exported="true"
             android:launchMode="singleTask"
             android:taskAffinity="com.xfb.xinfubao"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
@@ -100,7 +104,7 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
 
-                <!--这里填写你申请的app id-->
+                <!-- 这里填写你申请的app id -->
                 <data android:scheme="wxa70a398c8a7adbe1" />
             </intent-filter>
         </activity>

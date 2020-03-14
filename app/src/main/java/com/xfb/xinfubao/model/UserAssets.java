@@ -30,8 +30,28 @@ public class UserAssets {
     private double natTotalNum;
     //NAT已抵押数量
     private double natMortgagedNum;
+    //质押未使用
+    private double pledgeMoney;
+    //质押使用
+    private double pledgeUseMoney;
     //愿力值
     private double powerAvowNum;
+
+    public double getPledgeMoney() {
+        return pledgeMoney;
+    }
+
+    public void setPledgeMoney(double pledgeMoney) {
+        this.pledgeMoney = pledgeMoney;
+    }
+
+    public double getPledgeUseMoney() {
+        return pledgeUseMoney;
+    }
+
+    public void setPledgeUseMoney(double pledgeUseMoney) {
+        this.pledgeUseMoney = pledgeUseMoney;
+    }
 
     public double getGinkgoTreasureNum() {
         return ginkgoTreasureNum;

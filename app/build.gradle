@@ -65,10 +65,10 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation project(path: ':sdk')
     implementation project(path: ':matisse')
-    compile 'com.github.mcxtzhang:SwipeDelMenuLayout:V1.3.0'
+    implementation 'com.github.mcxtzhang:SwipeDelMenuLayout:V1.3.0'
     implementation files('libs/core-3.1.0.jar')
-    compile 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
     //支付宝/百川
     compile(name: 'alipaySdk-15.6.8-20191021122514', ext: 'aar')
-    compile 'com.android.support:multidex:1.0.1'
+    implementation 'com.android.support:multidex:1.0.1'
 }

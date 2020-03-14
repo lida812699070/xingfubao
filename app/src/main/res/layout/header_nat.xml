@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="15dp"
         android:paddingRight="5dp"
-        android:text="抵押记录"
+        android:text="财务记录"
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/tvTitle"
@@ -53,7 +53,7 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/clContent"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="109dp"
         android:layout_marginRight="20dp"
@@ -73,10 +73,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="180dp"
-            android:text="已抵押链上祭祀产品价值(元)"
+            android:text="已置换产品获得的NAT数量(枚)"
             android:textColor="@color/color_text_111"
             android:textSize="14sp"
-            android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -88,44 +87,94 @@
             android:layout_marginTop="207dp"
             android:includeFontPadding="false"
             android:text="123000.00"
-            android:textColor="@color/color_text_111"
-            android:textSize="38sp"
+            android:textColor="@color/color_light_org"
+            android:textSize="32sp"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="16dp"
+            android:background="@color/line_bg"
+            app:layout_constraintTop_toBottomOf="@+id/tvTotalMoney" />
+
         <TextView
-            android:id="@+id/tvWait"
+            android:id="@+id/tvZhiYaNatCountText"
             android:layout_width="wrap_content"
-            android:layout_height="32dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/shape_f5f_radius_16"
-            android:gravity="center"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:text="请在下方列表进行抵押"
-            android:textColor="@color/color_text_888"
-            android:textSize="13sp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="已质押产品获得的NAT数量(枚)"
+            android:textColor="@color/color_text_111"
+            android:textSize="14sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTotalMoney" />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="20dp"
-            android:drawableLeft="@mipmap/shuoming_icon"
-            android:drawablePadding="6dp"
-            android:gravity="left"
-            android:text="链上祭祀产品抵押给NAT基金会后，会获得同等比例的NAT资产包，请在NAT页面查看，抵押不可赎回"
-            android:textColor="@color/color_text_111"
-            android:textSize="12sp"
+        <View
+            android:id="@+id/viewLineCenter"
+            android:layout_width="1dp"
+            android:layout_height="62dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/line_bg"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvWait" />
+            app:layout_constraintTop_toBottomOf="@+id/tvZhiYaNatCountText" />
+
+        <TextView
+            android:id="@+id/tvUseCountText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="已使用（不可转出）"
+            android:textColor="@color/color_text_888"
+            android:textSize="14sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/viewLineCenter"
+            app:layout_constraintTop_toTopOf="@+id/viewLineCenter" />
+
+        <TextView
+            android:id="@+id/tvUseCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_light_org"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/viewLineCenter"
+            app:layout_constraintLeft_toLeftOf="@+id/tvUseCountText"
+            app:layout_constraintRight_toRightOf="@+id/tvUseCountText"
+            tools:text="7900" />
+
+        <TextView
+            android:id="@+id/tvUnUseCountText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="未使用（可转出）"
+            android:textColor="@color/color_text_888"
+            android:textSize="14sp"
+            app:layout_constraintLeft_toRightOf="@+id/viewLineCenter"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/viewLineCenter" />
+
+        <TextView
+            android:id="@+id/tvUnUseCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_light_org"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/viewLineCenter"
+            app:layout_constraintLeft_toLeftOf="@+id/tvUnUseCountText"
+            app:layout_constraintRight_toRightOf="@+id/tvUnUseCountText"
+            tools:text="7900" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/tvUnUseCount" />
+
     </android.support.constraint.ConstraintLayout>
 
     <TextView

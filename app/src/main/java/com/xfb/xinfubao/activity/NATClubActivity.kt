@@ -58,7 +58,19 @@ class NATClubActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
     override fun initLogic() {
         adapter.balanceEnum = BalanceEnum.NAT_CLUB
         tvToDiYa.setOnClickListener {
-            toDiya()
+            if (tvToDiYa.isSelected) {
+                toZhiHuan()
+            }
+        }
+        tvToUse.setOnClickListener {
+            if (tvToUse.isSelected) {
+                toUse()
+            }
+        }
+        tvToZhiYa.setOnClickListener {
+            if (tvToZhiYa.isSelected) {
+                toZhiYa()
+            }
         }
         val map = hashMapOf<String, String>()
         map["userId"] = "${ConfigUtils.userId()}"
@@ -68,9 +80,53 @@ class NATClubActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         }
     }
 
-    private fun toDiya() {
+    private fun toUse() {
         if (selectPosition == -1) {
-            showMessage("请选择抵押产品")
+            showMessage("请选择产品")
+            return
+        }
+        showDiYaDialog = DialogUtils.showDiYaDialog(this, 4) {
+            showDiYaDialog?.dismiss()
+            val map = hashMapOf<String, String>()
+            val itemBalanceModel = list[selectPosition]
+            map["orderNO"] = itemBalanceModel.orderNum
+            map["userId"] = "${ConfigUtils.userId()}"
+            map["payPassword"] = it
+            request(RetrofitCreateHelper.createApi(BaseApi::class.java).natMakeUseOf(map)) {
+                showMessage("操作成功")
+                refreshPage()
+            }
+        }
+    }
+
+    private fun toZhiYa() {
+        if (selectPosition == -1) {
+            showMessage("请选择产品")
+            return
+        }
+        val itemBalanceModel = list[selectPosition]
+        if (itemBalanceModel.isUse) {
+            showDiYaDialog = DialogUtils.showDiYaDialog(this, 3) {
+                showDiYaDialog?.dismiss()
+                val map = hashMapOf<String, String>()
+                map["orderNo"] = itemBalanceModel.orderNum
+                map["money"] = "${itemBalanceModel.amount}"
+                map["userId"] = "${ConfigUtils.userId()}"
+                map["payPwd"] = it
+                request(RetrofitCreateHelper.createApi(BaseApi::class.java).natPledgeApply(map)) {
+                    showMessage("操作成功")
+                    refreshPage()
+                }
+            }
+        } else {
+            ApplyZhiYaActivity.toActivity(this, itemBalanceModel)
+        }
+    }
+
+    /** 去置换 */
+    private fun toZhiHuan() {
+        if (selectPosition == -1) {
+            showMessage("请选择产品")
             return
         }
         if (selectUnlockModel == null) {
@@ -88,19 +144,48 @@ class NATClubActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
             map["unlockPackageId"] = "${selectUnlockModel?.id}"
             request(RetrofitCreateHelper.createApi(BaseApi::class.java).mortgageNat(map)) {
                 showMessage("操作成功")
-                val map = hashMapOf<String, String>()
-                map["userId"] = "${ConfigUtils.userId()}"
-                showProgress("请稍候")
-                request(RetrofitCreateHelper.createApi(BaseApi::class.java).getUserInfo(map)) {
-                    ConfigUtils.saveUserInfo(it.data)
-                    val tvTotalMoney = headerView!!.findViewById<TextView>(R.id.tvTotalMoney)
-                    tvTotalMoney.text =
-                        PriceChangeUtils.getNumKb(it.data.userAssets.natMortgagedNum)
-                    var selectPosition = -1
-                    this.adapter.natSelector = selectPosition
-                    onRefresh()
-                }
+                refreshPage()
             }
+        }
+    }
+
+    private fun refreshPage() {
+        val map = hashMapOf<String, String>()
+        map["userId"] = "${ConfigUtils.userId()}"
+        showProgress("请稍候")
+        request(RetrofitCreateHelper.createApi(BaseApi::class.java).getUserInfo(map)) {
+            ConfigUtils.saveUserInfo(it.data)
+            bindHeaderData(it.data)
+            selectPosition = -1
+            this.adapter.natSelector = selectPosition
+            onRefresh()
+            tvToUse.isSelected = false
+            tvToDiYa.isSelected = false
+            tvToZhiYa.isSelected = false
+        }
+    }
+
+    private fun bindHeaderData(it: UserInfo) {
+        val tvTotalMoney = headerView!!.findViewById<TextView>(R.id.tvTotalMoney)
+        val tvUseCount = headerView!!.findViewById<TextView>(R.id.tvUseCount)
+        val tvUseCountText = headerView!!.findViewById<TextView>(R.id.tvUseCountText)
+        val tvUnUseCount = headerView!!.findViewById<TextView>(R.id.tvUnUseCount)
+        val tvUnUseCountText = headerView!!.findViewById<TextView>(R.id.tvUnUseCountText)
+        tvTotalMoney.text =
+            PriceChangeUtils.getNumKb(it.userAssets.natMortgagedNum)
+        tvUseCount.text = PriceChangeUtils.getNumKb(it.userAssets.pledgeUseMoney)
+        tvUnUseCount.text = PriceChangeUtils.getNumKb(it.userAssets.pledgeMoney)
+        tvUseCountText.setOnClickListener {
+            ZhiYaDetailActivity.toActivity(this, true)
+        }
+        tvUseCount.setOnClickListener {
+            ZhiYaDetailActivity.toActivity(this, true)
+        }
+        tvUnUseCount.setOnClickListener {
+            ZhiYaDetailActivity.toActivity(this, false)
+        }
+        tvUnUseCountText.setOnClickListener {
+            ZhiYaDetailActivity.toActivity(this, false)
         }
     }
 
@@ -108,7 +193,6 @@ class NATClubActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         headerView = LayoutInflater.from(this).inflate(R.layout.header_nat, null)
         val ivFinish = headerView!!.findViewById<ImageView>(R.id.ivFinish)
         val tvDiYaRecord = headerView!!.findViewById<TextView>(R.id.tvDiYaRecord)
-        val tvTotalMoney = headerView!!.findViewById<TextView>(R.id.tvTotalMoney)
         val tvSelectUnLock = headerView!!.findViewById<TextView>(R.id.tvSelectUnLock)
         tvSelectUnLock.setOnClickListener {
             showProgress("请稍候")
@@ -131,7 +215,7 @@ class NATClubActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         tvDiYaRecord.setOnClickListener {
             CashOutRecordActivity.toActivity(this, 2)
         }
-        tvTotalMoney.text = PriceChangeUtils.getNumKb(userInfo.userAssets.natMortgagedNum)
+        bindHeaderData(userInfo)
         adapter.addHeaderView(headerView)
         adapter.setHeaderAndEmpty(true)
         initData()
@@ -140,6 +224,11 @@ class NATClubActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
             selectPosition = position
             this.adapter.natSelector = selectPosition
             adapter.notifyDataSetChanged()
+            val itemBalanceModel = list[selectPosition]
+            tvToUse.isSelected = itemBalanceModel.isUse
+            tvToUse.text = if (itemBalanceModel.isUse) "已使用" else "去使用"
+            tvToDiYa.isSelected = itemBalanceModel.isExchange
+            tvToZhiYa.isSelected = itemBalanceModel.isPledge
         }
     }
 
