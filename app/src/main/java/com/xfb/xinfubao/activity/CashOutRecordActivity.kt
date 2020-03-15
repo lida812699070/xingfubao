@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.activity_cash_out_record.*
 
 /** 转出记录 */
 class CashOutRecordActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
-    /** 0 申请提现记录  1 申请转出记录  2 申请抵押记录 */
+    /** 0 申请提现记录  1 申请转出记录  2 财务记录 */
     var state = 0
 
     companion object {
@@ -65,7 +65,7 @@ class CashOutRecordActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                             mContext.resources.getDrawable(R.drawable.shape_888_radius_13)
                     )
                 } else if (state == 2) {
-                    tvState.text = if (data.isSuccess) "已抵押" else "待审核"
+                    tvState.text = data.stateDepict
                     tvState.setBackgroundDrawable(
                         if (data.isSuccess)
                             mContext.resources.getDrawable(R.drawable.shape_theme_radius_13)
@@ -155,7 +155,7 @@ class CashOutRecordActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
             }
         } else if (state == 2) {//NAT抵押
             requestWithError(
-                RetrofitCreateHelper.createApi(BaseApi::class.java).findNatMortgageLogs(
+                RetrofitCreateHelper.createApi(BaseApi::class.java).financialRecord(
                     map
                 ), {
                     loadData(it.data)

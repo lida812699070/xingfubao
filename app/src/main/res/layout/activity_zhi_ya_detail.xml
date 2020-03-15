@@ -7,6 +7,12 @@
     android:background="@color/color_default_bg"
     tools:context="com.xfb.xinfubao.activity.ZhiYaDetailActivity">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/shape_theme_white_ga"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"

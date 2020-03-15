@@ -201,6 +201,10 @@ interface BaseApi {
     @POST("api/getNatInfo")
     fun getNatInfo(@Body map: Map<String, String>): Observable<Result<List<ItemBalanceModel>>>
 
+    /** NAT质押详情 */
+    @POST("api/pledgeList")
+    fun pledgeList(@Body map: Map<String, String>): Observable<Result<List<ItemBalanceModel>>>
+
     /** 转账 */
     @POST("api/transfer")
     fun transfer(@Body map: Map<String, String>): Observable<Result<Any?>>
@@ -212,6 +216,10 @@ interface BaseApi {
     /** 抵押记录 */
     @POST("api/findNatMortgageLogs")
     fun findNatMortgageLogs(@Body map: Map<String, String>): Observable<Result<List<ItemBalanceModel>>>
+
+    /** 财务记录 */
+    @POST("api/financialRecord")
+    fun financialRecord(@Body map: Map<String, String>): Observable<Result<List<ItemBalanceModel>>>
 
     /** 提现记录 */
     @POST("api/findNatMortgageLogs")
@@ -272,6 +280,22 @@ interface BaseApi {
     /** 转换余额 */
     @POST("api/exchangeBalance")
     fun exchangeBalance(@Body map: Map<String, String>): Observable<Result<ItemBalanceModel>>
+
+    /** NAT基金会-质押-退货地址信息 */
+    @POST("api/returnAddress")
+    fun returnAddress(@Body map: Map<String, String>): Observable<Result<AddressModel>>
+
+    /** 赎回 */
+    @POST("api/redeem")
+    fun redeem(@Body map: Map<String, String>): Observable<Result<RedeemResult>>
+
+    /** 转入NAT基本信息 */
+    @POST("api/walletInfo")
+    fun walletInfo(@Body map: Map<String, String>): Observable<Result<WalletInfoModel>>
+
+    /** 转入NAT 打款申请 */
+    @POST("api/aForPayment")
+    fun aForPayment(@Body map: Map<String, String>): Observable<Result<RedeemResult>>
 
 
 }

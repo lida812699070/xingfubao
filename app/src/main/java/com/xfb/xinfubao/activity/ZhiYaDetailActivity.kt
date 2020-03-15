@@ -18,10 +18,13 @@ import com.xfb.xinfubao.adapter.BalanceAdapter
 import com.xfb.xinfubao.api.BaseApi
 import com.xfb.xinfubao.model.ItemBalanceModel
 import com.xfb.xinfubao.model.UserInfo
+import com.xfb.xinfubao.model.event.ShuHuiEvent
 import com.xfb.xinfubao.myenum.BalanceEnum
 import com.xfb.xinfubao.utils.ConfigUtils
 import com.xfb.xinfubao.utils.setVisible
 import kotlinx.android.synthetic.main.activity_zhi_ya_detail.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 
 /** 质押详情 */
 class ZhiYaDetailActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
@@ -52,6 +55,7 @@ class ZhiYaDetailActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
     }
 
     override fun initView(savedInstanceState: Bundle?) {
+        EventBus.getDefault().register(this)
     }
 
     override fun getLayoutId(): Int {
@@ -72,13 +76,20 @@ class ZhiYaDetailActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
             tvBottom2.text = "申请赎回"
         }
 
-        //TODO 质押赎回
         tvBottom1.setOnClickListener {
-
+            if (selectPosition == -1) {
+                showMessage("请先选择产品")
+                return@setOnClickListener
+            }
+            ShuHuiZhiYaActivity.toActivity(this, list[selectPosition])
         }
         tvBottom2.setOnClickListener {
+            if (selectPosition == -1) {
+                showMessage("请先选择产品")
+                return@setOnClickListener
+            }
             if (isUse) {
-                //TODO 申请赎回
+                ShuHuiZhiYaActivity.toActivity(this, list[selectPosition])
             } else {
                 //TODO 转出
             }
@@ -100,7 +111,8 @@ class ZhiYaDetailActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         }
     }
 
-    private fun refreshPage() {
+    @Subscribe
+    fun refreshPage(event: ShuHuiEvent) {
         val map = hashMapOf<String, String>()
         map["userId"] = "${ConfigUtils.userId()}"
         showProgress("请稍候")
@@ -122,17 +134,21 @@ class ZhiYaDetailActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         tvCountText.text = if (isUse) "质押产品获得的NAT数量（已使用）" else "质押产品获得的NAT数量（未使用）"
     }
 
-    //TODO /** 质押详情 */
     override fun initData() {
         val map = hashMapOf<String, String>()
         map["pageNum"] = "$page"
         map["userId"] = "${ConfigUtils.userId()}"
         map["pageSize"] = "$pageSize"
-        requestWithError(RetrofitCreateHelper.createApi(BaseApi::class.java).getNatInfo(map), {
+        map["type"] = "${if (isUse) 1 else 2}"
+        requestWithError(RetrofitCreateHelper.createApi(BaseApi::class.java).pledgeList(map), {
             loadData(it.data)
         }) {
             showLoadError()
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
+    }
 }

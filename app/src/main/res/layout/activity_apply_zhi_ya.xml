@@ -65,13 +65,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:text="退货地址：江苏省常州市xx区xx市xx路3232号\n收货人：常孝集团\n电话号码：xxxx-xxxxxxxx"
             android:textColor="@color/white"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/tvCopyAddress"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="退货地址：江苏省常州市xx区xx市xx路3232号\n收货人：常孝集团\n电话号码：xxxx-xxxxxxxx" />
 
         <TextView
             android:id="@+id/tvCopyAddress"

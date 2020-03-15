@@ -19,11 +19,14 @@ import com.xfb.xinfubao.dialog.DialogUtils
 import com.xfb.xinfubao.model.ItemBalanceModel
 import com.xfb.xinfubao.model.NatUnlockPakeageModel
 import com.xfb.xinfubao.model.UserInfo
+import com.xfb.xinfubao.model.event.ZhiYaEvent
 import com.xfb.xinfubao.myenum.BalanceEnum
 import com.xfb.xinfubao.utils.ConfigUtils
 import com.xfb.xinfubao.utils.setVisible
 import kotlinx.android.synthetic.main.activity_natclub.*
 import kotlinx.android.synthetic.main.header_nat.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 
 /** NAT基金会 */
 class NATClubActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
@@ -52,7 +55,12 @@ class NATClubActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
     }
 
     override fun initView(savedInstanceState: Bundle?) {
+        EventBus.getDefault().register(this)
+    }
 
+    @Subscribe
+    fun zhiya(event: ZhiYaEvent) {
+        refreshPage()
     }
 
     override fun initLogic() {
@@ -226,7 +234,7 @@ class NATClubActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
             adapter.notifyDataSetChanged()
             val itemBalanceModel = list[selectPosition]
             tvToUse.isSelected = itemBalanceModel.isUse
-            tvToUse.text = if (itemBalanceModel.isUse) "已使用" else "去使用"
+            tvToUse.text = if (itemBalanceModel.isUse) "去使用" else "已使用"
             tvToDiYa.isSelected = itemBalanceModel.isExchange
             tvToZhiYa.isSelected = itemBalanceModel.isPledge
         }
@@ -244,4 +252,8 @@ class NATClubActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
+    }
 }
