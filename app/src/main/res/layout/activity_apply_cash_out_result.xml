@@ -129,7 +129,48 @@
         android:layout_marginTop="9dp"
         android:layout_marginRight="20dp"
         android:background="@color/color_line_e0e"
-        app:layout_constraintTop_toBottomOf="@+id/tvCashOutMoney" />
+        app:layout_constraintTop_toBottomOf="@+id/tvCashOutMoneyText" />
+
+    <TextView
+        android:id="@+id/tvCashOutStateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="22dp"
+        android:text="置换状态"
+        android:textColor="@color/color_text_111"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCashOutMoneyText" />
+
+    <TextView
+        android:id="@+id/tvCashOutState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:text="您的置换已成功"
+        android:textColor="@color/theme_color"
+        android:textSize="16sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvCashOutStateText"
+        app:layout_constraintLeft_toRightOf="@+id/tvCashOutStateText" />
+
+    <View
+        android:id="@+id/viewLineState"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/color_line_e0e"
+        app:layout_constraintTop_toBottomOf="@+id/tvCashOutState" />
+
+    <android.support.constraint.Group
+        android:id="@+id/gpState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="tvCashOutStateText,tvCashOutState,viewLineState"
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/tvOk"
@@ -137,6 +178,6 @@
         android:layout_marginTop="41dp"
         android:background="@drawable/shape_org_radius_8"
         android:text="已成功"
-        app:layout_constraintTop_toBottomOf="@+id/tvCashOutMoneyText"
+        app:layout_constraintTop_toBottomOf="@+id/tvCashOutStateText"
         tools:ignore="MissingConstraints" />
 </android.support.constraint.ConstraintLayout>

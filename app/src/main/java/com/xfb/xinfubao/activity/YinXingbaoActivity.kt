@@ -83,7 +83,7 @@ class YinXingbaoActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         //转出本金
         tvToCashOut.setOnClickListener {
             if (selectPosition == -1) {
-                showMessage("请选择转出记录")
+                showMessage("请选择明细")
                 return@setOnClickListener
             }
             ApplyCashOutActivity.toActivity(
@@ -96,7 +96,7 @@ class YinXingbaoActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         //转出余额
         tvToCashOutBalance.setOnClickListener {
             if (selectPosition == -1) {
-                showMessage("请选择转出记录")
+                showMessage("请选择明细")
                 return@setOnClickListener
             }
             DialogUtils.showDiYaDialog(this, 2) {

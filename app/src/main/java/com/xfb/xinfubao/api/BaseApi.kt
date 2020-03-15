@@ -48,7 +48,7 @@ interface BaseApi {
     /**
      * 杏福宝新闻首页列表数据
      */
-    @GET("newsdetails")
+    @GET("getShareInfo")
     fun newsdetails(@QueryMap map: Map<String, String>): Observable<Result<NewsDetail>>
 
     /**

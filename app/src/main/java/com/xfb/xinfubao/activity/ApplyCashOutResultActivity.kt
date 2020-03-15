@@ -1,5 +1,6 @@
 package com.xfb.xinfubao.activity
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -30,6 +31,7 @@ class ApplyCashOutResultActivity : DefaultActivity() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     override fun initView(savedInstanceState: Bundle?) {
         state = intent.getIntExtra("state", 0)
         itemBalanceModel = intent.getSerializableExtra("data") as ItemBalanceModel?
@@ -70,6 +72,7 @@ class ApplyCashOutResultActivity : DefaultActivity() {
                 tvCashOutMoney.setTextColor(resources.getColor(R.color.color_light_org))
                 tvCashOutMoney.text = PriceChangeUtils.getNumKb(itemBalanceModel!!.amount)
                 tvOk.setBackgroundDrawable(resources.getDrawable(R.drawable.shape_light_org_radius_13))
+                tvOk.text = itemBalanceModel?.stateDepict
             }
             1 -> {
                 myToolbar.setTitle("申请转出")
@@ -98,23 +101,32 @@ class ApplyCashOutResultActivity : DefaultActivity() {
                 tvCashOutMoney.setTextColor(resources.getColor(R.color.color_org))
                 tvCashOutMoney.text = PriceChangeUtils.getNumKb(itemBalanceModel!!.amount)
                 tvOk.setBackgroundDrawable(resources.getDrawable(R.drawable.shape_org_radius_13))
+                tvOk.text = itemBalanceModel?.stateDepict
+
             }
+            //NAT基金会
             2 -> {
-                myToolbar.setTitle("抵押银杏宝")
+                myToolbar.setTitle("${itemBalanceModel?.typeDepict}详情")
                 ivState.setImageResource(if (isWait) R.mipmap.dengdai_icon else R.mipmap.dui_icon_2)
-                val strState = if (itemBalanceModel!!.isSuccess) "已抵押" else "待审核"
+                val strState =
+                    "尊敬的用户\n您的${itemBalanceModel?.typeDepict}申请${itemBalanceModel?.stateDepict}\n请留意您的NAT总资产"
                 tvHint.setColorText(
-                    getString(R.string.apply_cash_out_success2_hint, strState),
+                    strState,
                     resources.getColor(R.color.color_theme),
                     12,
                     15
                 )
-                tvCashOutDetailText.text = "抵押详情"
+                tvCashOutDetailText.text = "${itemBalanceModel?.typeDepict}详情"
+                gpState.setVisible(true)
+                tvCashOutStateText.text = "${itemBalanceModel?.typeDepict}状态"
+                tvCashOutState.text =
+                    "您的${itemBalanceModel?.typeDepict}${itemBalanceModel?.stateDepict}"
                 tvApplyTime.text = itemBalanceModel?.createDate
                 tvApplyTime.setTextColor(resources.getColor(R.color.color_theme))
                 tvCashOutMoney.setTextColor(resources.getColor(R.color.color_theme))
                 tvCashOutMoney.text = PriceChangeUtils.getNumKb(itemBalanceModel!!.amount)
                 tvOk.setBackgroundDrawable(resources.getDrawable(R.drawable.shape_theme_radius_13))
+                tvOk.text = "查看NAT资产"
             }
             3 -> {
                 myToolbar.setTitle("转换详情")
@@ -133,9 +145,9 @@ class ApplyCashOutResultActivity : DefaultActivity() {
                 tvCashOutMoney.setTextColor(resources.getColor(R.color.color_org))
                 tvCashOutMoney.text = PriceChangeUtils.getNumKb(itemBalanceModel!!.amount)
                 tvOk.setBackgroundDrawable(resources.getDrawable(R.drawable.shape_org_radius_13))
+                tvOk.text = "返回银杏宝页面"
             }
         }
-        tvOk.text = itemBalanceModel?.stateDepict
     }
 
 }

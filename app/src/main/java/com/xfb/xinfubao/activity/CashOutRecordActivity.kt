@@ -105,7 +105,7 @@ class CashOutRecordActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         } else if (state == 1) {
             title = "转出记录"
         } else if (state == 2) {
-            title = "抵押记录"
+            title = "财务记录"
         }
         myToolbar.setTitle(title)
         val footerView = LayoutInflater.from(this).inflate(R.layout.footer_record, null)

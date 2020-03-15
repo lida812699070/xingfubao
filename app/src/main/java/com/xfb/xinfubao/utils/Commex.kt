@@ -96,10 +96,14 @@ fun View.setVisibleWithAnim(visible: Boolean) {
 
 fun TextView.setColorText(text: String, color: Int, start: Int, end: Int) {
     val spannableStringCoupon = SpannableString(text)
-    spannableStringCoupon.setSpan(
-        ForegroundColorSpan(color),
-        start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-    )
+    try {
+        spannableStringCoupon.setSpan(
+            ForegroundColorSpan(color),
+            start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
     this.text = spannableStringCoupon
 }
 
@@ -137,6 +141,7 @@ fun Context.getFile(): File {
         file.getParentFile().mkdirs()
     return file
 }
+
 fun Context.getApkFile(): File {
     val path =
         "${Config.getFileCacheDirPath()}${File.separator}apk"

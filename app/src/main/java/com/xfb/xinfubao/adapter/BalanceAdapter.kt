@@ -8,7 +8,6 @@ import com.chad.library.adapter.base.BaseViewHolder
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.model.ItemBalanceModel
 import com.xfb.xinfubao.myenum.BalanceEnum
-import com.xfb.xinfubao.utils.setColorText
 import com.xfb.xinfubao.utils.setVisible
 
 class BalanceAdapter(data: List<ItemBalanceModel>) :
@@ -47,36 +46,21 @@ class BalanceAdapter(data: List<ItemBalanceModel>) :
                     }
                     BalanceEnum.NAT -> {
                         val strTitle = "${data.createDate}   ${data.name}"
-                        tvTitle.setColorText(
-                            strTitle,
-                            mContext.resources.getColor(R.color.color_text_888),
-                            11,
-                            16
-                        )
+                        tvTitle.text = strTitle
                         ivPoint.isSelected = data.isCashIn
                         tvMoney.isSelected = data.isCashIn
                         tvMoney.text = PriceChangeUtils.getNumKb(data.amount)
                     }
                     BalanceEnum.YUAN_LI_ZHI -> {
                         val strTitle = "${data.createDate}   ${data.name}"
-                        tvTitle.setColorText(
-                            strTitle,
-                            mContext.resources.getColor(R.color.color_text_888),
-                            11,
-                            16
-                        )
+                        tvTitle.text = strTitle
                         ivPoint.setVisible(false)
                         tvMoney.isSelected = data.isCashIn
                         tvMoney.text = "${PriceChangeUtils.getNumKbs(data.amount)}分"
                     }
                     BalanceEnum.NAT_CLUB -> {
                         val strTitle = "${data.createDate}   ${data.name}"
-                        tvTitle.setColorText(
-                            strTitle,
-                            mContext.resources.getColor(R.color.color_text_888),
-                            11,
-                            16
-                        )
+                        tvTitle.text = strTitle
                         ivPoint.setVisible(false)
                         tvMoney.isSelected = data.isCashIn
                         tvMoney.text = "${PriceChangeUtils.getNumKbs(data.amount)}"
@@ -84,12 +68,7 @@ class BalanceAdapter(data: List<ItemBalanceModel>) :
                     }
                     BalanceEnum.YIN_XING_BAO -> {
                         val strTitle = "${data.createDate}   ${data.name}"
-                        tvTitle.setColorText(
-                            strTitle,
-                            mContext.resources.getColor(R.color.color_text_888),
-                            11,
-                            16
-                        )
+                        tvTitle.text = strTitle
                         ivPoint.setVisible(false)
                         tvMoney.setTextColor(mContext.resources.getColor(R.color.color_org))
                         tvMoney.text = "${PriceChangeUtils.getNumKbs(data.amount)}"
