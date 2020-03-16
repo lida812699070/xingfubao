@@ -78,21 +78,13 @@ class ZhiYaDetailActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
 
         tvBottom1.setOnClickListener {
             if (selectPosition == -1) {
-                showMessage("请先选择产品")
+                showMessage("请选择明细")
                 return@setOnClickListener
             }
             ShuHuiZhiYaActivity.toActivity(this, list[selectPosition])
         }
         tvBottom2.setOnClickListener {
-            if (selectPosition == -1) {
-                showMessage("请先选择产品")
-                return@setOnClickListener
-            }
-            if (isUse) {
-                ShuHuiZhiYaActivity.toActivity(this, list[selectPosition])
-            } else {
-                //TODO 转出
-            }
+            MoneyExchangeActivity.toActivity(this, BalanceEnum.NAT_ZHIYA_CLUB)
         }
     }
 
@@ -139,7 +131,7 @@ class ZhiYaDetailActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         map["pageNum"] = "$page"
         map["userId"] = "${ConfigUtils.userId()}"
         map["pageSize"] = "$pageSize"
-        map["type"] = "${if (isUse) 1 else 2}"
+        map["useState"] = "$isUse"
         requestWithError(RetrofitCreateHelper.createApi(BaseApi::class.java).pledgeList(map), {
             loadData(it.data)
         }) {

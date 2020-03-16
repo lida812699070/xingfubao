@@ -121,6 +121,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/shape_gery_radius_3"
+                    android:padding="3dp"
                     android:text="复制地址"
                     android:textColor="@color/color_text_999"
                     android:textSize="12sp"

@@ -176,11 +176,8 @@ class OrderDetailActivity : DefaultActivity() {
             112L -> {
                 tvOrderFinishTime.setVisible(false)
                 tvBottomYellow.text = "物流查询"
+                tvBottomYellow.setVisible(false)
                 tvOrderStateBig.text = "卖家已发货"
-                //TODO 物流查询
-                tvBottomYellow.setOnClickListener {
-
-                }
                 tvBottomTheme.text = "确认收货"
                 tvBottomTheme.setOnClickListener {
                     val map = hashMapOf<String, String>()

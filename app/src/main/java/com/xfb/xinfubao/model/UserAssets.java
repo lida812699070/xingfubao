@@ -20,6 +20,7 @@ public class UserAssets {
     private double ginkgoFruitNum;
     //银杏叶数量
     private double ginkgoLeafNum;
+    private double yxBabyCirculate;
     //积分数量
     private double integralNum;
     //NAT流通数量
@@ -36,6 +37,14 @@ public class UserAssets {
     private double pledgeUseMoney;
     //愿力值
     private double powerAvowNum;
+
+    public double getYxBabyCirculate() {
+        return yxBabyCirculate;
+    }
+
+    public void setYxBabyCirculate(double yxBabyCirculate) {
+        this.yxBabyCirculate = yxBabyCirculate;
+    }
 
     public double getPledgeMoney() {
         return pledgeMoney;

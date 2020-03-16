@@ -5,8 +5,8 @@ enum class BalanceEnum(var key: Int, var tag: String) {
     YING_XING_GUO(1, "银杏果"),
     YING_XING_YE(2, "银杏叶"),
     JI_FEN_SHANG_CHENG(3, "积分商城"),
-    NAT(4, "NAT资产"),
+    NAT(104, "NAT资产"),
     YUAN_LI_ZHI(5, "愿力值"),
     NAT_CLUB(6, "NAT基金会"),
-    NAT_ZHIYA_CLUB(7, "质押详情")
+    NAT_ZHIYA_CLUB(109, "质押详情")
 }

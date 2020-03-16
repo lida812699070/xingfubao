@@ -87,32 +87,21 @@
             app:layout_constraintTop_toTopOf="@+id/tvAddressInfo" />
     </android.support.constraint.ConstraintLayout>
 
-    <EditText
-        android:id="@+id/etCompany"
+    <TextView
+        android:id="@+id/tvCompany"
         style="@style/LoginGeryInput"
         android:layout_marginTop="8dp"
         android:background="@drawable/shape_white_radius_8"
+        android:gravity="center_vertical"
         android:hint="请输入物流公司"
         android:inputType="text"
         android:maxLines="1"
         android:paddingLeft="12dp"
         android:paddingRight="60dp"
+        android:textColor="@color/color_text_888"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@+id/clAddress"
         tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/tvCompanyCopy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
-        android:padding="5dp"
-        android:text="粘贴"
-        android:textColor="@color/theme_color"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/etCompany"
-        app:layout_constraintRight_toRightOf="@+id/etCompany"
-        app:layout_constraintTop_toTopOf="@+id/etCompany" />
 
     <EditText
         android:id="@+id/etOrderNo"
@@ -125,7 +114,7 @@
         android:paddingLeft="12dp"
         android:paddingRight="60dp"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/etCompany"
+        app:layout_constraintTop_toBottomOf="@+id/tvCompany"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -148,4 +137,28 @@
         android:text="申请质押"
         app:layout_constraintTop_toBottomOf="@+id/tvOrderNoCopy"
         tools:ignore="MissingConstraints" />
+
+    <View
+        android:id="@+id/viewBg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.2"
+        android:background="@color/text_blank" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/companyRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxHeight="200dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:itemCount="3"
+        tools:listitem="@layout/item_pay_way" />
+
+    <android.support.constraint.Group
+        android:id="@+id/gpSelector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="viewBg,companyRecyclerView" />
 </android.support.constraint.ConstraintLayout>

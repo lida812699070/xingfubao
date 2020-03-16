@@ -63,7 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="58dp"
-            android:text="总金额(元)"
+            android:text="配送的银杏宝价值(元)"
             android:textColor="@color/color_text_111"
             android:textSize="14sp"
             android:textStyle="bold"
@@ -102,11 +102,36 @@
             app:layout_constraintTop_toBottomOf="@+id/tvTotalMoney" />
 
         <TextView
+            android:id="@+id/tvCountCanFlowText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="190dp"
+            android:text="配送的银杏宝价值(元)"
+            android:textColor="@color/color_text_111"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvCountCanFlow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="0.0"
+            android:textColor="@color/color_org"
+            android:textSize="30sp"
+            app:layout_constraintLeft_toLeftOf="@+id/tvCountCanFlowText"
+            app:layout_constraintRight_toRightOf="@+id/tvCountCanFlowText"
+            app:layout_constraintTop_toBottomOf="@+id/tvCountCanFlowText" />
+
+        <TextView
             android:id="@+id/tvTotalCashInText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="45dp"
-            android:layout_marginTop="237dp"
+            android:layout_marginTop="270dp"
             android:text="累计收益(银杏果)"
             android:textColor="@color/color_text_888"
             android:textSize="14sp"
@@ -129,13 +154,12 @@
             android:id="@+id/tvTotalCashInYXYText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="237dp"
             android:layout_marginRight="45dp"
             android:text="累计收益(银杏叶)"
             android:textColor="@color/color_text_888"
             android:textSize="14sp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBaseline_toBaselineOf="@+id/tvTotalCashInText"
+            app:layout_constraintRight_toRightOf="parent" />
 
         <TextView
             android:id="@+id/tvTotalCashInYXY"

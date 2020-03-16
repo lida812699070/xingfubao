@@ -73,6 +73,7 @@ class YinXingbaoActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         val tvToCashOut = headerView!!.findViewById<TextView>(R.id.tvToCashOut)
         val tvToCashOutBalance = headerView!!.findViewById<TextView>(R.id.tvToCashOutBalance)
         val tabLayout = headerView!!.findViewById<TabLayout>(R.id.tabLayout)
+        val tvCountCanFlow = headerView!!.findViewById<TabLayout>(R.id.tabLayout)
         ivFinish.setOnClickListener {
             finish()
         }
@@ -127,9 +128,11 @@ class YinXingbaoActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         val tvTotalMoney = headerView!!.findViewById<TextView>(R.id.tvTotalMoney)
         val tvTotalCashIn = headerView!!.findViewById<TextView>(R.id.tvTotalCashIn)
         val tvTotalCashInYXY = headerView!!.findViewById<TextView>(R.id.tvTotalCashInYXY)
+        val tvCountCanFlow = headerView!!.findViewById<TextView>(R.id.tvCountCanFlow)
         tvTotalMoney?.text = PriceChangeUtils.getNumKb(data.userAssets.ginkgoTreasureNum)
         tvTotalCashIn?.text = PriceChangeUtils.getNumKb(data.userAssets.ginkgoFruitNum)
         tvTotalCashInYXY?.text = PriceChangeUtils.getNumKb(data.userAssets.ginkgoLeafNum)
+        tvCountCanFlow?.text = PriceChangeUtils.getNumKb(data.userAssets.yxBabyCirculate)
     }
 
     override fun initData() {

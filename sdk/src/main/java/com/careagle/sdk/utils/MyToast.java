@@ -28,9 +28,10 @@ public class MyToast {
     }
 
     public static void toast(String content) {
-        MyToast.ToastParams params = getParams().reset();
-        params.content = content;
-        toast(params);
+        Toast.makeText(Config.getContext(), content, Toast.LENGTH_SHORT).show();
+//        MyToast.ToastParams params = getParams().reset();
+//        params.content = content;
+//        toast(params);
     }
 
     public static void toast(String content, int iconResId, int duration) {

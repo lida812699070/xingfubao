@@ -9,6 +9,7 @@ import com.careagle.sdk.utils.PriceChangeUtils
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.api.BaseApi
 import com.xfb.xinfubao.model.ItemBalanceModel
+import com.xfb.xinfubao.model.UserInfo
 import com.xfb.xinfubao.model.event.ShuHuiEvent
 import com.xfb.xinfubao.utils.ConfigUtils
 import kotlinx.android.synthetic.main.activity_shu_hui_zhi_ya.*
@@ -17,6 +18,7 @@ import org.greenrobot.eventbus.EventBus
 /** 赎回质押 */
 class ShuHuiZhiYaActivity : DefaultActivity() {
     var itemBalanceModel: ItemBalanceModel? = null
+    var userInfo: UserInfo? = null
 
     companion object {
         fun toActivity(context: Context, itemBalanceModel: ItemBalanceModel) {
@@ -46,10 +48,18 @@ class ShuHuiZhiYaActivity : DefaultActivity() {
         showProgress("请稍候")
         request(RetrofitCreateHelper.createApi(BaseApi::class.java).getUserInfo(map)) {
             ConfigUtils.saveUserInfo(it.data)
+            userInfo = it.data
             tvBalance.text = PriceChangeUtils.getDoubleKb(it.data.userAssets.natFlowNum)
         }
 
         tvOk.setOnClickListener {
+            if (userInfo == null) {
+                return@setOnClickListener
+            }
+            if (itemBalanceModel!!.amount > userInfo!!.userAssets.natFlowNum) {
+                showMessage("请转入NAT")
+                return@setOnClickListener
+            }
             shuhui()
         }
     }

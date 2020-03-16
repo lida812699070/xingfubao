@@ -59,10 +59,9 @@ class BalanceAdapter(data: List<ItemBalanceModel>) :
                         tvMoney.text = "${PriceChangeUtils.getNumKbs(data.amount)}分"
                     }
                     BalanceEnum.NAT_CLUB -> {
-                        val strTitle = "${data.createDate}   ${data.name}"
+                        val strTitle = "${data.createDate}   ${data.stateDepict}"
                         tvTitle.text = strTitle
                         ivPoint.setVisible(false)
-                        tvMoney.isSelected = data.isCashIn
                         tvMoney.text = "${PriceChangeUtils.getNumKbs(data.amount)}"
                         ivNatClubRight.setVisible((helper.adapterPosition - 1) == natSelector)
                     }

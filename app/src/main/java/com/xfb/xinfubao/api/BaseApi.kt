@@ -297,5 +297,9 @@ interface BaseApi {
     @POST("api/aForPayment")
     fun aForPayment(@Body map: Map<String, String>): Observable<Result<RedeemResult>>
 
+    /** 物流公司 */
+    @POST("api/logisticsList")
+    fun logisticsList(@Body map: Map<String, String>): Observable<Result<List<CompanyModel>>>
+
 
 }

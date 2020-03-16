@@ -17,7 +17,6 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.api.BaseApi
-import com.xfb.xinfubao.constant.Constant
 import com.xfb.xinfubao.dialog.DialogUtils
 import com.xfb.xinfubao.model.ExchangeModel
 import com.xfb.xinfubao.myenum.BalanceEnum
@@ -80,7 +79,7 @@ class MoneyExchangeActivity : DefaultActivity() {
                 leftSelect = it.data[0]
                 if (balanceEnum != null) {
                     it.data.forEach {
-                        if (it.assetsId == 104) {
+                        if (it.assetsId == balanceEnum!!.key) {
                             leftSelect = it
                         }
                     }

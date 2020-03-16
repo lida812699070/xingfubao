@@ -126,6 +126,7 @@ class DialogUtils {
             }
             val etPayPassword = view.findViewById<EditText>(R.id.etPayPassword)
             view.findViewById<TextView>(R.id.tvOkCashOut).setOnClickListener {
+                dialog.dismiss()
                 method(etPayPassword.text.toString())
             }
             return dialog
