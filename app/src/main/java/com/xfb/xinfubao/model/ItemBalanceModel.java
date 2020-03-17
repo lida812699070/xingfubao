@@ -9,6 +9,7 @@ public class ItemBalanceModel implements MultiItemEntity, Serializable {
     private String name;
     private String createDate;
     private double amount;
+    private double redeemMoney;
     //状态；nat抵押记录1.处理中/2.完成3/释放中4已释放，银杏宝转出记录1待审核，2完成
     private int state;
     private String orderNum;
@@ -22,6 +23,14 @@ public class ItemBalanceModel implements MultiItemEntity, Serializable {
     private boolean use;
     private boolean exchange;
     private boolean pledge;
+
+    public double getRedeemMoney() {
+        return redeemMoney;
+    }
+
+    public void setRedeemMoney(double redeemMoney) {
+        this.redeemMoney = redeemMoney;
+    }
 
     public String getTypeDepict() {
         return typeDepict;

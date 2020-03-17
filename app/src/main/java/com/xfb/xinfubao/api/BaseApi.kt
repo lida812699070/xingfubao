@@ -301,5 +301,9 @@ interface BaseApi {
     @POST("api/logisticsList")
     fun logisticsList(@Body map: Map<String, String>): Observable<Result<List<CompanyModel>>>
 
+    /** 版本更新 */
+    @POST("api/getEdition")
+    fun getEdition(@Body map: Map<String, String>): Observable<Result<VersionInfoModel>>
+
 
 }

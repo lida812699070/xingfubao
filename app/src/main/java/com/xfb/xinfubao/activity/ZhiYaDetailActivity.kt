@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.RecyclerView
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -16,6 +17,7 @@ import com.chad.library.adapter.base.BaseViewHolder
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.adapter.BalanceAdapter
 import com.xfb.xinfubao.api.BaseApi
+import com.xfb.xinfubao.dialog.DialogUtils
 import com.xfb.xinfubao.model.ItemBalanceModel
 import com.xfb.xinfubao.model.UserInfo
 import com.xfb.xinfubao.model.event.ShuHuiEvent
@@ -84,7 +86,34 @@ class ZhiYaDetailActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
             ShuHuiZhiYaActivity.toActivity(this, list[selectPosition])
         }
         tvBottom2.setOnClickListener {
-            MoneyExchangeActivity.toActivity(this, BalanceEnum.NAT_ZHIYA_CLUB)
+            if (isUse) {
+                if (selectPosition == -1) {
+                    showMessage("请选择明细")
+                    return@setOnClickListener
+                }
+                DialogUtils.showDiYaDialog(this, 1) {
+                    shuhui(it)
+                }
+            } else {
+                MoneyExchangeActivity.toActivity(this, BalanceEnum.NAT_ZHIYA_CLUB)
+            }
+        }
+    }
+
+    private fun shuhui(payPassword: String) {
+        if (TextUtils.isEmpty(payPassword)) {
+            showMessage("请输入支付密码")
+            return
+        }
+        val map = hashMapOf<String, String>()
+        map["userId"] = "${ConfigUtils.userId()}"
+        map["ordernum"] = list[selectPosition].orderNum
+        map["orderId"] = list[selectPosition].id
+        map["payPassword"] = payPassword
+        showProgress("请稍候")
+        request(RetrofitCreateHelper.createApi(BaseApi::class.java).redeem(map)) {
+            EventBus.getDefault().post(ShuHuiEvent())
+            finish()
         }
     }
 

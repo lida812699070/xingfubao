@@ -42,7 +42,7 @@ class ShuHuiZhiYaActivity : DefaultActivity() {
         tvCashInNat.setOnClickListener {
             CashInNatActivity.toActivity(this)
         }
-        tvCutNatCount.text = PriceChangeUtils.getDoubleKb(itemBalanceModel!!.amount)
+        tvCutNatCount.text = PriceChangeUtils.getDoubleKb(itemBalanceModel!!.redeemMoney)
         val map = hashMapOf<String, String>()
         map["userId"] = "${ConfigUtils.userId()}"
         showProgress("请稍候")
@@ -56,7 +56,7 @@ class ShuHuiZhiYaActivity : DefaultActivity() {
             if (userInfo == null) {
                 return@setOnClickListener
             }
-            if (itemBalanceModel!!.amount > userInfo!!.userAssets.natFlowNum) {
+            if (itemBalanceModel!!.redeemMoney > userInfo!!.userAssets.natFlowNum) {
                 showMessage("请转入NAT")
                 return@setOnClickListener
             }

@@ -106,7 +106,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="190dp"
-            android:text="配送的银杏宝价值(元)"
+            android:text="银杏宝余额(元可消费)"
             android:textColor="@color/color_text_111"
             android:textSize="14sp"
             android:textStyle="bold"

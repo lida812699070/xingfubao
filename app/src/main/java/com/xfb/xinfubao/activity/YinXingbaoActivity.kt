@@ -107,7 +107,7 @@ class YinXingbaoActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 map["orderNo"] = list[selectPosition].orderNum
                 showProgress("请稍候")
                 request(RetrofitCreateHelper.createApi(BaseApi::class.java).exchangeBalance(map)) {
-                    showMessage("转出成功")
+                    showMessage(it.msg)
                     transfer(EventTransfer())
                     ApplyCashOutResultActivity.toActivity(this, 3, it.data)
                 }
