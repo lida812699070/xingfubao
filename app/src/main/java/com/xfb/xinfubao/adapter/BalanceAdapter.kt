@@ -14,6 +14,7 @@ class BalanceAdapter(data: List<ItemBalanceModel>) :
     BaseMultiItemQuickAdapter<ItemBalanceModel, BaseViewHolder>(data) {
     var balanceEnum = BalanceEnum.YING_XING_GUO
     var natSelector = -1
+    var isDetail = false
 
     companion object {
         //普通
@@ -59,8 +60,13 @@ class BalanceAdapter(data: List<ItemBalanceModel>) :
                         tvMoney.text = "${PriceChangeUtils.getNumKbs(data.amount)}分"
                     }
                     BalanceEnum.NAT_CLUB -> {
-                        val strTitle = "${data.createDate}   ${data.name}"
-                        tvTitle.text = strTitle
+                        if (isDetail) {
+                            val strTitle = "${data.createDate}   ${data.stateDepict}"
+                            tvTitle.text = strTitle
+                        } else {
+                            val strTitle = "${data.createDate}   ${data.name}"
+                            tvTitle.text = strTitle
+                        }
                         ivPoint.setVisible(false)
                         tvMoney.text = "${PriceChangeUtils.getNumKbs(data.amount)}"
                         ivNatClubRight.setVisible((helper.adapterPosition - 1) == natSelector)

@@ -67,6 +67,7 @@ class ZhiYaDetailActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
     override fun initLogic() {
         isUse = intent.getBooleanExtra("isUse", true)
         adapter.balanceEnum = BalanceEnum.NAT_CLUB
+        adapter.isDetail = true
         val map = hashMapOf<String, String>()
         map["userId"] = "${ConfigUtils.userId()}"
         showProgress("请稍候")
