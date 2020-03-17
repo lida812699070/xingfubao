@@ -270,6 +270,7 @@ class DialogUtils {
             strCancel: String = "取消",
             strOk: String = "确定",
             isCancel: Boolean = true,
+            isNeedCancel: Boolean = true,
             subTitle: String? = null,
             cancel: () -> Unit = {},
             method: () -> Unit
@@ -308,7 +309,9 @@ class DialogUtils {
             }
             tvOk.setOnClickListener {
                 method()
-                changeShopDialog?.dismiss()
+                if (isNeedCancel) {
+                    changeShopDialog?.dismiss()
+                }
             }
             return changeShopDialog
         }

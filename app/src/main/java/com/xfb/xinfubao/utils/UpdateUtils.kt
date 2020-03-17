@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Build
 import android.support.v4.content.FileProvider
 import android.util.Log
+import com.xfb.xinfubao.callback.DownloadCallBack
 import com.zhy.http.okhttp.OkHttpUtils
 import com.zhy.http.okhttp.callback.FileCallBack
 import okhttp3.Call
@@ -15,7 +16,11 @@ import java.io.File
 class UpdateUtils {
 
     companion object {
-        fun downloadFile(context: Context, url: String) {
+        fun downloadFile(
+            context: Context,
+            url: String,
+            callBack: DownloadCallBack
+        ) {
             val file = context.getApkFile()
             OkHttpUtils//
                 .get()//
@@ -38,16 +43,19 @@ class UpdateUtils {
 ////                        tvUpdateProgress.translationX = (progress * (layoutContent.width - resources.getDimension(R.dimen.dp_40))) - resources.getDimension(R.dimen.dp_25)
 //                    updateProgress.setProgress((100 * progress).toInt())
                         Log.e("tag", "${(100 * progress).toInt()}")
+                        callBack.inProgress((100 * progress).toInt())
                     }
 
                     override fun onError(call: Call, e: Exception) {
 //                    tvToUpdate.text = "更新"
 //                    tvToUpdate.isSelected = false
 //                    ToastMaker.showLongToast("请检查网络")
+                        callBack.finish("下载失败")
                     }
 
                     override fun onResponse(response: File) {
                         installationAPK(context, file)
+                        callBack.finish("下载成功")
 //                    tvToUpdate.text = "更新"
 //                    tvToUpdate.isSelected = false
                     }
