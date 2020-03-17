@@ -59,7 +59,7 @@ class BalanceAdapter(data: List<ItemBalanceModel>) :
                         tvMoney.text = "${PriceChangeUtils.getNumKbs(data.amount)}分"
                     }
                     BalanceEnum.NAT_CLUB -> {
-                        val strTitle = "${data.createDate}   ${data.amount}"
+                        val strTitle = "${data.createDate}   ${data.name}"
                         tvTitle.text = strTitle
                         ivPoint.setVisible(false)
                         tvMoney.text = "${PriceChangeUtils.getNumKbs(data.amount)}"
