@@ -234,7 +234,7 @@ class NATClubActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
             adapter.notifyDataSetChanged()
             val itemBalanceModel = list[selectPosition]
             tvToUse.isSelected = itemBalanceModel.isUse
-            tvToUse.text = if (itemBalanceModel.isUse) "去使用" else "已使用"
+            tvToUse.text = "去使用"
             tvToDiYa.isSelected = itemBalanceModel.isExchange
             tvToZhiYa.isSelected = itemBalanceModel.isPledge
         }

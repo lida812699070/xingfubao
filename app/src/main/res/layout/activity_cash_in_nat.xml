@@ -69,6 +69,11 @@
                 android:background="@drawable/shape_white_radius_8"
                 app:layout_constraintTop_toBottomOf="@+id/tvTitle">
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/shape_white_radius_8" />
+
                 <ImageView
                     android:id="@+id/ivQRCode"
                     android:layout_width="160dp"
@@ -188,7 +193,7 @@
                 android:id="@+id/tvOk"
                 style="@style/MainBtn"
                 android:layout_marginTop="32dp"
-                android:text="申请质押"
+                android:text="确认转入"
                 app:layout_constraintTop_toBottomOf="@+id/etCashInCount"
                 tools:ignore="MissingConstraints" />
 
