@@ -8,20 +8,21 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.widget.TextView
 import com.careagle.sdk.helper.RetrofitCreateHelper
-import com.careagle.sdk.utils.PriceChangeUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.xfb.xinfubao.R
+import com.xfb.xinfubao.adapter.RecordAdapter
 import com.xfb.xinfubao.api.BaseApi
 import com.xfb.xinfubao.model.ItemBalanceModel
 import com.xfb.xinfubao.utils.ConfigUtils
-import com.xfb.xinfubao.utils.setColorText
+import com.xfb.xinfubao.utils.setVisible
 import kotlinx.android.synthetic.main.activity_cash_out_record.*
 
 /** 转出记录 */
 class CashOutRecordActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
-    /** 0 申请提现记录  1 申请转出记录  2 财务记录 */
+    /** 0 申请提现记录  1 申请转出记录  2 财务记录 3转入明细*/
     var state = 0
+    val adapter = RecordAdapter(list)
 
     companion object {
         fun toActivity(context: Context, state: Int) {
@@ -30,52 +31,6 @@ class CashOutRecordActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
             context.startActivity(intent)
         }
     }
-
-    val adapter =
-        object : BaseQuickAdapter<ItemBalanceModel, BaseViewHolder>(
-            R.layout.item_cash_out_record,
-            list
-        ) {
-            override fun convert(helper: BaseViewHolder, data: ItemBalanceModel) {
-                val tvTitle = helper.getView<TextView>(R.id.tvTitle)
-                val tvState = helper.getView<TextView>(R.id.tvState)
-                val tvMoney = helper.getView<TextView>(R.id.tvMoney)
-                val strTitle = "${data.createDate}   ${data.name}"
-                tvTitle.setColorText(
-                    strTitle,
-                    mContext.resources.getColor(R.color.color_text_888),
-                    11,
-                    16
-                )
-                tvMoney.text = "${PriceChangeUtils.getNumKbs(data.amount)}"
-                if (state == 0) {
-                    tvState.text = data.stateDepict
-                    tvState.setBackgroundDrawable(
-                        if (data.isSuccess)
-                            mContext.resources.getDrawable(R.drawable.shape_light_org_radius_13)
-                        else
-                            mContext.resources.getDrawable(R.drawable.shape_888_radius_13)
-                    )
-                } else if (state == 1) {
-                    tvState.text = data.stateDepict
-                    tvState.setBackgroundDrawable(
-                        if (data.isSuccess)
-                            mContext.resources.getDrawable(R.drawable.shape_org_radius_13)
-                        else
-                            mContext.resources.getDrawable(R.drawable.shape_888_radius_13)
-                    )
-                } else if (state == 2) {
-                    tvState.text = data.stateDepict
-                    tvState.setBackgroundDrawable(
-                        if (data.isSuccess)
-                            mContext.resources.getDrawable(R.drawable.shape_theme_radius_13)
-                        else
-                            mContext.resources.getDrawable(R.drawable.shape_888_radius_13)
-                    )
-                    tvTitle.text = strTitle
-                }
-            }
-        }
 
     override fun getLayoutId(): Int {
         return R.layout.activity_cash_out_record
@@ -98,6 +53,7 @@ class CashOutRecordActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
 
     override fun initLogic() {
         state = intent.getIntExtra("state", 0)
+        adapter.state = state
         myToolbar.setClick { finish() }
         var title = "转出记录"
         if (state == 0) {
@@ -106,6 +62,8 @@ class CashOutRecordActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
             title = "转出记录"
         } else if (state == 2) {
             title = "财务记录"
+        } else if (state == 3) {
+            title = "转入明细"
         }
         myToolbar.setTitle(title)
         val footerView = LayoutInflater.from(this).inflate(R.layout.footer_record, null)
@@ -118,6 +76,8 @@ class CashOutRecordActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
             tvBack.setBackgroundDrawable(resources.getDrawable(R.drawable.shape_org_radius_8))
         } else if (state == 2) {
             tvBack.setBackgroundDrawable(resources.getDrawable(R.drawable.shape_theme_btn_bg))
+        } else if (state == 3) {
+            tvBack.setVisible(false)
         }
         adapter.addFooterView(footerView)
 
@@ -153,9 +113,21 @@ class CashOutRecordActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 }) {
                 showLoadError()
             }
-        } else if (state == 2) {//NAT抵押
+        } else if (state == 2) {//财务记录
             requestWithError(
                 RetrofitCreateHelper.createApi(BaseApi::class.java).financialRecord(
+                    map
+                ), {
+                    it.data.forEach {
+                        it.itemType = RecordAdapter.ITEM_TYPE_CAI_WU
+                    }
+                    loadData(it.data)
+                }) {
+                showLoadError()
+            }
+        } else if (state == 3) {//转入明细
+            requestWithError(
+                RetrofitCreateHelper.createApi(BaseApi::class.java).exchangeBalanceRecord(
                     map
                 ), {
                     loadData(it.data)

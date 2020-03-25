@@ -55,8 +55,20 @@
             android:layout_marginRight="5dp"
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
-            android:background="@drawable/shape_theme_btn_bg"
+            android:background="@drawable/shape_theme_storke_btn_bg"
             android:text="转出"
+            android:textColor="@color/theme_color"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/tvBottom3"
+            style="@style/MainBtn"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_theme_btn_bg"
+            android:text="转入矿场"
             tools:ignore="MissingConstraints" />
 
     </LinearLayout>

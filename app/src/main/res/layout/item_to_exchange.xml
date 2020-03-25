@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvSelect60"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
+        android:drawableLeft="@drawable/selector_check2_box"
+        android:drawablePadding="12dp"
+        android:padding="5dp"
+        android:text="锁仓期60天，一次性释放，兑换折扣95折。"
+        android:textColor="@color/color_selector_light_org_888"
+        android:textSize="14sp" />
+</LinearLayout>

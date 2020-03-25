@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="85dp"
+    android:layout_marginLeft="25dp"
+    android:layout_marginTop="9dp"
+    android:layout_marginRight="25dp"
+    android:background="@drawable/shape_white_radius_8">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginRight="5dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="收入：来自银杏宝固定分红"
+        android:textColor="@color/color_text_111"
+        android:textSize="13sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/tvMoney"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivPoint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="7dp"
+        android:background="@drawable/selector_balance_point"
+        app:layout_constraintBottom_toBottomOf="@+id/tvTitle"
+        app:layout_constraintRight_toLeftOf="@+id/tvMoney"
+        app:layout_constraintTop_toTopOf="@+id/tvTitle" />
+
+    <TextView
+        android:id="@+id/tvMoney"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="19dp"
+        android:text="15000"
+        android:textColor="@color/color_selector_111_light_org"
+        app:layout_constraintBottom_toBottomOf="@+id/tvTitle"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvTitle" />
+
+    <ImageView
+        android:id="@+id/ivNatClubRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:src="@mipmap/dui_icon_2"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/viewLine"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="42dp"
+        android:layout_marginRight="12dp"
+        android:background="@color/line_bg"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvProductName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="10dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="产品名称111111111111111111111111111111111111111"
+        android:textColor="@color/color_text_111"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/tvCashOutBalance"
+        app:layout_constraintTop_toBottomOf="@+id/viewLine"
+        app:layout_goneMarginRight="20dp" />
+
+    <TextView
+        android:id="@+id/tvCashOutBalance"
+        android:layout_width="70dp"
+        android:layout_height="22dp"
+        android:layout_marginRight="11dp"
+        android:background="@drawable/shape_org_stroke_radius_11"
+        android:gravity="center"
+        android:text="转为余额"
+        android:textColor="@color/color_org"
+        android:textSize="12sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvProductName"
+        app:layout_constraintRight_toLeftOf="@+id/tvToUse" />
+
+    <TextView
+        android:id="@+id/tvToUse"
+        android:layout_width="70dp"
+        android:layout_height="22dp"
+        android:layout_marginRight="14dp"
+        android:background="@drawable/shape_org_stroke_radius_11"
+        android:gravity="center"
+        android:text="去使用"
+        android:textColor="@color/color_org"
+        android:textSize="12sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvProductName"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

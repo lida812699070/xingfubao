@@ -17,12 +17,21 @@ public class ItemBalanceModel implements MultiItemEntity, Serializable {
     //质押手续费
     private String commission;
     private String typeDepict;
+    private String productName;
     private int itemType = 0;
     private int type = 0;
     private boolean isSuccess = true;
     private boolean use;
     private boolean exchange;
     private boolean pledge;
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
 
     public double getRedeemMoney() {
         return redeemMoney;

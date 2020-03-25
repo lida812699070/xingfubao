@@ -22,7 +22,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.CashInNatActivity"></activity>
+        <activity android:name=".activity.ToExchangeActivity"></activity>
+        <activity android:name=".activity.CashInKuangChangActivity" />
+        <activity android:name=".activity.UseProductActivity" />
+        <activity android:name=".activity.CashoutBalanceActivity" />
+        <activity android:name=".activity.CashInNatActivity" />
         <activity android:name=".activity.ShuHuiZhiYaActivity" />
         <activity android:name=".activity.ApplyZhiYaActivity" />
         <activity android:name=".activity.ZhiYaDetailActivity" />

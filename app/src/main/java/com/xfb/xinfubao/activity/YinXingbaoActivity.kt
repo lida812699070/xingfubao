@@ -71,9 +71,7 @@ class YinXingbaoActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         val ivFinish = headerView!!.findViewById<ImageView>(R.id.ivFinish)
         val tvSubTitle = headerView!!.findViewById<TextView>(R.id.tvSubTitle)
         val tvToCashOut = headerView!!.findViewById<TextView>(R.id.tvToCashOut)
-        val tvToCashOutBalance = headerView!!.findViewById<TextView>(R.id.tvToCashOutBalance)
         val tabLayout = headerView!!.findViewById<TabLayout>(R.id.tabLayout)
-        val tvCountCanFlow = headerView!!.findViewById<TabLayout>(R.id.tabLayout)
         ivFinish.setOnClickListener {
             finish()
         }
@@ -94,32 +92,35 @@ class YinXingbaoActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 list[selectPosition].amount
             )
         }
-        //转出余额
-        tvToCashOutBalance.setOnClickListener {
-            if (selectPosition == -1) {
-                showMessage("请选择明细")
-                return@setOnClickListener
-            }
-            DialogUtils.showDiYaDialog(this, 2) {
-                val map = hashMapOf<String, String>()
-                map["userId"] = "${ConfigUtils.userId()}"
-                map["payPwd"] = it
-                map["orderNo"] = list[selectPosition].orderNum
-                showProgress("请稍候")
-                request(RetrofitCreateHelper.createApi(BaseApi::class.java).exchangeBalance(map)) {
-                    showMessage(it.msg)
-                    transfer(EventTransfer())
-                    ApplyCashOutResultActivity.toActivity(this, 3, it.data)
-                }
-            }
-        }
+
         tabLayout.addTab(tabLayout.newTab().setText("明细"))
         initData()
 
-        adapter.setOnItemClickListener { adapter, view, position ->
-            selectPosition = position
-            this.adapter.natSelector = selectPosition
-            adapter.notifyDataSetChanged()
+        adapter.setOnItemChildClickListener { adapter, view, position ->
+            when (view.id) {
+                R.id.tvCashOutBalance -> {
+                    CashoutBalanceActivity.toActivity(this, list[position])
+                }
+                R.id.tvToUse -> {
+                    UseProductActivity.toActivity(this, list[position])
+                }
+            }
+        }
+    }
+
+    //转为余额
+    private fun cashOutBalance() {
+        DialogUtils.showDiYaDialog(this, 2) {
+            val map = hashMapOf<String, String>()
+            map["userId"] = "${ConfigUtils.userId()}"
+            map["payPwd"] = it
+            map["orderNo"] = list[selectPosition].orderNum
+            showProgress("请稍候")
+            request(RetrofitCreateHelper.createApi(BaseApi::class.java).exchangeBalance(map)) {
+                showMessage(it.msg)
+                transfer(EventTransfer())
+                ApplyCashOutResultActivity.toActivity(this, 3, it.data)
+            }
         }
     }
 
@@ -143,6 +144,9 @@ class YinXingbaoActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         map["pageSize"] = "$pageSize"
         requestWithError(RetrofitCreateHelper.createApi(BaseApi::class.java).ginkgoTreasureInfo(map),
             {
+                it.data.forEach {
+                    it.itemType = BalanceAdapter.ITEM_TYPE_WITH_BTN
+                }
                 loadData(it.data)
             }) {
             showLoadError()

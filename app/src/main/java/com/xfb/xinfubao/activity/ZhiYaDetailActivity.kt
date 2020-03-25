@@ -66,7 +66,7 @@ class ZhiYaDetailActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
 
     override fun initLogic() {
         isUse = intent.getBooleanExtra("isUse", true)
-        adapter.balanceEnum = BalanceEnum.NAT_CLUB
+        adapter.balanceEnum = BalanceEnum.NAT_ZHIYA_CLUB
         adapter.isDetail = true
         val map = hashMapOf<String, String>()
         map["userId"] = "${ConfigUtils.userId()}"
@@ -98,6 +98,10 @@ class ZhiYaDetailActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
             } else {
                 MoneyExchangeActivity.toActivity(this, BalanceEnum.NAT_ZHIYA_CLUB)
             }
+        }
+        //转入矿场
+        tvBottom3.setOnClickListener {
+
         }
     }
 
@@ -163,6 +167,9 @@ class ZhiYaDetailActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         map["pageSize"] = "$pageSize"
         map["useState"] = "$isUse"
         requestWithError(RetrofitCreateHelper.createApi(BaseApi::class.java).pledgeList(map), {
+            it.data.forEach {
+                it.itemType = BalanceAdapter.ITEM_TYPE_WITH_BTN
+            }
             loadData(it.data)
         }) {
             showLoadError()

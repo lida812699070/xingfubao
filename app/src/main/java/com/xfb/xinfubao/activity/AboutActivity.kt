@@ -32,7 +32,7 @@ class AboutActivity : DefaultActivity() {
 
     @SuppressLint("SetTextI18n")
     override fun initView(savedInstanceState: Bundle?) {
-        myToolbar.setOnClickListener { finish() }
+        myToolbar.setClick { finish() }
         tvServerProtocol.setOnClickListener {
             WebviewActivity.newInstanceUrl(this, Constant.PRIVITE_SERVER, "服务及隐私条款")
         }

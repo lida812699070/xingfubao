@@ -184,23 +184,10 @@
         <TextView
             android:id="@+id/tvToCashOut"
             style="@style/MainBtn"
-            android:layout_marginRight="5dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_org_stock_radius_8"
-            android:text="转出本金"
-            android:textColor="@color/color_org"
-            tools:ignore="MissingConstraints" />
-
-        <TextView
-            android:id="@+id/tvToCashOutBalance"
-            style="@style/MainBtn"
-            android:layout_marginLeft="5dp"
-            android:layout_weight="1"
             android:background="@drawable/shape_org_radius_8"
-            android:text="转出余额"
-            app:layout_constraintBottom_toBottomOf="@+id/clContent"
+            android:text="转出本金"
+            android:textColor="@color/white"
             tools:ignore="MissingConstraints" />
-
     </LinearLayout>
 
     <android.support.design.widget.TabLayout

@@ -13,6 +13,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/tvBg"
+        android:layout_width="match_parent"
+        android:layout_height="370dp"
+        android:background="@color/color_default_bg"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,16 +51,30 @@
         android:background="@color/color_line_e0e"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/tvToZhiYaText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginRight="21dp"
+        android:text="说明： 1、质押后，所得NAT可以转入矿场，享受固定年化12%的NAT收益；\n 2、60天后，还可以提币到钱包或交易所；"
+        android:textColor="@color/color_text_888"
+        android:textSize="14sp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
     <EditText
         android:id="@+id/etPayPassword"
         style="@style/LoginGeryInput"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="30dp"
         android:hint="请输入支付密码"
         android:inputType="textPassword"
         android:maxLines="1"
         android:paddingLeft="12dp"
         android:textSize="16sp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvToZhiYaText"
+        app:layout_goneMarginTop="40dp"
         tools:ignore="MissingConstraints" />
 
     <TextView

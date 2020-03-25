@@ -119,6 +119,8 @@ class DialogUtils {
                     context.getDrawable(R.drawable.shape_org_radius_8)
             } else if (state == 3) {
                 view.findViewById<TextView>(R.id.tvTitle).text = "质押"
+                view.findViewById<TextView>(R.id.tvBg).setVisible(true)
+                view.findViewById<TextView>(R.id.tvToZhiYaText).setVisible(true)
                 view.findViewById<TextView>(R.id.tvOkCashOut).text = "确认质押"
             } else if (state == 4) {
                 view.findViewById<TextView>(R.id.tvTitle).text = "使用"
@@ -313,6 +315,31 @@ class DialogUtils {
                     changeShopDialog?.dismiss()
                 }
             }
+            return changeShopDialog
+        }
+
+
+        /**
+         * 显示使用产品申请中
+         */
+        fun showUseApply(
+            context: Context
+        ): AlertDialog {
+            val builder = AlertDialog.Builder(context)
+            builder.setCancelable(true)
+            val view = LayoutInflater.from(context)
+                .inflate(R.layout.dialog_apply_use, null)
+            builder.setView(view)
+            val changeShopDialog = builder.create()
+            val ivClose = view.findViewById<ImageView>(R.id.ivClose)
+            ivClose.setOnClickListener { changeShopDialog?.dismiss() }
+            changeShopDialog?.show()
+            changeShopDialog?.window?.setLayout(
+                context.resources.getDimension(R.dimen.dp_360).toInt(),
+                context.resources.getDimension(R.dimen.dp_251).toInt()
+            )
+            changeShopDialog?.window?.setDimAmount(0.2f)
+            changeShopDialog?.window?.setBackgroundDrawable(context.resources.getDrawable(R.drawable.shape_white_radius_8))
             return changeShopDialog
         }
 
