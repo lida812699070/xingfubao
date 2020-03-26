@@ -23,7 +23,6 @@ import com.xfb.xinfubao.model.UserInfo
 import com.xfb.xinfubao.model.event.ShuHuiEvent
 import com.xfb.xinfubao.myenum.BalanceEnum
 import com.xfb.xinfubao.utils.ConfigUtils
-import com.xfb.xinfubao.utils.setVisible
 import kotlinx.android.synthetic.main.activity_zhi_ya_detail.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -31,15 +30,12 @@ import org.greenrobot.eventbus.Subscribe
 /** 质押详情 */
 class ZhiYaDetailActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
     val adapter = BalanceAdapter(list)
-    //使用  未使用
-    var isUse = true
     var selectPosition = -1
     var headerView: View? = null
 
     companion object {
-        fun toActivity(context: Context, isUse: Boolean = true) {
+        fun toActivity(context: Context) {
             val intent = Intent(context, ZhiYaDetailActivity::class.java)
-            intent.putExtra("isUse", isUse)
             context.startActivity(intent)
         }
     }
@@ -65,7 +61,6 @@ class ZhiYaDetailActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
     }
 
     override fun initLogic() {
-        isUse = intent.getBooleanExtra("isUse", true)
         adapter.balanceEnum = BalanceEnum.NAT_ZHIYA_CLUB
         adapter.isDetail = true
         val map = hashMapOf<String, String>()
@@ -74,11 +69,7 @@ class ZhiYaDetailActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         request(RetrofitCreateHelper.createApi(BaseApi::class.java).getUserInfo(map)) {
             initHeader(it.data)
         }
-        if (isUse) {
-            tvBottom1.setVisible(false)
-            tvBottom2.text = "申请赎回"
-        }
-
+        //质押赎回
         tvBottom1.setOnClickListener {
             if (selectPosition == -1) {
                 showMessage("请选择明细")
@@ -86,23 +77,35 @@ class ZhiYaDetailActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
             }
             ShuHuiZhiYaActivity.toActivity(this, list[selectPosition])
         }
+        //质押转出
         tvBottom2.setOnClickListener {
-            if (isUse) {
-                if (selectPosition == -1) {
-                    showMessage("请选择明细")
-                    return@setOnClickListener
+            if (selectPosition == -1) {
+                showMessage("请选择明细")
+                return@setOnClickListener
+            }
+            DialogUtils.showDiYaDialog(this, 1) {
+                val itemBalanceModel = list[selectPosition]
+                val map = hashMapOf<String, String>()
+                map["userId"] = "${ConfigUtils.userId()}"
+                map["orderNO"] = "${itemBalanceModel.orderNum}"
+                map["payPassword"] = "${ConfigUtils.userId()}"
+                showProgress("请稍候")
+                request(RetrofitCreateHelper.createApi(BaseApi::class.java).pledgeRollOut(map)) {
+                    showMessage(it.msg)
+                    refreshPage(ShuHuiEvent())
                 }
-                DialogUtils.showDiYaDialog(this, 1) {
-                    shuhui(it)
-                }
-            } else {
-                MoneyExchangeActivity.toActivity(this, BalanceEnum.NAT_ZHIYA_CLUB)
             }
         }
         //转入矿场
         tvBottom3.setOnClickListener {
-
+            if (selectPosition == -1) {
+                showMessage("请选择明细")
+                return@setOnClickListener
+            }
+            val itemBalanceModel = list[selectPosition]
+            CashInKuangChangActivity.toActivity(this,itemBalanceModel)
         }
+        selectChange()
     }
 
     private fun shuhui(payPassword: String) {
@@ -133,8 +136,24 @@ class ZhiYaDetailActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         adapter.setOnItemClickListener { adapter, view, position ->
             selectPosition = position
             this.adapter.natSelector = selectPosition
+            selectChange()
             adapter.notifyDataSetChanged()
         }
+    }
+
+
+    private fun selectChange() {
+        if (selectPosition == -1) {
+            tvBottom1.isSelected = false
+            tvBottom2.isSelected = false
+            tvBottom3.isSelected = false
+        } else {
+            val itemBalanceModel = list[selectPosition]
+            tvBottom1.isSelected = itemBalanceModel.isPledge
+            tvBottom2.isSelected = itemBalanceModel.isTurnOutState
+            tvBottom3.isSelected = itemBalanceModel.useState == 0
+        }
+
     }
 
     @Subscribe
@@ -146,6 +165,7 @@ class ZhiYaDetailActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
             ConfigUtils.saveUserInfo(it.data)
             bindHeadData(it.data)
             selectPosition = -1
+            selectChange()
             this.adapter.natSelector = selectPosition
             onRefresh()
         }
@@ -153,11 +173,7 @@ class ZhiYaDetailActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
 
     private fun bindHeadData(data: UserInfo) {
         val tvCount = headerView!!.findViewById<TextView>(R.id.tvCount)
-        val tvCountText = headerView!!.findViewById<TextView>(R.id.tvCountText)
-        tvCount.text =
-            if (isUse) PriceChangeUtils.getNumKb(data.userAssets.pledgeUseMoney) else
-                PriceChangeUtils.getNumKb(data.userAssets.pledgeMoney)
-        tvCountText.text = if (isUse) "质押产品获得的NAT数量（已使用）" else "质押产品获得的NAT数量（未使用）"
+        tvCount.text = PriceChangeUtils.getNumKb(data.userAssets.pledgeMoney)
     }
 
     override fun initData() {
@@ -165,7 +181,6 @@ class ZhiYaDetailActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         map["pageNum"] = "$page"
         map["userId"] = "${ConfigUtils.userId()}"
         map["pageSize"] = "$pageSize"
-        map["useState"] = "$isUse"
         requestWithError(RetrofitCreateHelper.createApi(BaseApi::class.java).pledgeList(map), {
             it.data.forEach {
                 it.itemType = BalanceAdapter.ITEM_TYPE_WITH_BTN

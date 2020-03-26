@@ -101,6 +101,8 @@ class BalanceAdapter(data: List<ItemBalanceModel>) :
                         ivNatClubRight.setImageResource(R.mipmap.dui_icon_3_red)
                         ivNatClubRight.setVisible((helper.adapterPosition - 1) == natSelector)
                         tvProductName.text = data.productName
+                        tvToUse.setVisible(data.isUse)
+                        tvCashOutBalance.setVisible(data.isTurnOutBalanceState)
                     }
                     BalanceEnum.NAT_CLUB -> {
                         if (isDetail) {
@@ -114,10 +116,12 @@ class BalanceAdapter(data: List<ItemBalanceModel>) :
                         tvCashOutBalance.text = "去置换"
                         tvCashOutBalance.background =
                             mContext.resources.getDrawable(R.drawable.shape_theme_stroke_radius_11)
+                        tvCashOutBalance.setVisible(data.isExchange)
                         tvToUse.setTextColor(mContext.resources.getColor(R.color.theme_color))
                         tvToUse.text = "去质押"
                         tvToUse.background =
                             mContext.resources.getDrawable(R.drawable.shape_theme_stroke_radius_11)
+                        tvToUse.setVisible(data.isPledge)
                         ivPoint.setVisible(false)
                         tvMoney.text = "${PriceChangeUtils.getNumKbs(data.amount)}"
                         ivNatClubRight.setVisible((helper.adapterPosition - 1) == natSelector)

@@ -16,7 +16,6 @@ import com.xfb.xinfubao.R
 import com.xfb.xinfubao.adapter.BalanceAdapter
 import com.xfb.xinfubao.api.BaseApi
 import com.xfb.xinfubao.constant.Constant
-import com.xfb.xinfubao.dialog.DialogUtils
 import com.xfb.xinfubao.model.ItemBalanceModel
 import com.xfb.xinfubao.model.UserInfo
 import com.xfb.xinfubao.model.event.EventTransfer
@@ -32,6 +31,7 @@ class YinXingbaoActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
     val adapter = BalanceAdapter(list)
     var selectPosition = -1
     var headerView: View? = null
+    var tvToCashOut: TextView? = null
 
     override fun getLayoutId(): Int {
         return R.layout.activity_yin_xingbao
@@ -70,7 +70,7 @@ class YinXingbaoActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         adapter.setHeaderAndEmpty(true)
         val ivFinish = headerView!!.findViewById<ImageView>(R.id.ivFinish)
         val tvSubTitle = headerView!!.findViewById<TextView>(R.id.tvSubTitle)
-        val tvToCashOut = headerView!!.findViewById<TextView>(R.id.tvToCashOut)
+        tvToCashOut = headerView!!.findViewById<TextView>(R.id.tvToCashOut)
         val tabLayout = headerView!!.findViewById<TabLayout>(R.id.tabLayout)
         ivFinish.setOnClickListener {
             finish()
@@ -80,9 +80,8 @@ class YinXingbaoActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         }
         initHeaderData(data)
         //转出本金
-        tvToCashOut.setOnClickListener {
-            if (selectPosition == -1) {
-                showMessage("请选择明细")
+        tvToCashOut?.setOnClickListener {
+            if (!tvToCashOut!!.isSelected) {
                 return@setOnClickListener
             }
             ApplyCashOutActivity.toActivity(
@@ -96,30 +95,23 @@ class YinXingbaoActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         tabLayout.addTab(tabLayout.newTab().setText("明细"))
         initData()
 
+        adapter.setOnItemClickListener { adapter, view, position ->
+            tvToCashOut?.isSelected = list[position].isTurnOutState
+            selectPosition = position
+            this.adapter.natSelector = selectPosition
+            adapter.notifyDataSetChanged()
+        }
+
         adapter.setOnItemChildClickListener { adapter, view, position ->
             when (view.id) {
+                //转为余额
                 R.id.tvCashOutBalance -> {
                     CashoutBalanceActivity.toActivity(this, list[position])
                 }
+                //去使用
                 R.id.tvToUse -> {
                     UseProductActivity.toActivity(this, list[position])
                 }
-            }
-        }
-    }
-
-    //转为余额
-    private fun cashOutBalance() {
-        DialogUtils.showDiYaDialog(this, 2) {
-            val map = hashMapOf<String, String>()
-            map["userId"] = "${ConfigUtils.userId()}"
-            map["payPwd"] = it
-            map["orderNo"] = list[selectPosition].orderNum
-            showProgress("请稍候")
-            request(RetrofitCreateHelper.createApi(BaseApi::class.java).exchangeBalance(map)) {
-                showMessage(it.msg)
-                transfer(EventTransfer())
-                ApplyCashOutResultActivity.toActivity(this, 3, it.data)
             }
         }
     }
@@ -130,6 +122,7 @@ class YinXingbaoActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         val tvTotalCashIn = headerView!!.findViewById<TextView>(R.id.tvTotalCashIn)
         val tvTotalCashInYXY = headerView!!.findViewById<TextView>(R.id.tvTotalCashInYXY)
         val tvCountCanFlow = headerView!!.findViewById<TextView>(R.id.tvCountCanFlow)
+        tvToCashOut = headerView!!.findViewById<TextView>(R.id.tvToCashOut)
         tvTotalMoney?.text = PriceChangeUtils.getNumKb(data.userAssets.ginkgoTreasureNum)
         tvTotalCashIn?.text = PriceChangeUtils.getNumKb(data.userAssets.ginkgoFruitNum)
         tvTotalCashInYXY?.text = PriceChangeUtils.getNumKb(data.userAssets.ginkgoLeafNum)
@@ -156,6 +149,7 @@ class YinXingbaoActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
     @Subscribe
     fun transfer(event: EventTransfer) {
         selectPosition = -1
+        tvToCashOut?.isSelected = false
         this.adapter.natSelector = selectPosition
         onRefresh()
         val map = hashMapOf<String, String>()

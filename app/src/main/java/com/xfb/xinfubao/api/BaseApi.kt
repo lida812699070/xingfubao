@@ -309,5 +309,16 @@ interface BaseApi {
     @POST("api/exchangeBalanceRecord")
     fun exchangeBalanceRecord(@Body map: Map<String, String>): Observable<Result<List<ItemBalanceModel>>>
 
+    /** 赎回扣除nat数量 */
+    @POST("api/redeemDeduct")
+    fun redeemDeduct(@Body map: Map<String, String>): Observable<Result<RedeemDeductNumModel>>
+
+    /** 质押转出 */
+    @POST("api/pledgeRollOut")
+    fun pledgeRollOut(@Body map: Map<String, String>): Observable<Result<Any?>>
+
+    /** 转入矿场 */
+    @POST("api/transferOrePond")
+    fun transferOrePond(@Body map: Map<String, String>): Observable<Result<Any?>>
 
 }

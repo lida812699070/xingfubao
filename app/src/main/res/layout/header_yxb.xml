@@ -184,7 +184,7 @@
         <TextView
             android:id="@+id/tvToCashOut"
             style="@style/MainBtn"
-            android:background="@drawable/shape_org_radius_8"
+            android:background="@drawable/selector_org_gery_btn"
             android:text="转出本金"
             android:textColor="@color/white"
             tools:ignore="MissingConstraints" />

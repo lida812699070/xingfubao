@@ -43,9 +43,9 @@
             android:layout_marginRight="5dp"
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
-            android:background="@drawable/shape_theme_storke_btn_bg"
+            android:background="@drawable/selector_strock_blue_gery"
             android:text="质押赎回"
-            android:textColor="@color/theme_color"
+            android:textColor="@color/color_selector_theme_white"
             tools:ignore="MissingConstraints" />
 
         <TextView
@@ -55,9 +55,9 @@
             android:layout_marginRight="5dp"
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
-            android:background="@drawable/shape_theme_storke_btn_bg"
+            android:background="@drawable/selector_strock_blue_gery"
             android:text="转出"
-            android:textColor="@color/theme_color"
+            android:textColor="@color/color_selector_theme_white"
             tools:ignore="MissingConstraints" />
 
         <TextView
@@ -67,7 +67,7 @@
             android:layout_marginRight="5dp"
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
-            android:background="@drawable/shape_theme_btn_bg"
+            android:background="@drawable/selector_blue_gery"
             android:text="转入矿场"
             tools:ignore="MissingConstraints" />
 

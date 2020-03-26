@@ -3,9 +3,16 @@ package com.xfb.xinfubao.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import com.careagle.sdk.helper.RetrofitCreateHelper
+import com.careagle.sdk.utils.PriceChangeUtils
 import com.xfb.xinfubao.R
+import com.xfb.xinfubao.api.BaseApi
+import com.xfb.xinfubao.dialog.DialogUtils
 import com.xfb.xinfubao.model.ItemBalanceModel
+import com.xfb.xinfubao.model.event.EventTransfer
+import com.xfb.xinfubao.utils.ConfigUtils
 import kotlinx.android.synthetic.main.activity_cashout_balance.*
+import org.greenrobot.eventbus.EventBus
 
 /** 转为余额 */
 class CashoutBalanceActivity : DefaultActivity() {
@@ -26,9 +33,44 @@ class CashoutBalanceActivity : DefaultActivity() {
 
     override fun initView(savedInstanceState: Bundle?) {
         itemBalanceModel = intent.getSerializableExtra("itemBalanceModel") as ItemBalanceModel?
+
+        tvYinXingBaoBalance.text = PriceChangeUtils.getNumKb(itemBalanceModel!!.amount)
+
+
+        setListener()
+    }
+
+    private fun setListener() {
+        ivFinish.setOnClickListener { finish() }
+        //全部
+        tvAll.setOnClickListener {
+            etCashInBalance.setText("${itemBalanceModel?.amount}")
+        }
+        //确认转入
+        tvOk.setOnClickListener {
+            cashOutBalance()
+        }
+        //转入明细
         tvSubTitles.setOnClickListener {
             CashOutRecordActivity.toActivity(this, 3)
         }
-
     }
+
+    //转为余额
+    private fun cashOutBalance() {
+        DialogUtils.showDiYaDialog(this, 2) {
+            val map = hashMapOf<String, String>()
+            map["userId"] = "${ConfigUtils.userId()}"
+            map["payPwd"] = it
+            map["orderNo"] = "${itemBalanceModel?.orderNum}"
+            map["amount"] = "${itemBalanceModel?.amount}"
+            showProgress("请稍候")
+            request(RetrofitCreateHelper.createApi(BaseApi::class.java).exchangeBalance(map)) {
+                showMessage(it.msg)
+                EventBus.getDefault().post(EventTransfer())
+                finish()
+            }
+        }
+    }
+
 }

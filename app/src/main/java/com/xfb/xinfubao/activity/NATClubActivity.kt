@@ -72,21 +72,6 @@ class NATClubActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         }
     }
 
-    private fun toUse(selectPosition: Int) {
-        showDiYaDialog = DialogUtils.showDiYaDialog(this, 4) {
-            showDiYaDialog?.dismiss()
-            val map = hashMapOf<String, String>()
-            val itemBalanceModel = list[selectPosition]
-            map["orderNO"] = itemBalanceModel.orderNum
-            map["userId"] = "${ConfigUtils.userId()}"
-            map["payPassword"] = it
-            request(RetrofitCreateHelper.createApi(BaseApi::class.java).natMakeUseOf(map)) {
-                showMessage("操作成功")
-                refreshPage()
-            }
-        }
-    }
-
     private fun toZhiYa(selectPosition: Int) {
         val itemBalanceModel = list[selectPosition]
         if (itemBalanceModel.isUse) {
@@ -94,11 +79,10 @@ class NATClubActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 showDiYaDialog?.dismiss()
                 val map = hashMapOf<String, String>()
                 map["orderNo"] = itemBalanceModel.orderNum
-                map["money"] = "${itemBalanceModel.amount}"
                 map["userId"] = "${ConfigUtils.userId()}"
                 map["payPwd"] = it
                 request(RetrofitCreateHelper.createApi(BaseApi::class.java).natPledgeApply(map)) {
-                    showMessage("操作成功")
+                    showMessage(it.msg)
                     refreshPage()
                 }
             }
@@ -109,21 +93,7 @@ class NATClubActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
 
     /** 去置换 */
     private fun toZhiHuan(selectPosition: Int) {
-        ToExchangeActivity.toActivity(this)
-//        showDiYaDialog = DialogUtils.showDiYaDialog(this) {
-//            showDiYaDialog?.dismiss()
-//            val map = hashMapOf<String, String>()
-//            val itemBalanceModel = list[selectPosition]
-//            map["ordernum"] = itemBalanceModel.orderNum
-//            map["orderId"] = itemBalanceModel.id
-//            map["userId"] = "${ConfigUtils.userId()}"
-//            map["payPassword"] = it
-//            map["unlockPackageId"] = "${selectUnlockModel?.id}"
-//            request(RetrofitCreateHelper.createApi(BaseApi::class.java).mortgageNat(map)) {
-//                showMessage("操作成功")
-//                refreshPage()
-//            }
-//        }
+        ToExchangeActivity.toActivity(this, list[selectPosition])
     }
 
     private fun refreshPage() {
@@ -148,7 +118,7 @@ class NATClubActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
             PriceChangeUtils.getNumKb(it.userAssets.natMortgagedNum)
         tvUnUseCount.text = PriceChangeUtils.getNumKb(it.userAssets.pledgeMoney)
         tvUnUseCount.setOnClickListener {
-            ZhiYaDetailActivity.toActivity(this, false)
+            ZhiYaDetailActivity.toActivity(this)
         }
     }
 
@@ -159,7 +129,7 @@ class NATClubActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         val tvSelectUnLock = headerView!!.findViewById<TextView>(R.id.tvSelectUnLock)
         val tvCashInKuangChang = headerView!!.findViewById<TextView>(R.id.tvCashInKuangChang)
         tvCashInKuangChang.setOnClickListener {
-            CashInKuangChangActivity.toActivity(this)
+            ZhiYaDetailActivity.toActivity(this)
         }
         tvSelectUnLock.setOnClickListener {
             showProgress("请稍候")

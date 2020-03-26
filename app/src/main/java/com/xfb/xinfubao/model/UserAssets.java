@@ -37,6 +37,16 @@ public class UserAssets {
     private double pledgeUseMoney;
     //愿力值
     private double powerAvowNum;
+    //矿池余额
+    private double orePoolMoney;
+
+    public double getOrePoolMoney() {
+        return orePoolMoney;
+    }
+
+    public void setOrePoolMoney(double orePoolMoney) {
+        this.orePoolMoney = orePoolMoney;
+    }
 
     public double getYxBabyCirculate() {
         return yxBabyCirculate;

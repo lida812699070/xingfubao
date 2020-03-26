@@ -42,7 +42,6 @@ class ShuHuiZhiYaActivity : DefaultActivity() {
         tvCashInNat.setOnClickListener {
             CashInNatActivity.toActivity(this)
         }
-        tvCutNatCount.text = PriceChangeUtils.getDoubleKb(itemBalanceModel!!.redeemMoney)
         val map = hashMapOf<String, String>()
         map["userId"] = "${ConfigUtils.userId()}"
         showProgress("请稍候")
@@ -61,6 +60,13 @@ class ShuHuiZhiYaActivity : DefaultActivity() {
                 return@setOnClickListener
             }
             shuhui()
+        }
+
+        val params = hashMapOf<String, String>()
+        params["userId"] = "${ConfigUtils.userId()}"
+        params["ordernum"] = "${itemBalanceModel?.orderNum}"
+        request(RetrofitCreateHelper.createApi(BaseApi::class.java).redeemDeduct(params)) {
+            tvCutNatCount.text = PriceChangeUtils.getDoubleKb(it.data.redeemDeductNum)
         }
     }
 
