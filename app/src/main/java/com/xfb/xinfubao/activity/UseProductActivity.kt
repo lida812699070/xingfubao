@@ -60,7 +60,7 @@ class UseProductActivity : DefaultActivity() {
         showDiYaDialog = DialogUtils.showDiYaDialog(this, 4) {
             showDiYaDialog?.dismiss()
             val map = hashMapOf<String, String>()
-            map["orderNO"] = "${itemBalanceModel?.orderNum}"
+            map["orderNo"] = "${itemBalanceModel?.orderNum}"
             map["userId"] = "${ConfigUtils.userId()}"
             map["payPwd"] = it
             map["userName"] = userName

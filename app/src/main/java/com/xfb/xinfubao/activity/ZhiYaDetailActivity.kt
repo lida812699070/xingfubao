@@ -75,6 +75,9 @@ class ZhiYaDetailActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 showMessage("请选择明细")
                 return@setOnClickListener
             }
+            if (!it.isSelected) {
+                return@setOnClickListener
+            }
             ShuHuiZhiYaActivity.toActivity(this, list[selectPosition])
         }
         //质押转出
@@ -83,12 +86,15 @@ class ZhiYaDetailActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 showMessage("请选择明细")
                 return@setOnClickListener
             }
+            if (!it.isSelected) {
+                return@setOnClickListener
+            }
             DialogUtils.showDiYaDialog(this, 1) {
                 val itemBalanceModel = list[selectPosition]
                 val map = hashMapOf<String, String>()
                 map["userId"] = "${ConfigUtils.userId()}"
                 map["orderNO"] = "${itemBalanceModel.orderNum}"
-                map["payPassword"] = "${ConfigUtils.userId()}"
+                map["payPassword"] = it
                 showProgress("请稍候")
                 request(RetrofitCreateHelper.createApi(BaseApi::class.java).pledgeRollOut(map)) {
                     showMessage(it.msg)
@@ -102,8 +108,11 @@ class ZhiYaDetailActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 showMessage("请选择明细")
                 return@setOnClickListener
             }
+            if (!it.isSelected) {
+                return@setOnClickListener
+            }
             val itemBalanceModel = list[selectPosition]
-            CashInKuangChangActivity.toActivity(this,itemBalanceModel)
+            CashInKuangChangActivity.toActivity(this, itemBalanceModel)
         }
         selectChange()
     }

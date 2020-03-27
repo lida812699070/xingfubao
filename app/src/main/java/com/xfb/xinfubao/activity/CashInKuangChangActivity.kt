@@ -21,7 +21,7 @@ class CashInKuangChangActivity : DefaultActivity() {
 
     companion object {
         fun toActivity(context: Context, itemBalanceModel: ItemBalanceModel?) {
-            val intent = Intent(context, CashoutBalanceActivity::class.java)
+            val intent = Intent(context, CashInKuangChangActivity::class.java)
             intent.putExtra("itemBalanceModel", itemBalanceModel)
             context.startActivity(intent)
         }

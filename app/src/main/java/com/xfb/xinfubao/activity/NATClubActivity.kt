@@ -74,20 +74,16 @@ class NATClubActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
 
     private fun toZhiYa(selectPosition: Int) {
         val itemBalanceModel = list[selectPosition]
-        if (itemBalanceModel.isUse) {
-            showDiYaDialog = DialogUtils.showDiYaDialog(this, 3) {
-                showDiYaDialog?.dismiss()
-                val map = hashMapOf<String, String>()
-                map["orderNo"] = itemBalanceModel.orderNum
-                map["userId"] = "${ConfigUtils.userId()}"
-                map["payPwd"] = it
-                request(RetrofitCreateHelper.createApi(BaseApi::class.java).natPledgeApply(map)) {
-                    showMessage(it.msg)
-                    refreshPage()
-                }
+        showDiYaDialog = DialogUtils.showDiYaDialog(this, 3) {
+            showDiYaDialog?.dismiss()
+            val map = hashMapOf<String, String>()
+            map["orderNo"] = itemBalanceModel.orderNum
+            map["userId"] = "${ConfigUtils.userId()}"
+            map["payPwd"] = it
+            request(RetrofitCreateHelper.createApi(BaseApi::class.java).natPledgeApply(map)) {
+                showMessage(it.msg)
+                refreshPage()
             }
-        } else {
-            ApplyZhiYaActivity.toActivity(this, itemBalanceModel)
         }
     }
 

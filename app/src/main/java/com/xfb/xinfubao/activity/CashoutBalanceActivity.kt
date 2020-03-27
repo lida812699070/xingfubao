@@ -3,11 +3,11 @@ package com.xfb.xinfubao.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import com.careagle.sdk.helper.RetrofitCreateHelper
 import com.careagle.sdk.utils.PriceChangeUtils
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.api.BaseApi
-import com.xfb.xinfubao.dialog.DialogUtils
 import com.xfb.xinfubao.model.ItemBalanceModel
 import com.xfb.xinfubao.model.event.EventTransfer
 import com.xfb.xinfubao.utils.ConfigUtils
@@ -58,18 +58,30 @@ class CashoutBalanceActivity : DefaultActivity() {
 
     //转为余额
     private fun cashOutBalance() {
-        DialogUtils.showDiYaDialog(this, 2) {
-            val map = hashMapOf<String, String>()
-            map["userId"] = "${ConfigUtils.userId()}"
-            map["payPwd"] = it
-            map["orderNo"] = "${itemBalanceModel?.orderNum}"
-            map["amount"] = "${itemBalanceModel?.amount}"
-            showProgress("请稍候")
-            request(RetrofitCreateHelper.createApi(BaseApi::class.java).exchangeBalance(map)) {
-                showMessage(it.msg)
-                EventBus.getDefault().post(EventTransfer())
-                finish()
-            }
+        val balance = etCashInBalance.text.toString()
+        val password = etPayPassword.text.toString()
+        if (TextUtils.isEmpty(balance)) {
+            showMessage("请输入金额")
+            return
+        }
+        if (TextUtils.isEmpty(password)) {
+            showMessage("请输入支付密码")
+            return
+        }
+        if (balance.toDouble() > itemBalanceModel!!.amount) {
+            showMessage("输入金额不得大于银杏宝金额")
+            return
+        }
+        val map = hashMapOf<String, String>()
+        map["userId"] = "${ConfigUtils.userId()}"
+        map["payPwd"] = password
+        map["orderNo"] = "${itemBalanceModel?.orderNum}"
+        map["amount"] = balance
+        showProgress("请稍候")
+        request(RetrofitCreateHelper.createApi(BaseApi::class.java).exchangeBalance(map)) {
+            showMessage(it.msg)
+            EventBus.getDefault().post(EventTransfer())
+            finish()
         }
     }
 

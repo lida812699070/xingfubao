@@ -138,7 +138,7 @@ class BalanceAdapter(data: List<ItemBalanceModel>) :
                         tvCashOutBalance.setVisible(false)
                         tvToUse.setVisible(false)
                         ivPoint.setVisible(false)
-                        tvMoney.text = "${PriceChangeUtils.getNumKbs(data.amount)}枚"
+                        tvMoney.text = "${PriceChangeUtils.getNumKbs(data.redeemMoney)}枚"
                         ivNatClubRight.setVisible((helper.adapterPosition - 1) == natSelector)
                         tvProductName.text = data.productName
                     }

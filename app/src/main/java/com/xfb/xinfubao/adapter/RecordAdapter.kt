@@ -23,7 +23,7 @@ class RecordAdapter(data: List<ItemBalanceModel>) :
 
     init {
         addItemType(ITEM_TYPE_NORMAL, R.layout.item_cash_out_record)
-        addItemType(ITEM_TYPE_CAI_WU, R.layout.item_cash_out_record)
+        addItemType(ITEM_TYPE_CAI_WU, R.layout.item_cash_out_record_cai_wu)
     }
 
     override fun convert(helper: BaseViewHolder, data: ItemBalanceModel) {

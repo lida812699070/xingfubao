@@ -27,6 +27,7 @@ class ToExchangeActivity : DefaultActivity() {
         BaseQuickAdapter<NatUnlockPakeageModel, BaseViewHolder>(R.layout.item_to_exchange, list) {
         override fun convert(helper: BaseViewHolder, item: NatUnlockPakeageModel) {
             val tvSelect = helper.getView<TextView>(R.id.tvSelect60)
+            tvSelect.text = item.name
             tvSelect.isSelected = selectPosition == helper.adapterPosition
         }
     }
