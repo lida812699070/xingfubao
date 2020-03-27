@@ -47,7 +47,7 @@
         android:layout_marginTop="13dp"
         android:layout_marginRight="12dp"
         android:layout_marginBottom="12dp"
-        android:background="@drawable/shape_theme_storke_btn_bg"
+        android:background="@drawable/shape_theme_storke_btn_bg_13"
         android:gravity="center"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
