@@ -42,9 +42,9 @@ class CashInKuangChangActivity : DefaultActivity() {
             tvBalance.text = PriceChangeUtils.getNumKb(it.data.userAssets.orePoolMoney)
         }
         tvAll.setOnClickListener {
-            etCashInBalance.setText("${itemBalanceModel?.amount}")
+            tvCashInBalance.setText("${itemBalanceModel?.redeemMoney}")
         }
-        etCashInBalance.setText("${itemBalanceModel?.amount}")
+        tvCashInBalance.setText("${itemBalanceModel?.redeemMoney}")
 
         tvOk.setOnClickListener {
             cashinOk()
@@ -52,7 +52,7 @@ class CashInKuangChangActivity : DefaultActivity() {
     }
 
     private fun cashinOk() {
-        val strCashinBalance = etCashInBalance.text.toString()
+        val strCashinBalance = tvCashInBalance.text.toString()
         val strPassword = etPayPassword.text.toString()
         if (TextUtils.isEmpty(strCashinBalance)) {
             showMessage("请输入转入数量")
