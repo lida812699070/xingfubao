@@ -26,7 +26,25 @@ public class ItemBalanceModel implements MultiItemEntity, Serializable {
     private boolean pledge;
     private boolean turnOutBalanceState;
     private boolean turnOutState;
+    private boolean turnOutPledgeState;
+    private int redeemState;
     private int useState;
+
+    public boolean isTurnOutPledgeState() {
+        return turnOutPledgeState;
+    }
+
+    public void setTurnOutPledgeState(boolean turnOutPledgeState) {
+        this.turnOutPledgeState = turnOutPledgeState;
+    }
+
+    public int getRedeemState() {
+        return redeemState;
+    }
+
+    public void setRedeemState(int redeemState) {
+        this.redeemState = redeemState;
+    }
 
     public int getUseState() {
         return useState;
