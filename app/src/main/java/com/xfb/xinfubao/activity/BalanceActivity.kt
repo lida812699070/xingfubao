@@ -206,7 +206,8 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                     tabLayout.addTab(tabLayout.newTab().setText("解锁明细"))
                     tabLayout.addTab(tabLayout.newTab().setText("兑换明细"))
                     tabLayout.addTab(tabLayout.newTab().setText("提币明细"))
-                    tabLayout.addTab(tabLayout.newTab().setText("质押明细"))
+                    tabLayout.addTab(tabLayout.newTab().setText("矿池明细"))
+                    tabLayout.addTab(tabLayout.newTab().setText("使用明细"))
                 }
                 tvCash.setOnClickListener {
                     MoneyExchangeActivity.toActivity(this, BalanceEnum.NAT)
@@ -282,8 +283,10 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
             tagType = 2
         } else if ("提币明细" == p0?.text) {
             tagType = 3
-        } else if ("质押明细" == p0?.text) {
+        } else if ("矿池明细" == p0?.text) {
             tagType = 5
+        } else if ("使用明细" == p0?.text) {
+            tagType = 6
         }
     }
 
