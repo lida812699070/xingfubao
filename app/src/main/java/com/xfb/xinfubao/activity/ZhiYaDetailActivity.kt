@@ -158,9 +158,9 @@ class ZhiYaDetailActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
             tvBottom3.isSelected = false
         } else {
             val itemBalanceModel = list[selectPosition]
-            tvBottom1.isSelected = itemBalanceModel.isPledge
-            tvBottom2.isSelected = itemBalanceModel.isTurnOutPledgeState
-            tvBottom3.isSelected = itemBalanceModel.redeemState == 1
+            tvBottom1.isSelected = itemBalanceModel.redeemState == 1//赎回
+            tvBottom2.isSelected = itemBalanceModel.isTurnOutPledgeState//转出
+            tvBottom3.isSelected = itemBalanceModel.useState == 0//转入矿场
         }
 
     }
