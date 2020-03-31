@@ -2,10 +2,9 @@ package com.xfb.xinfubao.activity
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.view.View
 import com.xfb.xinfubao.R
-import com.xfb.xinfubao.fragment.FindFragment
-import com.xfb.xinfubao.fragment.HomeFragment
-import com.xfb.xinfubao.fragment.MineFragment
+import com.xfb.xinfubao.fragment.*
 import com.xfb.xinfubao.model.event.EventExitApp
 import kotlinx.android.synthetic.main.activity_main.*
 import org.greenrobot.eventbus.EventBus
@@ -15,7 +14,9 @@ class MainActivity : DefaultActivity() {
 
     private var findFragment: FindFragment? = null
     private var homeFragment: HomeFragment? = null
+    private var natFragment: NatFragment? = null
     private var mineFragment: MineFragment? = null
+    private var yxbFragment: YXBFragment? = null
     private var currentFragment: Fragment? = null
     private var exitTime = 0L
 
@@ -33,10 +34,9 @@ class MainActivity : DefaultActivity() {
 
     override fun initView(savedInstanceState: Bundle?) {
         EventBus.getDefault().register(this)
-        tvTabFind.setOnClickListener {
-            tvTabFind.isSelected = true
-            tvTabMine.isSelected = false
-            ivTabHome.isSelected = false
+        tvTabLiulan.setOnClickListener {
+            if (it.isSelected) return@setOnClickListener
+            setSelectTab(it)
             val beginTransaction = supportFragmentManager.beginTransaction()
             if (findFragment == null) {
                 findFragment = FindFragment()
@@ -48,9 +48,7 @@ class MainActivity : DefaultActivity() {
             beginTransaction.commitAllowingStateLoss()
         }
         tvTabMine.setOnClickListener {
-            tvTabFind.isSelected = false
-            tvTabMine.isSelected = true
-            ivTabHome.isSelected = false
+            setSelectTab(it)
             val beginTransaction = supportFragmentManager.beginTransaction()
             if (mineFragment == null) {
                 mineFragment = MineFragment()
@@ -61,10 +59,8 @@ class MainActivity : DefaultActivity() {
             currentFragment = mineFragment
             beginTransaction.commitAllowingStateLoss()
         }
-        ivTabHome.setOnClickListener {
-            tvTabFind.isSelected = false
-            tvTabMine.isSelected = false
-            ivTabHome.isSelected = true
+        tvTabMall.setOnClickListener {
+            setSelectTab(it)
             val beginTransaction = supportFragmentManager.beginTransaction()
             if (homeFragment == null) {
                 homeFragment = HomeFragment()
@@ -76,7 +72,42 @@ class MainActivity : DefaultActivity() {
             beginTransaction.commitAllowingStateLoss()
         }
 
-        ivTabHome.performClick()
+        tvTabYXB.setOnClickListener {
+            setSelectTab(it)
+            val beginTransaction = supportFragmentManager.beginTransaction()
+            if (yxbFragment == null) {
+                yxbFragment = YXBFragment()
+                beginTransaction.add(R.id.flContent, yxbFragment!!, "yxbFragment")
+            }
+            currentFragment?.let { beginTransaction.hide(it) }
+            beginTransaction.show(yxbFragment!!)
+            currentFragment = yxbFragment
+            beginTransaction.commitAllowingStateLoss()
+        }
+
+        tvTabNat.setOnClickListener {
+            setSelectTab(it)
+            val beginTransaction = supportFragmentManager.beginTransaction()
+            if (natFragment == null) {
+                natFragment = NatFragment()
+                beginTransaction.add(R.id.flContent, natFragment!!, "natFragment")
+            }
+            currentFragment?.let { beginTransaction.hide(it) }
+            beginTransaction.show(natFragment!!)
+            currentFragment = natFragment
+            beginTransaction.commitAllowingStateLoss()
+        }
+
+        tvTabMall.performClick()
+    }
+
+    private fun setSelectTab(it: View) {
+        tvTabLiulan.isSelected = false
+        tvTabMine.isSelected = false
+        tvTabMall.isSelected = false
+        tvTabYXB.isSelected = false
+        tvTabNat.isSelected = false
+        it.isSelected = true
     }
 
     override fun onBackPressed() {

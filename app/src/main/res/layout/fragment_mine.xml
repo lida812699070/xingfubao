@@ -172,6 +172,7 @@
             android:layout_width="match_parent"
             android:layout_height="68dp"
             android:layout_marginTop="11dp"
+            android:visibility="gone"
             app:item_mine_left_img="@mipmap/icon_mine_yxb"
             app:item_mine_title="银杏宝"
             app:layout_constraintTop_toBottomOf="@+id/clMineTabs" />
@@ -180,6 +181,7 @@
             android:id="@+id/itemYlz"
             android:layout_width="match_parent"
             android:layout_height="68dp"
+            android:layout_marginTop="11dp"
             app:item_mine_left_img="@mipmap/yuanli_icon1"
             app:item_mine_title="愿力值"
             app:layout_constraintTop_toBottomOf="@+id/itemYxb" />
@@ -188,6 +190,7 @@
             android:id="@+id/itemNATJj"
             android:layout_width="match_parent"
             android:layout_height="68dp"
+            android:visibility="gone"
             app:item_mine_left_img="@mipmap/icon_mine_nat"
             app:item_mine_title="NAT基金会"
             app:layout_constraintTop_toBottomOf="@+id/itemYlz" />
