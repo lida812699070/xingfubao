@@ -39,6 +39,16 @@ public class UserAssets {
     private double powerAvowNum;
     //矿池余额
     private double orePoolMoney;
+    //NAT价格
+    private double natPrice;
+
+    public double getNatPrice() {
+        return natPrice;
+    }
+
+    public void setNatPrice(double natPrice) {
+        this.natPrice = natPrice;
+    }
 
     public double getOrePoolMoney() {
         return orePoolMoney;

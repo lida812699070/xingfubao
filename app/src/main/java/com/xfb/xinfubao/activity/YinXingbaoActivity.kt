@@ -70,6 +70,8 @@ class YinXingbaoActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         adapter.setHeaderAndEmpty(true)
         val ivFinish = headerView!!.findViewById<ImageView>(R.id.ivFinish)
         val tvSubTitle = headerView!!.findViewById<TextView>(R.id.tvSubTitle)
+        val tvCountCanFlowText = headerView!!.findViewById<TextView>(R.id.tvCountCanFlowText)
+        val tvCountCanFlow = headerView!!.findViewById<TextView>(R.id.tvCountCanFlow)
         tvToCashOut = headerView!!.findViewById<TextView>(R.id.tvToCashOut)
         val tabLayout = headerView!!.findViewById<TabLayout>(R.id.tabLayout)
         ivFinish.setOnClickListener {
@@ -90,6 +92,26 @@ class YinXingbaoActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 list[selectPosition].id,
                 list[selectPosition].amount
             )
+        }
+        tvCountCanFlow.setOnClickListener {
+            CashOutRecordActivity.toActivity(this, 3)
+        }
+        tvCountCanFlowText.setOnClickListener {
+            CashOutRecordActivity.toActivity(this, 3)
+        }
+
+        headerView!!.findViewById<TextView>(R.id.tvTotalCashInText).setOnClickListener {
+            BalanceActivity.toActivity(this, BalanceEnum.YING_XING_GUO)
+        }
+        headerView!!.findViewById<TextView>(R.id.tvTotalCashIn).setOnClickListener {
+            BalanceActivity.toActivity(this, BalanceEnum.YING_XING_GUO)
+        }
+
+        headerView!!.findViewById<TextView>(R.id.tvTotalCashInYXYText).setOnClickListener {
+            BalanceActivity.toActivity(this, BalanceEnum.YING_XING_YE)
+        }
+        headerView!!.findViewById<TextView>(R.id.tvTotalCashInYXY).setOnClickListener {
+            BalanceActivity.toActivity(this, BalanceEnum.YING_XING_YE)
         }
 
         tabLayout.addTab(tabLayout.newTab().setText("明细"))

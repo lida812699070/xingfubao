@@ -137,6 +137,9 @@ class ZhiYaDetailActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
     private fun initHeader(data: UserInfo) {
         headerView = LayoutInflater.from(this).inflate(R.layout.header_zhiya_detail, null)
         val ivFinish = headerView!!.findViewById<ImageView>(R.id.ivFinish)
+        headerView!!.findViewById<TextView>(R.id.tvSubTitle).setOnClickListener {
+            BalanceActivity.toActivity(this,BalanceEnum.NAT)
+        }
         ivFinish.setOnClickListener { finish() }
         bindHeadData(data)
         adapter.addHeaderView(headerView)

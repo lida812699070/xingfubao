@@ -123,6 +123,8 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         val tvCash = headerView!!.findViewById<TextView>(R.id.tvCash)
         //另一个主按钮
         val tvCashRight = headerView!!.findViewById<TextView>(R.id.tvCashRight)
+        val tvRealPriceText = headerView!!.findViewById<TextView>(R.id.tvRealPriceText)
+        val tvRealPrice = headerView!!.findViewById<TextView>(R.id.tvRealPrice)
         tabLayout = headerView!!.findViewById<TabLayout>(R.id.tabLayout)
         //NAT金额
         val tvNATMoney = headerView!!.findViewById<TextView>(R.id.tvNATMoney)
@@ -200,8 +202,11 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 tvCashRight.setVisible(true)
                 tvCashRight.text = "提币到钱包"
                 tvNATMoney.setVisible(true)
+                tvRealPrice.setVisible(true)
+                tvRealPriceText.setVisible(true)
                 tvNATMoney.text = PriceChangeUtils.getNumKb(userAssets.natLockNum)
                 tvBalance.text = PriceChangeUtils.getNumKb(userAssets.natFlowNum)
+                tvRealPrice.text = "≈${PriceChangeUtils.getNumKb(userAssets.natPrice)}元"
                 if (!initTab) {
                     tabLayout.addTab(tabLayout.newTab().setText("解锁明细"))
                     tabLayout.addTab(tabLayout.newTab().setText("兑换明细"))
