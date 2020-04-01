@@ -31,7 +31,7 @@ class ToExchangeActivity : DefaultActivity() {
             val tvSelect = helper.getView<TextView>(R.id.tvSelect60)
             tvSelect.text = item.name
             tvSelect.isSelected = selectPosition == helper.adapterPosition
-            val str = "可获得的NAT数量：${PriceChangeUtils.getNumKb(item.unlockNum)}"
+            val str = "可获得的NAT数量：${PriceChangeUtils.getNumKb(list[selectPosition].unlockNum)}"
             tvCanGetNatCount.setColorText(
                 str,
                 resources.getColor(R.color.color_light_org),

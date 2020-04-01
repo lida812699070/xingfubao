@@ -77,8 +77,8 @@ class NatFragment : BaseRecyclerViewFragment<ItemBalanceModel>() {
         }
 
         val params = hashMapOf<String, String>()
-        params["deviceid"]="2"
-        params["moduleTypeId"]="7"
+        params["deviceid"] = "2"
+        params["moduleTypeId"] = "7"
         request(RetrofitCreateHelper.createApi(BaseApi::class.java).notificationLetter(params)) {
             initDialog(it.data)
         }
@@ -95,9 +95,16 @@ class NatFragment : BaseRecyclerViewFragment<ItemBalanceModel>() {
         webView.loadUrl(Constant.NAT_SCH)
     }
 
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (!hidden) {
+            clDialog.setVisible(true)
+        }
+    }
+
     private fun toZhiYa(selectPosition: Int) {
         val itemBalanceModel = list[selectPosition]
-        showDiYaDialog = DialogUtils.showDiYaDialog(activity!!, 3, itemBalanceModel.redeemMoney) {
+        showDiYaDialog = DialogUtils.showDiYaDialog(activity!!, 3, itemBalanceModel.pledgenum) {
             showDiYaDialog?.dismiss()
             val map = hashMapOf<String, String>()
             map["orderNo"] = itemBalanceModel.orderNum
