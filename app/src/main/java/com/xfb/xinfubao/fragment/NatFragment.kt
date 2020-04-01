@@ -18,6 +18,7 @@ import com.xfb.xinfubao.activity.ToExchangeActivity
 import com.xfb.xinfubao.activity.ZhiYaDetailActivity
 import com.xfb.xinfubao.adapter.BalanceAdapter
 import com.xfb.xinfubao.api.BaseApi
+import com.xfb.xinfubao.constant.Constant
 import com.xfb.xinfubao.dialog.DialogUtils
 import com.xfb.xinfubao.model.ItemBalanceModel
 import com.xfb.xinfubao.model.NatNotfModel
@@ -91,7 +92,7 @@ class NatFragment : BaseRecyclerViewFragment<ItemBalanceModel>() {
             clDialog.setVisible(false)
         }
         webView.settings.javaScriptEnabled = true
-        webView.loadUrl("http://xfb.cxtx.info:8082/help/agreement/2/7")
+        webView.loadUrl(Constant.NAT_SCH)
     }
 
     private fun toZhiYa(selectPosition: Int) {

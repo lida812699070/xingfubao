@@ -24,5 +24,7 @@ public class Constant {
     public static final String YIN_XING_BAO_RULE_URL = SERVER_API + "/help/agreement/2/5";
     //新闻详情
     public static final String NEWS_H5 = SERVER_API + "/help/newsdetails/";
+    //NAT告知函
+    public static final String NAT_SCH = SERVER_API + "/help/agreement/2/7";
 
 }
