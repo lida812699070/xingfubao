@@ -99,6 +99,7 @@ class NatFragment : BaseRecyclerViewFragment<ItemBalanceModel>() {
         super.onHiddenChanged(hidden)
         if (!hidden) {
             clDialog.setVisible(true)
+            refreshPage()
         }
     }
 

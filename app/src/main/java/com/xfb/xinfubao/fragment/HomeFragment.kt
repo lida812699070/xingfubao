@@ -39,6 +39,18 @@ class HomeFragment : BaseFragment() {
         return R.layout.fragment_home
     }
 
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (!hidden) {
+            request(
+                RetrofitCreateHelper.createApi(BaseApi::class.java)
+                    .index(mapOf())
+            ) {
+                bindData(it.data)
+            }
+        }
+    }
+
     override fun initUI(view: View?, savedInstanceState: Bundle?) {
         request(
             RetrofitCreateHelper.createApi(BaseApi::class.java)

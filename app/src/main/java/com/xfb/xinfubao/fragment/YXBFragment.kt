@@ -63,6 +63,13 @@ class YXBFragment : BaseRecyclerViewFragment<ItemBalanceModel>() {
         EventBus.getDefault().register(this)
     }
 
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (!hidden) {
+            transfer(EventTransfer())
+        }
+    }
+
     private fun initHeader(data: UserInfo) {
         headerView = LayoutInflater.from(activity!!).inflate(R.layout.header_yxb, null)
         adapter.addHeaderView(headerView)
