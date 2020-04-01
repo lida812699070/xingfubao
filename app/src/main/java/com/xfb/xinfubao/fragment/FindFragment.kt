@@ -39,4 +39,12 @@ class FindFragment : BaseFragment() {
         tabLayout.setupWithViewPager(vpContent)
     }
 
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (!hidden) {
+            val newsFragment = fragments.get(tabLayout.selectedTabPosition) as NewsFragment
+            newsFragment.onRefresh()
+        }
+    }
+
 }
