@@ -64,6 +64,15 @@
             tools:itemCount="3"
             tools:listitem="@layout/item_to_exchange" />
 
+        <TextView
+            android:id="@+id/tvCanGetNatCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="15dp"
+            android:text="可获得的NAT数量"
+            android:textColor="@color/color_text_111"
+            android:textSize="16sp" />
     </LinearLayout>
 
     <EditText

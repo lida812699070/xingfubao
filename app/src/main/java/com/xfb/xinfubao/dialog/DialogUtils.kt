@@ -90,6 +90,7 @@ class DialogUtils {
         fun showDiYaDialog(
             context: Context,
             state: Int = 0,
+            redeemMoney: Double = 0.0,
             method: (payPassword: String) -> Unit
         ): AlertDialog? {
             val builder = AlertDialog.Builder(context)
@@ -118,10 +119,13 @@ class DialogUtils {
                 view.findViewById<TextView>(R.id.tvOkCashOut).background =
                     context.getDrawable(R.drawable.shape_org_radius_8)
             } else if (state == 3) {
+                val tvCanZhiyaCount = view.findViewById<TextView>(R.id.tvCanZhiyaCount)
                 view.findViewById<TextView>(R.id.tvTitle).text = "质押"
                 view.findViewById<TextView>(R.id.tvBg).setVisible(true)
                 view.findViewById<TextView>(R.id.tvToZhiYaText).setVisible(true)
+                tvCanZhiyaCount.setVisible(true)
                 view.findViewById<TextView>(R.id.tvOkCashOut).text = "确认质押"
+                tvCanZhiyaCount.text = "质押可获得NAT的数量：${PriceChangeUtils.getNumKb(redeemMoney)}"
             } else if (state == 4) {
                 view.findViewById<TextView>(R.id.tvTitle).text = "使用"
                 view.findViewById<TextView>(R.id.tvOkCashOut).text = "确认使用"

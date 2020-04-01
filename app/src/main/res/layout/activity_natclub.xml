@@ -65,4 +65,5 @@
             tools:ignore="MissingConstraints" />
     </LinearLayout>
 
+    <include layout="@layout/dialog_nat_hint" />
 </android.support.constraint.ConstraintLayout>

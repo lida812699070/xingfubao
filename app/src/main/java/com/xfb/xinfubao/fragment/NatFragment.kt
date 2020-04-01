@@ -20,6 +20,7 @@ import com.xfb.xinfubao.adapter.BalanceAdapter
 import com.xfb.xinfubao.api.BaseApi
 import com.xfb.xinfubao.dialog.DialogUtils
 import com.xfb.xinfubao.model.ItemBalanceModel
+import com.xfb.xinfubao.model.NatNotfModel
 import com.xfb.xinfubao.model.NatUnlockPakeageModel
 import com.xfb.xinfubao.model.UserInfo
 import com.xfb.xinfubao.model.event.ZhiYaEvent
@@ -27,6 +28,7 @@ import com.xfb.xinfubao.myenum.BalanceEnum
 import com.xfb.xinfubao.utils.ConfigUtils
 import com.xfb.xinfubao.utils.setVisible
 import kotlinx.android.synthetic.main.activity_natclub.*
+import kotlinx.android.synthetic.main.dialog_nat_hint.*
 import kotlinx.android.synthetic.main.header_nat.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -72,11 +74,29 @@ class NatFragment : BaseRecyclerViewFragment<ItemBalanceModel>() {
         request(RetrofitCreateHelper.createApi(BaseApi::class.java).getUserInfo(map)) {
             initHeader(it.data)
         }
+
+        val params = hashMapOf<String, String>()
+        params["deviceid"]="2"
+        params["moduleTypeId"]="7"
+        request(RetrofitCreateHelper.createApi(BaseApi::class.java).notificationLetter(params)) {
+            initDialog(it.data)
+        }
+
+    }
+
+    private fun initDialog(data: NatNotfModel) {
+        clDialog.setVisible(true)
+        tvDialogTitle.text = data.title
+        tvAgree.setOnClickListener {
+            clDialog.setVisible(false)
+        }
+        webView.settings.javaScriptEnabled = true
+        webView.loadUrl("http://xfb.cxtx.info:8082/help/agreement/2/7")
     }
 
     private fun toZhiYa(selectPosition: Int) {
         val itemBalanceModel = list[selectPosition]
-        showDiYaDialog = DialogUtils.showDiYaDialog(activity!!, 3) {
+        showDiYaDialog = DialogUtils.showDiYaDialog(activity!!, 3, itemBalanceModel.redeemMoney) {
             showDiYaDialog?.dismiss()
             val map = hashMapOf<String, String>()
             map["orderNo"] = itemBalanceModel.orderNum

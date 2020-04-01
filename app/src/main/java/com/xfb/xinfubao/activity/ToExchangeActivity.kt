@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
 import android.widget.TextView
 import com.careagle.sdk.helper.RetrofitCreateHelper
+import com.careagle.sdk.utils.PriceChangeUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.xfb.xinfubao.R
@@ -15,6 +16,7 @@ import com.xfb.xinfubao.model.ItemBalanceModel
 import com.xfb.xinfubao.model.NatUnlockPakeageModel
 import com.xfb.xinfubao.model.event.ZhiYaEvent
 import com.xfb.xinfubao.utils.ConfigUtils
+import com.xfb.xinfubao.utils.setColorText
 import kotlinx.android.synthetic.main.activity_to_exchange.*
 import org.greenrobot.eventbus.EventBus
 
@@ -29,6 +31,13 @@ class ToExchangeActivity : DefaultActivity() {
             val tvSelect = helper.getView<TextView>(R.id.tvSelect60)
             tvSelect.text = item.name
             tvSelect.isSelected = selectPosition == helper.adapterPosition
+            val str = "可获得的NAT数量：${PriceChangeUtils.getNumKb(item.unlockNum)}"
+            tvCanGetNatCount.setColorText(
+                str,
+                resources.getColor(R.color.color_light_org),
+                10,
+                str.length
+            )
         }
     }
 
@@ -59,6 +68,7 @@ class ToExchangeActivity : DefaultActivity() {
 
     private fun loadData() {
         val map = hashMapOf<String, String>()
+        map["recordId"] = "${itemBalanceModel?.id}"
         request(RetrofitCreateHelper.createApi(BaseApi::class.java).getNatUnlockPackage(map)) {
             list.clear()
             list.addAll(it.data)

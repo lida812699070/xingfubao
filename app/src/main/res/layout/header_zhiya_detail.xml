@@ -44,7 +44,7 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/clContent"
         android:layout_width="match_parent"
-        android:layout_height="166dp"
+        android:layout_height="254dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="26dp"
         android:layout_marginRight="20dp"
@@ -74,6 +74,31 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvCountText"
             tools:text="7000" />
+
+        <TextView
+            android:id="@+id/tvKuangChiCountText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="矿池余额（枚）"
+            android:textColor="@color/color_text_111"
+            android:textSize="14sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvCount" />
+
+        <TextView
+            android:id="@+id/tvKuangChiCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:textColor="@color/color_light_org"
+            android:textSize="36sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvKuangChiCountText"
+            tools:text="7000" />
+
 
     </android.support.constraint.ConstraintLayout>
 

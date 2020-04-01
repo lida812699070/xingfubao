@@ -321,4 +321,8 @@ interface BaseApi {
     @POST("api/transferOrePond")
     fun transferOrePond(@Body map: Map<String, String>): Observable<Result<Any?>>
 
+    /** nat基金会告知函 */
+    @POST("api/notificationLetter")
+    fun notificationLetter(@Body map: Map<String, String>): Observable<Result<NatNotfModel>>
+
 }

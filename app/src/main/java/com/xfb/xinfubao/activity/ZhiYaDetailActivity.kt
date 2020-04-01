@@ -185,7 +185,9 @@ class ZhiYaDetailActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
 
     private fun bindHeadData(data: UserInfo) {
         val tvCount = headerView!!.findViewById<TextView>(R.id.tvCount)
+        val tvKuangChiCount = headerView!!.findViewById<TextView>(R.id.tvKuangChiCount)
         tvCount.text = PriceChangeUtils.getNumKb(data.userAssets.pledgeMoney)
+        tvKuangChiCount.text = PriceChangeUtils.getNumKb(data.userAssets.orePoolMoney)
     }
 
     override fun initData() {

@@ -5,6 +5,15 @@ public class NatUnlockPakeageModel {
     private String name;
     private long lockTime;
     private double unlockRatio;
+    private double unlockNum;
+
+    public double getUnlockNum() {
+        return unlockNum;
+    }
+
+    public void setUnlockNum(double unlockNum) {
+        this.unlockNum = unlockNum;
+    }
 
     public long getId() {
         return id;
