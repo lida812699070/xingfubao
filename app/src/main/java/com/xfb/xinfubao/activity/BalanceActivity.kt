@@ -103,7 +103,7 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 ConfigUtils.saveUserInfo(it.data)
                 val tvRealPrice = headerView?.findViewById<TextView>(R.id.tvRealPrice)
                 tvRealPrice?.text =
-                    "≈${PriceChangeUtils.getNumKb(it.data.userAssets.natPrice)}元"
+                    "≈${it.data.userAssets.natPrice}元"
             }
             mHandler.sendMessage(Message.obtain())
         }, 1000 * 60)
@@ -232,7 +232,7 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 tvRealPriceText.setVisible(true)
                 tvNATMoney.text = PriceChangeUtils.getNumKb(userAssets.natLockNum)
                 tvBalance.text = PriceChangeUtils.getNumKb(userAssets.natFlowNum)
-                tvRealPrice.text = "≈${PriceChangeUtils.getNumKb(userAssets.natPrice)}元"
+                tvRealPrice.text =  "≈${userAssets.natPrice}元"
                 if (!initTab) {
                     tabLayout.addTab(tabLayout.newTab().setText("解锁明细"))
                     tabLayout.addTab(tabLayout.newTab().setText("兑换明细"))
@@ -427,7 +427,7 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         super.onDestroy()
         EventBus.getDefault().unregister(this)
         showBalanceDialog?.dismiss()
-        mHandler.removeCallbacks(null)
+        mHandler.removeMessages(0)
     }
 }
 
