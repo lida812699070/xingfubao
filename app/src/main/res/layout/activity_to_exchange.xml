@@ -101,6 +101,7 @@
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:layout_marginTop="18dp"
         android:text="转入矿场说明： \n1、产品质押的NAT，转入矿场，将享受年化12%的NAT奖励，同时回扣除相应的手续费；\n2、转入矿场，每期为90天，自转入矿场开始计算，到期自动回到“产品质押的NAT”； \n3、如需继续享受收益，必须重新转入。"
         android:textColor="@color/color_text_888"

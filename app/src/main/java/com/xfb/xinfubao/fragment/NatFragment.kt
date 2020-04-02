@@ -21,7 +21,6 @@ import com.xfb.xinfubao.api.BaseApi
 import com.xfb.xinfubao.constant.Constant
 import com.xfb.xinfubao.dialog.DialogUtils
 import com.xfb.xinfubao.model.ItemBalanceModel
-import com.xfb.xinfubao.model.NatNotfModel
 import com.xfb.xinfubao.model.NatUnlockPakeageModel
 import com.xfb.xinfubao.model.UserInfo
 import com.xfb.xinfubao.model.event.ZhiYaEvent
@@ -75,19 +74,11 @@ class NatFragment : BaseRecyclerViewFragment<ItemBalanceModel>() {
         request(RetrofitCreateHelper.createApi(BaseApi::class.java).getUserInfo(map)) {
             initHeader(it.data)
         }
-
-        val params = hashMapOf<String, String>()
-        params["deviceid"] = "2"
-        params["moduleTypeId"] = "7"
-        request(RetrofitCreateHelper.createApi(BaseApi::class.java).notificationLetter(params)) {
-            initDialog(it.data)
-        }
-
+        initDialog()
     }
 
-    private fun initDialog(data: NatNotfModel) {
+    private fun initDialog() {
         clDialog.setVisible(true)
-        tvDialogTitle.text = data.title
         tvAgree.setOnClickListener {
             clDialog.setVisible(false)
         }
@@ -98,7 +89,6 @@ class NatFragment : BaseRecyclerViewFragment<ItemBalanceModel>() {
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
         if (!hidden) {
-            clDialog.setVisible(true)
             refreshPage()
         }
     }

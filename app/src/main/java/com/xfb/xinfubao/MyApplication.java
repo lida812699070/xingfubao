@@ -13,6 +13,7 @@ import com.xfb.xinfubao.wxapi.WXUtils;
 
 public class MyApplication extends Application {
     private static MyApplication context = null;
+    public static boolean isPopNatHist = false;
 
     @Override
     public void onCreate() {

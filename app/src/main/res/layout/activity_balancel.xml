@@ -16,4 +16,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </android.support.v4.widget.SwipeRefreshLayout>
+
+    <include layout="@layout/dialog_nat_hint" />
 </android.support.constraint.ConstraintLayout>

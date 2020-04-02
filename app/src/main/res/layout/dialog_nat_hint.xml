@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="57dp"
             android:gravity="center"
-            android:text="标题"
+            android:text="NAT用户确认函"
             android:textColor="@color/color_text_111"
             android:textSize="18sp"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -49,7 +49,7 @@
             android:layout_height="52dp"
             android:background="@drawable/shape_theme_bottom_round_8"
             android:gravity="center"
-            android:text="已阅读并同意，进入"
+            android:text="确认并不再提示"
             android:textColor="@color/white"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent" />

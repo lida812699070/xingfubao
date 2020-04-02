@@ -325,4 +325,8 @@ interface BaseApi {
     @POST("api/notificationLetter")
     fun notificationLetter(@Body map: Map<String, String>): Observable<Result<NatNotfModel>>
 
+    /** 银杏宝 产品使用 */
+    @POST("api/natMakeUseOfProduct")
+    fun natMakeUseOfProduct(@Body map: Map<String, String>): Observable<Result<List<YinXinBaoUseProductModel>>>
+
 }

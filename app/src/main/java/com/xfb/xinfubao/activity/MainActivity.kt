@@ -3,6 +3,7 @@ package com.xfb.xinfubao.activity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.View
+import com.xfb.xinfubao.MyApplication
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.fragment.*
 import com.xfb.xinfubao.model.event.EventExitApp
@@ -126,6 +127,7 @@ class MainActivity : DefaultActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        MyApplication.isPopNatHist = false
         EventBus.getDefault().unregister(this)
     }
 }

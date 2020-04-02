@@ -67,12 +67,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="47dp"
-        android:layout_marginRight="47dp"
         android:text="NAT实时价格"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:visibility="gone"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/tvRealPrice"
+        app:layout_constraintRight_toRightOf="@+id/tvRealPrice"
         app:layout_constraintTop_toTopOf="@+id/ivBg" />
 
     <TextView
@@ -80,11 +80,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:layout_marginRight="47dp"
         android:textColor="#CFAA8E"
         android:textSize="16sp"
         android:visibility="gone"
-        app:layout_constraintLeft_toLeftOf="@+id/tvRealPriceText"
-        app:layout_constraintRight_toRightOf="@+id/tvRealPriceText"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvRealPriceText"
         tools:text="≈2.58元" />
 
@@ -198,7 +198,7 @@
         android:layout_height="wrap_content"
         android:includeFontPadding="false"
         android:text="0.00"
-        android:textColor="@color/theme_color"
+        android:textColor="@color/white"
         android:textSize="24sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/tvLock"

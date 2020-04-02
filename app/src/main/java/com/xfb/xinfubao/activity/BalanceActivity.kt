@@ -18,12 +18,14 @@ import com.careagle.sdk.helper.RetrofitCreateHelper
 import com.careagle.sdk.utils.PriceChangeUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
+import com.xfb.xinfubao.MyApplication
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.activity.TransferActivity.Companion.TRANSFER_TYPE_JF
 import com.xfb.xinfubao.activity.TransferActivity.Companion.TRANSFER_TYPE_YXY
 import com.xfb.xinfubao.adapter.BalanceAdapter
 import com.xfb.xinfubao.adapter.BalanceAdapter.Companion.ITEM_TYPE_DATE
 import com.xfb.xinfubao.api.BaseApi
+import com.xfb.xinfubao.constant.Constant
 import com.xfb.xinfubao.constant.Constant.YUAN_LI_ZHI_RULE_URL
 import com.xfb.xinfubao.dialog.DialogUtils
 import com.xfb.xinfubao.model.ItemBalanceModel
@@ -34,6 +36,7 @@ import com.xfb.xinfubao.utils.ConfigUtils
 import com.xfb.xinfubao.utils.setInVisible
 import com.xfb.xinfubao.utils.setVisible
 import kotlinx.android.synthetic.main.activity_balancel.*
+import kotlinx.android.synthetic.main.dialog_nat_hint.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
@@ -92,7 +95,21 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         EventBus.getDefault().register(this)
         if (balanceEnum == BalanceEnum.NAT) {
             mHandler.sendMessage(Message.obtain())
+            if (!MyApplication.isPopNatHist) {
+                initDialog()
+            }
+
         }
+    }
+
+    private fun initDialog() {
+        clDialog.setVisible(true)
+        tvAgree.setOnClickListener {
+            MyApplication.isPopNatHist = true
+            clDialog.setVisible(false)
+        }
+        webView.settings.javaScriptEnabled = true
+        webView.loadUrl(Constant.NAT_SCH)
     }
 
     private fun refreshPrice() {
@@ -103,7 +120,7 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 ConfigUtils.saveUserInfo(it.data)
                 val tvRealPrice = headerView?.findViewById<TextView>(R.id.tvRealPrice)
                 tvRealPrice?.text =
-                    "≈${it.data.userAssets.natPrice}元"
+                    "≈￥${it.data.userAssets.natPrice}"
             }
             mHandler.sendMessage(Message.obtain())
         }, 1000 * 60)
@@ -232,12 +249,12 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 tvRealPriceText.setVisible(true)
                 tvNATMoney.text = PriceChangeUtils.getNumKb(userAssets.natLockNum)
                 tvBalance.text = PriceChangeUtils.getNumKb(userAssets.natFlowNum)
-                tvRealPrice.text =  "≈${userAssets.natPrice}元"
+                tvRealPrice.text = "≈￥${userAssets.natPrice}"
                 if (!initTab) {
                     tabLayout.addTab(tabLayout.newTab().setText("解锁明细"))
                     tabLayout.addTab(tabLayout.newTab().setText("兑换明细"))
                     tabLayout.addTab(tabLayout.newTab().setText("提币明细"))
-                    tabLayout.addTab(tabLayout.newTab().setText("矿池明细"))
+                    tabLayout.addTab(tabLayout.newTab().setText("矿场明细"))
                     tabLayout.addTab(tabLayout.newTab().setText("使用明细"))
                 }
                 tvCash.setOnClickListener {
@@ -314,7 +331,7 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
             tagType = 2
         } else if ("提币明细" == p0?.text) {
             tagType = 3
-        } else if ("矿池明细" == p0?.text) {
+        } else if ("矿场明细" == p0?.text) {
             tagType = 5
         } else if ("使用明细" == p0?.text) {
             tagType = 6
