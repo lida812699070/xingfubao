@@ -91,20 +91,28 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         }
         EventBus.getDefault().register(this)
         if (balanceEnum == BalanceEnum.NAT) {
-            mHandler.postDelayed({
-                request(RetrofitCreateHelper.createApi(BaseApi::class.java).getUserInfo(map)) {
-                    ConfigUtils.saveUserInfo(it.data)
-                    val tvRealPrice = headerView?.findViewById<TextView>(R.id.tvRealPrice)
-                    tvRealPrice?.text =
-                        "≈${PriceChangeUtils.getNumKb(it.data.userAssets.natPrice)}元"
-                }
-            }, 60 * 1000 * 1000)
+            mHandler.sendMessage(Message.obtain())
         }
+    }
+
+    private fun refreshPrice() {
+        val map = hashMapOf<String, String>()
+        map["userId"] = "${ConfigUtils.userId()}"
+        mHandler.postDelayed({
+            request(RetrofitCreateHelper.createApi(BaseApi::class.java).getUserInfo(map)) {
+                ConfigUtils.saveUserInfo(it.data)
+                val tvRealPrice = headerView?.findViewById<TextView>(R.id.tvRealPrice)
+                tvRealPrice?.text =
+                    "≈${PriceChangeUtils.getNumKb(it.data.userAssets.natPrice)}元"
+            }
+            mHandler.sendMessage(Message.obtain())
+        }, 1000 * 60)
     }
 
     private val mHandler = object : Handler() {
         override fun handleMessage(msg: Message?) {
             super.handleMessage(msg)
+            refreshPrice()
         }
     }
 
