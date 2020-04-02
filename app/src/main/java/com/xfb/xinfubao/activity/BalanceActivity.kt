@@ -3,6 +3,8 @@ package com.xfb.xinfubao.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Message
 import android.support.design.widget.TabLayout
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AlertDialog
@@ -88,6 +90,22 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
             ConfigUtils.saveUserInfo(it.data)
         }
         EventBus.getDefault().register(this)
+        if (balanceEnum == BalanceEnum.NAT) {
+            mHandler.postDelayed({
+                request(RetrofitCreateHelper.createApi(BaseApi::class.java).getUserInfo(map)) {
+                    ConfigUtils.saveUserInfo(it.data)
+                    val tvRealPrice = headerView?.findViewById<TextView>(R.id.tvRealPrice)
+                    tvRealPrice?.text =
+                        "≈${PriceChangeUtils.getNumKb(it.data.userAssets.natPrice)}元"
+                }
+            }, 60 * 1000 * 1000)
+        }
+    }
+
+    private val mHandler = object : Handler() {
+        override fun handleMessage(msg: Message?) {
+            super.handleMessage(msg)
+        }
     }
 
     @Subscribe
@@ -401,6 +419,7 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         super.onDestroy()
         EventBus.getDefault().unregister(this)
         showBalanceDialog?.dismiss()
+        mHandler.removeCallbacks(null)
     }
 }
 
