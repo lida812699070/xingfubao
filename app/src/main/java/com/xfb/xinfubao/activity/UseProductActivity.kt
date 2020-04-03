@@ -83,10 +83,6 @@ class UseProductActivity : DefaultActivity() {
             showMessage("请输入供奉人名字")
             return
         }
-        if (TextUtils.isEmpty(idNo)) {
-            showMessage("请输入供奉人身份证号码")
-            return
-        }
         if (TextUtils.isEmpty(etContent)) {
             showMessage("请输入供奉内容")
             return
@@ -103,7 +99,9 @@ class UseProductActivity : DefaultActivity() {
             map["worshipProduct"] = "${list[selectIndex].id}"
             map["payPwd"] = it
             map["userName"] = userName
-            map["idNo"] = idNo
+            if (!TextUtils.isEmpty(idNo)) {
+                map["idNo"] = idNo
+            }
             map["worshipContent"] = etContent
             request(RetrofitCreateHelper.createApi(BaseApi::class.java).natMakeUseOf(map)) {
                 val showUseApply = DialogUtils.showUseApply(this)
