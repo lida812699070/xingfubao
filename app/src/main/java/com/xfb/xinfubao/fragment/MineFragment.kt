@@ -71,6 +71,11 @@ class MineFragment : BaseFragment() {
                 BalanceActivity.toActivity(it, BalanceEnum.YUAN_LI_ZHI)
             }
         }
+        itemYKT.setOnClickListener {
+            activity?.let {
+                BalanceActivity.toActivity(it, BalanceEnum.YI_KA_TONG)
+            }
+        }
         itemNATJj.setOnClickListener {
             activity?.let {
                 startActivity(Intent(it, NATClubActivity::class.java))

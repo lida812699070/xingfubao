@@ -80,7 +80,7 @@ abstract class BaseFragment : BaseCompatFragment() {
                     showMessage("请先设置支付密码")
                     ChangePasswordActivity.toActivity(
                         ChangePasswordEnum.SET_PAY_PASSWORD,
-                        activity,
+                        activity!!,
                         "设置支付密码"
                     )
                 }

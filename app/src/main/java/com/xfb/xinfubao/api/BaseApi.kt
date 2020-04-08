@@ -157,6 +157,10 @@ interface BaseApi {
     @POST("api/natAssets")
     fun natAssets(@Body map: Map<String, String>): Observable<Result<List<ItemBalanceModel>>>
 
+    /** 一卡通金额 */
+    @POST("api/yktInfo")
+    fun yktInfo(@Body map: Map<String, String>): Observable<Result<List<ItemBalanceModel>>>
+
     /** 获取用户购物车 */
     @POST("api/listUserCart")
     fun listUserCart(@Body map: Map<String, String>): Observable<Result<List<Product>>>

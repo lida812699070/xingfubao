@@ -8,5 +8,6 @@ enum class BalanceEnum(var key: Int, var tag: String) {
     NAT(104, "NAT资产"),
     YUAN_LI_ZHI(5, "愿力值"),
     NAT_CLUB(6, "NAT基金会"),
-    NAT_ZHIYA_CLUB(109, "质押详情")
+    NAT_ZHIYA_CLUB(109, "质押详情"),
+    YI_KA_TONG(108, "一卡通")
 }

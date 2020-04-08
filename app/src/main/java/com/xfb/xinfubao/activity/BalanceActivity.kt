@@ -30,6 +30,7 @@ import com.xfb.xinfubao.constant.Constant.YUAN_LI_ZHI_RULE_URL
 import com.xfb.xinfubao.dialog.DialogUtils
 import com.xfb.xinfubao.model.ItemBalanceModel
 import com.xfb.xinfubao.model.UserInfo
+import com.xfb.xinfubao.model.event.EventChangeTab
 import com.xfb.xinfubao.model.event.EventTransfer
 import com.xfb.xinfubao.myenum.BalanceEnum
 import com.xfb.xinfubao.utils.ConfigUtils
@@ -41,7 +42,7 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
 /**
- * 银杏宝  银杏叶  银杏果  积分商城  愿力值
+ * 银杏宝  银杏叶  银杏果  积分商城  愿力值  一卡通
  */
 class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
     val adapter = BalanceAdapter(list)
@@ -233,6 +234,23 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 }
                 tvCash.setOnClickListener {
                     WebviewActivity.newInstanceUrl(this, YUAN_LI_ZHI_RULE_URL, "愿力值规则")
+                }
+            }
+            BalanceEnum.YI_KA_TONG -> {
+                tvTitle.text = BalanceEnum.YI_KA_TONG.tag
+                tvSubtitle.setInVisible(false)
+                tvBalanceText.text = "余额"
+                ivBg.setImageResource(R.mipmap.icon_ykt)
+                tvCash.text = "去商城消费"
+                if (!initTab) {
+                    tabLayout.addTab(tabLayout.newTab().setText("全部"))
+                    tabLayout.addTab(tabLayout.newTab().setText("收入"))
+                    tabLayout.addTab(tabLayout.newTab().setText("转出"))
+                }
+                tvBalance.text = PriceChangeUtils.getNumKb(userAssets.yctCirculate)
+                tvCash.setOnClickListener {
+                    EventBus.getDefault().post(EventChangeTab())
+                    finish()
                 }
             }
             BalanceEnum.NAT -> {
@@ -435,6 +453,28 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                         map
                     ), {
                         loadData(it.data)
+                    }) {
+                    showLoadError()
+                }
+            }
+            BalanceEnum.YI_KA_TONG -> {
+                requestWithError(
+                    RetrofitCreateHelper.createApi(BaseApi::class.java).yktInfo(
+                        map
+                    ), {
+                        var dateStr = ""
+                        val datas = arrayListOf<ItemBalanceModel>()
+                        it.data.forEach {
+                            if (it.createDate.substring(0, 10) != dateStr) {
+                                dateStr = it.createDate.substring(0, 10)
+                                val itemBalanceModel = ItemBalanceModel()
+                                itemBalanceModel.itemType = ITEM_TYPE_DATE
+                                itemBalanceModel.createDate = it.createDate.substring(0, 10)
+                                datas.add(itemBalanceModel)
+                            }
+                            datas.add(it)
+                        }
+                        loadData(datas)
                     }) {
                     showLoadError()
                 }

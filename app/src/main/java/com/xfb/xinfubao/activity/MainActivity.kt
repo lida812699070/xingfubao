@@ -6,6 +6,7 @@ import android.view.View
 import com.xfb.xinfubao.MyApplication
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.fragment.*
+import com.xfb.xinfubao.model.event.EventChangeTab
 import com.xfb.xinfubao.model.event.EventExitApp
 import kotlinx.android.synthetic.main.activity_main.*
 import org.greenrobot.eventbus.EventBus
@@ -123,6 +124,11 @@ class MainActivity : DefaultActivity() {
     @Subscribe
     fun exitApp(event: EventExitApp) {
         finish()
+    }
+
+    @Subscribe
+    fun exitApp(event: EventChangeTab) {
+        tvTabMall.performClick()
     }
 
     override fun onDestroy() {

@@ -178,13 +178,21 @@
             app:layout_constraintTop_toBottomOf="@+id/clMineTabs" />
 
         <com.xfb.xinfubao.view.ItemMineView
-            android:id="@+id/itemYlz"
+            android:id="@+id/itemYKT"
             android:layout_width="match_parent"
             android:layout_height="68dp"
             android:layout_marginTop="11dp"
             app:item_mine_left_img="@mipmap/yuanli_icon1"
-            app:item_mine_title="愿力值"
+            app:item_mine_title="一卡通"
             app:layout_constraintTop_toBottomOf="@+id/itemYxb" />
+
+        <com.xfb.xinfubao.view.ItemMineView
+            android:id="@+id/itemYlz"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            app:item_mine_left_img="@mipmap/yuanli_icon1"
+            app:item_mine_title="愿力值"
+            app:layout_constraintTop_toBottomOf="@+id/itemYKT" />
 
         <com.xfb.xinfubao.view.ItemMineView
             android:id="@+id/itemNATJj"

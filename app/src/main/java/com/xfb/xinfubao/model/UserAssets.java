@@ -41,6 +41,16 @@ public class UserAssets {
     private double orePoolMoney;
     //NAT价格
     private double natPrice;
+    //一卡通金额
+    private double yctCirculate;
+
+    public double getYctCirculate() {
+        return yctCirculate;
+    }
+
+    public void setYctCirculate(double yctCirculate) {
+        this.yctCirculate = yctCirculate;
+    }
 
     public double getNatPrice() {
         return natPrice;
