@@ -91,23 +91,25 @@ class UseProductActivity : DefaultActivity() {
             showMessage("请选择使用产品")
             return
         }
-        showDiYaDialog = DialogUtils.showDiYaDialog(this, 4) {
-            showDiYaDialog?.dismiss()
-            val map = hashMapOf<String, String>()
-            map["orderNo"] = "${itemBalanceModel?.orderNum}"
-            map["userId"] = "${ConfigUtils.userId()}"
-            map["worshipProduct"] = "${list[selectIndex].id}"
-            map["payPwd"] = it
-            map["userName"] = userName
-            if (!TextUtils.isEmpty(idNo)) {
-                map["idNo"] = idNo
-            }
-            map["worshipContent"] = etContent
-            request(RetrofitCreateHelper.createApi(BaseApi::class.java).natMakeUseOf(map)) {
-                val showUseApply = DialogUtils.showUseApply(this)
-                showUseApply.setOnDismissListener {
-                    EventBus.getDefault().post(EventTransfer())
-                    finish()
+        checkPayPassword {
+            showDiYaDialog = DialogUtils.showDiYaDialog(this, 4) {
+                showDiYaDialog?.dismiss()
+                val map = hashMapOf<String, String>()
+                map["orderNo"] = "${itemBalanceModel?.orderNum}"
+                map["userId"] = "${ConfigUtils.userId()}"
+                map["worshipProduct"] = "${list[selectIndex].id}"
+                map["payPwd"] = it
+                map["userName"] = userName
+                if (!TextUtils.isEmpty(idNo)) {
+                    map["idNo"] = idNo
+                }
+                map["worshipContent"] = etContent
+                request(RetrofitCreateHelper.createApi(BaseApi::class.java).natMakeUseOf(map)) {
+                    val showUseApply = DialogUtils.showUseApply(this)
+                    showUseApply.setOnDismissListener {
+                        EventBus.getDefault().post(EventTransfer())
+                        finish()
+                    }
                 }
             }
         }

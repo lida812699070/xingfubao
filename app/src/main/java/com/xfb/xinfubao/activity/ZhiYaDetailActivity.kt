@@ -89,16 +89,18 @@ class ZhiYaDetailActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
             if (!it.isSelected) {
                 return@setOnClickListener
             }
-            DialogUtils.showDiYaDialog(this, 1) {
-                val itemBalanceModel = list[selectPosition]
-                val map = hashMapOf<String, String>()
-                map["userId"] = "${ConfigUtils.userId()}"
-                map["orderNO"] = "${itemBalanceModel.orderNum}"
-                map["payPassword"] = it
-                showProgress("请稍候")
-                request(RetrofitCreateHelper.createApi(BaseApi::class.java).pledgeRollOut(map)) {
-                    showMessage(it.msg)
-                    refreshPage(ShuHuiEvent())
+            checkPayPassword {
+                DialogUtils.showDiYaDialog(this, 1) {
+                    val itemBalanceModel = list[selectPosition]
+                    val map = hashMapOf<String, String>()
+                    map["userId"] = "${ConfigUtils.userId()}"
+                    map["orderNO"] = "${itemBalanceModel.orderNum}"
+                    map["payPassword"] = it
+                    showProgress("请稍候")
+                    request(RetrofitCreateHelper.createApi(BaseApi::class.java).pledgeRollOut(map)) {
+                        showMessage(it.msg)
+                        refreshPage(ShuHuiEvent())
+                    }
                 }
             }
         }
@@ -138,7 +140,7 @@ class ZhiYaDetailActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         headerView = LayoutInflater.from(this).inflate(R.layout.header_zhiya_detail, null)
         val ivFinish = headerView!!.findViewById<ImageView>(R.id.ivFinish)
         headerView!!.findViewById<TextView>(R.id.tvSubTitle).setOnClickListener {
-            BalanceActivity.toActivity(this,BalanceEnum.NAT)
+            BalanceActivity.toActivity(this, BalanceEnum.NAT)
         }
         ivFinish.setOnClickListener { finish() }
         bindHeadData(data)

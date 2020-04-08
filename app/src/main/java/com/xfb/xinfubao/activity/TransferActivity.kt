@@ -79,20 +79,22 @@ class TransferActivity : DefaultActivity() {
             showMessage("余额不足")
             return
         }
-        showDiYaDialog = DialogUtils.showDiYaDialog(this, 1) {
-            showDiYaDialog?.dismiss()
-            val map = hashMapOf<String, String>()
-            map["userId"] = userId
-            map["transferType"] = "$transferType"
-            map["payeePhone"] = payeePhone
-            map["amount"] = amount
-            map["remark"] = etRemark
-            map["password"] = it
-            showProgress("请稍候")
-            request(RetrofitCreateHelper.createApi(BaseApi::class.java).transfer(map)) {
-                showMessage("转账成功")
-                finish()
-                EventBus.getDefault().post(EventTransfer())
+        checkPayPassword {
+            showDiYaDialog = DialogUtils.showDiYaDialog(this, 1) {
+                showDiYaDialog?.dismiss()
+                val map = hashMapOf<String, String>()
+                map["userId"] = userId
+                map["transferType"] = "$transferType"
+                map["payeePhone"] = payeePhone
+                map["amount"] = amount
+                map["remark"] = etRemark
+                map["password"] = it
+                showProgress("请稍候")
+                request(RetrofitCreateHelper.createApi(BaseApi::class.java).transfer(map)) {
+                    showMessage("转账成功")
+                    finish()
+                    EventBus.getDefault().post(EventTransfer())
+                }
             }
         }
     }

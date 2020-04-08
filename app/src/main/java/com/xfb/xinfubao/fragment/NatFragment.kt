@@ -95,15 +95,17 @@ class NatFragment : BaseRecyclerViewFragment<ItemBalanceModel>() {
 
     private fun toZhiYa(selectPosition: Int) {
         val itemBalanceModel = list[selectPosition]
-        showDiYaDialog = DialogUtils.showDiYaDialog(activity!!, 3, itemBalanceModel.pledgeNum) {
-            showDiYaDialog?.dismiss()
-            val map = hashMapOf<String, String>()
-            map["orderNo"] = itemBalanceModel.orderNum
-            map["userId"] = "${ConfigUtils.userId()}"
-            map["payPwd"] = it
-            request(RetrofitCreateHelper.createApi(BaseApi::class.java).natPledgeApply(map)) {
-                showMessage(it.msg)
-                refreshPage()
+        checkPayPassword {
+            showDiYaDialog = DialogUtils.showDiYaDialog(activity!!, 3, itemBalanceModel.pledgeNum) {
+                showDiYaDialog?.dismiss()
+                val map = hashMapOf<String, String>()
+                map["orderNo"] = itemBalanceModel.orderNum
+                map["userId"] = "${ConfigUtils.userId()}"
+                map["payPwd"] = it
+                request(RetrofitCreateHelper.createApi(BaseApi::class.java).natPledgeApply(map)) {
+                    showMessage(it.msg)
+                    refreshPage()
+                }
             }
         }
     }

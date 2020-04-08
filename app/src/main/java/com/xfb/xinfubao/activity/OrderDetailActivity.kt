@@ -83,6 +83,7 @@ class OrderDetailActivity : DefaultActivity() {
             tvRealSendWayGoods.text = "复制"
             tvRealSendWayGoods.setOnClickListener {
                 CommentUtils.copy(data.deliveryNumber)
+                showMessage("复制成功")
             }
         }
         tvPayWay.text = data.paymentInfo.paymentMethod

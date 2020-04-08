@@ -117,19 +117,21 @@ class ApplyZhiYaActivity : DefaultActivity() {
             showMessage("请输入运单号码")
             return
         }
-        showDiYaDialog = DialogUtils.showDiYaDialog(this, 3) {
-            showMessage("请稍候")
-            val map = hashMapOf<String, String>()
-            map["userId"] = "${ConfigUtils.userId()}"
-            map["orderNo"] = "${itemBalanceModel?.orderNum}"
-            map["money"] = "${itemBalanceModel?.amount}"
-            map["payPwd"] = it
-            map["logisticsCode"] = orderNoStr
-            map["logisticsId"] = "${company?.logisticsId}"
-            request(RetrofitCreateHelper.createApi(BaseApi::class.java).natPledgeApply(map)) {
-                showMessage("申请质押提交成功")
-                EventBus.getDefault().post(ZhiYaEvent())
-                finish()
+        checkPayPassword {
+            showDiYaDialog = DialogUtils.showDiYaDialog(this, 3) {
+                showMessage("请稍候")
+                val map = hashMapOf<String, String>()
+                map["userId"] = "${ConfigUtils.userId()}"
+                map["orderNo"] = "${itemBalanceModel?.orderNum}"
+                map["money"] = "${itemBalanceModel?.amount}"
+                map["payPwd"] = it
+                map["logisticsCode"] = orderNoStr
+                map["logisticsId"] = "${company?.logisticsId}"
+                request(RetrofitCreateHelper.createApi(BaseApi::class.java).natPledgeApply(map)) {
+                    showMessage("申请质押提交成功")
+                    EventBus.getDefault().post(ZhiYaEvent())
+                    finish()
+                }
             }
         }
     }
