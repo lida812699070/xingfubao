@@ -97,6 +97,7 @@ class OrderDetailActivity : DefaultActivity() {
 
         tvCopyOrderNo.setOnClickListener {
             CommentUtils.copy(data.orderNumber)
+            showMessage("已复制")
         }
         val tvOrderCreateTimeStr = "创建时间：${data.createDate}"
         val tvOrderPayTimeStr = "付款时间：${data.createDate}"

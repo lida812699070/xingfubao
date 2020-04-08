@@ -130,11 +130,15 @@ class YXBFragment : BaseRecyclerViewFragment<ItemBalanceModel>() {
             when (view.id) {
                 //转为余额
                 R.id.tvCashOutBalance -> {
-                    CashoutBalanceActivity.toActivity(activity!!, list[position])
+                    checkPayPassword {
+                        CashoutBalanceActivity.toActivity(activity!!, list[position])
+                    }
                 }
                 //去使用
                 R.id.tvToUse -> {
-                    UseProductActivity.toActivity(activity!!, list[position])
+                    checkPayPassword {
+                        UseProductActivity.toActivity(activity!!, list[position])
+                    }
                 }
             }
         }

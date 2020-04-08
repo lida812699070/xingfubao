@@ -245,7 +245,7 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 if (!initTab) {
                     tabLayout.addTab(tabLayout.newTab().setText("全部"))
                     tabLayout.addTab(tabLayout.newTab().setText("收入"))
-                    tabLayout.addTab(tabLayout.newTab().setText("转出"))
+                    tabLayout.addTab(tabLayout.newTab().setText("支出"))
                 }
                 tvBalance.text = PriceChangeUtils.getNumKb(userAssets.yctCirculate)
                 tvCash.setOnClickListener {
@@ -355,6 +355,8 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
             tagType = 5
         } else if ("使用明细" == p0?.text) {
             tagType = 6
+        } else if ("支出" == p0?.text) {
+            tagType = 2
         }
     }
 

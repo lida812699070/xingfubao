@@ -176,10 +176,14 @@ class NatFragment : BaseRecyclerViewFragment<ItemBalanceModel>() {
         adapter.setOnItemChildClickListener { adapter, view, position ->
             when (view.id) {
                 R.id.tvCashOutBalance -> {
-                    toZhiHuan(position)
+                    checkPayPassword {
+                        toZhiHuan(position)
+                    }
                 }
                 R.id.tvToUse -> {
-                    toZhiYa(position)
+                    checkPayPassword {
+                        toZhiYa(position)
+                    }
                 }
             }
         }

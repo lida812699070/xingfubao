@@ -42,6 +42,7 @@ class BalanceAdapter(data: List<ItemBalanceModel>) :
                 when (balanceEnum) {
                     BalanceEnum.YING_XING_GUO,
                     BalanceEnum.YING_XING_YE,
+                    BalanceEnum.YI_KA_TONG,
                     BalanceEnum.JI_FEN_SHANG_CHENG -> {
                         tvTitle.text = data.name
                         ivPoint.isSelected = data.isCashIn
