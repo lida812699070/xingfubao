@@ -47,7 +47,9 @@ class CashInKuangChangActivity : DefaultActivity() {
         tvCashInBalance.setText("${itemBalanceModel?.redeemMoney}")
 
         tvOk.setOnClickListener {
-            cashinOk()
+            checkPayPassword {
+                cashinOk()
+            }
         }
     }
 

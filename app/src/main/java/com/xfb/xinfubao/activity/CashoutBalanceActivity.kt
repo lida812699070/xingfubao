@@ -48,7 +48,9 @@ class CashoutBalanceActivity : DefaultActivity() {
         }
         //确认转入
         tvOk.setOnClickListener {
-            cashOutBalance()
+            checkPayPassword {
+                cashOutBalance()
+            }
         }
         //转入明细
         tvSubTitles.setOnClickListener {

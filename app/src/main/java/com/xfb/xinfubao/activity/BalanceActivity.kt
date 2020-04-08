@@ -262,36 +262,38 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 }
 
                 tvCashRight.setOnClickListener {
-                    showCashOutDialog =
-                        DialogUtils.showBalanceDialog(this) { strTokenAddress, strNATCount, strPayPassword ->
-                            if (TextUtils.isEmpty(strTokenAddress)) {
-                                showMessage("请输入NAToken钱包地址")
-                                return@showBalanceDialog
+                    checkPayPassword {
+                        showCashOutDialog =
+                            DialogUtils.showBalanceDialog(this) { strTokenAddress, strNATCount, strPayPassword ->
+                                if (TextUtils.isEmpty(strTokenAddress)) {
+                                    showMessage("请输入NAToken钱包地址")
+                                    return@showBalanceDialog
+                                }
+                                if (TextUtils.isEmpty(strNATCount)) {
+                                    showMessage("请输入要提取的NAT数量")
+                                    return@showBalanceDialog
+                                }
+                                if (TextUtils.isEmpty(strPayPassword)) {
+                                    showMessage("请输入支付密码")
+                                    return@showBalanceDialog
+                                }
+                                showProgress("请稍候")
+                                val map = hashMapOf<String, String>()
+                                map["userId"] = "${ConfigUtils.userId()}"
+                                map["amount"] = strNATCount
+                                map["bankCards"] = strTokenAddress
+                                map["payPwd"] = strPayPassword
+                                request(
+                                    RetrofitCreateHelper.createApi(BaseApi::class.java).natTurnOut(
+                                        map
+                                    )
+                                ) {
+                                    showMessage("提币成功")
+                                    EventBus.getDefault().post(EventTransfer())
+                                    showCashOutDialog?.dismiss()
+                                }
                             }
-                            if (TextUtils.isEmpty(strNATCount)) {
-                                showMessage("请输入要提取的NAT数量")
-                                return@showBalanceDialog
-                            }
-                            if (TextUtils.isEmpty(strPayPassword)) {
-                                showMessage("请输入支付密码")
-                                return@showBalanceDialog
-                            }
-                            showProgress("请稍候")
-                            val map = hashMapOf<String, String>()
-                            map["userId"] = "${ConfigUtils.userId()}"
-                            map["amount"] = strNATCount
-                            map["bankCards"] = strTokenAddress
-                            map["payPwd"] = strPayPassword
-                            request(
-                                RetrofitCreateHelper.createApi(BaseApi::class.java).natTurnOut(
-                                    map
-                                )
-                            ) {
-                                showMessage("提币成功")
-                                EventBus.getDefault().post(EventTransfer())
-                                showCashOutDialog?.dismiss()
-                            }
-                        }
+                    }
                 }
             }
         }

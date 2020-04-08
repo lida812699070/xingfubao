@@ -61,7 +61,9 @@ class ToExchangeActivity : DefaultActivity() {
         ivFinish.setOnClickListener { finish() }
         initRecyclerView()
         tvOk.setOnClickListener {
-            toExchange()
+            checkPayPassword {
+                toExchange()
+            }
         }
         loadData()
     }

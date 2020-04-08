@@ -91,7 +91,9 @@ class ApplyCashOutActivity : DefaultActivity() {
 
     private fun initListener() {
         tvOK.setOnClickListener {
-            okApply()
+            checkPayPassword {
+                okApply()
+            }
         }
         ivFinish.setOnClickListener { finish() }
         tvApplyRecord.setOnClickListener {

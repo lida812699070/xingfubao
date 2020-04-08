@@ -59,7 +59,9 @@ class ShuHuiZhiYaActivity : DefaultActivity() {
                 showMessage("请转入NAT")
                 return@setOnClickListener
             }
-            shuhui()
+            checkPayPassword {
+                shuhui()
+            }
         }
 
         val params = hashMapOf<String, String>()
