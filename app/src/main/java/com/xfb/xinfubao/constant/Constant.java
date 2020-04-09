@@ -1,11 +1,13 @@
 package com.xfb.xinfubao.constant;
 
+import com.xfb.xinfubao.BuildConfig;
+
 public class Constant {
 
     public static final String MONEY_RMB = "¥";
     public static final String REQUEST_ID = "2";
-        public static final String SERVER = "http://xfb.cxtx.info";
-//    public static final String SERVER = "http://test.xfb.cxtx.info";
+    public static String SERVER = getService();
+    //    public static final String SERVER = "http://test.xfb.cxtx.info";
     public static final String SERVER_API = SERVER + ":8082";
     //    http://xfbapi.tynet.vip/images/28dc2296e1ed44679c199db18a34a050.png
     //图片头地址
@@ -27,4 +29,11 @@ public class Constant {
     //NAT告知函
     public static final String NAT_SCH = SERVER_API + "/help/agreement/2/7";
 
+    private static String getService() {
+        if (BuildConfig.IS_DEV) {
+            return "http://test.xfb.cxtx.info";
+        } else {
+            return "http://xfb.cxtx.info";
+        }
+    }
 }
