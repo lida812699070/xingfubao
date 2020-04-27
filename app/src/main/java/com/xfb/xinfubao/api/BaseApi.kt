@@ -333,4 +333,21 @@ interface BaseApi {
     @POST("api/natMakeUseOfProduct")
     fun natMakeUseOfProduct(@Body map: Map<String, String>): Observable<Result<List<YinXinBaoUseProductModel>>>
 
+    /**活动列表*/
+    @POST("api/activityList")
+    fun activityList(@Body map: Map<String, String>): Observable<Result<List<NatActiveModel>>>
+
+    /**参与活动明细*/
+    @POST("api/activityJoinRecord")
+    fun activityJoinRecord(@Body map: Map<String, String>): Observable<Result<List<NatActiveItem>>>
+
+    /**活动详情*/
+    @POST("api/activityDetail")
+    fun activityDetail(@Body map: Map<String, String>): Observable<Result<NatActiveDetail>>
+
+    /**参与活动*/
+    @POST("api/activityJoin")
+    fun activityJoin(@Body map: Map<String, String>): Observable<Result<Any?>>
+
+
 }

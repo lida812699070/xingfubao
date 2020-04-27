@@ -39,6 +39,24 @@ public class UserInfo {
     private String gradeIcon;
     private boolean isPayPwd;
     private UserAssets userAssets;
+    private int minersLevel;
+    private String minersLevelIcon;
+
+    public int getMinersLevel() {
+        return minersLevel;
+    }
+
+    public void setMinersLevel(int minersLevel) {
+        this.minersLevel = minersLevel;
+    }
+
+    public String getMinersLevelIcon() {
+        return minersLevelIcon;
+    }
+
+    public void setMinersLevelIcon(String minersLevelIcon) {
+        this.minersLevelIcon = minersLevelIcon;
+    }
 
     public int getTeamNumber() {
         return teamNumber;

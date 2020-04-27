@@ -13,10 +13,12 @@
         tools:itemCount="3"
         tools:listitem="@layout/item_header_nat_active" />
 
+
     <android.support.design.widget.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="15dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/headerRecyclerView"

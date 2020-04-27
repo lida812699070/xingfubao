@@ -85,12 +85,46 @@ class DialogUtils {
             return changeShopDialog
         }
 
+        /** NAT提币到钱包 */
+        fun showNATInputDialog(
+            context: Context,
+            method: (strNATCount: String, strPayPassword: String) -> Unit
+        ): AlertDialog {
+            val builder = AlertDialog.Builder(context)
+            builder.setCancelable(true)
+            val view = LayoutInflater.from(context)
+                .inflate(R.layout.dialog_input_nat_password, null)
+            builder.setView(view)
+            val changeShopDialog = builder.create()
+            changeShopDialog?.show()
+            val layoutParams = changeShopDialog?.window?.attributes
+            layoutParams?.width = WindowManager.LayoutParams.MATCH_PARENT
+            layoutParams?.gravity = Gravity.BOTTOM
+            changeShopDialog?.window?.attributes = layoutParams
+            changeShopDialog?.window?.setDimAmount(0.4f)
+            val dw = ColorDrawable(0x00)
+            changeShopDialog?.window?.setBackgroundDrawable(dw)
+            val tvOkCashOut = view.findViewById<TextView>(R.id.tvOkCashOut)
+            val etNATCount = view.findViewById<EditText>(R.id.etNATCount)
+            val etPayPassword = view.findViewById<EditText>(R.id.etPayPassword)
+            view.findViewById<ImageView>(R.id.ivClose).setOnClickListener {
+                changeShopDialog.dismiss()
+            }
+            tvOkCashOut.setOnClickListener {
+                val strNATCount = etNATCount.text.toString()
+                val strPayPassword = etPayPassword.text.toString()
+                method(strNATCount, strPayPassword)
+            }
+            return changeShopDialog
+        }
+
         /** 抵押 */
-        //state 0 抵押  1支付  2银杏宝余额转出 3质押 4使用
+        //state 0 抵押  1支付  2银杏宝余额转出 3质押 4使用 5同意释放
         fun showDiYaDialog(
             context: Context,
             state: Int = 0,
             redeemMoney: Double = 0.0,
+            title: String? = "",
             method: (payPassword: String) -> Unit
         ): AlertDialog? {
             val builder = AlertDialog.Builder(context)
@@ -129,6 +163,9 @@ class DialogUtils {
             } else if (state == 4) {
                 view.findViewById<TextView>(R.id.tvTitle).text = "使用"
                 view.findViewById<TextView>(R.id.tvOkCashOut).text = "确认使用"
+            } else if (state == 5) {
+                view.findViewById<TextView>(R.id.tvTitle).text = title
+                view.findViewById<TextView>(R.id.tvOkCashOut).text = "确认"
             }
             val etPayPassword = view.findViewById<EditText>(R.id.etPayPassword)
             view.findViewById<TextView>(R.id.tvOkCashOut).setOnClickListener {

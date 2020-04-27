@@ -18,6 +18,7 @@ import com.xfb.xinfubao.model.event.EventUserInfo
 import com.xfb.xinfubao.myenum.BalanceEnum
 import com.xfb.xinfubao.utils.BlurBitmap
 import com.xfb.xinfubao.utils.ConfigUtils
+import com.xfb.xinfubao.utils.loadUri
 import com.xfb.xinfubao.utils.loadUriNoError
 import jp.wasabeef.glide.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.fragment_mine.*
@@ -175,6 +176,7 @@ class MineFragment : BaseFragment() {
         tvUserId.text = "NO.${data.userId}"
         ivVip.loadUriNoError(data.gradeIcon)
         ConfigUtils.saveUserInfo(data)
+        ivKuangzhu.loadUri(data.minersLevelIcon)
     }
 
     @Subscribe

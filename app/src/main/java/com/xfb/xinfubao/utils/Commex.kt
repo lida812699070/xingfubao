@@ -111,6 +111,10 @@ fun TextView.setColorText(color: Int, start: Int, end: Int) {
     setColorText(text.toString(), color, start, end)
 }
 
+fun TextView.setColorTextEnd(text: String,color: Int, start: Int) {
+    setColorText(text, color, start, text.length)
+}
+
 fun EditText.indexEnd() {
     setSelection(text.toString().length)
 }
