@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".activity.NATActiveActivity">
+
+    <com.xfb.xinfubao.view.MyToolbarBar
+        android:id="@+id/myToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:str_title_toolbar="活动" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_bg"
+        app:layout_constraintTop_toBottomOf="@+id/myToolbar" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myToolbar">
+
+        <TextView
+            android:id="@+id/tvKuangZhu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawableTop="@mipmap/icon_kuangzhu"
+            android:drawablePadding="10dp"
+            android:text="抢注矿主"
+            android:textColor="@color/color_text_111"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvKuangZhuHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="抢注矿主活动\n所有用户均可参与" />
+
+        <TextView
+            android:id="@+id/tvKuangZhuOk"
+            android:layout_width="88dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/shape_blue_stroke_radius_15"
+            android:gravity="center"
+            android:text="抢注"
+            android:textColor="@color/theme_color"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tvKuangJi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:drawableTop="@mipmap/icon_kuangji"
+            android:drawablePadding="10dp"
+            android:text="矿基活动"
+            android:textColor="@color/color_text_111"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvKuangJiHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="矿基活动\n对应身份可参与" />
+
+        <TextView
+            android:id="@+id/tvKuangJiOk"
+            android:layout_width="88dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/shape_blue_stroke_radius_15"
+            android:gravity="center"
+            android:text="加入"
+            android:textColor="@color/theme_color"
+            android:textSize="14sp" />
+
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

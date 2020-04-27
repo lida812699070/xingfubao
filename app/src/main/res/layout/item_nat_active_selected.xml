@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="18dp"
+        android:drawableLeft="@drawable/selector_check3_box"
+        android:drawablePadding="11dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="3个月 年化8%收益"
+        android:textColor="@color/color_selector_theme_111"
+        android:textSize="14sp" />
+</LinearLayout>

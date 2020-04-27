@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_default_bg"
+    android:orientation="vertical"
+    tools:context=".activity.NatKuangDetailActivity">
+
+    <com.xfb.xinfubao.view.MyToolbarBar
+        android:id="@+id/myToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:str_title_toolbar="抢注矿主" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvOk"
+        app:layout_constraintTop_toBottomOf="@+id/myToolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/shape_white_radius_8"
+                android:orientation="vertical"
+                tools:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tvView1Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="13dp"
+                    android:text="钻石矿主"
+                    android:textColor="@color/color_text_111"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="13dp"
+                    android:background="@color/line_bg" />
+
+                <TextView
+                    android:id="@+id/tvOpenObject"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="21dp"
+                    android:text="开放对象：所有人都可参"
+                    android:textColor="@color/color_text_111"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvOpenProtectPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="15dp"
+                    android:text="是否开启保值功能：是"
+                    android:textColor="@color/color_text_111"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvOpenAddPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="15dp"
+                    android:text="是否开启增值功能：是"
+                    android:textColor="@color/color_text_111"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvProtectPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="15dp"
+                    android:text="保费税率：是"
+                    android:textColor="@color/color_text_111"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvNATMinPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="15dp"
+                    android:text="NAT起投数量:5000"
+                    android:textColor="@color/color_text_111"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvActiveWay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="15dp"
+                    android:paddingBottom="17dp"
+                    android:text="活动方式:限制报名时间为 2020.5.1-2020.6.1"
+                    android:textColor="@color/color_text_111"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/shape_white_radius_8"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="13dp"
+                    android:text="请选择期限"
+                    android:textColor="@color/color_text_111"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="13dp"
+                    android:background="@color/line_bg" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="11dp"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/item_nat_active_selected" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/shape_white_radius_8"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginTop="13dp"
+                    android:text="活动规则"
+                    android:textColor="@color/color_text_111"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="13dp"
+                    android:background="@color/line_bg" />
+
+                <TextView
+                    android:id="@+id/tvActiveRule"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="18dp"
+                    android:layout_marginRight="18dp"
+                    android:paddingTop="15dp"
+                    android:paddingBottom="20dp"
+                    android:text="后台设置活动规则内容"
+                    android:textColor="@color/color_text_111"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+    <TextView
+        android:id="@+id/tvOk"
+        style="@style/MainBtn"
+        android:layout_marginBottom="50dp"
+        android:text="确定"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="MissingConstraints" />
+
+</android.support.constraint.ConstraintLayout>

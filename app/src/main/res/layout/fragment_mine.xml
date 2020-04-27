@@ -43,34 +43,46 @@
             app:layout_constraintTop_toTopOf="@+id/ivHeader" />
 
         <TextView
-            android:id="@+id/tvNikeName"
+            android:id="@+id/tvUserId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:text="昵称"
+            android:text="NO.111"
             android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintLeft_toLeftOf="@+id/tvName"
             app:layout_constraintTop_toBottomOf="@+id/tvName" />
 
         <TextView
-            android:id="@+id/tvUserId"
+            android:id="@+id/tvNikeName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="NO.111"
             android:textColor="@color/white"
             android:textSize="14sp"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/ivHeader"
             app:layout_constraintLeft_toLeftOf="@+id/tvName" />
 
         <ImageView
             android:id="@+id/ivVip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
+            android:layout_width="41dp"
+            android:layout_height="19dp"
+            android:scaleType="fitXY"
             android:src="@mipmap/vip1_icon"
-            app:layout_constraintBottom_toBottomOf="@+id/tvUserId"
-            app:layout_constraintLeft_toRightOf="@+id/tvUserId" />
+            app:layout_constraintBottom_toBottomOf="@+id/tvNikeName"
+            app:layout_constraintLeft_toLeftOf="@+id/tvUserId" />
+
+        <ImageView
+            android:id="@+id/ivKuangzhu"
+            android:layout_width="65dp"
+            android:layout_height="19dp"
+            android:layout_marginLeft="11dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/icon_zhuanshi"
+            app:layout_constraintBottom_toBottomOf="@+id/ivVip"
+            app:layout_constraintLeft_toRightOf="@+id/ivVip"
+            app:layout_constraintTop_toTopOf="@+id/ivVip" />
 
         <ImageView
             android:id="@+id/ivSetting"

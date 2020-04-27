@@ -42,7 +42,7 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 
 /**
- * 银杏宝  银杏叶  银杏果  积分商城  愿力值  一卡通
+ * 银杏宝  银杏叶  银杏果  积分商城  愿力值  一卡通  NAT资产
  */
 class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
     val adapter = BalanceAdapter(list)
@@ -169,6 +169,11 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         val tvCashRight = headerView!!.findViewById<TextView>(R.id.tvCashRight)
         val tvRealPriceText = headerView!!.findViewById<TextView>(R.id.tvRealPriceText)
         val tvRealPrice = headerView!!.findViewById<TextView>(R.id.tvRealPrice)
+        val tvTitleRight = headerView!!.findViewById<TextView>(R.id.tvTitleRight)
+        tvTitleRight.setVisible(balanceEnum == BalanceEnum.NAT)
+        tvTitleRight.setOnClickListener {
+            startActivity(Intent(this, NATActiveActivity::class.java))
+        }
         tabLayout = headerView!!.findViewById<TabLayout>(R.id.tabLayout)
         //NAT金额
         val tvNATMoney = headerView!!.findViewById<TextView>(R.id.tvNATMoney)
