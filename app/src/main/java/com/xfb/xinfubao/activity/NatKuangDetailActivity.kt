@@ -142,7 +142,7 @@ class NatKuangDetailActivity : DefaultActivity() {
         tvProtectPrice.setColorTextEnd("保费税率：${data?.premiumRateDesc}", selectColor, 6)
         tvNATMinPrice.setColorTextEnd("NAT起投数量：${data?.natInputNum}", selectColor, 9)
         tvActiveWay.setColorTextEnd("活动方式：${data?.activityWay}", selectColor, 6)
-        tvActiveRule.text = data?.activityRules
+        loadRule(data?.activityRules)
         tvOk.text = data?.confirmButtonText
         if (1 == data?.incrementState) {
             llSelectDate.setVisible(true)
@@ -154,6 +154,18 @@ class NatKuangDetailActivity : DefaultActivity() {
         }
     }
 
+    fun loadRule(html: String?) {
+        val webSettings = tvActiveRule.getSettings()
+        webSettings.setJavaScriptEnabled(true)
+//        webSettings.setUseWideViewPort(true) //将图片调整到适合webview的大小
+//        webSettings.setLoadWithOverviewMode(true) // 缩放至屏幕的大小
+//        webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK) //关闭webview中缓存
+//        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN)
+//        webSettings.setDefaultTextEncodingName("utf-8")
+        val imgStyle = "<html><body><style> img{ width:100%; height:auto;}</style>";
+        val htmlStr = imgStyle + html + "</body></html>";
+        tvActiveRule.loadDataWithBaseURL(null, htmlStr, "text/html", "utf-8", null);
+    }
 
     override fun onDestroy() {
         super.onDestroy()
