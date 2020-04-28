@@ -1,7 +1,5 @@
 package com.xfb.xinfubao.constant;
 
-import com.xfb.xinfubao.BuildConfig;
-
 public class Constant {
 
     public static final String MONEY_RMB = "¥";
@@ -30,10 +28,7 @@ public class Constant {
     public static final String NAT_SCH = SERVER_API + "/help/agreement/2/7";
 
     private static String getService() {
-        if (BuildConfig.IS_DEV) {
-            return "http://test.xfb.cxtx.info";
-        } else {
-            return "http://xfb.cxtx.info";
-        }
+        return "http://test.xfb.cxtx.info";
+//        return "http://xfb.cxtx.info";
     }
 }
