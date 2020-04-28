@@ -27,6 +27,10 @@ android {
             v2SigningEnabled true
             aaptOptions.cruncherEnabled = false
             aaptOptions.useNewCruncher = false
+            lintOptions {
+                checkReleaseBuilds false
+                abortOnError false
+            }
         }
         debug {
             keyAlias "lida53"
