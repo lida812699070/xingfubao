@@ -3,6 +3,7 @@ package com.xfb.xinfubao.fragment
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.GlideDrawable
@@ -16,10 +17,7 @@ import com.xfb.xinfubao.constant.Constant
 import com.xfb.xinfubao.model.UserInfo
 import com.xfb.xinfubao.model.event.EventUserInfo
 import com.xfb.xinfubao.myenum.BalanceEnum
-import com.xfb.xinfubao.utils.BlurBitmap
-import com.xfb.xinfubao.utils.ConfigUtils
-import com.xfb.xinfubao.utils.loadUri
-import com.xfb.xinfubao.utils.loadUriNoError
+import com.xfb.xinfubao.utils.*
 import jp.wasabeef.glide.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.fragment_mine.*
 import org.greenrobot.eventbus.EventBus
@@ -177,6 +175,7 @@ class MineFragment : BaseFragment() {
         ivVip.loadUriNoError(data.gradeIcon)
         ConfigUtils.saveUserInfo(data)
         ivKuangzhu.loadUri(data.minersLevelIcon)
+        ivKuangzhu.setVisible(!TextUtils.isEmpty(data.minersLevelIcon))
     }
 
     @Subscribe

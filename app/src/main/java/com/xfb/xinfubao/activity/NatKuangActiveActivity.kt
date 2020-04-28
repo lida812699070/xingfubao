@@ -54,8 +54,10 @@ class NatKuangActiveActivity : BaseRecyclerViewActivity<NatActiveItem>() {
                 .addOnClickListener(R.id.tvAction)
             val tvContent = helper.getView<TextView>(R.id.tvContent)
             val ivImage = helper.getView<ImageView>(R.id.ivImage)
+            val tvAction = helper.getView<TextView>(R.id.tvAction)
             ivImage.loadRound(item.activityIcon, 6f)
             val color = mContext.getColor(R.color.theme_color)
+            tvAction.text = if (type == 0) "抢注" else "参与"
             if (item.activityWay == 1) {
                 if (item.thawTime == null) return
                 val day = item.thawTime.day
@@ -78,7 +80,8 @@ class NatKuangActiveActivity : BaseRecyclerViewActivity<NatActiveItem>() {
                     spannableStringCoupon.setSpan(
                         ForegroundColorSpan(color),
                         "结束还有${day}天${hours}小时".length,
-                        "结束还有${day}天${hours}小时${minutes}".length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                        "结束还有${day}天${hours}小时${minutes}".length,
+                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
                     )
                     spannableStringCoupon.setSpan(
                         ForegroundColorSpan(color),
