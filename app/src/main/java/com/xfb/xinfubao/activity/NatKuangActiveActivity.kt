@@ -7,6 +7,9 @@ import android.support.design.widget.TabLayout
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -19,10 +22,14 @@ import com.xfb.xinfubao.R
 import com.xfb.xinfubao.api.BaseApi
 import com.xfb.xinfubao.model.NatActiveItem
 import com.xfb.xinfubao.model.NatActiveModel
+import com.xfb.xinfubao.model.event.NatKuangEvent
 import com.xfb.xinfubao.utils.ConfigUtils
+import com.xfb.xinfubao.utils.loadRound
 import com.xfb.xinfubao.utils.setColorText
 import com.xfb.xinfubao.utils.setVisible
 import kotlinx.android.synthetic.main.activity_nat_kuang_active.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 
 /** 抢注矿主列表  矿机活动列表  */
 class NatKuangActiveActivity : BaseRecyclerViewActivity<NatActiveItem>() {
@@ -36,7 +43,6 @@ class NatKuangActiveActivity : BaseRecyclerViewActivity<NatActiveItem>() {
     var headerView: View? = null
     var headerRecyclerView: RecyclerView? = null
     var tabLayout: TabLayout? = null
-    var currentActiveIndex = 0
 
     val headerAdapter = object :
         BaseQuickAdapter<NatActiveModel, BaseViewHolder>(
@@ -45,9 +51,51 @@ class NatKuangActiveActivity : BaseRecyclerViewActivity<NatActiveItem>() {
         ) {
         override fun convert(helper: BaseViewHolder, item: NatActiveModel) {
             helper.setText(R.id.tvTitle, item.activityName)
-                .setText(R.id.tvContent, item.thawTime)
                 .addOnClickListener(R.id.tvAction)
+            val tvContent = helper.getView<TextView>(R.id.tvContent)
+            val ivImage = helper.getView<ImageView>(R.id.ivImage)
+            ivImage.loadRound(item.activityIcon, 6f)
+            val color = mContext.getColor(R.color.theme_color)
+            if (item.activityWay == 1) {
+                if (item.thawTime == null) return
+                val day = item.thawTime.day
+                val hours = item.thawTime.hours
+                val minutes = item.thawTime.minutes
+                val seconds = item.thawTime.seconds
+                val text = "结束还有${day}天${hours}小时${minutes}分${seconds}秒"
+                val spannableStringCoupon = SpannableString(text)
+                try {
+                    spannableStringCoupon.setSpan(
+                        ForegroundColorSpan(color),
+                        4, "结束还有${day}".length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
+                    spannableStringCoupon.setSpan(
+                        ForegroundColorSpan(color),
+                        "结束还有${day}天".length,
+                        "结束还有${day}天${hours}".length,
+                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
+                    spannableStringCoupon.setSpan(
+                        ForegroundColorSpan(color),
+                        "结束还有${day}天${hours}小时".length,
+                        "结束还有${day}天${hours}小时${minutes}".length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
+                    spannableStringCoupon.setSpan(
+                        ForegroundColorSpan(color),
+                        "结束还有${day}天${hours}小时${minutes}分".length,
+                        "结束还有${day}天${hours}小时${minutes}分${seconds}".length,
+                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
+                    tvContent.setText(spannableStringCoupon)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            } else if (item.activityWay == 2) {
+                val strContent = "名额还剩${item.joinNumber}个"
+                tvContent.setColorText(strContent, color, 4, strContent.length - 1)
+            }
         }
+
     }
     val adapter =
         object :
@@ -76,7 +124,7 @@ class NatKuangActiveActivity : BaseRecyclerViewActivity<NatActiveItem>() {
     }
 
     override fun initView(savedInstanceState: Bundle?) {
-
+        EventBus.getDefault().register(this)
     }
 
     override fun pageRecyclerView(): RecyclerView {
@@ -103,10 +151,10 @@ class NatKuangActiveActivity : BaseRecyclerViewActivity<NatActiveItem>() {
             }
         }
         headerAdapter.setOnItemClickListener { adapter, view, position ->
-            if (currentActiveIndex != position) {
-                currentActiveIndex = position
-                adapter.notifyDataSetChanged()
-            }
+            //            if (currentActiveIndex != position) {
+//                currentActiveIndex = position
+//                adapter.notifyDataSetChanged()
+//            }
         }
         requestHeadDateHeader()
     }
@@ -173,7 +221,7 @@ class NatKuangActiveActivity : BaseRecyclerViewActivity<NatActiveItem>() {
      */
     override fun initData() {
         val map = hashMapOf<String, String>()
-        map["activityId"] = "${headList[currentActiveIndex].id}"
+        map["activityType"] = "$type"
         map["userId"] = "${ConfigUtils.userId()}"
         map["pageNum"] = "$page"
         map["pageSize"] = "$pageSize"
@@ -185,5 +233,15 @@ class NatKuangActiveActivity : BaseRecyclerViewActivity<NatActiveItem>() {
             }, {
                 showLoadError()
             })
+    }
+
+    @Subscribe
+    fun eventAction(event: NatKuangEvent) {
+        onRefresh()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
     }
 }

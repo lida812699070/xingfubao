@@ -3,11 +3,21 @@ package com.xfb.xinfubao.model;
 public class NatActiveModel {
     private int id;
     private String activityName;
+    private String activityIcon;
     private boolean buttonState;
     private boolean inputState;
+    //    1=时间限制 2=人数限制
     private int activityWay;
     private int joinNumber;
-    private String thawTime;
+    private ThawTimeModel thawTime;
+
+    public String getActivityIcon() {
+        return activityIcon;
+    }
+
+    public void setActivityIcon(String activityIcon) {
+        this.activityIcon = activityIcon;
+    }
 
     public int getId() {
         return id;
@@ -57,11 +67,11 @@ public class NatActiveModel {
         this.joinNumber = joinNumber;
     }
 
-    public String getThawTime() {
+    public ThawTimeModel getThawTime() {
         return thawTime;
     }
 
-    public void setThawTime(String thawTime) {
+    public void setThawTime(ThawTimeModel thawTime) {
         this.thawTime = thawTime;
     }
 }

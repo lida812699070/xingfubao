@@ -13,18 +13,47 @@ public class NatActiveDetail {
     private int incrementState;
     private String incrementStateDesc;
     private double premiumRate;
-    private Object natInputNum;
+    private String natInputNum;
     private String activityWay;
     private String activityRules;
     private String premiumRateDesc;
-    private List<ConfigDates> configDates;
+    private String confirmButtonText;
+//    自动投入状态 0：关闭 1：开启
+    private int autoInputState;
+    private int inputType;
+    //投入方式；1:最少投入数量 2:按每月NAT释放量的比率，设置百分比
+    private List<ConfigDates> incrementVos;
 
-    public List<ConfigDates> getConfigDates() {
-        return configDates;
+    public int getAutoInputState() {
+        return autoInputState;
     }
 
-    public void setConfigDates(List<ConfigDates> configDates) {
-        this.configDates = configDates;
+    public void setAutoInputState(int autoInputState) {
+        this.autoInputState = autoInputState;
+    }
+
+    public int getInputType() {
+        return inputType;
+    }
+
+    public void setInputType(int inputType) {
+        this.inputType = inputType;
+    }
+
+    public String getConfirmButtonText() {
+        return confirmButtonText;
+    }
+
+    public void setConfirmButtonText(String confirmButtonText) {
+        this.confirmButtonText = confirmButtonText;
+    }
+
+    public List<ConfigDates> getIncrementVos() {
+        return incrementVos;
+    }
+
+    public void setIncrementVos(List<ConfigDates> incrementVos) {
+        this.incrementVos = incrementVos;
     }
 
     public int getId() {
@@ -91,11 +120,11 @@ public class NatActiveDetail {
         this.premiumRate = premiumRate;
     }
 
-    public Object getNatInputNum() {
+    public String getNatInputNum() {
         return natInputNum;
     }
 
-    public void setNatInputNum(Object natInputNum) {
+    public void setNatInputNum(String natInputNum) {
         this.natInputNum = natInputNum;
     }
 

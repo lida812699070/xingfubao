@@ -22,6 +22,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.careagle.sdk.Config
 import com.careagle.sdk.callback.PermissionCallBack
+import com.careagle.sdk.utils.MyToast
 import com.careagle.sdk.utils.Permission
 import com.careagle.sdk.utils.PriceChangeUtils
 import com.careagle.sdk.utils.RxPermissionsUtil
@@ -113,6 +114,14 @@ class DialogUtils {
             tvOkCashOut.setOnClickListener {
                 val strNATCount = etNATCount.text.toString()
                 val strPayPassword = etPayPassword.text.toString()
+                if (TextUtils.isEmpty(strNATCount)) {
+                    MyToast.toast("请输入Nat数量")
+                    return@setOnClickListener
+                }
+                if (TextUtils.isEmpty(strPayPassword)) {
+                    MyToast.toast("请输入支付密码")
+                    return@setOnClickListener
+                }
                 method(strNATCount, strPayPassword)
             }
             return changeShopDialog
