@@ -169,9 +169,9 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         val tvCashRight = headerView!!.findViewById<TextView>(R.id.tvCashRight)
         val tvRealPriceText = headerView!!.findViewById<TextView>(R.id.tvRealPriceText)
         val tvRealPrice = headerView!!.findViewById<TextView>(R.id.tvRealPrice)
-        val tvTitleRight = headerView!!.findViewById<TextView>(R.id.tvTitleRight)
-        tvTitleRight.setVisible(balanceEnum == BalanceEnum.NAT)
-        tvTitleRight.setOnClickListener {
+        val ivActive = headerView!!.findViewById<ImageView>(R.id.ivActive)
+        ivActive.setVisible(balanceEnum == BalanceEnum.NAT)
+        ivActive.setOnClickListener {
             startActivity(Intent(this, NATActiveActivity::class.java))
         }
         tabLayout = headerView!!.findViewById<TabLayout>(R.id.tabLayout)

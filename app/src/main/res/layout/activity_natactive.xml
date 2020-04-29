@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/color_default_bg"
     android:orientation="vertical"
     tools:context=".activity.NATActiveActivity">
 
@@ -21,83 +21,134 @@
         android:background="@color/line_bg"
         app:layout_constraintTop_toBottomOf="@+id/myToolbar" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myToolbar">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="91dp"
+        android:background="@color/color_org">
 
         <TextView
-            android:id="@+id/tvKuangZhu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:drawableTop="@mipmap/icon_kuangzhu"
-            android:drawablePadding="10dp"
+            android:layout_centerInParent="true"
+            android:text="杏福宝NAT活动，欢迎参与"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clKuangZhu"
+        android:layout_width="match_parent"
+        android:layout_height="107dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/shape_white_radius_8">
+
+        <ImageView
+            android:id="@+id/ivImage1"
+            android:layout_width="67dp"
+            android:layout_height="67dp"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/qzkz_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvQiangZhuKuangZhu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="8dp"
             android:text="抢注矿主"
             android:textColor="@color/color_text_111"
-            android:textSize="28sp"
-            android:textStyle="bold" />
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@+id/ivImage1"
+            app:layout_constraintTop_toTopOf="@+id/ivImage1" />
+
 
         <TextView
-            android:id="@+id/tvKuangZhuHint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:text="抢注矿主活动\n所有用户均可参与" />
+            android:layout_marginBottom="10dp"
+            android:text="所有用户均可参与"
+            android:textColor="@color/color_text_111"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivImage1"
+            app:layout_constraintLeft_toLeftOf="@+id/tvQiangZhuKuangZhu" />
 
         <TextView
-            android:id="@+id/tvKuangZhuOk"
-            android:layout_width="88dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="18dp"
-            android:background="@drawable/shape_blue_stroke_radius_15"
+            android:layout_width="75dp"
+            android:layout_height="25dp"
+            android:layout_marginRight="21dp"
+            android:background="@drawable/shape_org_stroke_radius_15"
             android:gravity="center"
             android:text="抢注"
-            android:textColor="@color/theme_color"
-            android:textSize="14sp" />
+            android:textColor="@color/color_org"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clKuangJi"
+        android:layout_width="match_parent"
+        android:layout_height="107dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/shape_white_radius_8">
+
+        <ImageView
+            android:id="@+id/ivImage2"
+            android:layout_width="67dp"
+            android:layout_height="67dp"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/kjhd_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvKuangJi"
+            android:id="@+id/tvQiangZhuKuangJi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="40dp"
-            android:drawableTop="@mipmap/icon_kuangji"
-            android:drawablePadding="10dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="8dp"
             android:text="矿基活动"
             android:textColor="@color/color_text_111"
-            android:textSize="28sp"
-            android:textStyle="bold" />
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@+id/ivImage2"
+            app:layout_constraintTop_toTopOf="@+id/ivImage2" />
+
 
         <TextView
-            android:id="@+id/tvKuangJiHint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:text="矿基活动\n对应身份可参与" />
+            android:layout_marginBottom="10dp"
+            android:text="对应身份可参与"
+            android:textColor="@color/color_text_111"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivImage2"
+            app:layout_constraintLeft_toLeftOf="@+id/tvQiangZhuKuangJi" />
 
         <TextView
-            android:id="@+id/tvKuangJiOk"
-            android:layout_width="88dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="18dp"
-            android:background="@drawable/shape_blue_stroke_radius_15"
+            android:layout_width="75dp"
+            android:layout_height="25dp"
+            android:layout_marginRight="21dp"
+            android:background="@drawable/shape_org_stroke_radius_15"
             android:gravity="center"
             android:text="加入"
-            android:textColor="@color/theme_color"
-            android:textSize="14sp" />
+            android:textColor="@color/color_org"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-
-    </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+</LinearLayout>

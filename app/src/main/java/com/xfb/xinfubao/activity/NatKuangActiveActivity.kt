@@ -146,7 +146,7 @@ class NatKuangActiveActivity : BaseRecyclerViewActivity<NatActiveItem>() {
     override fun initLogic() {
         type = intent.getIntExtra("type", 0)
         myToolbar.setClick { finish() }
-        myToolbar.setTitle(if (type == 0) "抢注矿主" else "矿基活动")
+        myToolbar.setTitle(if (type == 1) "抢注矿主" else "矿基活动")
         adapter.setHeaderAndEmpty(false)
         initHeader()
         headerAdapter.setOnItemChildClickListener { adapter, view, position ->

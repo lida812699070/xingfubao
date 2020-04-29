@@ -16,26 +16,13 @@ class NATActiveActivity : DefaultActivity() {
 
     override fun initView(savedInstanceState: Bundle?) {
         myToolbar.setClick { finish() }
-        tvKuangZhu.setOnClickListener {
-            NatKuangActiveActivity.toActivity(this, 1)
-        }
-        tvKuangZhuHint.setOnClickListener {
-            NatKuangActiveActivity.toActivity(this, 1)
-        }
-        tvKuangZhuOk.setOnClickListener {
+        clKuangZhu.setOnClickListener {
             NatKuangActiveActivity.toActivity(this, 1)
         }
 
-        tvKuangJi.setOnClickListener {
+        clKuangJi.setOnClickListener {
             NatKuangActiveActivity.toActivity(this, 2)
         }
-        tvKuangJiHint.setOnClickListener {
-            NatKuangActiveActivity.toActivity(this, 2)
-        }
-        tvKuangJiOk.setOnClickListener {
-            NatKuangActiveActivity.toActivity(this, 2)
-        }
-
     }
 
 }
