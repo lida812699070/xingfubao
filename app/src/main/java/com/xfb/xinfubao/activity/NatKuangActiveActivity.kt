@@ -58,6 +58,7 @@ class NatKuangActiveActivity : BaseRecyclerViewActivity<NatActiveItem>() {
             ivImage.loadRound(item.activityIcon, 6f)
             val color = mContext.getColor(R.color.theme_color)
             tvAction.text = if (type == 0) "抢注" else "参与"
+            tvAction.isSelected = item.isButtonState
             if (item.activityWay == 1) {
                 if (item.thawTime == null) return
                 val day = item.thawTime.day
@@ -149,7 +150,7 @@ class NatKuangActiveActivity : BaseRecyclerViewActivity<NatActiveItem>() {
         adapter.setHeaderAndEmpty(false)
         initHeader()
         headerAdapter.setOnItemChildClickListener { adapter, view, position ->
-            if (view.id == R.id.tvAction) {
+            if (view.id == R.id.tvAction && headList[position].isButtonState) {
                 NatKuangDetailActivity.toActivity(this, type, headList[position].id)
             }
         }

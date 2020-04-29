@@ -142,6 +142,7 @@ class NatKuangDetailActivity : DefaultActivity() {
         tvProtectPrice.setColorTextEnd("保费税率：${data?.premiumRateDesc}", selectColor, 6)
         tvNATMinPrice.setColorTextEnd("NAT起投数量：${data?.natInputNum}", selectColor, 9)
         tvActiveWay.setColorTextEnd("活动方式：${data?.activityWay}", selectColor, 6)
+        llRule.setVisible(!TextUtils.isEmpty(data?.activityRules))
         loadRule(data?.activityRules)
         tvOk.text = data?.confirmButtonText
         if (1 == data?.incrementState) {
