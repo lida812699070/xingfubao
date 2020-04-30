@@ -72,7 +72,8 @@
                     android:layout_marginTop="15dp"
                     android:text="是否开启保值功能：是"
                     android:textColor="@color/color_text_111"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/tvOpenAddPrice"
@@ -82,7 +83,8 @@
                     android:layout_marginTop="15dp"
                     android:text="是否开启增值功能：是"
                     android:textColor="@color/color_text_111"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/tvProtectPrice"

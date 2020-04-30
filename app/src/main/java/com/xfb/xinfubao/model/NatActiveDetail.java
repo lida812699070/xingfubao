@@ -13,7 +13,7 @@ public class NatActiveDetail {
     private int incrementState;
     private String incrementStateDesc;
     private double premiumRate;
-    private String natInputNum;
+    private double natInputNum;
     private String activityWay;
     private String activityRules;
     private String premiumRateDesc;
@@ -120,11 +120,11 @@ public class NatActiveDetail {
         this.premiumRate = premiumRate;
     }
 
-    public String getNatInputNum() {
+    public double getNatInputNum() {
         return natInputNum;
     }
 
-    public void setNatInputNum(String natInputNum) {
+    public void setNatInputNum(double natInputNum) {
         this.natInputNum = natInputNum;
     }
 

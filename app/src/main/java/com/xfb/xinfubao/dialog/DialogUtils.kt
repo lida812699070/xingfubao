@@ -30,10 +30,12 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.activity.UserInfoActivity
+import com.xfb.xinfubao.model.NatActiveDetail
 import com.xfb.xinfubao.model.NatUnlockPakeageModel
 import com.xfb.xinfubao.model.NewsDetail
 import com.xfb.xinfubao.utils.ConfigUtils
 import com.xfb.xinfubao.utils.HttpUtils
+import com.xfb.xinfubao.utils.setColorText
 import com.xfb.xinfubao.utils.setVisible
 import com.xfb.xinfubao.wxapi.WXUtils
 import com.zhihu.matisse.Matisse
@@ -89,6 +91,8 @@ class DialogUtils {
         /** NAT提币到钱包 */
         fun showNATInputDialog(
             context: Context,
+            data: NatActiveDetail,
+            balance: Double,
             method: (strNATCount: String, strPayPassword: String) -> Unit
         ): AlertDialog {
             val builder = AlertDialog.Builder(context)
@@ -106,8 +110,42 @@ class DialogUtils {
             val dw = ColorDrawable(0x00)
             changeShopDialog?.window?.setBackgroundDrawable(dw)
             val tvOkCashOut = view.findViewById<TextView>(R.id.tvOkCashOut)
+            //起投金额
+            val tvTextQiTouBiaoZhun = view.findViewById<TextView>(R.id.tvTextQiTouBiaoZhun)
+            //标题
+            val tvTitle = view.findViewById<TextView>(R.id.tvTitle)
+            //Nat余额
+            val tvNatBalance = view.findViewById<TextView>(R.id.tvNatBalance)
             val etNATCount = view.findViewById<EditText>(R.id.etNATCount)
             val etPayPassword = view.findViewById<EditText>(R.id.etPayPassword)
+
+            var lessInputCount = 0.0
+            if (data.inputType == 1) {//数量
+                tvTitle.text = "同意投入"
+                tvTextQiTouBiaoZhun.text = "起投标准：${data.natInputNum}"
+                val color = context.resources.getColor(R.color.color_light_org)
+                val strBalance = "NAT可以用余额：$balance"
+                lessInputCount = data.natInputNum
+                tvNatBalance.setColorText(
+                    strBalance,
+                    color,
+                    9,
+                    strBalance.length
+                )
+            } else {
+                tvTitle.text = "同意按释放比例${data.natInputNum * 100}%投入"
+                tvTextQiTouBiaoZhun.text = "起投标准：NAT释放量的${data.natInputNum * 100}%"
+                val color = context.resources.getColor(R.color.color_light_org)
+                val strBalance = "NAT可以用余额：$balance"
+                lessInputCount = balance * data.natInputNum
+                tvNatBalance.setColorText(
+                    strBalance,
+                    color,
+                    9,
+                    strBalance.length
+                )
+            }
+
             view.findViewById<ImageView>(R.id.ivClose).setOnClickListener {
                 changeShopDialog.dismiss()
             }
@@ -122,8 +160,18 @@ class DialogUtils {
                     MyToast.toast("请输入支付密码")
                     return@setOnClickListener
                 }
+
+                if (strNATCount.toDouble() > balance) {
+                    MyToast.toast("投资金额大于所剩余额")
+                    return@setOnClickListener
+                }
+                if (strNATCount.toDouble() < lessInputCount) {
+                    MyToast.toast("投资金额小于起投数量")
+                    return@setOnClickListener
+                }
                 method(strNATCount, strPayPassword)
             }
+
             return changeShopDialog
         }
 

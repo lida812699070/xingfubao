@@ -167,6 +167,7 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         val tvCash = headerView!!.findViewById<TextView>(R.id.tvCash)
         //另一个主按钮
         val tvCashRight = headerView!!.findViewById<TextView>(R.id.tvCashRight)
+        val tvCashNatRight = headerView!!.findViewById<TextView>(R.id.tvCashNatRight)
         val tvRealPriceText = headerView!!.findViewById<TextView>(R.id.tvRealPriceText)
         val tvRealPrice = headerView!!.findViewById<TextView>(R.id.tvRealPrice)
         val ivActive = headerView!!.findViewById<ImageView>(R.id.ivActive)
@@ -264,9 +265,11 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 tvBalanceText.text = "可流通"
                 tvLock.setVisible(true)
                 ivBg.setImageResource(R.mipmap.icon_nat)
-                tvCash.text = "兑换商城积分"
+                tvCash.text = "兑换积分"
                 tvCashRight.setVisible(true)
-                tvCashRight.text = "提币到钱包"
+                tvCashNatRight.setVisible(true)
+                tvCashRight.text = "NAT转出"
+                tvCashNatRight.text = "NAT转入"
                 tvNATMoney.setVisible(true)
                 tvRealPrice.setVisible(true)
                 tvRealPriceText.setVisible(true)
@@ -283,7 +286,9 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 tvCash.setOnClickListener {
                     MoneyExchangeActivity.toActivity(this, BalanceEnum.NAT)
                 }
-
+                tvCashNatRight.setOnClickListener {
+                    CashInNatActivity.toActivity(this)
+                }
                 tvCashRight.setOnClickListener {
                     checkPayPassword {
                         showCashOutDialog =

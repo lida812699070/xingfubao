@@ -161,7 +161,6 @@
         android:layout_height="52dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="12dp"
-        android:layout_marginRight="40dp"
         android:background="@drawable/shape_white_radius_13"
         android:gravity="center"
         android:text="提币到红包"
@@ -170,6 +169,24 @@
         android:textStyle="bold"
         android:visibility="gone"
         app:layout_constraintLeft_toRightOf="@+id/tvCash"
+        app:layout_constraintRight_toLeftOf="@+id/tvCashNatRight"
+        app:layout_constraintTop_toBottomOf="@+id/tvBalance" />
+
+    <TextView
+        android:id="@+id/tvCashNatRight"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/shape_white_radius_13"
+        android:gravity="center"
+        android:text="提币到红包"
+        android:textColor="@color/color_text_111"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintLeft_toRightOf="@+id/tvCashRight"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvBalance" />
 

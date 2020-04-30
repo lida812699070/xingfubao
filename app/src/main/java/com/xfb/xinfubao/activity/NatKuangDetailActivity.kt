@@ -68,7 +68,9 @@ class NatKuangDetailActivity : DefaultActivity() {
         }
 
         tvOk.setOnClickListener {
-            activityJoin()
+            data?.let {
+                getUserInfo()
+            }
         }
         dateAdapter.setOnItemClickListener { adapter, view, position ->
             incrementConfig = dateList[position].id
@@ -78,31 +80,26 @@ class NatKuangDetailActivity : DefaultActivity() {
 
     var showDialog: AlertDialog? = null
     /** 参与活动 */
-    private fun activityJoin() {
+    private fun activityJoin(natFlowNum: Double) {
         checkPayPassword {
-            //非Nat
-            if (1 == data?.inputType) {
-                var natInputNum = 0.0
-                try {
-                    natInputNum = data!!.natInputNum.toDouble()
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-                showDialog =
-                    DialogUtils.showNATInputDialog(this) { strNATCount, strPayPassword ->
-                        if (strNATCount.toDouble() < natInputNum) {
-                            showMessage("投资数量必须大于起投数量")
-                            return@showNATInputDialog
-                        }
-                        joinActive(strNATCount, strPayPassword)
-                    }
-            } else if (2 == data?.inputType) {
-                val strTitle = data?.natInputNum?.toString()
-                showDialog = DialogUtils.showDiYaDialog(this, 5, title = strTitle) {
-                    joinActive(null, it)
+            showDialog =
+                DialogUtils.showNATInputDialog(
+                    this,
+                    data!!,
+                    natFlowNum
+                ) { strNATCount, strPayPassword ->
+                    joinActive(strNATCount, strPayPassword)
                     showDialog?.dismiss()
                 }
-            }
+        }
+    }
+
+    private fun getUserInfo() {
+        val map = hashMapOf<String, String>()
+        map["userId"] = "${ConfigUtils.userId()}"
+        showProgress("请稍候")
+        request(RetrofitCreateHelper.createApi(BaseApi::class.java).getUserInfo(map)) {
+            activityJoin(it.data.userAssets.natFlowNum)
         }
     }
 
@@ -130,22 +127,30 @@ class NatKuangDetailActivity : DefaultActivity() {
         recyclerViewSelectDate.adapter = dateAdapter
     }
 
-    private fun bindData(data: NatActiveDetail?) {
+    private fun bindData(data: NatActiveDetail) {
         this.data = data
-        tvView1Title.text = data?.activityName
+        tvView1Title.text = data.activityName
         val selectColor = resources.getColor(R.color.theme_color)
-        tvOpenObject.setColorTextEnd("开放对象：${data?.openObjects}", selectColor, 6)
+        tvOpenObject.setColorTextEnd("开放对象：${data.openObjects}", selectColor, 6)
         tvOpenProtectPrice.setColorTextEnd(
-            "是否开启保值功能：${data?.hedgeStateDesc}", selectColor, 10
+            "是否开启保值功能：${data.hedgeStateDesc}", selectColor, 10
         )
-        tvOpenAddPrice.setColorTextEnd("是否开启增值功能：${data?.incrementStateDesc}", selectColor, 10)
-        tvProtectPrice.setColorTextEnd("保费税率：${data?.premiumRateDesc}", selectColor, 6)
-        tvNATMinPrice.setColorTextEnd("NAT起投数量：${data?.natInputNum}", selectColor, 9)
-        tvActiveWay.setColorTextEnd("活动方式：${data?.activityWay}", selectColor, 6)
-        llRule.setVisible(!TextUtils.isEmpty(data?.activityRules))
-        loadRule(data?.activityRules)
-        tvOk.text = data?.confirmButtonText
-        if (1 == data?.incrementState) {
+        tvOpenAddPrice.setColorTextEnd("是否开启增值功能：${data.incrementStateDesc}", selectColor, 10)
+        tvProtectPrice.setColorTextEnd("保费税率：${data.premiumRateDesc}", selectColor, 6)
+        if (data.inputType == 1) {
+            tvNATMinPrice.setColorTextEnd("NAT起投数量：${data.natInputNum}", selectColor, 9)
+        } else {
+            tvNATMinPrice.setColorTextEnd(
+                "NAT起投数量：本账户释放比率${data.natInputNum * 100}%",
+                selectColor,
+                9
+            )
+        }
+        tvActiveWay.setColorTextEnd("活动方式：${data.activityWay}", selectColor, 6)
+        llRule.setVisible(!TextUtils.isEmpty(data.activityRules))
+        loadRule(data.activityRules)
+        tvOk.text = data.confirmButtonText
+        if (1 == data.incrementState) {
             llSelectDate.setVisible(true)
             dateList.clear()
             if (data.incrementVos != null) {
