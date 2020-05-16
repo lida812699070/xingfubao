@@ -122,7 +122,7 @@ class DialogUtils {
             var lessInputCount = 0.0
             if (data.inputType == 1) {//数量
                 tvTitle.text = "同意投入"
-                tvTextQiTouBiaoZhun.text = "起投标准：${data.natInputNum}"
+                tvTextQiTouBiaoZhun.text = "起投标准：${data.natInputNum}枚"
                 val color = context.resources.getColor(R.color.color_light_org)
                 val strBalance = "NAT可以用余额：$balance"
                 lessInputCount = data.natInputNum

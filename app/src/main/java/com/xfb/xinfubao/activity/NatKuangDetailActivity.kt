@@ -113,7 +113,7 @@ class NatKuangDetailActivity : DefaultActivity() {
             map["inputNum"] = "$strNATCount"
         }
         if (incrementConfig != -1L) {
-            map["incrementConfig"] = "$strNATCount"
+            map["incrementConfig"] = "$incrementConfig"
         }
         request(RetrofitCreateHelper.createApi(BaseApi::class.java).activityJoin(map)) {
             showMessage("参与活动成功")
