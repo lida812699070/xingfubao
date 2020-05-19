@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.activity_cash_out_record.*
 
 /** 转出记录 */
 class CashOutRecordActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
-    /** 0 申请提现记录  1 申请转出记录  2 财务记录 3转入明细*/
+    /** 0 申请提现记录  1 申请转出记录  2 财务记录 3转入明细 4导入明细*/
     var state = 0
     val adapter = RecordAdapter(list)
 
@@ -64,6 +64,8 @@ class CashOutRecordActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
             title = "财务记录"
         } else if (state == 3) {
             title = "转入明细"
+        } else if (state == 4) {
+            title = "导入明细"
         }
         myToolbar.setTitle(title)
         val footerView = LayoutInflater.from(this).inflate(R.layout.footer_record, null)
@@ -77,6 +79,8 @@ class CashOutRecordActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         } else if (state == 2) {
             tvBack.setBackgroundDrawable(resources.getDrawable(R.drawable.shape_theme_btn_bg))
         } else if (state == 3) {
+            tvBack.setVisible(false)
+        } else if (state == 4) {
             tvBack.setVisible(false)
         }
         adapter.addFooterView(footerView)
@@ -128,6 +132,15 @@ class CashOutRecordActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         } else if (state == 3) {//转入明细
             requestWithError(
                 RetrofitCreateHelper.createApi(BaseApi::class.java).exchangeBalanceRecord(
+                    map
+                ), {
+                    loadData(it.data)
+                }) {
+                showLoadError()
+            }
+        } else if (state == 4) {//导入明细
+            requestWithError(
+                RetrofitCreateHelper.createApi(BaseApi::class.java).importInfo(
                     map
                 ), {
                     loadData(it.data)

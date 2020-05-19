@@ -37,6 +37,19 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/ivFinish" />
 
+    <TextView
+        android:id="@+id/tvRightTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:padding="5dp"
+        android:text="导入明细"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tvTitle"
+        app:layout_constraintRight_toRightOf="parent" />
+
     <ImageView
         android:id="@+id/ivBg"
         android:layout_width="wrap_content"

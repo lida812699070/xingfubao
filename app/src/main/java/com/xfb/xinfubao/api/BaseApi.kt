@@ -349,5 +349,9 @@ interface BaseApi {
     @POST("api/activityJoin")
     fun activityJoin(@Body map: Map<String, String>): Observable<Result<Any?>>
 
+    /**导入明细*/
+    @POST("api/ykt/importInfo")
+    fun importInfo(@Body map: Map<String, String>): Observable<Result<List<ItemBalanceModel>>>
+
 
 }

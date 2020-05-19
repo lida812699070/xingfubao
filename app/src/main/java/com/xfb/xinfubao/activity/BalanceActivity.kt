@@ -159,6 +159,7 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         val ivBg = headerView!!.findViewById<ImageView>(R.id.ivBg)
         //副标题
         val tvSubtitle = headerView!!.findViewById<TextView>(R.id.tvSubtitle)
+        val tvRightTitle = headerView!!.findViewById<TextView>(R.id.tvRightTitle)
         //余额文本
         val tvBalanceText = headerView!!.findViewById<TextView>(R.id.tvBalanceText)
         //余额值
@@ -245,6 +246,8 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
             BalanceEnum.YI_KA_TONG -> {
                 tvTitle.text = BalanceEnum.YI_KA_TONG.tag
                 tvSubtitle.setInVisible(false)
+                tvRightTitle.text = "导入明细"
+                tvRightTitle.setVisible(true)
                 tvBalanceText.text = "余额"
                 ivBg.setImageResource(R.mipmap.icon_ykt)
                 tvCash.text = "去商城消费"
@@ -257,6 +260,9 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
                 tvCash.setOnClickListener {
                     EventBus.getDefault().post(EventChangeTab())
                     finish()
+                }
+                tvRightTitle.setOnClickListener {
+                    CashOutRecordActivity.toActivity(this, 4)
                 }
             }
             BalanceEnum.NAT -> {
