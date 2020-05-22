@@ -161,7 +161,7 @@
                 android:drawableTop="@mipmap/jifen_icon"
                 android:drawablePadding="2dp"
                 android:gravity="center"
-                android:text="积分商城"
+                android:text="商城积分"
                 android:textColor="@color/color_text_111"
                 android:textSize="14sp" />
 

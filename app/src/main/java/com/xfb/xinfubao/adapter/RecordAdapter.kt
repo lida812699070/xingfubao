@@ -69,6 +69,10 @@ class RecordAdapter(data: List<ItemBalanceModel>) :
                     tvState.text = data.stateDepict
                     tvState.setVisible(false)
                     tvTitle.text = strTitle
+                } else if (state == 4) {
+                    tvState.text = data.stateDepict
+                    tvState.setVisible(false)
+                    tvTitle.text = strTitle
                 }
             }
             ITEM_TYPE_CAI_WU -> {

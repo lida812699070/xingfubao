@@ -59,7 +59,7 @@
         android:drawablePadding="10dp"
         android:gravity="right"
         android:paddingLeft="5dp"
-        android:text="积分商城"
+        android:text="商城积分"
         android:textColor="@color/color_text_888"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/tvPayWayText"

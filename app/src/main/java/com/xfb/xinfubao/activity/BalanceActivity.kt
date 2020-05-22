@@ -3,8 +3,6 @@ package com.xfb.xinfubao.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Message
 import android.support.design.widget.TabLayout
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AlertDialog
@@ -36,10 +34,13 @@ import com.xfb.xinfubao.myenum.BalanceEnum
 import com.xfb.xinfubao.utils.ConfigUtils
 import com.xfb.xinfubao.utils.setInVisible
 import com.xfb.xinfubao.utils.setVisible
+import io.reactivex.Observable
+import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_balancel.*
 import kotlinx.android.synthetic.main.dialog_nat_hint.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
+import java.util.concurrent.TimeUnit
 
 /**
  * 银杏宝  银杏叶  银杏果  积分商城  愿力值  一卡通  NAT资产
@@ -53,6 +54,7 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
     var headerView: View? = null
     var tagType: Int? = null
     var initTab = false
+    var subscribe: Disposable? = null
 
     companion object {
         fun toActivity(context: Context, enum: BalanceEnum) {
@@ -95,12 +97,34 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         }
         EventBus.getDefault().register(this)
         if (balanceEnum == BalanceEnum.NAT) {
-            mHandler.sendMessage(Message.obtain())
+            startTask()
             if (!MyApplication.isPopNatHist) {
                 initDialog()
             }
 
         }
+    }
+
+    private fun startTask() {
+        if (balanceEnum != BalanceEnum.NAT) {
+            return
+        }
+        if (subscribe != null) {
+            subscribe?.dispose()
+        }
+        subscribe = Observable.interval(6L, 6L, TimeUnit.SECONDS)
+            .subscribe {
+                runOnUiThread {
+                    val map = hashMapOf<String, String>()
+                    map["userId"] = "${ConfigUtils.userId()}"
+                    request(RetrofitCreateHelper.createApi(BaseApi::class.java).getUserInfo(map)) {
+                        ConfigUtils.saveUserInfo(it.data)
+                        val tvRealPrice = headerView?.findViewById<TextView>(R.id.tvRealPrice)
+                        tvRealPrice?.text =
+                            "≈￥${it.data.userAssets.natPrice}"
+                    }
+                }
+            }
     }
 
     private fun initDialog() {
@@ -111,27 +135,6 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         }
         webView.settings.javaScriptEnabled = true
         webView.loadUrl(Constant.NAT_SCH)
-    }
-
-    private fun refreshPrice() {
-        val map = hashMapOf<String, String>()
-        map["userId"] = "${ConfigUtils.userId()}"
-        mHandler.postDelayed({
-            request(RetrofitCreateHelper.createApi(BaseApi::class.java).getUserInfo(map)) {
-                ConfigUtils.saveUserInfo(it.data)
-                val tvRealPrice = headerView?.findViewById<TextView>(R.id.tvRealPrice)
-                tvRealPrice?.text =
-                    "≈￥${it.data.userAssets.natPrice}"
-            }
-            mHandler.sendMessage(Message.obtain())
-        }, 1000 * 60)
-    }
-
-    private val mHandler = object : Handler() {
-        override fun handleMessage(msg: Message?) {
-            super.handleMessage(msg)
-            refreshPrice()
-        }
     }
 
     @Subscribe
@@ -500,11 +503,21 @@ class BalanceActivity : BaseRecyclerViewActivity<ItemBalanceModel>() {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        subscribe?.dispose()
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        startTask()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         EventBus.getDefault().unregister(this)
         showBalanceDialog?.dismiss()
-        mHandler.removeMessages(0)
+        subscribe?.dispose()
     }
 }
 
