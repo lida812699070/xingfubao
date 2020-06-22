@@ -32,6 +32,15 @@ public class ProductDetail {
     private String productStateDesc;
     private String isRealDesc;
     private List<ProductImg> productImg;
+    private List<GiveTypeVo> giveTypeVos;
+
+    public List<GiveTypeVo> getGiveTypeVos() {
+        return giveTypeVos;
+    }
+
+    public void setGiveTypeVos(List<GiveTypeVo> giveTypeVos) {
+        this.giveTypeVos = giveTypeVos;
+    }
 
     public boolean isChain() {
         return isChain;

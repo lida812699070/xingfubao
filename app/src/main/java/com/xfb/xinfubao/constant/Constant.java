@@ -28,7 +28,7 @@ public class Constant {
     public static final String NAT_SCH = SERVER_API + "/help/agreement/2/7";
 
     private static String getService() {
-//        return "http://test.xfb.cxtx.info";
-        return "http://xfb.cxtx.info";
+        return "http://test.xfb.cxtx.info";
+//        return "http://xfb.cxtx.info";
     }
 }

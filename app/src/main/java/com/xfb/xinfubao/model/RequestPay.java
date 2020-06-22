@@ -11,6 +11,15 @@ public class RequestPay {
     private String payWay;
     private String payAmount;
     private String payPwd;
+    private Integer favorableId;
+
+    public Integer getFavorableId() {
+        return favorableId;
+    }
+
+    public void setFavorableId(Integer favorableId) {
+        this.favorableId = favorableId;
+    }
 
     public String getUserId() {
         return userId;

@@ -22,7 +22,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.NatKuangDetailActivity"></activity>
+        <activity android:name=".activity.SelectBalanceDiKouActivity"/>
+        <activity android:name=".activity.NatKuangDetailActivity"/>
         <activity android:name=".activity.NatKuangActiveActivity" />
         <activity android:name=".activity.NATActiveActivity" />
         <activity android:name=".activity.ToExchangeActivity" />

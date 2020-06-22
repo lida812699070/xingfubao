@@ -1,5 +1,7 @@
 package com.xfb.xinfubao.activity
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
@@ -32,6 +34,7 @@ class CashInActivity : DefaultActivity() {
     var data: CashRegisterModel? = null
     var payMethod: PayMethod? = null
     var showDiYaDialog: AlertDialog? = null
+    var selectBalanceModel: SelectBalanceModel? = null
     var adapter =
         object : BaseQuickAdapter<RegisterOrderVo, BaseViewHolder>(
             R.layout.item_cash_in_order_price,
@@ -96,6 +99,16 @@ class CashInActivity : DefaultActivity() {
             gpSelector.setVisible(false)
         }
 
+        //资产抵扣
+        tvBalanceDiKouText.setOnClickListener {
+            if (data != null && data?.favorableVosVos != null && data!!.favorableVosVos!!.size > 0) {
+                SelectBalanceDiKouActivity.toActivity(
+                    this,
+                    data?.favorableVosVos,
+                    selectBalanceModel
+                )
+            }
+        }
         initPayWayRecyclerView()
         EventBus.getDefault().register(this)
     }
@@ -120,6 +133,9 @@ class CashInActivity : DefaultActivity() {
         requestPay.payWay = "${payMethod?.payMethodId}"
         requestPay.payAmount = "${data?.totalAmount}"
         requestPay.payPwd = payPwd
+        if (selectBalanceModel != null) {
+            requestPay.favorableId = selectBalanceModel?.id
+        }
         val orderNos = arrayListOf<String>()
         for (registerOrderVo in list) {
             orderNos.add(registerOrderVo.orderNumber)
@@ -159,17 +175,54 @@ class CashInActivity : DefaultActivity() {
 
     private fun bindData(data: CashRegisterModel?) {
         this.data = data
+        var isCanDikou = false
+        data?.favorableVosVos?.let {
+            isCanDikou = it.size > 0
+        }
+        tvDiKouMoney.setVisible(isCanDikou)
+        gpCanDikou.setVisible(isCanDikou)
         data?.let {
             list.clear()
             list.addAll(it.registerOrderVos)
             adapter.notifyDataSetChanged()
             tvTotalPrice.text =
                 "总金额：${getString(R.string.rmb_tag, PriceChangeUtils.getDoubleKb(it.totalAmount))}"
+            tvShouldPayMoney.text =
+                "应付款：${getString(R.string.rmb_tag, PriceChangeUtils.getDoubleKb(it.totalAmount))}"
             payMethod = data.payMethod?.get(0)
             tvPayWay.text = payMethod?.payMethodName
             payWayList.clear()
             payWayList.addAll(data.payMethod)
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+            val selectBalanceModel = data?.getSerializableExtra("data") as SelectBalanceModel?
+            changeSelect(selectBalanceModel)
+        }
+    }
+
+    private fun changeSelect(selectBalanceModel: SelectBalanceModel?) {
+        if (selectBalanceModel == null) return
+        this.selectBalanceModel = selectBalanceModel
+        tvDiKouMoney.setVisible(true)
+        tvDiKouMoney.text =
+            "${selectBalanceModel.assetsName}抵扣：${getString(
+                R.string.rmb_tag,
+                PriceChangeUtils.getDoubleKb(selectBalanceModel.maxFavorable)
+            )}"
+        tvShouldPayMoney.text =
+            "应付款：${getString(
+                R.string.rmb_tag,
+                PriceChangeUtils.getDoubleKb(data!!.totalAmount - selectBalanceModel.maxFavorable)
+            )}"
+        tvBalanceDiKou.setTextColor(resources.getColor(R.color.color_light_org))
+        tvBalanceDiKou.text = "${selectBalanceModel.assetsName}抵扣减${getString(
+            R.string.rmb_tag,
+            PriceChangeUtils.getDoubleKb(selectBalanceModel.maxFavorable)
+        )}"
     }
 
     private fun initRecyclerView() {

@@ -83,6 +83,41 @@
                 app:layout_constraintRight_toRightOf="parent"
                 tools:text="库存：200" />
 
+            <LinearLayout
+                android:id="@+id/llGift"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/bgGoodsInfo">
+
+                <TextView
+                    android:id="@+id/tvGift"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="14dp"
+                    android:paddingBottom="14dp"
+                    android:text="赠送"
+                    android:textColor="@color/color_text_111"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <com.xfb.xinfubao.view.flowlayout.TagFlowLayout
+                    android:id="@+id/tagEvaluationFlowLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="1"
+                    app:max_select="-1"
+                    app:tag_gravity="right" />
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/tvSelectedCount"
                 android:layout_width="match_parent"
@@ -95,7 +130,7 @@
                 android:textColor="@color/color_text_111"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@+id/bgGoodsInfo" />
+                app:layout_constraintTop_toBottomOf="@+id/llGift" />
 
             <ImageView
                 android:id="@+id/ivAdd"

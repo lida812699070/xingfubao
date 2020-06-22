@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tvTag"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingLeft="14dp"
+    android:paddingTop="4dp"
+    android:paddingRight="14dp"
+    android:paddingBottom="4dp"
+    android:text="tag"
+    android:background="@drawable/shape_light_org_stroke_radius_20"
+    android:textColor="@color/color_light_org"
+    android:textSize="12sp" />
