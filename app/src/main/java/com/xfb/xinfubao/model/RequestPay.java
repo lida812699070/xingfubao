@@ -12,6 +12,15 @@ public class RequestPay {
     private String payAmount;
     private String payPwd;
     private Integer favorableId;
+    private Double favorableAmount;
+
+    public Double getFavorableAmount() {
+        return favorableAmount;
+    }
+
+    public void setFavorableAmount(Double favorableAmount) {
+        this.favorableAmount = favorableAmount;
+    }
 
     public Integer getFavorableId() {
         return favorableId;

@@ -69,7 +69,7 @@ class NatKuangDetailActivity : DefaultActivity() {
 
         tvOk.setOnClickListener {
             data?.let {
-                getUserInfo()
+                activityJoin(it.releaseNum)
             }
         }
         dateAdapter.setOnItemClickListener { adapter, view, position ->
@@ -79,6 +79,7 @@ class NatKuangDetailActivity : DefaultActivity() {
     }
 
     var showDialog: AlertDialog? = null
+
     /** 参与活动 */
     private fun activityJoin(natFlowNum: Double) {
         checkPayPassword {

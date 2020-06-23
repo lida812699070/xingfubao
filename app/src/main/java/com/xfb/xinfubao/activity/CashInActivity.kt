@@ -135,6 +135,7 @@ class CashInActivity : DefaultActivity() {
         requestPay.payPwd = payPwd
         if (selectBalanceModel != null) {
             requestPay.favorableId = selectBalanceModel?.id
+            requestPay.favorableAmount = selectBalanceModel?.favorable
         }
         val orderNos = arrayListOf<String>()
         for (registerOrderVo in list) {

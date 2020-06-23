@@ -21,8 +21,17 @@ public class NatActiveDetail {
 //    自动投入状态 0：关闭 1：开启
     private int autoInputState;
     private int inputType;
+    private double releaseNum;
     //投入方式；1:最少投入数量 2:按每月NAT释放量的比率，设置百分比
     private List<ConfigDates> incrementVos;
+
+    public double getReleaseNum() {
+        return releaseNum;
+    }
+
+    public void setReleaseNum(double releaseNum) {
+        this.releaseNum = releaseNum;
+    }
 
     public int getAutoInputState() {
         return autoInputState;
