@@ -63,7 +63,11 @@ class SelectBalanceDiKouActivity : DefaultActivity() {
         }
         recyclerView.adapter = adapter
         adapter.setOnItemClickListener { adapter, view, position ->
-            selectBalanceModel = list[position]
+            if (list[position].id == selectBalanceModel?.id) {
+                selectBalanceModel = null
+            } else {
+                selectBalanceModel = list[position]
+            }
             adapter.notifyDataSetChanged()
         }
         tvOK.setOnClickListener {

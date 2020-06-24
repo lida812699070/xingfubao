@@ -197,6 +197,10 @@ class CashInActivity : DefaultActivity() {
             payWayList.clear()
             payWayList.addAll(data.payMethod)
         }
+        if (selectBalanceModel == null) {
+            tvBalanceDiKou.setTextColor(resources.getColor(R.color.color_text_888))
+            tvBalanceDiKou.text = "请选择"
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -208,8 +212,11 @@ class CashInActivity : DefaultActivity() {
     }
 
     private fun changeSelect(selectBalanceModel: SelectBalanceModel?) {
-        if (selectBalanceModel == null) return
         this.selectBalanceModel = selectBalanceModel
+        if (selectBalanceModel == null) {
+            bindData(data)
+            return
+        }
         tvDiKouMoney.setVisible(true)
         tvDiKouMoney.text =
             "${selectBalanceModel.assetsName}抵扣：${getString(
