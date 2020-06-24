@@ -53,7 +53,7 @@ class SelectBalanceDiKouActivity : DefaultActivity() {
                         R.id.tvCanDiKou,
                         "可抵扣：${getString(
                             R.string.rmb_tag,
-                            PriceChangeUtils.getDoubleKb(item.maxFavorable)
+                            PriceChangeUtils.getDoubleKb(item.favorable)
                         )}"
                     )
 

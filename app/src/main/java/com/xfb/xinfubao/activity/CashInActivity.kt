@@ -25,6 +25,7 @@ import com.xfb.xinfubao.wxapi.WXUtils
 import kotlinx.android.synthetic.main.activity_cash_in.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
+import kotlin.math.max
 
 /** 收银台 */
 class CashInActivity : DefaultActivity() {
@@ -136,6 +137,7 @@ class CashInActivity : DefaultActivity() {
         if (selectBalanceModel != null) {
             requestPay.favorableId = selectBalanceModel?.id
             requestPay.favorableAmount = selectBalanceModel?.favorable
+            requestPay.payAmount = "${data!!.totalAmount - selectBalanceModel!!.favorable}"
         }
         val orderNos = arrayListOf<String>()
         for (registerOrderVo in list) {
@@ -180,7 +182,7 @@ class CashInActivity : DefaultActivity() {
         data?.favorableVosVos?.let {
             isCanDikou = it.size > 0
         }
-        tvDiKouMoney.setVisible(isCanDikou)
+        tvDiKouMoney.setVisible(isCanDikou && selectBalanceModel != null)
         gpCanDikou.setVisible(isCanDikou)
         data?.let {
             list.clear()
@@ -212,17 +214,19 @@ class CashInActivity : DefaultActivity() {
         tvDiKouMoney.text =
             "${selectBalanceModel.assetsName}抵扣：${getString(
                 R.string.rmb_tag,
-                PriceChangeUtils.getDoubleKb(selectBalanceModel.maxFavorable)
+                PriceChangeUtils.getDoubleKb(selectBalanceModel.favorable)
             )}"
+        var shouldPayMoney = data!!.totalAmount - selectBalanceModel.favorable
+        shouldPayMoney = max(shouldPayMoney, 0.0)
         tvShouldPayMoney.text =
             "应付款：${getString(
                 R.string.rmb_tag,
-                PriceChangeUtils.getDoubleKb(data!!.totalAmount - selectBalanceModel.maxFavorable)
+                PriceChangeUtils.getDoubleKb(shouldPayMoney)
             )}"
         tvBalanceDiKou.setTextColor(resources.getColor(R.color.color_light_org))
         tvBalanceDiKou.text = "${selectBalanceModel.assetsName}抵扣减${getString(
             R.string.rmb_tag,
-            PriceChangeUtils.getDoubleKb(selectBalanceModel.maxFavorable)
+            PriceChangeUtils.getDoubleKb(selectBalanceModel.favorable)
         )}"
     }
 
