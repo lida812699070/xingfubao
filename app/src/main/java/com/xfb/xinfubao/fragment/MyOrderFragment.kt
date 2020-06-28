@@ -71,7 +71,7 @@ class MyOrderFragment : BaseRecyclerViewFragment<MyOrderModel>() {
                     100 -> {
                         strState = "等待买家付款"
                     }
-                    102 -> {
+                    114 -> {
                         strState = "等待卖家发货"
                     }
                     112 -> {

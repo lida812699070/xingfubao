@@ -131,7 +131,7 @@ class OrderDetailActivity : DefaultActivity() {
         gpWait.setVisible(data.orderState == 100L)
         tvOrderStateBig.setVisible(data.orderState != 100L)
         clBottom.setVisible(data.orderState == 100L)
-        llBottom.setVisible(data.orderState != 100L)
+        llBottom.setVisible(data.orderState != 100L && data.orderState != 114L)
         if (data.orderState == 100L) {
             tvVipLevelSaveMoneyText.text = "VIP等级折扣"
             tvVipSaveMoney.setVisible(false)
@@ -167,7 +167,7 @@ class OrderDetailActivity : DefaultActivity() {
                 tvPayWay.setVisible(false)
                 tvCopyOrderNo.setVisible(false)
             }
-            102L -> {
+            114L -> {
                 tvOrderSendTime.setVisible(false)
                 tvOrderFinishTime.setVisible(false)
                 tvOrderStateBig.text = "等待卖家发货"
@@ -185,7 +185,9 @@ class OrderDetailActivity : DefaultActivity() {
                     val map = hashMapOf<String, String>()
                     map["userId"] = "${ConfigUtils.userId()}"
                     map["orderNumber"] = data.orderNumber
-                    request(RetrofitCreateHelper.createApi(BaseApi::class.java).confirmReceipt(map)) {
+                    request(
+                        RetrofitCreateHelper.createApi(BaseApi::class.java).confirmReceipt(map)
+                    ) {
                         showMessage("确认收货成功")
                         finish()
                     }
