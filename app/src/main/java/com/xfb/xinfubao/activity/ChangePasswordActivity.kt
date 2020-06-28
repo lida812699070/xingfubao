@@ -10,12 +10,14 @@ import com.careagle.sdk.helper.RxHelper
 import com.careagle.sdk.utils.CommentUtils
 import com.xfb.xinfubao.R
 import com.xfb.xinfubao.api.BaseApi
+import com.xfb.xinfubao.model.event.EventChangeTab
 import com.xfb.xinfubao.myenum.ChangePasswordEnum
 import com.xfb.xinfubao.utils.ConfigUtils
 import com.xfb.xinfubao.utils.setVisible
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.activity_change_password.*
+import org.greenrobot.eventbus.EventBus
 import java.util.concurrent.TimeUnit
 
 /** 修改密码 */
@@ -47,10 +49,18 @@ class ChangePasswordActivity : DefaultActivity() {
 
             }
             ChangePasswordEnum.SET_PAY_PASSWORD -> {
+                if (!TextUtils.isEmpty(ConfigUtils.getUserInfo()?.tel)) {
+                    etMobile.isEnabled = false
+                    etMobile.setText("${ConfigUtils.getUserInfo()?.tel}")
+                }
                 etPasswordTop.hint = "请输入支付密码"
                 etPasswordBottom.hint = "请再次输入密码"
             }
             ChangePasswordEnum.CHANGE_PAY_PASSWORD -> {
+                if (!TextUtils.isEmpty(ConfigUtils.getUserInfo()?.tel)) {
+                    etMobile.isEnabled = false
+                    etMobile.setText("${ConfigUtils.getUserInfo()?.tel}")
+                }
                 etPasswordTop.hint = "请输入新的支付密码"
                 etPasswordBottom.hint = "请再次输入密码"
             }
@@ -136,7 +146,7 @@ class ChangePasswordActivity : DefaultActivity() {
             ChangePasswordEnum.SET_PAY_PASSWORD -> {
                 request(RetrofitCreateHelper.createApi(BaseApi::class.java).updpaypsw(map)) {
                     showMessage("操作成功")
-                    finish()
+                    backHome()
                 }
             }
             //修改登录密码
@@ -155,6 +165,14 @@ class ChangePasswordActivity : DefaultActivity() {
             }
 
         }
+    }
+
+    private fun backHome() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        startActivity(intent)
+        EventBus.getDefault().post(EventChangeTab())
+        finish()
     }
 
     override fun onDestroy() {

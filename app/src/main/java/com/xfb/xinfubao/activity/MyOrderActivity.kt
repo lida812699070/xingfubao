@@ -24,7 +24,7 @@ class MyOrderActivity : DefaultActivity() {
         titles.add("已完成")
         fragments.add(MyOrderFragment.newInstance())
         fragments.add(MyOrderFragment.newInstance(100))
-        fragments.add(MyOrderFragment.newInstance(102))
+        fragments.add(MyOrderFragment.newInstance(114))
         fragments.add(MyOrderFragment.newInstance(112))
         fragments.add(MyOrderFragment.newInstance(106))
         val pagerAdapter =
