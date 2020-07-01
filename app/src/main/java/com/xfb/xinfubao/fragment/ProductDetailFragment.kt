@@ -10,6 +10,7 @@ import com.careagle.sdk.utils.PriceChangeUtils
 import com.google.gson.Gson
 import com.xfb.xinfubao.MyImageLoader
 import com.xfb.xinfubao.R
+import com.xfb.xinfubao.activity.CartActivity
 import com.xfb.xinfubao.activity.CashInActivity
 import com.xfb.xinfubao.activity.ConfirmOrderActivity
 import com.xfb.xinfubao.api.BaseApi
@@ -52,13 +53,18 @@ class ProductDetailFragment : BaseFragment() {
         productDetail?.let {
             initBanner(it.productImg)
         }
+        tvCat.setOnClickListener {
+            activity?.let {
+                startActivity(Intent(it, CartActivity::class.java))
+            }
+        }
     }
 
     private fun bindData() {
         productDetail?.let {
             tvTitle.text = it.productName
             tvPrice.text =
-                    getString(R.string.rmb_tag, PriceChangeUtils.getNumKb(it.productPrice))
+                getString(R.string.rmb_tag, PriceChangeUtils.getNumKb(it.productPrice))
             tvStock.text = "库存：${it.inventory}"
             tvCat.setVisible(it.isIsReal && it.isProductState && !it.isChain)
             tvAddToCat.setVisible(it.isIsReal && it.isProductState && !it.isChain)
@@ -71,9 +77,15 @@ class ProductDetailFragment : BaseFragment() {
                 llGift.setVisible(false)
             } else {
                 llGift.setVisible(true)
-                tagEvaluationFlowLayout.setAdapter(object : TagAdapter<GiveTypeVo?>(it.giveTypeVos) {
-                    override fun getView(parent: FlowLayout?, position: Int, item: GiveTypeVo?): View {
-                        val tv = LayoutInflater.from(activity).inflate(R.layout.item_tag_goods_detail, null) as TextView
+                tagEvaluationFlowLayout.setAdapter(object :
+                    TagAdapter<GiveTypeVo?>(it.giveTypeVos) {
+                    override fun getView(
+                        parent: FlowLayout?,
+                        position: Int,
+                        item: GiveTypeVo?
+                    ): View {
+                        val tv = LayoutInflater.from(activity)
+                            .inflate(R.layout.item_tag_goods_detail, null) as TextView
                         tv.text = "${item?.assetsName}${item?.maxFavorable}${item?.unit}"
                         return tv
                     }
@@ -165,7 +177,7 @@ class ProductDetailFragment : BaseFragment() {
 
     /** 创建订单 */
     private fun toCreateOrder(
-            products: ArrayList<Product>
+        products: ArrayList<Product>
     ) {
         var totalAmount = 0.0
         products.forEach {
@@ -180,13 +192,15 @@ class ProductDetailFragment : BaseFragment() {
         requestSaveOrderModel.totalAmount = "$totalAmount"
         requestSaveOrderModel.discount = "${totalAmount * (1.0 - ConfigUtils.mUserInfo.discount)}"
         requestSaveOrderModel.payAmount =
-                "${totalAmount * ConfigUtils.mUserInfo.discount}"
+            "${totalAmount * ConfigUtils.mUserInfo.discount}"
         requestSaveOrderModel.productDtoList = products
         showProgress("请稍候")
-        request(RetrofitCreateHelper.createApi(BaseApi::class.java).saveOrder(requestSaveOrderModel)) {
+        request(
+            RetrofitCreateHelper.createApi(BaseApi::class.java).saveOrder(requestSaveOrderModel)
+        ) {
             startActivity(
-                    Intent(activity!!, CashInActivity::class.java)
-                            .putExtra("data", it.data)
+                Intent(activity!!, CashInActivity::class.java)
+                    .putExtra("data", it.data)
             )
         }
     }
