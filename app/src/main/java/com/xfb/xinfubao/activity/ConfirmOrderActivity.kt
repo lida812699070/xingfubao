@@ -13,6 +13,7 @@ import com.xfb.xinfubao.api.BaseApi
 import com.xfb.xinfubao.model.*
 import com.xfb.xinfubao.model.event.EventPauResult
 import com.xfb.xinfubao.utils.ConfigUtils
+import com.xfb.xinfubao.utils.onClick
 import com.xfb.xinfubao.utils.setVisible
 import kotlinx.android.synthetic.main.activity_confirm_order.*
 import org.greenrobot.eventbus.EventBus
@@ -100,7 +101,7 @@ class ConfirmOrderActivity : DefaultActivity() {
     private fun initListener() {
         myToolbar.setClick { finish() }
         //立即结算
-        tvOrderBalance.setOnClickListener {
+        tvOrderBalance.onClick {
             toCreateOrder()
         }
         //选择地址
