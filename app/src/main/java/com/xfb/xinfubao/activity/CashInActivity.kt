@@ -20,6 +20,7 @@ import com.xfb.xinfubao.model.event.EventPauResult
 import com.xfb.xinfubao.model.event.PaySucessEvent
 import com.xfb.xinfubao.payment.PayUtils
 import com.xfb.xinfubao.utils.ConfigUtils
+import com.xfb.xinfubao.utils.onClick
 import com.xfb.xinfubao.utils.setVisible
 import com.xfb.xinfubao.wxapi.WXUtils
 import kotlinx.android.synthetic.main.activity_cash_in.*
@@ -78,7 +79,7 @@ class CashInActivity : DefaultActivity() {
         }
 
         //立即支付
-        tvToPay.setOnClickListener {
+        tvToPay.onClick {
             if (105L == payMethod?.payMethodId || 106L == payMethod?.payMethodId) {
                 toPay("")
             } else {

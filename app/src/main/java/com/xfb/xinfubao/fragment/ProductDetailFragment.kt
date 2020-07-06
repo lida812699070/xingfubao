@@ -17,6 +17,7 @@ import com.xfb.xinfubao.api.BaseApi
 import com.xfb.xinfubao.callback.MyClickCallBack
 import com.xfb.xinfubao.model.*
 import com.xfb.xinfubao.utils.ConfigUtils
+import com.xfb.xinfubao.utils.onClick
 import com.xfb.xinfubao.utils.setVisible
 import com.xfb.xinfubao.view.flowlayout.FlowLayout
 import com.xfb.xinfubao.view.flowlayout.TagAdapter
@@ -149,18 +150,18 @@ class ProductDetailFragment : BaseFragment() {
         }
 
         //立即购买
-        tvToBuy.setOnClickListener {
+        tvToBuy.onClick {
             productDetail?.let {
                 if (count <= 0) {
                     showMessage("请选择购买数量")
-                    return@setOnClickListener
+                    return@onClick
                 }
                 if (count > it.inventory) {
                     showMessage("商品库存不足")
-                    return@setOnClickListener
+                    return@onClick
                 }
                 if (!it.isProductState) {
-                    return@setOnClickListener
+                    return@onClick
                 }
                 val products = arrayListOf<Product>()
                 val productInfo = it.toProduct()
